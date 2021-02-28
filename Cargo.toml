@@ -1,0 +1,9 @@
+[workspace]
+members = [
+    "kontroli",
+    "kocheck",
+    "koweb",
+]
+
+[profile.release]
+codegen-units = 1
