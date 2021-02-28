@@ -34,14 +34,22 @@
 
             // Define a new theme that constains only rules that match this language
             monaco.editor.defineTheme('myCoolTheme', {
-                base: 'vs',
+                base: 'vs-dark',
                 inherit: false,
                 rules: [
                     { token: 'custom-info', foreground: '808080' },
                     { token: 'custom-error', foreground: 'ff0000', fontStyle: 'bold' },
                     { token: 'custom-notice', foreground: 'FFA500' },
                     { token: 'custom-date', foreground: '008800' }
-                ]
+                ],
+                // colors: {
+                //     [editorBackground]: '#FFFFFE',
+                //     [editorForeground]: '#000000',
+                //     [editorInactiveSelection]: '#E5EBF1',
+                //     [editorIndentGuides]: '#D3D3D3',
+                //     [editorActiveIndentGuides]: '#939393',
+                //     [editorSelectionHighlight]: '#ADD6FF4D'
+	            // }
             });
 
             var editor = monaco.editor.create(document.getElementById('container'), {
