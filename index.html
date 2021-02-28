@@ -15,7 +15,7 @@
     <div id="container" style="width: 800px; height: 600px; border: 1px solid grey"></div>
     <script src="../monaco/min/vs/loader.js"></script>
     <script>
-        require.config({ paths: { vs: '../node_modules/monaco-editor/min/vs' } });
+        require.config({ paths: { vs: '../monaco/min/vs' } });
 
         require(['vs/editor/editor.main'], function () {
             monaco.languages.register({
