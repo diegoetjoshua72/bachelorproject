@@ -23,24 +23,13 @@
             });
 
             monaco.languages.setMonarchTokensProvider('lambdapi', {
-                symbols:  /[=><!~?:&|+\-*\/\^%]+/,
-                keywords: ["(",")","{","}","@","\[","\]",":","⇒","→","∀","λ","≔",",",";","_","=",],
+                defaultToken: "invalid",
                 tokenizer: {
                     root: [
-                     // identifiers and keywords
-                        [/[a-z_$][\w$]*/, { cases: {'@typeKeywords': 'keyword',
-                                                '@keywords': 'keyword',
-                                                '@default': 'identifier' } }],
-                      [/[A-Z][\w\$]*/, 'type.identifier' ],  // to show class names nicely
-                         // whitespace
-                        { include: '@whitespace' },
-                        // [/&\(\<\h\w*\>\|\({|\([^|]\|\(|[^}]\)\)*|*|}\)\)/,'Constant'],
-                        // [/?\(\<\h\w*\>\|\({|\([^|]\|\(|[^}]\)\)*|*|}\)\)/,'PreProc'],
-                        // [/\u\w/,'Type'],
-                        // [/\(\(\<\h\w*\>\|\({|\([^|]\|\n\|\(|[^}]\)\)*|*|}\)\)\.\)\+\(\<\h\w*\>\|\({|\([^|]\|\n\|\(|[^}]\)\)*|*|}\)\)/, 'Identifier'],
-                        // [/\(\<\h\w*\>\|\({|\([^|]\|\n\|\(|[^}]\)\)*|*|}\)\)\.\@!/,"Identifier"],
+                        [/bas|begin|builtin|constant|debug|end|flag|in|infix|injective|left|off|notation|on|opaque|prover|prover_timeout|prefix|private|protected|quantifier|right|sequential|TYPE|unif_rule)/, "keyword"]
                     ]
                 }
+
             });
 
             // Define a new theme that constains only rules that match this language
