@@ -27,9 +27,13 @@
                 keywords: ["(",")","{","}","@","\[","\]",":","⇒","→","∀","λ","≔",",",";","_","=",],
                 tokenizer: {
                     root: [
-                        [],
-                        [],
-                        [],
+                     // identifiers and keywords
+                        [/[a-z_$][\w$]*/, { cases: {'@typeKeywords': 'keyword',
+                                                '@keywords': 'keyword',
+                                                '@default': 'identifier' } }],
+                      [/[A-Z][\w\$]*/, 'type.identifier' ],  // to show class names nicely
+                         // whitespace
+                        { include: '@whitespace' },
                         // [/&\(\<\h\w*\>\|\({|\([^|]\|\(|[^}]\)\)*|*|}\)\)/,'Constant'],
                         // [/?\(\<\h\w*\>\|\({|\([^|]\|\(|[^}]\)\)*|*|}\)\)/,'PreProc'],
                         // [/\u\w/,'Type'],
