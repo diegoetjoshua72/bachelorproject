@@ -5,7 +5,7 @@ require.config({ paths: { vs: "./monaco/min/vs" } });
 require(["vs/editor/editor.main"], function () {
 
 
-    
+
   monaco.languages.register({
     id: "lambdapi",
   });
@@ -265,7 +265,7 @@ require(["vs/editor/editor.main"], function () {
   var editor = monaco.editor.create(document.getElementById("container"), {
     theme: "vs-gruv",
     value: getCode(),
-    language: "javascript",
+    language: "lambdapi",
   });
 });
 
