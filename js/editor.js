@@ -3,23 +3,20 @@
 require.config({ paths: { vs: "./monaco/min/vs" } });
 
 require(["vs/editor/editor.main"], function () {
-//   monaco.languages.register({
-//     id: "lambdapi",
-//   });
 
-//   monaco.languages.setMonarchTokensProvider("lambdapi", {
-//     defaultToken: "invalid",
-//     tokenizer: {
-//       root: [
-//         [/\b(as|begin|builtin|constant|debug|end|flag|in|infix|injective|left|off|notation|on|opaque|prover|prover_timeout|prefix|private|protected|quantifier|right|sequential|TYPE|unif_rule)\b/,"keyword"],
-//         [/\b(assert|assernot|compute|print|proofterm|set|type)\b/, "misc"],
-//         [/\b(abort|admit|fais)\b/, "warning"],
-//         [],
-//         [],
-//         [],
-//       ],
-//     },
-//   });
+
+    
+  monaco.languages.register({
+    id: "lambdapi",
+  });
+
+  monaco.languages.setMonarchTokensProvider("lambdapi", {
+    tokenizer: {
+      root: [
+        [/\b(as|begin|builtin|constant|debug|end|flag|in|infix|injective|left|off|notation|on|opaque|prover|prover_timeout|prefix|private|protected|quantifier|right|sequential|TYPE|unif_rule)\b/,"keyword"],
+      ],
+    },
+  });
 
 //   // Define a new theme that constains only rules that match this language
   monaco.editor.defineTheme("vs-gruv", {
