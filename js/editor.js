@@ -1,4 +1,4 @@
-require.config({ paths: { vs: "./monaco/min/vs" } });
+require.config({ paths: { vs: "../monaco/min/vs" } });
 
 require(["vs/editor/editor.main"], function () {
   monaco.languages.register({
@@ -9,10 +9,7 @@ require(["vs/editor/editor.main"], function () {
     defaultToken: "invalid",
     tokenizer: {
       root: [
-        [
-          /\b(as|begin|builtin|constant|debug|end|flag|in|infix|injective|left|off|notation|on|opaque|prover|prover_timeout|prefix|private|protected|quantifier|right|sequential|TYPE|unif_rule)\b/,
-          "keyword"
-        ],
+        [/\b(as|begin|builtin|constant|debug|end|flag|in|infix|injective|left|off|notation|on|opaque|prover|prover_timeout|prefix|private|protected|quantifier|right|sequential|TYPE|unif_rule)\b/,"keyword"],
         [/\b(assert|assernot|compute|print|proofterm|set|type)\b/, "misc"],
         [/\b(abort|admit|fail)\b/, "warning"],
         [],
