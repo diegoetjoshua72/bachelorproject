@@ -1,6 +1,6 @@
 
 
-require.config({ paths: { vs: "../monaco/min/vs" } });
+require.config({ paths: { vs: "./monaco/min/vs" } });
 
 require(["vs/editor/editor.main"], function () {
   monaco.languages.register({
