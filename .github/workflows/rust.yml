@@ -24,9 +24,11 @@ jobs:
         # - name: Run test
         #   run: cargo test
         - name: Build wasm
+          working-directory: ./koweb
           run:  wasm-pack build --out-dir "./www/pkg" --target web 
 
         - name: Deploy
+          working-directory: ./koweb
           uses: peaceiris/actions-gh-pages@v3
           with:
               github_token: ${{ secrets.GITHUB_TOKEN }}
