@@ -15,20 +15,19 @@ jobs:
     build:
       runs-on: ubuntu-latest
       steps:
-      - name: Run test
-        run: cargo test
+        - uses: actions/checkout@v2
+
+        - uses: jetli/wasm-pack-action@v0.3.0
+          with:
+            version: 'latest'
       
-      - uses: jetli/wasm-pack-action@v0.3.0
-        with:
-          version: 'latest'
+        # - name: Run test
+        #   run: cargo test
+        - name: Build wasm
+          run:  wasm-pack build --out-dir "./www/pkg" --target web 
 
-      - name: Build wasm
-        run:  wasm-pack build --out-dir "./www/pkg" --target web 
-
-      - name: Perform Checkout
-        uses: actions/checkout@v2
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./koweb/www
+        - name: Deploy
+          uses: peaceiris/actions-gh-pages@v3
+          with:
+              github_token: ${{ secrets.GITHUB_TOKEN }}
+              publish_dir: ./koweb/www
