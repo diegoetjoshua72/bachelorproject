@@ -39,20 +39,14 @@ extern "C" {
     fn alert(s: &str);
 }
 
-//things to do
-//parse the string that is passed to run test
-//we should pass an array of strings without comments
-
-//i need to understand jsvalues better
-//
-
-//add the cmd count to the function to know how many cmds have been
-//exucuted and how many are left
 
 //https://github.com/Deducteam/lambdapi/tree/master/editors/vscode
-//dans vim aussi 
 
-//do the monarch text highlight and set up the gitpages and git action
+
+#[wasm_bindgen]
+pub fn greet (){
+    println!("hello how are you from russt");
+}
 
 #[wasm_bindgen]
 pub fn run_test(cmds_from_js: &str) -> Result<(), JsValue> {
