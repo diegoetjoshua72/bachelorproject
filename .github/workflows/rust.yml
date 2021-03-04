@@ -15,11 +15,16 @@ jobs:
     build:
       runs-on: ubuntu-latest
       steps:
+      - name: Run test
+      - run: cargo test
+
+      - name: Build wasm
+      - run:  wasm-pack build --out-dir "./www/pkg" --target web 
+
       - name: Perform Checkout
         uses: actions/checkout@v2
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./koweb/testwasm
-          publish_branch: gh-pages
+          publish_dir: ./koweb/www
