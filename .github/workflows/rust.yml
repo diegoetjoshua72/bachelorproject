@@ -16,10 +16,10 @@ jobs:
       runs-on: ubuntu-latest
       steps:
       - name: Run test
-      - run: cargo test
+        run: cargo test
 
       - name: Build wasm
-      - run:  wasm-pack build --out-dir "./www/pkg" --target web 
+        run:  wasm-pack build --out-dir "./www/pkg" --target web 
 
       - name: Perform Checkout
         uses: actions/checkout@v2
