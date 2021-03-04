@@ -17,6 +17,10 @@ jobs:
       steps:
       - name: Run test
         run: cargo test
+      
+      - uses: jetli/wasm-pack-action@v0.3.0
+        with:
+          version: 'latest'
 
       - name: Build wasm
         run:  wasm-pack build --out-dir "./www/pkg" --target web 
