@@ -16,6 +16,11 @@ function getUint8Memory0() {
 function getStringFromWasm0(ptr, len) {
     return cachedTextDecoder.decode(getUint8Memory0().subarray(ptr, ptr + len));
 }
+/**
+*/
+export function greet() {
+    wasm.greet();
+}
 
 let WASM_VECTOR_LEN = 0;
 

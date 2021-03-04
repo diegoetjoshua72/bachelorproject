@@ -1,6 +1,9 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
+*/
+export function greet(): void;
+/**
 * @param {string} cmds_from_js
 */
 export function run_test(cmds_from_js: string): void;
@@ -9,6 +12,7 @@ export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembl
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
+  readonly greet: () => void;
   readonly run_test: (a: number, b: number) => void;
   readonly __wbindgen_malloc: (a: number) => number;
   readonly __wbindgen_realloc: (a: number, b: number, c: number) => number;
