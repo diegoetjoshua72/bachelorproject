@@ -18,8 +18,8 @@ function getStringFromWasm0(ptr, len) {
 }
 /**
 */
-export function greet() {
-    wasm.greet();
+export function greeting() {
+    wasm.greeting();
 }
 
 let WASM_VECTOR_LEN = 0;

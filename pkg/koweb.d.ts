@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
 */
-export function greet(): void;
+export function greeting(): void;
 /**
 * @param {string} cmds_from_js
 */
@@ -13,7 +13,7 @@ export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembl
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
   readonly run_test: (a: number, b: number) => void;
-  readonly greet: () => void;
+  readonly greeting: () => void;
   readonly __wbindgen_malloc: (a: number) => number;
   readonly __wbindgen_realloc: (a: number, b: number, c: number) => number;
 }
