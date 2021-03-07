@@ -41,8 +41,8 @@ extern "C" {
 //https://github.com/Deducteam/lambdapi/tree/master/editors/vscode
 
 #[wasm_bindgen]
-pub fn greet() {
-    alert("hellow how are you from rust");
+pub fn greeting() {
+    alert("hello how are you from rust");
 }
 
 #[wasm_bindgen]

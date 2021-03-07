@@ -4,36 +4,36 @@ on:
   workflow_dispatch:
   push:
     paths-ignore:
-    - '.github/**' # Ignore changes towards the .github directory
+      - ".github/**" # Ignore changes towards the .github directory
     branches:
-    - master # Only trigger on the development branch
+      - master # Only trigger on the development branch
 
 env:
   CARGO_TERM_COLOR: always
 
 jobs:
-    build:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
 
-        - uses: jetli/wasm-pack-action@v0.3.0
-          with:
-            version: 'latest'
-      
-        # - name: Run test
-        #   run: cargo test
-        - name: Build wasm
-          working-directory: ./koweb
-          run:  wasm-pack build --out-dir "./www/pkg" --target web 
-        
-        - name: Remove File
-          uses: JesseTG/rm@v1.0.2
-          with:
-            path: ./koweb/www/pkg/.gitignore
+      - uses: jetli/wasm-pack-action@v0.3.0
+        with:
+          version: "latest"
 
-        - name: Deploy
-          uses: peaceiris/actions-gh-pages@v3
-          with:
-              github_token: ${{ secrets.GITHUB_TOKEN }}
-              publish_dir: ./koweb/www
+      # - name: Run test
+      #   run: cargo test
+      - name: Build wasm
+        working-directory: ./koweb
+        run: wasm-pack build --out-dir "www/pkg" --target web
+
+      - name: Remove File
+        uses: JesseTG/rm@v1.0.2
+        with:
+          path: ./koweb/www/pkg/.gitignore
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./koweb/www

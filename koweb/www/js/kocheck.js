@@ -9,7 +9,7 @@ function get_cmds() {
 
 rust
   .then((m) => {
-    m.greet();
+    m.greeting();
 
     document.getElementById("run").addEventListener("click", () => {
       m.run_test(get_cmds());
