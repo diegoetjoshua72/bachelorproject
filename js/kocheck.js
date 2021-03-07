@@ -1,4 +1,4 @@
-const rust = import("../pkg/koweb");
+const rust = import("../pkg/koweb.js");
 
 function get_cmds() {
   var program_string = window.editor.getValue();
