@@ -9,7 +9,6 @@ use colosseum::unsync::Arena;
 use kontroli::rc::{Intro, Rule, Signature, Typing};
 use kontroli::scope::{Command, Symbols};
 
-
 use kontroli::error::Error;
 use kontroli::error::SymbolsError;
 
@@ -39,13 +38,11 @@ extern "C" {
     fn alert(s: &str);
 }
 
-
 //https://github.com/Deducteam/lambdapi/tree/master/editors/vscode
 
-
 #[wasm_bindgen]
-pub fn greet (){
-    println!("hello how are you from russt");
+pub fn greet() {
+    alert("hellow how are you from rust");
 }
 
 #[wasm_bindgen]
@@ -76,12 +73,12 @@ pub fn run_test(cmds_from_js: &str) -> Result<(), JsValue> {
                 let id: &str = arena.alloc(id);
                 // add symbol to symbol table and fail if it is not new
                 let sym = syms.insert(id).unwrap();
-                
-                //TODO 
+
+                //TODO
                 //need to figure out how i can do error handling code and pass them to the js
                 // match sym {
                 //     Ok(symbol) => sym = symbol,
-                //     Err(SymbolsError) => return Ok(JsValue.from_str("test")), 
+                //     Err(SymbolsError) => return Ok(JsValue.from_str("test")),
                 // }
 
                 // typecheck and insert into signature
@@ -98,8 +95,6 @@ pub fn run_test(cmds_from_js: &str) -> Result<(), JsValue> {
     alert("run_test 1 function converted to wasm");
     Ok(())
 }
-
-
 
 // pub fn run_test2() -> Result<(), Error> {
 //     let cmds = [
