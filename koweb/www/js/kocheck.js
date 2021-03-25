@@ -4,7 +4,7 @@ import init, { greeting, run_test } from '../pkg/koweb.js';
 async function run() {
     await init();
     greeting();
-    run_test();
+    run_test("brah");
 }
 run();
 
