@@ -1,6 +1,6 @@
 
 
-import init, { greeting } from './pkg/koweb.js';
+import init, { greeting } from '../pkg/koweb.js';
 async function run() {
     await init();
     greeting();
