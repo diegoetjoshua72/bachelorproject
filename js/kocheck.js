@@ -6,6 +6,7 @@ async function run() {
     greeting();
     run_test("brah");
 }
+run();
 document.getElementById("run").onclick = run();
 
 //i want to get the cmds from the editor and turn that into an cmd iterator
