@@ -4,7 +4,7 @@ import init, { greeting, run_test } from '../pkg/koweb.js';
 async function run() {
     await init();
     greeting();
-    document.getElementById("run").onclick = run_test("brah");
+    // document.getElementById("run").onclick = run_test("brah");
 }
 run();
 
