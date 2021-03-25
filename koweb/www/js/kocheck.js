@@ -1,21 +1,12 @@
-const rust = import("../pkg/koweb.js");
 
-function get_cmds() {
-  var program_string = window.editor.getValue();
-  console.log(program_string);
-  console.log(typeof program_string);
-  return program_string;
+
+import init, { greeting } from './pkg/koweb.js';
+async function run() {
+    await init();
+    greeting();
+    run_test();
 }
-
-rust
-  .then((m) => {
-    m.greeting();
-
-    document.getElementById("run").addEventListener("click", () => {
-      m.run_test(get_cmds());
-    });
-  })
-  .catch(console.error);
+run();
 
 //i want to get the cmds from the editor and turn that into an cmd iterator
 //in rust
