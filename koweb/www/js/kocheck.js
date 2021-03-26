@@ -2,7 +2,7 @@
 import init, { greeting, run_test } from '../pkg/koweb.js';
 async function run() {
     await init();
-    run_test(editor.getValue());
+    run_test(window.editor.getValue());
 }
 
 var run_button = document.getElementById("run");
