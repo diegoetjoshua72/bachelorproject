@@ -25,7 +25,7 @@ function getStringFromWasm0(ptr, len) {
 /**
 */
 export function greeting() {
-    wasm.greeting();
+    wasm.main_js();
 }
 
 let WASM_VECTOR_LEN = 0;
