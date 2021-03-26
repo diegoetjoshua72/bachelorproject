@@ -1,4 +1,4 @@
-import editor from './editor';
+// import editor from './editor';
 import init, { greeting, run_test } from '../pkg/koweb.js';
 async function run() {
     await init();
