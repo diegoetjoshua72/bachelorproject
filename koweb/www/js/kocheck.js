@@ -1,18 +1,12 @@
 
-import editor from './editor';
 import init, { greeting, run_test } from '../pkg/koweb.js';
 async function run() {
     await init();
     greeting();
-    var value = document.getElementById("container").value; //this was undefine
-    var test = editor.getValue();
-
-    console.log(test);
+    var value = editor.getValue();
     console.log(value);
     var run = document.getElementById("run");
     run.onclick = run_test(value);
-    
-
 }
 run();
 
