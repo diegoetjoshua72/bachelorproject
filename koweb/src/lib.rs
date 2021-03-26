@@ -91,6 +91,8 @@ pub fn greeting() {
 #[wasm_bindgen]
 pub fn run_test(cmds_from_js: &str) -> Result<(), JsValue> {
     // set_panic_hook();
+    #[cfg(debug_assertions)]
+    console_error_panic_hook::set_once();
     alert(cmds_from_js);
 
     // let opt = Opt{};
