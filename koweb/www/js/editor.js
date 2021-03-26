@@ -3,7 +3,7 @@
 require.config({ paths: { vs: "./monaco/min/vs" } });
 
 
-let editor = null;
+export var editor = null;
 
 require(["vs/editor/editor.main"], function () {
 
