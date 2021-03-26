@@ -2,6 +2,9 @@
 
 require.config({ paths: { vs: "./monaco/min/vs" } });
 
+
+let editor = null;
+
 require(["vs/editor/editor.main"], function () {
 
 
@@ -262,7 +265,7 @@ require(["vs/editor/editor.main"], function () {
     },
   });
 
-  var editor = monaco.editor.create(document.getElementById("container"), {
+  editor = monaco.editor.create(document.getElementById("container"), {
     theme: "vs-gruv",
     value: getCode(),
     language: "lambdapi",
