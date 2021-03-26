@@ -17,26 +17,25 @@ use kontroli::error::SymbolsError;
 #[global_allocator]
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
-// #[wasm_bindgen(start)]
-// pub fn main_js() -> Result<(), JsValue> {
-//     //better error message is what it says it does
-//     #[cfg(debug_assertions)]
-//     // console_error_panic_hook::set_once();
+#[wasm_bindgen(start)]
+pub fn main_js() -> Result<(), JsValue> {
+    #[cfg(debug_assertions)]
+    console_error_panic_hook::set_once();
 
-//     // console::log_1(&JsValue::from_str("Hello world!"));
-//     // match run_test2() {
-//     //     Ok(()) => println!("no errors"),
-//     //     Err() =>
-//     // }
-
-//     Ok(())
-// }
+    // console::log_1(&JsValue::from_str("Hello world!"));
+    // match run_test2() {
+    //     Ok(()) => println!("no errors"),
+    //     Err() =>
+    // }
+    Ok(())
+}
 
 
 pub fn set_panic_hook() {
     #[cfg(feature = "console_error_panic_hook")]
     console_error_panic_hook::set_once();
 }
+
 
 #[wasm_bindgen]
 extern "C" {
@@ -92,7 +91,7 @@ pub fn greeting() {
 
 #[wasm_bindgen]
 pub fn run_test(cmds_from_js: &str) -> Result<(), JsValue> {
-    set_panic_hook();
+    // set_panic_hook();
     alert(cmds_from_js);
 
     // let opt = Opt{};
