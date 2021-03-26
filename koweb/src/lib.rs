@@ -22,6 +22,7 @@ pub fn main_js() -> Result<(), JsValue> {
     #[cfg(debug_assertions)]
     console_error_panic_hook::set_once();
 
+    greeting();
     // console::log_1(&JsValue::from_str("Hello world!"));
     // match run_test2() {
     //     Ok(()) => println!("no errors"),
@@ -47,7 +48,7 @@ extern "C" {
 
 #[wasm_bindgen]
 pub fn greeting() {
-    alert("hello how are you from rust");
+    alert("debug code is run");
 }
 
 
@@ -82,8 +83,6 @@ pub fn greeting() {
 //     let cmds = parse(pr.read, &opt).map(|cmd| cmd.map(Event::Command));
 //     path.chain(cmds)
 // }
-
-
 
 
 //but here i don't need a file path vector and then to turn those files into iterators all i should get is a string and change that into an iterator 
