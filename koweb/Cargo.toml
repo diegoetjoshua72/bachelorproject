@@ -17,5 +17,5 @@ colosseum = "0.2"
 wasm-bindgen = "^0.2"
 kocheck = { path = "../kocheck" }
 kontroli = { path = "../kontroli" }
-
+console_error_panic_hook = "0.1.6"
 
