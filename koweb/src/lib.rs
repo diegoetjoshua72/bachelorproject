@@ -133,6 +133,5 @@ pub fn run_test(cmds_from_js: &str) -> Result<(), JsValue> {
             Command::Rules(rules) => sig.add_rules(rules.into_iter().map(Rule::from)).unwrap(),
         }
     }
-    alert("run_test 1 function converted to wasm");
     Ok(())
 }
