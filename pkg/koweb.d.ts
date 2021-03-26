@@ -2,6 +2,9 @@
 /* eslint-disable */
 /**
 */
+export function main_js(): void;
+/**
+*/
 export function greeting(): void;
 /**
 * @param {string} cmds_from_js
@@ -14,8 +17,10 @@ export interface InitOutput {
   readonly memory: WebAssembly.Memory;
   readonly run_test: (a: number, b: number) => void;
   readonly greeting: () => void;
+  readonly main_js: () => void;
   readonly __wbindgen_malloc: (a: number) => number;
   readonly __wbindgen_realloc: (a: number, b: number, c: number) => number;
+  readonly __wbindgen_start: () => void;
 }
 
 /**
