@@ -45,9 +45,50 @@ pub fn greeting() {
     alert("hello how are you from rust");
 }
 
+
+
+// pub struct JsOpt {
+//     eta: bool,
+//     no_scope: bool,
+//     no_infer: bool,
+//     no_check: bool,
+//     // buffer: Byte,
+//     // channel_capacity: Option<Option<usize>>,
+//     program: String,
+// }
+
+// impl JsOpt {
+//     pub fn from_js_args () -> Self {
+//         Self {
+
+//         }
+//     }
+// }
+
+//TODO
+//lets turn our js string into a &[u8] 
+//parse also wants some buffer size but idk i guess i need to give the default or something 64MB
+//ok lets do that then i get the string from the editor then i will try to parse it here with this produce function and we will see
+//whats next
+
+//this will take my program and turn it into commands modules 
+// fn produce(pr: PathRead, opt: &Opt) -> impl Iterator<Item = Result<Event, Error>> {
+//     let path = std::iter::once(Ok(Event::Module(pr.path)));
+//     let cmds = parse(pr.read, &opt).map(|cmd| cmd.map(Event::Command));
+//     path.chain(cmds)
+// }
+
+
+
+
+//but here i don't need a file path vector and then to turn those files into iterators all i should get is a string and change that into an iterator 
+//like i could just pass the program as a string and then split it into an vector or strings for every line and then turn it into an iterator and run it 
+
 #[wasm_bindgen]
 pub fn run_test(cmds_from_js: &str) -> Result<(), JsValue> {
     alert(cmds_from_js);
+
+    // let opt = Opt{};
 
     let cmds = [
         // declarations
@@ -95,41 +136,3 @@ pub fn run_test(cmds_from_js: &str) -> Result<(), JsValue> {
     alert("run_test 1 function converted to wasm");
     Ok(())
 }
-
-// pub fn run_test2() -> Result<(), Error> {
-//     let cmds = [
-//         // declarations
-//         "prop : Type.\n",
-//         "imp : prop -> prop -> prop.\n",
-//         // definition with a rewrite rule
-//         "def proof : prop -> Type.\n",
-//         "[x, y] proof (imp x y) --> proof x -> proof y.\n",
-//         // theorem
-//         r"thm imp_refl (x : prop) : proof (imp x x) := p : proof x => p.\n",
-//     ];
-
-//     let arena = Arena::new();
-//     let mut syms = Symbols::new();
-//     let mut sig = Signature::new();
-
-//     for c in cmds.iter() {
-//         // parse and scope command in one go
-//         let cmd: Command<String> = Command::parse(c, &syms)?;
-//         match cmd {
-//             // introduction of a new name
-//             Command::Intro(id, it) => {
-//                 let id: &str = arena.alloc(id);
-//                 // add symbol to symbol table and fail if it is not new
-//                 let sym = syms.insert(id)?;
-
-//                 // typecheck and insert into signature
-//                 let typing: Typing = Typing::new(Intro::from(it), &sig)?.check(&sig)?;
-//                 sig.insert(sym, typing)?
-//             }
-//             // addition of rewrite rules
-//             Command::Rules(rules) => sig.add_rules(rules.into_iter().map(Rule::from))?,
-//         }
-//     }
-//     alert("run test 2 function called by main that is turned to webasm");
-//     Ok(())
-// }

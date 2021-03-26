@@ -4,9 +4,15 @@ import init, { greeting, run_test } from '../pkg/koweb.js';
 async function run() {
     await init();
     greeting();
-    // document.getElementById("run").onclick = run_test("brah");
+    var value = window.editor.getValue();
+    console.log(value);
+    var run = document.getElementById("run");
+    run.onclick = run_test(value);
+
 }
 run();
+
+greeting();
 
 //i want to get the cmds from the editor and turn that into an cmd iterator
 //in rust
