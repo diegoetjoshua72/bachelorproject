@@ -3,7 +3,8 @@
 require.config({ paths: { vs: "./monaco/min/vs" } });
 
 
-window.editor = require(["vs/editor/editor.main"], function () {
+
+require(["vs/editor/editor.main"], function () {
 
   monaco.languages.register({
     id: "lambdapi",
@@ -261,11 +262,11 @@ window.editor = require(["vs/editor/editor.main"], function () {
     },
   });
 
-  return(monaco.editor.create(document.getElementById("container"), {
+  window.editor = monaco.editor.create(document.getElementById("container"), {
     theme: "vs-gruv",
     value: getCode(),
     language: "lambdapi",
-  }));
+  });
 });
 
 function getCode() {
