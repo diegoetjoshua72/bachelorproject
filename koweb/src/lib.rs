@@ -1,7 +1,4 @@
 use wasm_bindgen::prelude::*;
-extern crate wasm_bindgen;
-// use wasm_bindgen::JsCast;
-use wasm_bindgen::JsValue;
 
 //parses strings into commands which are then either
 use colosseum::unsync::Arena;
@@ -17,26 +14,10 @@ use kontroli::error::SymbolsError;
 #[global_allocator]
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
-#[wasm_bindgen(start)]
-pub fn main_js() -> Result<(), JsValue> {
-    #[cfg(debug_assertions)]
-    console_error_panic_hook::set_once();
-
-    greeting();
-    // console::log_1(&JsValue::from_str("Hello world!"));
-    // match run_test2() {
-    //     Ok(()) => println!("no errors"),
-    //     Err() =>
-    // }
-    Ok(())
-}
-
-
 pub fn set_panic_hook() {
     #[cfg(feature = "console_error_panic_hook")]
     console_error_panic_hook::set_once();
 }
-
 
 #[wasm_bindgen]
 extern "C" {
@@ -93,6 +74,11 @@ pub fn run_test(cmds_from_js: &str) -> Result<(), JsValue> {
     // set_panic_hook();
     #[cfg(debug_assertions)]
     console_error_panic_hook::set_once();
+
+    let window = web_sys::window().expect("no global `window` exists");
+    let document = window.document().expect("should have a document on window");
+    document.get_element_by_id("container").unwrap().text_content;
+
     alert(cmds_from_js);
 
     // let opt = Opt{};
