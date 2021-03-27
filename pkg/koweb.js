@@ -1,12 +1,6 @@
 
 let wasm;
 
-/**
-*/
-export function main_js() {
-    wasm.main_js();
-}
-
 let cachedTextDecoder = new TextDecoder('utf-8', { ignoreBOM: true, fatal: true });
 
 cachedTextDecoder.decode();
@@ -25,7 +19,7 @@ function getStringFromWasm0(ptr, len) {
 /**
 */
 export function greeting() {
-    wasm.main_js();
+    wasm.greeting();
 }
 
 let WASM_VECTOR_LEN = 0;
@@ -142,7 +136,7 @@ async function init(input) {
 
     wasm = instance.exports;
     init.__wbindgen_wasm_module = module;
-    wasm.__wbindgen_start();
+
     return wasm;
 }
 
