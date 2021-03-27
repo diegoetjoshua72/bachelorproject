@@ -12,7 +12,7 @@ init_editor();
 
 async function run() {
     await init();
-    run_test(window.editor.getValue());
+    run_test(editor.getValue());
 }
 
 
