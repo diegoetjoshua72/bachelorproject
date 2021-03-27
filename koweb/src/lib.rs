@@ -75,9 +75,6 @@ pub fn run_test(cmds_from_js: &str) -> Result<(), JsValue> {
     #[cfg(debug_assertions)]
     console_error_panic_hook::set_once();
 
-    let window = web_sys::window().expect("no global `window` exists");
-    let document = window.document().expect("should have a document on window");
-    document.get_element_by_id("container").unwrap().text_content;
 
     alert(cmds_from_js);
 
