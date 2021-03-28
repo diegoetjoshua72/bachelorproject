@@ -1,11 +1,8 @@
 
 
 
+
 export var editor = undefined;
-
-//because i want this code to be run on the page i can't use this as export can i ?
-//maybe i can export this whole thing as a function called init editor 
-
 
 export function init_editor(){
   require.config({ paths: { vs: "./monaco/min/vs" } });
