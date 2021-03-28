@@ -268,10 +268,12 @@ export function init_editor(){
       value: getCode(),
       language: "lambdapi",
     });
-
+    console.log("this is what Editor is here : " , editor);
     test = editor;
+    console.log("this is what test is here : " , test);
 
   });
+
 
   //i have no clue what to do here g
   return test;
