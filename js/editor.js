@@ -1,13 +1,19 @@
 
 
-// import * as monaco from '../monaco/min/vs/editor/editor.main'
+import * as loader from '../monaco/min/vs/loader.js'
+import * as mod from '../monaco/min/vs/editor/editor.main'
+
 
 export function init_editor(){
+
+  console.log(loader);
+  console.log(mod);
+
   require.config({ paths: { vs: "./monaco/min/vs" } });
   require(["vs/editor/editor.main"], init());
   var test;
   function init () {
-    import('../monaco/min/vs/editor/editor.main').then(() => {
+    import('../monaco/min/vs/editor/editor.main.js').then(() => {
     monaco.languages.register({
       id: "lambdapi",
     });
