@@ -1,11 +1,13 @@
 
 
-
-
+import * as monaco from '../monaco/min/vs/editor/editor.main'
 
 export function init_editor(){
   require.config({ paths: { vs: "./monaco/min/vs" } });
-  var bro  = require(["vs/editor/editor.main"], function () {
+  require(["vs/editor/editor.main"], init());
+  
+  var test;
+  function init () {
     monaco.languages.register({
       id: "lambdapi",
     });
@@ -271,11 +273,10 @@ export function init_editor(){
     test = editor;
     console.log("this is what test is here : " , test);
 
-  });
+  };
 
 
   //i have no clue what to do here g
-  console.log("this is what is inside of bro : " , bro);
   console.log("this is what test is right before the return : " , test);
   return test;
 }
