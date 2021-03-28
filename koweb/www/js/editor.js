@@ -3,22 +3,24 @@
 // import * as loader from '../monaco/min/vs/loader.js'
 
 
-export function init_editor(){
+// export function init_editor(){
 
-  var test;
-  define('main', ["./monaco/min/vs/editor/editor.main"], function () {
-    console.log("inside");
-    window.test = "hello from inside"
+//   var test;
+//   define('main', ["./monaco/min/vs/editor/editor.main"], function () {
+//     console.log("inside");
+//     window.test = "hello from inside"
     
-    return {someValue: 2};
+//     return {someValue: 2};
   
-    });
+//     });
 
-  console.log(window.test);
+//   console.log(window.test);
 
+
+var editor
 
   require.config({ paths: { vs: "./monaco/min/vs" } });
-  require(["vs/editor/editor.main"], function (test) {
+  require(["vs/editor/editor.main"], function () {
   
     monaco.languages.register({
       id: "lambdapi",
@@ -276,19 +278,19 @@ export function init_editor(){
       },
     });
 
-    test = monaco.editor.create(document.getElementById("container"), {
+    editor = monaco.editor.create(document.getElementById("container"), {
       theme: "vs-gruv",
       value: getCode(),
       language: "lambdapi",
     });
     // console.log("this is what Editor is here : " , editor);
     // test = editor;
-    console.log("this is what test is here : " , test);
+    // console.log("this is what test is here : " , test);
   });
   //i have no clue what to do here g
-  console.log("this is what test is right before the return : " , test);
-  return test;
-}
+  // console.log("this is what test is right before the return : " , test);
+  // return test;
+// }
 
 function getCode() {
   return [
