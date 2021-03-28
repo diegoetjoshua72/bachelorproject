@@ -3,7 +3,7 @@
 import init, {run_test } from '../pkg/koweb.js';
 // import * as wasm from '../pkg/koweb.js';
 
-console.log(window.editor);
+// console.log(window.editor);
 
 async function run() {
     await init();
