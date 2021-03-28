@@ -8,6 +8,7 @@ export function init_editor(){
   
   var test;
   function init () {
+    import('../monaco/min/vs/editor/editor.main');
     monaco.languages.register({
       id: "lambdapi",
     });
@@ -20,7 +21,7 @@ export function init_editor(){
       },
     });
 
-  //   // Define a new theme that constains only rules that match this language
+    //   // Define a new theme that constains only rules that match this language
     monaco.editor.defineTheme("vs-gruv", {
       base: "vs-dark",
       inherit: true,
