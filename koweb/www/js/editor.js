@@ -7,6 +7,17 @@ export function init_editor(){
 
 
   var test;
+  define('main', ["./monaco/min/vs/editor/editor.main"], function () {
+    console.log("inside");
+    test = "hello from inside"
+    
+    return {someValue: 2};
+  
+    });
+
+  console.log(test);
+
+
   require.config({ paths: { vs: "./monaco/min/vs" } });
   require(["vs/editor/editor.main"], function (test) {
   
