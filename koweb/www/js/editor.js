@@ -263,7 +263,7 @@ export function init_editor(){
       },
     });
 
-    editor = monaco.editor.create(document.getElementById("container"), {
+    return monaco.editor.create(document.getElementById("container"), {
       theme: "vs-gruv",
       value: getCode(),
       language: "lambdapi",
