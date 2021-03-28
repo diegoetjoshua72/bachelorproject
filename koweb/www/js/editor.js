@@ -4,8 +4,12 @@
 
 
 export function init_editor(){
+
+
+  var test;
   require.config({ paths: { vs: "./monaco/min/vs" } });
-  require(["vs/editor/editor.main"], function () {
+  require(["vs/editor/editor.main"], function (test) {
+  
     monaco.languages.register({
       id: "lambdapi",
     });
@@ -262,13 +266,13 @@ export function init_editor(){
       },
     });
 
-    var editor = monaco.editor.create(document.getElementById("container"), {
+    test = monaco.editor.create(document.getElementById("container"), {
       theme: "vs-gruv",
       value: getCode(),
       language: "lambdapi",
     });
-    console.log("this is what Editor is here : " , editor);
-    test = editor;
+    // console.log("this is what Editor is here : " , editor);
+    // test = editor;
     console.log("this is what test is here : " , test);
   });
   //i have no clue what to do here g
