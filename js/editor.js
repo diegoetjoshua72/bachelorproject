@@ -2,9 +2,9 @@
 
 
 
-export var editor = undefined;
 
 export function init_editor(){
+  var test = undefined;
   require.config({ paths: { vs: "./monaco/min/vs" } });
   require(["vs/editor/editor.main"], function () {
     monaco.languages.register({
@@ -263,12 +263,15 @@ export function init_editor(){
       },
     });
 
-    return monaco.editor.create(document.getElementById("container"), {
+    test = monaco.editor.create(document.getElementById("container"), {
       theme: "vs-gruv",
       value: getCode(),
       language: "lambdapi",
     });
   });
+
+  return test;
+
 }
 
 function getCode() {
@@ -305,11 +308,6 @@ function getCode() {
     "{|Pure.conjunction|const|} : eta ({|fun|type|} {|prop|type|} ({|fun|type|} {|prop|type|} {|prop|type|})).",
     "{|Pure.prop_def|axiom|} : A : eta {|prop|type|} -> eps ({|Pure.eq|const|} {|prop|type|} ({|Pure.prop|const|} A) A).",
   ].join("\n");
-}
-
-
-export function hello(){
-  console.log("exported function")
 }
 
 
