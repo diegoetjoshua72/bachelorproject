@@ -276,6 +276,7 @@ export function init_editor(){
 
 
   //i have no clue what to do here g
+  console.log("this is what test is right before the return : " , test);
   return test;
 }
 
