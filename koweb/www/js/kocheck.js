@@ -1,6 +1,6 @@
 
 import {init_editor} from './editor.js';
-import init, { greeting, run_test } from '../pkg/koweb.js';
+import init, {run_test } from '../pkg/koweb.js';
 // import * as wasm from '../pkg/koweb.js';
 
 console.log(init_editor());
