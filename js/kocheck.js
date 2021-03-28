@@ -3,7 +3,7 @@ import {init_editor} from './editor.js';
 import init, { greeting, run_test } from '../pkg/koweb.js';
 // import * as wasm from '../pkg/koweb.js';
 
-var editor = init_editor();
+init_editor();
 console.log(editor);
 
 async function run() {
