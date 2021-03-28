@@ -4,7 +4,8 @@
 
 
 export function init_editor(){
-  require.config({ paths: { vs: "./monaco/min/vs" } });
+  var test;
+  require.config({ paths: { vs: "../monaco/min/vs" } });
   require(["vs/editor/editor.main"], function () {
     monaco.languages.register({
       id: "lambdapi",
@@ -262,15 +263,18 @@ export function init_editor(){
       },
     });
 
-    let editor = monaco.editor.create(document.getElementById("container"), {
+    var editor = monaco.editor.create(document.getElementById("container"), {
       theme: "vs-gruv",
       value: getCode(),
       language: "lambdapi",
     });
+
+    test = editor;
+
   });
 
   //i have no clue what to do here g
-
+  return test;
 }
 
 function getCode() {
