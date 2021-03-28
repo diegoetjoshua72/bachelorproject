@@ -5,7 +5,7 @@
 
 export function init_editor(){
   require.config({ paths: { vs: "./monaco/min/vs" } });
-  require(["vs/editor/editor.main"], function () {
+  var bro  = require(["vs/editor/editor.main"], function () {
     monaco.languages.register({
       id: "lambdapi",
     });
@@ -275,6 +275,7 @@ export function init_editor(){
 
 
   //i have no clue what to do here g
+  console.log("this is what is inside of bro : " , bro);
   console.log("this is what test is right before the return : " , test);
   return test;
 }
