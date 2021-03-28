@@ -1,6 +1,6 @@
 
 
-import * as monaco from '../monaco/min/vs/editor/editor.main'
+// import * as monaco from '../monaco/min/vs/editor/editor.main'
 
 export function init_editor(){
   require.config({ paths: { vs: "./monaco/min/vs" } });
