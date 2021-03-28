@@ -1,7 +1,7 @@
 
 
-import * as loader from '../monaco/min/vs/loader.js'
-import * as mod from '../monaco/min/vs/editor/editor.main.js'
+// import * as loader from '../monaco/min/vs/loader.js'
+import * as editor from '../monaco/min/vs/editor/editor.main.js'
 
 
 export function init_editor(){
