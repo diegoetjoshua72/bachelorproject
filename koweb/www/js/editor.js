@@ -5,10 +5,9 @@
 export function init_editor(){
   require.config({ paths: { vs: "./monaco/min/vs" } });
   require(["vs/editor/editor.main"], init());
-  
   var test;
   function init () {
-    import('../monaco/min/vs/editor/editor.main');
+    import('../monaco/min/vs/editor/editor.main').then(() => {
     monaco.languages.register({
       id: "lambdapi",
     });
@@ -273,7 +272,7 @@ export function init_editor(){
     console.log("this is what Editor is here : " , editor);
     test = editor;
     console.log("this is what test is here : " , test);
-
+  })
   };
 
 
