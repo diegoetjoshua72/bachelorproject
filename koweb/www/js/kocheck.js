@@ -5,16 +5,19 @@ import init, {run_test } from '../pkg/koweb.js';
 
 console.log(window.editor);
 
-var eta = document.querySelector("eta").value;
-var no_scope = document.querySelector("no_scope").checked;
-var no_infer = document.querySelector("no_infer").checked;
-var no_check = document.querySelector("no_check").checked;
+var eta = document.querySelector("#eta").value;
+var no_scope = document.querySelector("#no_scope").checked;
+var no_infer = document.querySelector("#no_infer").checked;
+var no_check = document.querySelector("#no_check").checked;
 //no_scope no_infer no_check
 
-console.log(eta);
-console.log(no_scope);
-console.log(no_infer);
-console.log(no_check);
+function print_options(){
+    console.log(window.editor);
+    console.log(eta);
+    console.log(no_scope);
+    console.log(no_infer);
+    console.log(no_check);
+}
 
 // var checkedValue = document.querySelector('.messageCheckbox:checked').value;
 
@@ -28,4 +31,4 @@ async function run() {
 
 
 var run_button = document.getElementById("run");
-run_button.addEventListener('click', run());
+run_button.addEventListener('click', print_options());
