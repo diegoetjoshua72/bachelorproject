@@ -5,7 +5,7 @@ import init, {run_test } from '../pkg/koweb.js';
 
 console.log(window.editor);
 
-var eta = document.querySelector("#eta").value;
+var eta = document.querySelector("#eta").checked;
 var no_scope = document.querySelector("#no_scope").checked;
 var no_infer = document.querySelector("#no_infer").checked;
 var no_check = document.querySelector("#no_check").checked;
@@ -31,4 +31,4 @@ async function run() {
 
 
 var run_button = document.getElementById("run");
-run_button.addEventListener('click', print_options());
+run_button.onclick = print_options;
