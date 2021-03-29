@@ -8,6 +8,9 @@ console.log(window.editor);
 async function run() {
     await init();
     run_test(window.editor.getValue());
+    //why does it not work on the first run
+    //matter of fact it should not even run on startup why is it running everytime i refresh that 
+    //does not make any sense either ??????????????????
 }
 
 
