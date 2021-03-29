@@ -6,8 +6,12 @@ use colosseum::unsync::Arena;
 use kontroli::rc::{Intro, Rule, Signature, Typing};
 use kontroli::scope::{Command, Symbols};
 
-use kontroli::error::Error;
+// use kontroli::error::Error;
 use kontroli::error::SymbolsError;
+
+use byte_unit::{Byte, ByteError};
+use kocheck::{Opt, Event, parse, Error};
+
 
 //not sure what wee alloc does
 #[cfg(feature = "wee_alloc")]
@@ -34,23 +38,29 @@ pub fn greeting() {
 
 
 
-// pub struct JsOpt {
-//     eta: bool,
-//     no_scope: bool,
-//     no_infer: bool,
-//     no_check: bool,
-//     // buffer: Byte,
-//     // channel_capacity: Option<Option<usize>>,
-//     program: String,
-// }
+pub struct JsOpt {
+    eta: bool,
+    no_scope: bool,
+    no_infer: bool,
+    no_check: bool,
+    // buffer: Byte,
+    // channel_capacity: Option<Option<usize>>,
+    program: String, //&[u8]
 
-// impl JsOpt {
-//     pub fn from_js_args () -> Self {
-//         Self {
+}
 
-//         }
-//     }
-// }
+impl JsOpt {
+    pub fn from_js_args ( program: &str, eta:bool,no_scope:bool,no_infer:bool,no_check:bool) -> Self {
+        
+        Self {
+            eta,
+            no_scope,
+            no_infer,
+            no_check,
+            program: program.to_string(),
+        }
+    }
+}
 
 //TODO
 //lets turn our js string into a &[u8] 
@@ -69,16 +79,59 @@ pub fn greeting() {
 //but here i don't need a file path vector and then to turn those files into iterators all i should get is a string and change that into an iterator 
 //like i could just pass the program as a string and then split it into an vector or strings for every line and then turn it into an iterator and run it 
 
+fn produce_from_js(program_str: &'static String ,opt: &Opt ) -> impl Iterator<Item = Result<Event, Error>>{
+    unsafe{
+        let cmds = parse(program_str.as_bytes(),opt).map(|cmd| cmd.map(Event::Command));
+        cmds 
+    }
+}
+
+//turn my stuff into a Pathread 
+
+
 #[wasm_bindgen]
-pub fn run_test(cmds_from_js: &str) -> Result<(), JsValue> {
+pub fn run_test(cmds_from_js: 'static + String, eta: bool, no_scope: bool, no_infer: bool , no_check: bool) -> Result<(), JsValue> {
     // set_panic_hook();
     #[cfg(debug_assertions)]
     console_error_panic_hook::set_once();
+    alert(&cmds_from_js[..]);
+
+    let optjs = JsOpt::from_js_args(&cmds_from_js[..], eta, no_scope, no_infer, no_check);
+    
+    let opt = Opt {
+        eta,
+        no_scope,
+        no_infer,
+        no_check,
+        buffer : Byte::from_str("64MB").unwrap(),
+        channel_capacity : None ,
+        jobs : None,
+        files : vec!(),
+    };
+
+    unsafe {
+        produce_from_js(&cmds_from_js, &opt);
+    }
+
+    //how can i turn my string into Commands
+
+    // produce(pr?, &opt)
+    //when i produce i will get an iterator of Enums Event:Module followed by Event:Commands i guess i'll make some special js module 
+
+    //i need to make this kind of thing work get a similar output 
+
+    //1 we need to parse into commands which are actually of the type EVENT
+    //2 we then need to parse commands which is done by the consome 
+
+    //fn produce(pr: PathRead, opt: &Opt) -> impl Iterator<Item = Result<Event, Error>> {
+    //     let path = std::iter::once(Ok(Event::Module(pr.path)));
+    //     let cmds = parse(pr.read, &opt).map(|cmd| cmd.map(Event::Command));
+    //     path.chain(cmds)
+    // }   
 
 
-    alert(cmds_from_js);
-
-    // let opt = Opt{};
+    //calling parse on my string when passing it in parse .as_bytes()
+    // https://stackoverflow.com/questions/32674905/pass-string-to-function-taking-read-trait
 
     let cmds = [
         // declarations

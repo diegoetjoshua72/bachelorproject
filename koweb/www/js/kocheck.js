@@ -5,18 +5,18 @@ import init, {run_test } from '../pkg/koweb.js';
 
 console.log(window.editor);
 
-var eta = document.querySelector("#eta").checked;
-var no_scope = document.querySelector("#no_scope").checked;
-var no_infer = document.querySelector("#no_infer").checked;
-var no_check = document.querySelector("#no_check").checked;
+// var eta = document.querySelector("#eta").checked;
+// var no_scope = document.querySelector("#no_scope").checked;
+// var no_infer = document.querySelector("#no_infer").checked;
+// var no_check = document.querySelector("#no_check").checked;
 //no_scope no_infer no_check
 
 function print_options(){
     console.log(window.editor);
-    console.log(eta);
-    console.log(no_scope);
-    console.log(no_infer);
-    console.log(no_check);
+    console.log(document.querySelector("#eta").checked);
+    console.log(document.querySelector("#no_scope").checked);
+    console.log(document.querySelector("#no_infer").checked);
+    console.log(document.querySelector("#no_check").checked);
 }
 
 // var checkedValue = document.querySelector('.messageCheckbox:checked').value;
@@ -24,6 +24,7 @@ function print_options(){
 async function run() {
     await init();
     run_test(window.editor.getValue());
+    
     //why does it not work on the first run
     //matter of fact it should not even run on startup why is it running everytime i refresh that 
     //does not make any sense either ??????????????????
