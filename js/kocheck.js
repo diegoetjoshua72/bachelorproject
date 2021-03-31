@@ -23,7 +23,7 @@ function print_options(){
 
 async function run() {
     await init();
-    run_test(window.editor.getValue());
+    run_test(window.editor.getValue(), document.querySelector("#eta").checked, document.querySelector("#no_scope").checked , document.querySelector("#no_infer").checked , document.querySelector("#no_check").checked);
     
     //why does it not work on the first run
     //matter of fact it should not even run on startup why is it running everytime i refresh that 
