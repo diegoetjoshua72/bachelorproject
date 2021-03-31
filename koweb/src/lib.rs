@@ -10,7 +10,7 @@ use kontroli::scope::{Command, Symbols};
 use kontroli::error::SymbolsError;
 
 use byte_unit::{Byte, ByteError};
-use kocheck::{Opt, Event, parse, Error};
+use kocheck::{Opt, Event, parse, seq, Error};
 
 
 //not sure what wee alloc does
@@ -93,8 +93,10 @@ pub fn run_test(cmds_from_js: String, eta: bool, no_scope: bool, no_infer: bool 
 
     #[cfg(debug_assertions)]
     console_error_panic_hook::set_once();
+
+    alert("hello ?does it work");
     alert(cmds_from_js.as_str());
-    
+
     let static_cmds_str  = string_to_static_str(cmds_from_js);
 
     let optjs = JsOpt::from_js_args(static_cmds_str.to_string(), eta, no_scope, no_infer, no_check);
@@ -114,7 +116,7 @@ pub fn run_test(cmds_from_js: String, eta: bool, no_scope: bool, no_infer: bool 
 
     //replace log with something that lets me write to something on the webpage 
     let mut iter = Box::new(commando).inspect(|r| r.iter().for_each(|event| write_to_webconsole(event)));
-    //seq::consume(iter, &opt)?,
+    seq::consume(iter, &opt).expect("something went wrong in the consume");
 
     
 
