@@ -94,6 +94,7 @@ pub fn run_test(cmds_from_js: String, eta: bool, no_scope: bool, no_infer: bool 
     #[cfg(debug_assertions)]
     console_error_panic_hook::set_once();
     alert(cmds_from_js.as_str());
+    
     let static_cmds_str  = string_to_static_str(cmds_from_js);
 
     let optjs = JsOpt::from_js_args(static_cmds_str.to_string(), eta, no_scope, no_infer, no_check);
