@@ -81,8 +81,10 @@ fn write_to_webconsole(event: &kocheck::Event){
     let document = window.document().expect("should have a document on window");
     let body = document.body().expect("document should have a body");
 
-    let val = document.get_element_by_id("console").unwrap();
+    // let val = document.get_element_by_id("console").unwrap();
+    let val = document.create_element("p").unwrap();
     val.set_text_content(Some(format!("{}",event).as_str()));
+    body.append_child(&val).unwrap();
 }
 
 
