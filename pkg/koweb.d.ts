@@ -5,14 +5,18 @@
 export function greeting(): void;
 /**
 * @param {string} cmds_from_js
+* @param {boolean} eta
+* @param {boolean} no_scope
+* @param {boolean} no_infer
+* @param {boolean} no_check
 */
-export function run_test(cmds_from_js: string): void;
+export function run_test(cmds_from_js: string, eta: boolean, no_scope: boolean, no_infer: boolean, no_check: boolean): void;
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
-  readonly run_test: (a: number, b: number) => void;
+  readonly run_test: (a: number, b: number, c: number, d: number, e: number, f: number) => void;
   readonly greeting: () => void;
   readonly __wbindgen_malloc: (a: number) => number;
   readonly __wbindgen_realloc: (a: number, b: number, c: number) => number;

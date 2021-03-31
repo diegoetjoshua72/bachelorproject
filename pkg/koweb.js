@@ -78,11 +78,15 @@ function passStringToWasm0(arg, malloc, realloc) {
 }
 /**
 * @param {string} cmds_from_js
+* @param {boolean} eta
+* @param {boolean} no_scope
+* @param {boolean} no_infer
+* @param {boolean} no_check
 */
-export function run_test(cmds_from_js) {
+export function run_test(cmds_from_js, eta, no_scope, no_infer, no_check) {
     var ptr0 = passStringToWasm0(cmds_from_js, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
     var len0 = WASM_VECTOR_LEN;
-    wasm.run_test(ptr0, len0);
+    wasm.run_test(ptr0, len0, eta, no_scope, no_infer, no_check);
 }
 
 async function load(module, imports) {
@@ -126,6 +130,9 @@ async function init(input) {
     imports.wbg = {};
     imports.wbg.__wbg_alert_4914cfe43bafd4ba = function(arg0, arg1) {
         alert(getStringFromWasm0(arg0, arg1));
+    };
+    imports.wbg.__wbindgen_throw = function(arg0, arg1) {
+        throw new Error(getStringFromWasm0(arg0, arg1));
     };
 
     if (typeof input === 'string' || (typeof Request === 'function' && input instanceof Request) || (typeof URL === 'function' && input instanceof URL)) {
