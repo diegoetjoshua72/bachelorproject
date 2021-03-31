@@ -29,7 +29,6 @@ async function run() {
     //matter of fact it should not even run on startup why is it running everytime i refresh that 
     //does not make any sense either ??????????????????
 }
-
-
+run();
 var run_button = document.getElementById("run");
 run_button.onclick = print_options;
