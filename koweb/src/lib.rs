@@ -50,7 +50,7 @@ pub struct JsOpt {
 }
 
 impl JsOpt {
-    pub fn from_js_args ( program: &str, eta:bool,no_scope:bool,no_infer:bool,no_check:bool) -> Self {
+    pub fn from_js_args ( program: String, eta:bool,no_scope:bool,no_infer:bool,no_check:bool) -> Self {
         
         Self {
             eta,
@@ -62,41 +62,41 @@ impl JsOpt {
     }
 }
 
-//TODO
-//lets turn our js string into a &[u8] 
-//parse also wants some buffer size but idk i guess i need to give the default or something 64MB
-//ok lets do that then i get the string from the editor then i will try to parse it here with this produce function and we will see
-//whats next
-
-//this will take my program and turn it into commands modules 
-// fn produce(pr: PathRead, opt: &Opt) -> impl Iterator<Item = Result<Event, Error>> {
-//     let path = std::iter::once(Ok(Event::Module(pr.path)));
-//     let cmds = parse(pr.read, &opt).map(|cmd| cmd.map(Event::Command));
-//     path.chain(cmds)
-// }
-
-
-//but here i don't need a file path vector and then to turn those files into iterators all i should get is a string and change that into an iterator 
-//like i could just pass the program as a string and then split it into an vector or strings for every line and then turn it into an iterator and run it 
-
-fn produce_from_js(program_str: &'static String ,opt: &Opt ) -> impl Iterator<Item = Result<Event, Error>>{
-    unsafe{
-        let cmds = parse(program_str.as_bytes(),opt).map(|cmd| cmd.map(Event::Command));
-        cmds 
-    }
+fn produce_from_js(cmds_from_js: &'static str ,opt: &Opt ) -> impl Iterator<Item = Result<Event, Error>>{
+    let cmds = parse(cmds_from_js.as_bytes(), opt).map(|cmd| cmd.map(Event::Command));
+    //what is the return of parse really is something i need to understand here !!
+    cmds 
 }
 
-//turn my stuff into a Pathread 
+//look if Box leak works here and if i can get unstuck
+//
+
+fn string_to_static_str(s: String) -> &'static str {
+    Box::leak(s.into_boxed_str())
+}
+
+fn write_to_webconsole(event: &kocheck::Event){
+
+    //i need to match here on the cocheck enum ??
+    let window = web_sys::window().expect("no global `window` exists");
+    let document = window.document().expect("should have a document on window");
+    let body = document.body().expect("document should have a body");
+
+    let val = document.get_element_by_id("console").unwrap();
+    val.set_text_content(format!("{}",event));
+}
 
 
 #[wasm_bindgen]
-pub fn run_test(cmds_from_js: 'static + String, eta: bool, no_scope: bool, no_infer: bool , no_check: bool) -> Result<(), JsValue> {
+pub fn run_test(cmds_from_js: String, eta: bool, no_scope: bool, no_infer: bool , no_check: bool) -> Result<(), JsValue> {
     // set_panic_hook();
+
     #[cfg(debug_assertions)]
     console_error_panic_hook::set_once();
-    alert(&cmds_from_js[..]);
+    alert(cmds_from_js.as_str());
+    let static_cmds_str  = string_to_static_str(cmds_from_js);
 
-    let optjs = JsOpt::from_js_args(&cmds_from_js[..], eta, no_scope, no_infer, no_check);
+    let optjs = JsOpt::from_js_args(static_cmds_str.to_string(), eta, no_scope, no_infer, no_check);
     
     let opt = Opt {
         eta,
@@ -109,9 +109,13 @@ pub fn run_test(cmds_from_js: 'static + String, eta: bool, no_scope: bool, no_in
         files : vec!(),
     };
 
-    unsafe {
-        produce_from_js(&cmds_from_js, &opt);
-    }
+    let commando = produce_from_js(static_cmds_str, &opt);
+
+    //replace log with something that lets me write to something on the webpage 
+    let mut iter = Box::new(commando).inspect(|r| r.iter().for_each(|event| write_to_webconsole(event)));
+    //seq::consume(iter, &opt)?,
+
+    
 
     //how can i turn my string into Commands
 
