@@ -46,8 +46,9 @@ pub fn greeting() {
 }
 
 fn produce_from_js(cmds_from_js: &'static str ,opt: &Opt ) -> impl Iterator<Item = Result<Event, Error>>{
+    let module = std::iter::once(Ok(Event::Module(vec!("js".to_string()))));
     let cmds = parse(cmds_from_js.as_bytes(), opt).map(|cmd| cmd.map(Event::Command));
-    cmds 
+    module.chain(cmds)
 }
 
 fn string_to_static_str(s: String) -> &'static str {
@@ -123,7 +124,7 @@ pub fn run_test(cmds_from_js: String, eta: bool, no_scope: bool, no_infer: bool 
 
     
     let opt = Opt {
-        eta: true,
+        eta,
         no_scope,
         no_infer,
         no_check,
