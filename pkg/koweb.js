@@ -282,9 +282,6 @@ async function init(input) {
     imports.wbg.__wbg_debug_f29e6b5aa936ee44 = function(arg0, arg1, arg2, arg3) {
         console.debug(getObject(arg0), getObject(arg1), getObject(arg2), getObject(arg3));
     };
-    imports.wbg.__wbg_error_c81c8d172df3cb18 = function(arg0) {
-        console.error(getObject(arg0));
-    };
     imports.wbg.__wbg_error_a919ae31d9492215 = function(arg0, arg1, arg2, arg3) {
         console.error(getObject(arg0), getObject(arg1), getObject(arg2), getObject(arg3));
     };
