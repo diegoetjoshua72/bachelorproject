@@ -87,9 +87,9 @@ where I : Iterator<Item = Result<Event, Error>>,
 {
     for element in iter {
         match element{
-            Result::Ok(Event) => info!("{}",Event),
+            Result::Ok(Event) => coslog(format!("{}",Event)),
             
-            Result::Err(Error) => info!("something went wrong : {:?}",Error)
+            Result::Err(Error) => coslog(format!("something went wrong : {:?}",Error))
         }
     }
 }
@@ -117,6 +117,7 @@ pub fn run_test(cmds_from_js: String, eta: bool, no_scope: bool, no_infer: bool 
     // env_logger::from_env(Env::default().filter_or("LOG", "warn")).init();
     // log::debug!("hello");
     
+    // Introduce symbol {|Pure.Appt|const|}
 
     let static_cmds_str  = string_to_static_str(cmds_from_js);
 
