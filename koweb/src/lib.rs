@@ -141,7 +141,7 @@ pub fn run_test(cmds_from_js: String, eta: bool, no_scope: bool, no_infer: bool 
     // alert(format!("{}",iter.size_hint()));
     //lets print out the iterator to the console i think that would be useful information 
     
-    print_iterator(&mut iter);
+    // print_iterator(&mut iter);
     
 
     seq::consume(iter, &opt).expect("something went wrong in the consume");
