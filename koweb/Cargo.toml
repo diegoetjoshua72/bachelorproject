@@ -21,6 +21,7 @@ kocheck = { path = "../kocheck" }
 kontroli = { path = "../kontroli" }
 console_error_panic_hook = "0.1.6"
 log = "0.4.6"
+console_log = { version = "0.2", features = ["color"] }
 wasm-logger = "0.2.0"
 
 [dependencies.web-sys]
