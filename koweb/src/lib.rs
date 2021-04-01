@@ -123,7 +123,7 @@ pub fn run_test(cmds_from_js: String, eta: bool, no_scope: bool, no_infer: bool 
 
     
     let opt = Opt {
-        eta,
+        eta: true,
         no_scope,
         no_infer,
         no_check,
