@@ -329,6 +329,24 @@ async function init(input) {
         var ret = getObject(arg0) === undefined;
         return ret;
     };
+    imports.wbg.__wbg_new_59cb74e423758ede = function() {
+        var ret = new Error();
+        return addHeapObject(ret);
+    };
+    imports.wbg.__wbg_stack_558ba5917b466edd = function(arg0, arg1) {
+        var ret = getObject(arg1).stack;
+        var ptr0 = passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        var len0 = WASM_VECTOR_LEN;
+        getInt32Memory0()[arg0 / 4 + 1] = len0;
+        getInt32Memory0()[arg0 / 4 + 0] = ptr0;
+    };
+    imports.wbg.__wbg_error_4bb6c2a97407129a = function(arg0, arg1) {
+        try {
+            console.error(getStringFromWasm0(arg0, arg1));
+        } finally {
+            wasm.__wbindgen_free(arg0, arg1);
+        }
+    };
     imports.wbg.__wbindgen_debug_string = function(arg0, arg1) {
         var ret = debugString(getObject(arg1));
         var ptr0 = passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
