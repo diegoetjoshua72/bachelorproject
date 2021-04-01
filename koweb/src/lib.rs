@@ -99,7 +99,7 @@ where I : Iterator<Item = Result<Event, Error>>,
 pub fn run_test(cmds_from_js: String, eta: bool, no_scope: bool, no_infer: bool , no_check: bool) -> Result<(), JsValue> {
 
     // wasm_logger::init(wasm_logger::Config::default());
-    wasm_logger::init(wasm_logger::Config::new(log::Level::Trace));
+    // wasm_logger::init(wasm_logger::Config::new(log::Level::Trace));
     wasm_logger::init(wasm_logger::Config::new(log::Level::Info));
     init_console_wasm_debug();
     alert(cmds_from_js.as_str());
