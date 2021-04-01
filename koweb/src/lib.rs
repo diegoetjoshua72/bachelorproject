@@ -99,6 +99,7 @@ where I : Iterator<Item = Result<Event, Error>>,
 pub fn run_test(cmds_from_js: String, eta: bool, no_scope: bool, no_infer: bool , no_check: bool) -> Result<(), JsValue> {
 
     wasm_logger::init(wasm_logger::Config::default());
+    wasm_logger::init(wasm_logger::Config::new(log::Level::Trace));
     init_console_wasm_debug();
     alert(cmds_from_js.as_str());
     //CAREFULLLLL when something goes wrong in the code i get unreachable in the browser console i need to find a way to get good error messages
