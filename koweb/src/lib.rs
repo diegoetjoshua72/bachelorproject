@@ -87,9 +87,9 @@ where I : Iterator<Item = Result<Event, Error>>,
 {
     for element in iter {
         match element{
-            Result::Ok(Event) => coslog(format!("{}",Event)),
+            Result::Ok(Event) => coslog(format!("{}",Event).as_str()),
             
-            Result::Err(Error) => coslog(format!("something went wrong : {:?}",Error))
+            Result::Err(Error) => coslog(format!("something went wrong : {:?}",Error).as_str())
         }
     }
 }
