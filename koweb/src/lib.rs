@@ -18,9 +18,13 @@ use kocheck::{Opt, Event, parse, seq, Error};
 #[global_allocator]
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
-pub fn set_panic_hook() {
-    #[cfg(feature = "console_error_panic_hook")]
-    console_error_panic_hook::set_once();
+extern crate console_error_panic_hook;
+use std::panic;
+
+fn my_init_function() {
+    panic::set_hook(Box::new(console_error_panic_hook::hook));
+
+    // ...
 }
 
 #[wasm_bindgen]
@@ -78,6 +82,7 @@ pub fn run_test(cmds_from_js: String, eta: bool, no_scope: bool, no_infer: bool 
     wasm_logger::init(wasm_logger::Config::default());
     #[cfg(debug_assertions)]
     console_error_panic_hook::set_once();
+    my_init_function();
     alert(cmds_from_js.as_str());
     //CAREFULLLLL when something goes wrong in the code i get unreachable in the browser console i need to find a way to get good error messages
     //essayer de virer le static lifetime =)
@@ -89,6 +94,8 @@ pub fn run_test(cmds_from_js: String, eta: bool, no_scope: bool, no_infer: bool 
         // -> String ??? -> (peut etre async lazy reading)???
         //regarder le parse buffer
 
+    //typing reduce convertible 
+    //something i wrong and i reach unreachable how can i fix that the logging works tho which is really cool
 
 
     // env_logger::from_env(Env::default().filter_or("LOG", "warn")).init();
