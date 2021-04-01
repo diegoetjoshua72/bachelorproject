@@ -79,6 +79,7 @@ pub fn run_test(cmds_from_js: String, eta: bool, no_scope: bool, no_infer: bool 
     #[cfg(debug_assertions)]
     console_error_panic_hook::set_once();
     alert(cmds_from_js.as_str());
+    //CAREFULLLLL when something goes wrong in the code i get unreachable in the browser console i need to find a way to get good error messages
     //essayer de virer le static lifetime =)
     //essayer le wasm log 
     //essayer de passer de maniere async le code dans le text editor (lazy)
@@ -89,26 +90,13 @@ pub fn run_test(cmds_from_js: String, eta: bool, no_scope: bool, no_infer: bool 
         //regarder le parse buffer
 
 
-    
-
-
-
-    // use env_logger::Env;
-    // log warnings and errors by default
-    // allow setting the logging level by using the environment variable "LOG"
-    // e.g. `LOG=trace kocheck ...`
-
-    //i there are debug ! and trace ! macros in the kontroli kernel and i would like to get their outputs 
-    //like instead of it loging i would need to get a string
 
     // env_logger::from_env(Env::default().filter_or("LOG", "warn")).init();
     // log::debug!("hello");
     
-    //this looks like its setting up something where the kontroli kernel writes
 
     let static_cmds_str  = string_to_static_str(cmds_from_js);
 
-    // let optjs = JsOpt::from_js_args(static_cmds_str.to_string(), eta, no_scope, no_infer, no_check);
     
     let opt = Opt {
         eta,
