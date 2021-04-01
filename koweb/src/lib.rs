@@ -11,7 +11,7 @@ use kontroli::error::SymbolsError;
 
 use byte_unit::{Byte, ByteError};
 use kocheck::{Opt, Event, parse, seq, Error};
-
+use log::{info, trace, warn};
 
 //not sure what wee alloc does
 #[cfg(feature = "wee_alloc")]
@@ -21,7 +21,8 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 extern crate console_error_panic_hook;
 use std::panic;
 
-fn my_init_function() {
+//i should get the the automatic code format and debugger going as well today
+fn init_console_wasm_debug() {
     panic::set_hook(Box::new(console_error_panic_hook::hook));
 
     // ...
@@ -31,6 +32,10 @@ fn my_init_function() {
 extern "C" {
     #[wasm_bindgen]
     fn alert(s: &str);
+
+    #[wasm_bindgen(js_namespace = console)]
+    fn coslog(s: &str);
+
 }
 
 //https://github.com/Deducteam/lambdapi/tree/master/editors/vscode
@@ -76,13 +81,24 @@ where
     })
 }
 
+
+fn print_iterator<I>(iter: &mut I )
+where I : Iterator<Item = Result<Event, Error>>,
+{
+    for element in iter {
+        match element{
+            Result::Ok(Event) => info!("{}",Event),
+            
+            Result::Err(Error) => info!("something went wrong : {:?}",Error)
+        }
+    }
+}
+
 #[wasm_bindgen]
 pub fn run_test(cmds_from_js: String, eta: bool, no_scope: bool, no_infer: bool , no_check: bool) -> Result<(), JsValue> {
 
     wasm_logger::init(wasm_logger::Config::default());
-    #[cfg(debug_assertions)]
-    console_error_panic_hook::set_once();
-    my_init_function();
+    init_console_wasm_debug();
     alert(cmds_from_js.as_str());
     //CAREFULLLLL when something goes wrong in the code i get unreachable in the browser console i need to find a way to get good error messages
     //essayer de virer le static lifetime =)
@@ -117,10 +133,15 @@ pub fn run_test(cmds_from_js: String, eta: bool, no_scope: bool, no_infer: bool 
     };
 
     let iter = produce_from_js(static_cmds_str, &opt);
-
+    
     let mut iter = Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webconsole(event)));
-
+    
     // alert(format!("{}",iter.size_hint()));
+    //lets print out the iterator to the console i think that would be useful information 
+    
+    print_iterator(&mut iter);
+    
+
     seq::consume(iter, &opt).expect("something went wrong in the consume");
 
     //changer la face log 
