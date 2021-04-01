@@ -98,12 +98,11 @@ where I : Iterator<Item = Result<Event, Error>>,
 #[wasm_bindgen]
 pub fn run_test(cmds_from_js: String, eta: bool, no_scope: bool, no_infer: bool , no_check: bool) -> Result<(), JsValue> {
 
-    // wasm_logger::init(wasm_logger::Config::default());
-    // wasm_logger::init(wasm_logger::Config::new(log::Level::Trace));
-    wasm_logger::init(wasm_logger::Config::new(log::Level::Info));
+    wasm_logger::init(wasm_logger::Config::new(log::Level::Trace));
     init_console_wasm_debug();
     alert(cmds_from_js.as_str());
 
+    // https://stackoverflow.com/questions/19846078/how-to-read-from-chromes-console-in-javascript
     //CAREFULLLLL when something goes wrong in the code i get unreachable in the browser console i need to find a way to get good error messages
     //essayer de virer le static lifetime =)
     //essayer le wasm log 
@@ -143,17 +142,12 @@ pub fn run_test(cmds_from_js: String, eta: bool, no_scope: bool, no_infer: bool 
     
     // alert(format!("{}",iter.size_hint()));
     //lets print out the iterator to the console i think that would be useful information 
-    
     // print_iterator(&mut iter);
     
 
     seq::consume(iter, &opt).expect("something went wrong in the consume");
 
-    //changer la face log 
     
-    //that's done through the env logger
-    //compare the terminal logs with the logs that i got on the page 
-    //and what next find how many things i have to iterate on like the size of the iterator
     //i want to be able to get error messages and line numbers 
     //then i want to be able to run it with the run button 
     //make the loading bar thing
