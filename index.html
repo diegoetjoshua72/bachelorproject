@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">    
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="./css/index.css">
     <title>λ Kontroli</title>
 </head>
@@ -13,6 +15,7 @@
     <h1>
         λ Kontroli
     </h1>
+
 
     <div id="container" style="width: 1200px; height: 800px; border: 1px solid grey"></div>
     <div>
@@ -27,9 +30,24 @@
         
         <input type="checkbox" id="no_check" names="no_check">
         <label for="no_check">no_check</label>
-    <div>
+    </div>
 
-    <button id="run">Run</button>
+    <div>
+        <button id="run">Run</button>
+
+        <button id="run_url" onclick="get_string_from_url();">Run from the following url</button>
+        <input id="url" type="text">input url here</input>
+        <!-- if the url is not inputed then display some warning message here -->
+
+    </div>
+
+    <div id="output">
+        <!-- when run is done display stuff here -->
+    </div>
+    
+    <div id="misc">
+
+    </div>
 
 
     <script src="./monaco/min/vs/loader.js"></script>

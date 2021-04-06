@@ -8,8 +8,10 @@ h1{
 }
 
 body{
+    margin-left: 10%;
+    margin-right: 10%;
     background-color: #1e1e1e;
-    font-family: SFMono-Regular,Consolas,Liberation;
+    font-family: 'Roboto', sans-serif;
     color: blanchedalmond;
 }
  
