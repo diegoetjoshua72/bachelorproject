@@ -57,7 +57,7 @@ function display_error_onpage (error_msg, context) {
     error_msg_dom.classList.add("bounce-in")
     error_msg_dom.appendChild(text);
     var element = document.getElementById(context);
-    element.appendChild(context);
+    element.appendChild(error_msg_dom);
 }
 
 
