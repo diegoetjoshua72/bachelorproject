@@ -1,6 +1,6 @@
 
 // import {init_editor} from './editor.js';
-import init, * as was from '../pkg/koweb.js';
+import init, {run_test, greeting} from '../pkg/koweb.js';
 // import * as wasm from '../pkg/koweb.js';
 
 function remove_all_errors_dom () {
@@ -69,6 +69,7 @@ async function run() {
     const wasm = await init();
     window.wasm = wasm;
     console.log(wasm);
+    var testing = await window.editor.getValue();
     greeting();
     run_test(window.editor.getValue(), document.getElementById("eta").checked, document.getElementById("no_scope").checked , document.getElementById("no_infer").checked , document.getElementById("no_check").checked);
 }
