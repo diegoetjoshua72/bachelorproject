@@ -64,7 +64,10 @@ var run_url = document.getElementById("run_url").onclick = () => {
 // run();
 
 
-const wasmtest = async () => {await init('../pkg/koweb_bg.wasm'); window.wasm = wasm}
+const wasmtest = async () => {
+    await init(); 
+    window.wasm = wasm;
+}
 wasmtest();
 console.log(wasmtest);
 console.log(window.wasm);
