@@ -35,7 +35,7 @@ var editor = monaco.editor.create(document.getElementById('container'), {
 var editor = 666;
 
   require.config({ paths: { vs: "./monaco/min/vs" } });
-  require(["vs/editor/editor.main"], function () {
+  require(["vs/editor/editor.main"], async function () {
   
     monaco.languages.register({
       id: "lambdapi",
@@ -293,14 +293,15 @@ var editor = 666;
       },
     });
 
-    editor = monaco.editor.create(document.getElementById("container"), {
+    //this is taken outside the normal execution flow and its a problem because i need window to be set before i continue
+    window.editor = await monaco.editor.create(document.getElementById("container"), {
       theme: "vs-gruv",
       value: getCode(),
       language: "lambdapi",
     });
   });
 
-console.log(editor);
+  console.log(window.editor)
 
 function getCode () {
   return [
