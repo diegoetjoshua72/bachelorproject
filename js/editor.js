@@ -17,7 +17,20 @@
 //   console.log(window.test);
 
 
-var editor = 12;
+{/* <script>
+var require = { paths: { vs: '../node_modules/monaco-editor/min/vs' } };
+</script>
+<script src="../node_modules/monaco-editor/min/vs/loader.js"></script>
+<script src="../node_modules/monaco-editor/min/vs/editor/editor.main.nls.js"></script>
+<script src="../node_modules/monaco-editor/min/vs/editor/editor.main.js"></script>
+
+<script>
+var editor = monaco.editor.create(document.getElementById('container'), {
+    value: ['function x() {', '\tconsole.log("Hello world!");', '}'].join('\n'),
+    language: 'javascript'
+});
+</script> */}
+
 
   require.config({ paths: { vs: "./monaco/min/vs" } });
   require(["vs/editor/editor.main"], function () {
@@ -278,19 +291,12 @@ var editor = 12;
       },
     });
 
-    window.editor = monaco.editor.create(document.getElementById("container"), {
+    var editor = monaco.editor.create(document.getElementById("container"), {
       theme: "vs-gruv",
       value: getCode(),
       language: "lambdapi",
     });
-    // console.log("this is what Editor is here : " , editor);
-    // test = editor;
-    // console.log("this is what test is here : " , test);
   });
-  //i have no clue what to do here g
-  // console.log("this is what test is right before the return : " , test);
-  // return test;
-// }
 
 
 function getCode () {

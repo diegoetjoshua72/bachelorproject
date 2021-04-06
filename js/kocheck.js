@@ -15,19 +15,19 @@ function get_string_from_url (context_id) {
         fetch(url).then(result => {
             result.text().then(string => console.log(string)).catch((err) => {
                 console.log(err);
-                display_error_onpage("Given Url is not valid",context_id)
+                display_error_dom("Given Url is not valid",context_id)
             });
         }).catch((err) => {
             console.log(err);
-            display_error_onpage("Given Url is not valid",context_id);
+            display_error_dom("Given Url is not valid",context_id);
         });
     }
     else {
-        display_error_onpage("Empty url field", context_id)
+        display_error_dom("Empty url field", context_id)
     }
 }
 
-function display_error_onpage (error_msg, context) {
+function display_error_dom (error_msg, context) {
     var error_msg_dom = document.createElement("p");
     var text = document.createTextNode(error_msg);
     error_msg_dom.classList.add("error")
@@ -45,25 +45,57 @@ function print_options(){
     console.log(document.querySelector("#no_check").checked);
 }
 
+function load_text_from_url_in_editor (context_id) {
+    window.editor.setValue(get_string_from_url(context_id));
+}
+
+
 //javascript and Webassembly share the same execution thread when you execute wasm within javascript the javascript halts and vice versa
 //still some erors loadings idk 
+
+// editor.getModel().setValue('some value');
+
+{/* <script>
+var require = { paths: { vs: '../node_modules/monaco-editor/min/vs' } };
+</script>
+<script src="../node_modules/monaco-editor/min/vs/loader.js"></script>
+<script src="../node_modules/monaco-editor/min/vs/editor/editor.main.nls.js"></script>
+<script src="../node_modules/monaco-editor/min/vs/editor/editor.main.js"></script>
+
+<script>
+var editor = monaco.editor.create(document.getElementById('container'), {
+    value: ['function x() {', '\tconsole.log("Hello world!");', '}'].join('\n'),
+    language: 'javascript'
+});
+</script> */}
 
 console.log(window.editor);
 
 
 async function run() {
-    const wasm = await init();
-    window.wasm = wasm;
-    console.log(wasm);
-    var testing = await window.editor.getValue();
-    console.log("this is testing ::: ", testing);
-    greeting();
-    run_test(window.editor.getValue(), document.getElementById("eta").checked, document.getElementById("no_scope").checked , document.getElementById("no_infer").checked , document.getElementById("no_check").checked);
+    try{
+        const wasm = await init();
+        window.wasm = wasm;
+        console.log(wasm);
+        var testing = await window.editor.getValue();
+        console.log("this is testing ::: ", testing);
+        greeting();
+        run_test(window.editor.getValue(), document.getElementById("eta").checked, document.getElementById("no_scope").checked , document.getElementById("no_infer").checked , document.getElementById("no_check").checked);
+    }
+    catch {
+        remove_all_errors_dom();
+        display_error_dom("something went wrong in the run", errortest);
+    }
 }
 
 print_options();
 console.log(window.wasm)
 
+
+
+var load_url = document.getElementById("load_url").onclick = () => {
+    load_text_from_url_in_editor("url_operations");
+} 
 
 var run_url = document.getElementById("run_url").onclick = () => {
     get_string_from_url("url_operations");
