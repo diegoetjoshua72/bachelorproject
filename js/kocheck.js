@@ -70,7 +70,7 @@ async function run() {
     window.wasm = wasm;
     console.log(wasm);
     var testing = await window.editor.getValue();
-    console.log("this is testing ::: "testing);
+    console.log("this is testing ::: ", testing);
     greeting();
     run_test(window.editor.getValue(), document.getElementById("eta").checked, document.getElementById("no_scope").checked , document.getElementById("no_infer").checked , document.getElementById("no_check").checked);
 }
