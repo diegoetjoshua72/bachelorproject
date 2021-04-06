@@ -1,6 +1,6 @@
 
 // import {init_editor} from './editor.js';
-import init, * as wasm from '../pkg/koweb.js';
+import init, * as was from '../pkg/koweb.js';
 // import * as wasm from '../pkg/koweb.js';
 
 function remove_all_errors_dom () {
@@ -64,16 +64,10 @@ var run_url = document.getElementById("run_url").onclick = () => {
 // run();
 
 
-const wasmtest = async () => {
-    await init(); 
-    window.wasm = wasm;
-}
-wasmtest();
-console.log(wasmtest);
-console.log(window.wasm);
 
 async function run() {
     const wasm = await init();
+    console.log(wasm);
     wasm.greeting();
     wasm.run_test(window.editor.getValue(), document.getElementById("eta").checked, document.getElementById("no_scope").checked , document.getElementById("no_infer").checked , document.getElementById("no_check").checked);
     
