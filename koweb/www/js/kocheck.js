@@ -13,6 +13,31 @@ console.log(window.editor);
 
 
 
+
+// limit text line length 
+// set line height (space between lines)
+
+//i want to be able to load from a file into the text editor on the website 
+//run from a link straight away
+//drag and drop into the editor
+//load / run from link / run file / 
+
+
+//look into making a nice card for the rust output 
+//make some done appear and some animations for when there are erros 
+//3 hours 
+
+
+//i hope i still have time after that 
+//if i do review the network anki 
+//owrkout
+//review 
+
+//next i will work on the lazy parsing that we talked about 
+//look into changing and fixing the thing with the editor first loading 
+//change the rust function that is passed to the javascript
+
+
 function get_string_from_url () {
     const url = document.getElementById("url").value;
     if(url != ""){
@@ -21,19 +46,22 @@ function get_string_from_url () {
         }).catch("Given Url is not valid")
     }
     else {
-    
-
+        // display_error_onpage
     }
 }
 
 function display_error_onpage (error_msg, context) {
     var error_msg_dom = document.createElement("p");
     var text = document.createTextNode(error_msg);
-
-    tag.appendChild(text);
+    error_msg_dom.classList.add("error")
+    error_msg_dom.classList.add("bounce-in")
+    error_msg_dom.appendChild(text);
     var element = document.getElementById(context);
-    element.appendChild(tag);
+    element.appendChild(context);
 }
+
+
+display_error_onpage("oi m8 yu w4n7 50m3");
 
 
 function print_options(){
@@ -58,7 +86,7 @@ function print_options(){
 async function run() {
     const wasm = await init();
     wasm.greeting();
-    run_test(window.editor.getValue(), document.querySelector("#eta").checked, document.querySelector("#no_scope").checked , document.querySelector("#no_infer").checked , document.querySelector("#no_check").checked);
+    run_test(window.editor.getValue(), document.getElementById("eta").checked, document.getElementById("no_scope").checked , document.getElementById("no_infer").checked , document.getElementById("no_check").checked);
     
     //why does it not work on the first run
     //matter of fact it should not even run on startup why is it running everytime i refresh that 
