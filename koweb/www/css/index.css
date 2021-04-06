@@ -28,6 +28,8 @@ body{
     background-color: #FF6961;
     padding-top: 20px;
     padding-bottom: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
     font-weight: bold;
     color: white;
     width: max-content;
@@ -39,7 +41,7 @@ body{
   }
 
 .bounce-in {
-    animation: bounce-in 1.5s ease;
+    animation: bounce-in 0.8s ease;
   }
 
 @keyframes bounce-in {
