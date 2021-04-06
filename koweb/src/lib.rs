@@ -104,6 +104,7 @@ pub fn run_test(cmds_from_js: String, eta: bool, no_scope: bool, no_infer: bool 
     init_console_wasm_debug();
     alert(cmds_from_js.as_str());
 
+    info!("testing the info part");
     // https://stackoverflow.com/questions/19846078/how-to-read-from-chromes-console-in-javascript
     //CAREFULLLLL when something goes wrong in the code i get unreachable in the browser console i need to find a way to get good error messages
     //essayer de virer le static lifetime =)
