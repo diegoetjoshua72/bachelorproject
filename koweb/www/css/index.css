@@ -35,10 +35,11 @@ body{
     /* transform: scale(0);
     transition: 0.5s; */
     box-shadow: 0 0 5px rgb(240,102,0);
+
   }
 
 .bounce-in {
-    animation: bounce-in 2s ease infinite;
+    animation: bounce-in 2s ease;
   }
 
 @keyframes bounce-in {
@@ -50,7 +51,7 @@ body{
       opacity: 1;
       transform: scale(1.05);
     }
-    70% { transform: scale(.9); }
+    /* 70% { transform: scale(.9); } */
     100% { transform: scale(1); }
 }
   
