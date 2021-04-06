@@ -52,7 +52,7 @@ console.log(window.editor);
 display_error_onpage("oi m8 yu w4n7 50m3", "errortest");
 
 var run_url = document.getElementById("run_url").onclick = () => {
-    get_string_from_url("urlstuff")
+    get_string_from_url("url_operations");
 } 
 
 
@@ -67,13 +67,10 @@ var run_url = document.getElementById("run_url").onclick = () => {
 
 async function run() {
     const wasm = await init();
+    window.wasm = wasm;
     console.log(wasm);
-    wasm.greeting();
-    wasm.run_test(window.editor.getValue(), document.getElementById("eta").checked, document.getElementById("no_scope").checked , document.getElementById("no_infer").checked , document.getElementById("no_check").checked);
-    
-    //why does it not work on the first run
-    //matter of fact it should not even run on startup why is it running everytime i refresh that 
-    //does not make any sense either ??????????????????
+    greeting();
+    run_test(window.editor.getValue(), document.getElementById("eta").checked, document.getElementById("no_scope").checked , document.getElementById("no_infer").checked , document.getElementById("no_check").checked);
 }
 run();
 
@@ -82,3 +79,4 @@ run_button.onclick = async () => {
     await run();
 }
 print_options();
+console.log(window.wasm)
