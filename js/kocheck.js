@@ -61,7 +61,7 @@ function display_error_onpage (error_msg, context) {
 }
 
 
-display_error_onpage("oi m8 yu w4n7 50m3");
+display_error_onpage("oi m8 yu w4n7 50m3", "errortest");
 
 
 function print_options(){
