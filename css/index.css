@@ -30,7 +30,7 @@ body{
     padding-bottom: 20px;
     font-weight: bold;
     color: white;
-    width: auto;
+    width: max-content;
     border-radius: 10px;
     /* transform: scale(0);
     transition: 0.5s; */
@@ -39,13 +39,13 @@ body{
   }
 
 .bounce-in {
-    animation: bounce-in 2s ease;
+    animation: bounce-in 1.5s ease;
   }
 
 @keyframes bounce-in {
     0% {
       opacity: 0;
-      transform: scale(.3);
+      transform: scale(.7);
     }
     50% {
       opacity: 1;
