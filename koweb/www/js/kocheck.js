@@ -46,23 +46,9 @@ function print_options(){
 }
 
 //javascript and Webassembly share the same execution thread when you execute wasm within javascript the javascript halts and vice versa
+//still some erors loadings idk 
 
 console.log(window.editor);
-
-display_error_onpage("oi m8 yu w4n7 50m3", "errortest");
-
-var run_url = document.getElementById("run_url").onclick = () => {
-    get_string_from_url("url_operations");
-} 
-
-
-// import init, * as wam from './front.js';
-// const run = async () => {
-//     await init('./front_bg.wasm');
-//     window.wam = wam;
-// };
-// run();
-
 
 
 async function run() {
@@ -74,11 +60,16 @@ async function run() {
     greeting();
     run_test(window.editor.getValue(), document.getElementById("eta").checked, document.getElementById("no_scope").checked , document.getElementById("no_infer").checked , document.getElementById("no_check").checked);
 }
-run();
+
+print_options();
+console.log(window.wasm)
+
+
+var run_url = document.getElementById("run_url").onclick = () => {
+    get_string_from_url("url_operations");
+} 
 
 var run_button = document.getElementById("run");
 run_button.onclick = async () => {
     await run();
 }
-print_options();
-console.log(window.wasm)
