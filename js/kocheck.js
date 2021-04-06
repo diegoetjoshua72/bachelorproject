@@ -13,8 +13,14 @@ function get_string_from_url (context_id) {
     const url = document.getElementById("url").value;
     if(url != ""){
         fetch(url).then(result => {
-            result.text().then(string => console.log(string)).catch(display_error_onpage("Given Url is not valid",context_id));
-        }).catch(display_error_onpage("Given Url is not valid",context_id))
+            result.text().then(string => console.log(string)).catch((err) => {
+                console.log(err);
+                display_error_onpage("Given Url is not valid",context_id)
+            });
+        }).catch((err) => {
+            console.log(err);
+            display_error_onpage("Given Url is not valid",context_id);
+        });
     }
     else {
         display_error_onpage("Empty url field", context_id)
@@ -57,7 +63,8 @@ var run_url = document.getElementById("run_url").onclick = () => {
 // };
 // run();
 
-const wasmtest = async () => {await init(); window.wasm = wasm}
+
+const wasmtest = async () => {await init('../pkg/koweb_bg.wasm'); window.wasm = wasm}
 wasmtest();
 console.log(wasmtest);
 console.log(window.wasm);
