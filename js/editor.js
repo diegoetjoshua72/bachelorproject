@@ -32,6 +32,8 @@ var editor = monaco.editor.create(document.getElementById('container'), {
 </script> */}
 
 
+var editor = 666;
+
   require.config({ paths: { vs: "./monaco/min/vs" } });
   require(["vs/editor/editor.main"], function () {
   
@@ -291,13 +293,14 @@ var editor = monaco.editor.create(document.getElementById('container'), {
       },
     });
 
-    var editor = monaco.editor.create(document.getElementById("container"), {
+    editor = monaco.editor.create(document.getElementById("container"), {
       theme: "vs-gruv",
       value: getCode(),
       language: "lambdapi",
     });
   });
 
+console.log(editor);
 
 function getCode () {
   return [
