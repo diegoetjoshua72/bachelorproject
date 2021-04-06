@@ -38,15 +38,21 @@ console.log(window.editor);
 //change the rust function that is passed to the javascript
 
 
-function get_string_from_url () {
+function remove_all_errors_dom () {
+    document.querySelectorAll('.error').forEach(e => e.remove());​
+}
+
+//when this is run all error tags should be cleared 
+function get_string_from_url (context_id) {
+    remove_all_errors_dom();
     const url = document.getElementById("url").value;
     if(url != ""){
         fetch(url).then(result => {
-            result.text().then(string => console.log(string)).catch("Could not get the text");
-        }).catch("Given Url is not valid")
+            result.text().then(string => console.log(string)).catch(display_error_onpage("Given Url is not valid",context_id));
+        }).catch(display_error_onpage("Given Url is not valid",context_id))
     }
     else {
-        // display_error_onpage
+        display_error_onpage("Empty url field", context_id)
     }
 }
 
@@ -62,7 +68,9 @@ function display_error_onpage (error_msg, context) {
 
 
 display_error_onpage("oi m8 yu w4n7 50m3", "errortest");
-
+var run_url = document.getElementById("run_url").onclick = () => {
+    get_string_from_url("urlstuff")
+} 
 
 function print_options(){
     console.log(window.editor);
@@ -93,5 +101,8 @@ async function run() {
     //does not make any sense either ??????????????????
 }
 run();
+
 var run_button = document.getElementById("run");
-run_button.onclick = print_options;
+run_button.onclick = async () => {
+    await run();
+}
