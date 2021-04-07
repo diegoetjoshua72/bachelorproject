@@ -8,18 +8,34 @@ function remove_all_errors_dom () {
 }
 
 //when this is run all error tags should be cleared 
-function get_string_from_url (context_id) {
+//make a run string from url and a load string from url function 
+function load_program_from_url (context_id) {
     remove_all_errors_dom();
     const url = document.getElementById("url").value;
     if(url != ""){
         fetch(url).then(result => {
-            result.text().then(string => console.log(string)).catch((err) => {
-                console.log(err);
-                display_error_dom("Given Url is not valid",context_id)
+            result.text().then(string => load_text_from_url_in_editor(context_id)).catch((err) => { //make 404s display the error message
+                display_error_dom(err ,context_id)
             });
         }).catch((err) => {
-            console.log(err);
-            display_error_dom("Given Url is not valid",context_id);
+            display_error_dom(err ,context_id);
+        });
+    }
+    else {
+        display_error_dom("Empty url field", context_id)
+    }
+}
+
+function run_program_from_url (context_id) {
+    remove_all_errors_dom();
+    const url = document.getElementById("url").value;
+    if(url != ""){
+        fetch(url).then(result => {
+            result.text().then(string => run();).catch((err) => { //make 404s display the error message
+                display_error_dom(err ,context_id)
+            });
+        }).catch((err) => {
+            display_error_dom(err ,context_id);
         });
     }
     else {
@@ -54,21 +70,6 @@ function load_text_from_url_in_editor (context_id) {
 //still some erors loadings idk 
 
 // editor.getModel().setValue('some value');
-
-{/* <script>
-var require = { paths: { vs: '../node_modules/monaco-editor/min/vs' } };
-</script>
-<script src="../node_modules/monaco-editor/min/vs/loader.js"></script>
-<script src="../node_modules/monaco-editor/min/vs/editor/editor.main.nls.js"></script>
-<script src="../node_modules/monaco-editor/min/vs/editor/editor.main.js"></script>
-
-<script>
-var editor = monaco.editor.create(document.getElementById('container'), {
-    value: ['function x() {', '\tconsole.log("Hello world!");', '}'].join('\n'),
-    language: 'javascript'
-});
-</script> */}
-
 console.log(window.editor);
 
 
@@ -86,7 +87,7 @@ async function run() {
         remove_all_errors_dom();
         display_error_dom("something went wrong in the run", errortest);
     }
-}
+} 
 
 print_options();
 console.log(window.wasm)
@@ -94,11 +95,11 @@ console.log(window.wasm)
 
 
 var load_url = document.getElementById("load_url").onclick = () => {
-    load_text_from_url_in_editor("url_operations");
+    load_program_from_url_in_editor("url_operations");
 } 
 
 var run_url = document.getElementById("run_url").onclick = () => {
-    get_string_from_url("url_operations");
+    run_program_from_url("url_operations");
 } 
 
 var run_button = document.getElementById("run");
