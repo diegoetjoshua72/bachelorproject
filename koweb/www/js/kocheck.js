@@ -14,7 +14,7 @@ function load_program_from_url (context_id) {
     const url = document.getElementById("url").value;
     if(url != ""){
         fetch(url).then(result => {
-            result.text().then(string => load_text_from_url_in_editor(context_id)).catch((err) => { //make 404s display the error message
+            result.text().then(string => load_text_from_url_in_editor(string)).catch((err) => { //make 404s display the error message
                 display_error_dom(err ,context_id)
             });
         }).catch((err) => {
@@ -61,8 +61,8 @@ function print_options(){
     console.log(document.querySelector("#no_check").checked);
 }
 
-function load_text_from_url_in_editor (context_id) {
-    window.editor.setValue(get_string_from_url(context_id));
+function load_text_from_url_in_editor (program_text) {
+    window.editor.setValue(program_text);
 }
 
 
