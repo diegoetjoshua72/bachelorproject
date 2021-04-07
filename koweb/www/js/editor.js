@@ -32,9 +32,8 @@ var editor = monaco.editor.create(document.getElementById('container'), {
 </script> */}
 
 
-const callback = async (editor) => {return editor;}
 
-var editor = 666;
+var editor = 0;
 
   require.config({ paths: { vs: "./monaco/min/vs" } });
   require(["vs/editor/editor.main"], () => {
@@ -305,7 +304,6 @@ var editor = 666;
     });
   });                                                                                                                                                                                                                   ;
 
-  console.log(window.editor)
 
 function getCode () {
   return [

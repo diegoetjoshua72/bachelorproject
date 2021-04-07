@@ -70,7 +70,7 @@ function load_text_from_url_in_editor (context_id) {
 //still some erors loadings idk 
 
 // editor.getModel().setValue('some value');
-console.log(window.editor);
+// console.log(window.editor);
 
 
 async function run() {
@@ -95,7 +95,7 @@ console.log(window.wasm)
 
 
 var load_url = document.getElementById("load_url").onclick = () => {
-    load_program_from_url_in_editor("url_operations");
+    load_program_from_url("url_operations");
 } 
 
 var run_url = document.getElementById("run_url").onclick = () => {
