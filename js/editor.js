@@ -36,7 +36,7 @@ var editor = monaco.editor.create(document.getElementById('container'), {
 var editor = 0;
 
   require.config({ paths: { vs: "./monaco/min/vs" } });
-  require(["vs/editor/editor.main"], () => {
+  require(["vs/editor/editor.main"], function () {
   
     monaco.languages.register({
       id: "lambdapi",
