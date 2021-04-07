@@ -32,14 +32,18 @@ var editor = monaco.editor.create(document.getElementById('container'), {
 </script> */}
 
 
+const callback = async (editor) => {return editor;}
+
 var editor = 666;
 
   require.config({ paths: { vs: "./monaco/min/vs" } });
-  require(["vs/editor/editor.main"], async function () {
+  require(["vs/editor/editor.main"], () => {
   
     monaco.languages.register({
       id: "lambdapi",
     });
+
+    
 
     monaco.languages.setMonarchTokensProvider("lambdapi", {
       tokenizer: {
@@ -294,12 +298,12 @@ var editor = 666;
     });
 
     //this is taken outside the normal execution flow and its a problem because i need window to be set before i continue
-    window.editor = await monaco.editor.create(document.getElementById("container"), {
+    window.editor = monaco.editor.create(document.getElementById("container"), {
       theme: "vs-gruv",
       value: getCode(),
       language: "lambdapi",
     });
-  });
+  });                                                                                                                                                                                                                   ;
 
   console.log(window.editor)
 
