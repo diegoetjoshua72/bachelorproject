@@ -31,7 +31,7 @@ function run_program_from_url (context_id) {
     const url = document.getElementById("url").value;
     if(url != ""){
         fetch(url).then(result => {
-            result.text().then(string => run();).catch((err) => { //make 404s display the error message
+            result.text().then(string => run()).catch((err) => { //make 404s display the error message
                 display_error_dom(err ,context_id)
             });
         }).catch((err) => {
