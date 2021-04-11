@@ -60,6 +60,8 @@ body {
 }
 
 #option_panel {
+  display: flex;
+  flex-direction: column;
   width: max-content;
   text-align: center;
   border-radius: 10px;
