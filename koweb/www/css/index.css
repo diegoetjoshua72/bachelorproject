@@ -65,21 +65,24 @@ body {
   display: flex;
   flex-direction: column;
   width: max-content;
+  width: 50%;
+  margin: 0 auto;
   text-align: center;
-  border-radius: 10px;
-  border-style: solid;
-  border: solid;
-  border-color: grey;
+  /* border-radius: 10px; */
+  /* border-style: solid; */
+  /* border: solid; */
+  /* border-color: grey; */
   margin-bottom: 50px;
 }
 
 #operations {
+  width: 50%;
+  margin: 0 auto;
   width: max-content;
-  text-align: center;
-  border-radius: 10px;
-  border-style: solid;
-  border: solid;
-  border-color: grey;
+  /* border-radius: 10px; */
+  /* border-style: solid; */
+  /* border: solid; */
+  /* border-color: grey; */
   margin-bottom: 50px;
 }
 
