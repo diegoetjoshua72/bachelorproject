@@ -1,59 +1,77 @@
-*{
-    box-sizing: border-box;
+* {
+  box-sizing: border-box;
 }
 
-h1{
-    text-align: center;
-    margin-bottom: 50px;
+h1 {
+  text-align: center;
+  margin-bottom: 50px;
 }
 
-body{
-    margin-left: 10%;
-    margin-right: 10%;
-    background-color: #1e1e1e;
-    font-family: 'Roboto', sans-serif;
-    color: blanchedalmond;
-}
- 
-#container{
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 25px;
-    width: 80%;
-    height: 650px;
+body {
+  margin-left: 10%;
+  margin-right: 10%;
+  background-color: #1e1e1e;
+  font-family: "Roboto", sans-serif;
+  color: blanchedalmond;
 }
 
-.error{
-    text-align: center;
-    background-color: #FF6961;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-right: 20px;
-    padding-left: 20px;
-    font-weight: bold;
-    color: white;
-    width: max-content;
-    border-radius: 10px;
-    /* transform: scale(0);
+#container {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 25px;
+  width: 80%;
+  height: 650px;
+}
+
+.error {
+  text-align: center;
+  background-color: #ff6961;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
+  font-weight: bold;
+  color: white;
+  width: max-content;
+  border-radius: 10px;
+  /* transform: scale(0);
     transition: 0.5s; */
-    box-shadow: 0 0 5px rgb(240,102,0);
-
-  }
+  box-shadow: 0 0 5px rgb(240, 102, 0);
+}
 
 .bounce-in {
-    animation: bounce-in 0.8s ease;
-  }
+  animation: bounce-in 0.8s ease;
+}
 
 @keyframes bounce-in {
-    0% {
-      opacity: 0;
-      transform: scale(.7);
-    }
-    50% {
-      opacity: 1;
-      transform: scale(1.05);
-    }
-    /* 70% { transform: scale(.9); } */
-    100% { transform: scale(1); }
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  /* 70% { transform: scale(.9); } */
+  100% {
+    transform: scale(1);
+  }
 }
-  
+
+#option_panel {
+  text-align: center;
+  border-radius: 10px;
+  border-style: solid;
+  border: solid;
+  border-color: grey;
+  margin-bottom: 50px;
+}
+
+#operations {
+  text-align: center;
+  border-radius: 10px;
+  border-style: solid;
+  border: solid;
+  border-color: grey;
+  margin-bottom: 50px;
+}
