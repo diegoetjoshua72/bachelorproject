@@ -1,5 +1,5 @@
 * {
-  box-sizing: border-box;
+  box-sizing: border-box !important;
 }
 
 h1 {
@@ -8,9 +8,12 @@ h1 {
 }
 
 body {
-  margin-left: 10%;
-  margin-right: 10%;
-  background-color: #1e1e1e;
+  /* margin-left: 10%;
+  margin-right: 10%; */
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(150deg, #333, #111);
+  /* background-color: #1e1e1e; */
   font-family: "Roboto", sans-serif;
   color: blanchedalmond;
 }
