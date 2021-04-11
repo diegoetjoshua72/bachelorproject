@@ -92,12 +92,25 @@ body {
 #output {
     margin: 0 auto;
     width: 50%;
-    width: max-content;
     border-radius: 10px;
     border: solid;
     border-color: grey;
     background-color: black;
     margin-bottom: 50px;
+}
+#lambda {
+    color: purple;
+    font-weight: bold;
+}
+
+#line {
+    color: green;
+    font-weight: bold;
+}
+
+#errors {
+    margin: 0 auto;
+    width: 50%;
 }
 
 #url {
@@ -140,24 +153,4 @@ body {
 .option {
     font-size: 18;
     margin-bottom: 10px;
-}
-
-#lambda {
-    color: purple;
-    font-weight: bold;
-}
-
-#line {
-    color: green;
-    font-weight: bold;
-}
-
-#errors {
-    margin: 0 auto;
-    width: 50%;
-}
-
-#output {
-    margin: 0 auto;
-    width: 50%;
 }
