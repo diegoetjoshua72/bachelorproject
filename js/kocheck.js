@@ -38,7 +38,7 @@ function run_program_from_url(context_id) {
             .then((result) => {
                 result
                     .text()
-                    .then((string) => run())
+                    .then((string) => run(program))
                     .catch((err) => {
                         //make 404s display the error message
                         display_error_dom(err, context_id);
@@ -80,23 +80,34 @@ function load_text_from_url_in_editor(program_text) {
 // editor.getModel().setValue('some value');
 // console.log(window.editor);
 
-async function run() {
+async function run(program = undefined) {
     try {
         const wasm = await init();
         window.wasm = wasm;
         console.log(wasm);
         var testing = await window.editor.getValue();
         console.log("this is testing ::: ", testing);
-        run_test(
-            window.editor.getValue(),
-            document.getElementById("eta").checked,
-            document.getElementById("no_scope").checked,
-            document.getElementById("no_infer").checked,
-            document.getElementById("no_check").checked
-        );
+        if (program === undefined) {
+            run_test(
+                window.editor.getValue(),
+                document.getElementById("eta").checked,
+                document.getElementById("no_scope").checked,
+                document.getElementById("no_infer").checked,
+                document.getElementById("no_check").checked
+            );
+        } else {
+            console.log("ran from url");
+            run_test(
+                program,
+                document.getElementById("eta").checked,
+                document.getElementById("no_scope").checked,
+                document.getElementById("no_infer").checked,
+                document.getElementById("no_check").checked
+            );
+        }
     } catch {
         remove_all_errors_dom();
-        display_error_dom("something went wrong in the run", errortest);
+        display_error_dom("something went wrong in the run", error);
     }
 }
 
