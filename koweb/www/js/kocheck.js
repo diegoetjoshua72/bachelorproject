@@ -1,5 +1,5 @@
 // import {init_editor} from './editor.js';
-import init, { run_test, greeting } from "../pkg/koweb.js";
+import init, { run_test } from "../pkg/koweb.js";
 // import * as wasm from '../pkg/koweb.js';
 
 function remove_all_errors_dom() {
@@ -15,7 +15,7 @@ function load_program_from_url(context_id) {
         fetch(url)
             .then((result) => {
                 result
-                    .text()
+                    .text() //if the string is 404 not found
                     .then((string) => load_text_from_url_in_editor(string))
                     .catch((err) => {
                         //make 404s display the error message
