@@ -67,7 +67,7 @@ body {
   flex-direction: column;
   width: max-content;
   width: 50%;
-  padding-left: 10px;
+  padding: 10px;
   margin: 0 auto;
   border-radius: 10px;
   border-style: solid;
