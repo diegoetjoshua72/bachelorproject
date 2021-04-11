@@ -66,17 +66,19 @@ body {
   flex-direction: column;
   width: max-content;
   width: 50%;
+  padding-left: 10px;
   margin: 0 auto;
   border-radius: 10px;
   border-style: solid;
   border: solid;
   border-color: grey;
+  background-color: #404040;
   margin-bottom: 50px;
 }
 
 #operations {
-  width: 50%;
   margin: 0 auto;
+  width: 50%;
   width: max-content;
   border-radius: 10px;
   border-style: solid;
