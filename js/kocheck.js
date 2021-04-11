@@ -107,7 +107,7 @@ async function run(program = undefined) {
         }
     } catch {
         remove_all_errors_dom();
-        display_error_dom("something went wrong in the run", error);
+        display_error_dom("something went wrong in the run", "errors");
     }
 }
 
@@ -115,11 +115,11 @@ print_options();
 console.log(window.wasm);
 
 var load_url = (document.getElementById("load_url").onclick = () => {
-    load_program_from_url("error");
+    load_program_from_url("errors");
 });
 
 var run_url = (document.getElementById("run_url").onclick = () => {
-    run_program_from_url("error");
+    run_program_from_url("errors");
 });
 
 var run_button = document.getElementById("run");
