@@ -38,7 +38,7 @@ function run_program_from_url(context_id) {
             .then((result) => {
                 result
                     .text()
-                    .then((string) => run(program))
+                    .then((string) => run(string))
                     .catch((err) => {
                         //make 404s display the error message
                         display_error_dom(err, context_id);
