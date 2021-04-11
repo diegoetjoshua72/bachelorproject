@@ -96,6 +96,7 @@ body {
   border-radius: 10px;
   border: solid;
   border-color: grey;
+  background-color: black;
   margin-bottom: 50px;
 }
 
@@ -139,4 +140,14 @@ body {
 .option {
   font-size: 18;
   margin-bottom: 10px;
+}
+
+#lambda {
+  color: purple;
+  font-weight: bold;
+}
+
+#line {
+  color: green;
+  font-weight: bold;
 }
