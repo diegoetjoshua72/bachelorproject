@@ -66,6 +66,7 @@ fn write_to_webpage(event: &kocheck::Event) {
     let body = document.body().expect("document should have a body");
 
     // let val = document.get_element_by_id("console").unwrap();
+    let line = document.create_element("div").unwrap();
     let val = document.create_element("p").unwrap();
     let lambda_span = document.create_element("span").unwrap();
     let prompt_span = document.create_element("span").unwrap();
@@ -74,11 +75,13 @@ fn write_to_webpage(event: &kocheck::Event) {
     prompt_span.set_class_name("prompt");
     prompt_span.set_text_content(Some("> "));
     lambda_span.append_child(&prompt_span);
-    val.append_child(&lambda_span);
     val.set_class_name("line");
     val.set_text_content(Some(format!("{}", event).as_str()));
+    line.append_child(&lambda_span);
+    line.appen_child(&val);
 
-    body.append_child(&val).unwrap();
+    //now it needs to go in the ouput
+    body.append_child(&line).unwrap();
 }
 
 //temporary i'll use the definition from bin maybe
