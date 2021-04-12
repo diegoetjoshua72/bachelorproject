@@ -26,6 +26,7 @@ function load_program_from_url(context_id) {
                         })
                         .catch((err) => {
                             //make 404s display the error message
+                            console.log("test");
                             display_error_dom(err, context_id);
                         });
                 })
