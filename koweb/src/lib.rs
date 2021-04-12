@@ -104,15 +104,15 @@ static mut test: i32 = 0;
 #[wasm_bindgen()]
 pub fn increment() {
     unsafe {
-        alert(format!("test : {}", test));
+        alert(format!("test : {}", test).as_str());
         test += 1;
     }
 }
 
-pub fn lazy() {
-    // goal is to get only a piece of the string if there is nothing left to get
-    // then it returns what ? False
-}
+// pub fn lazy() {
+// goal is to get only a piece of the string if there is nothing left to get
+// then it returns what ? False
+// }
 
 #[wasm_bindgen]
 pub fn run_test(
