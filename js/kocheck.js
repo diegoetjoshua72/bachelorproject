@@ -16,7 +16,13 @@ function load_program_from_url(context_id) {
             .then((result) => {
                 result
                     .text() //if the string is 404 not found
-                    .then((string) => load_text_from_url_in_editor(string))
+                    .then((string) => {
+                        console.log(
+                            "THIS IS THE STRING WE GET FROM THE URL :: ",
+                            string
+                        );
+                        load_text_from_url_in_editor(string);
+                    })
                     .catch((err) => {
                         //make 404s display the error message
                         display_error_dom(err, context_id);
@@ -38,7 +44,13 @@ function run_program_from_url(context_id) {
             .then((result) => {
                 result
                     .text()
-                    .then((string) => run(string))
+                    .then((string) => {
+                        console.log(
+                            "THIS IS THE STRING WE RUN FROM THE URL :: ",
+                            string
+                        );
+                        run(string);
+                    })
                     .catch((err) => {
                         //make 404s display the error message
                         display_error_dom(err, context_id);
@@ -107,7 +119,7 @@ async function run(program = undefined) {
         }
     } catch {
         remove_all_errors_dom();
-        display_error_dom("something went wrong in the run", "errors");
+        display_error_dom("something went wrong in the kontroli run", "errors");
     }
 }
 
