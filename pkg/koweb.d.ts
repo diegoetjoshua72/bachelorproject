@@ -4,6 +4,9 @@
 */
 export function greeting(): void;
 /**
+*/
+export function increment(): void;
+/**
 * @param {string} cmds_from_js
 * @param {boolean} eta
 * @param {boolean} no_scope
@@ -16,6 +19,7 @@ export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembl
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
+  readonly increment: () => void;
   readonly run_test: (a: number, b: number, c: number, d: number, e: number, f: number) => void;
   readonly greeting: () => void;
   readonly __wbindgen_malloc: (a: number) => number;

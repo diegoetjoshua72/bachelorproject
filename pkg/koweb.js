@@ -180,6 +180,12 @@ export function greeting() {
 }
 
 /**
+*/
+export function increment() {
+    wasm.increment();
+}
+
+/**
 * @param {string} cmds_from_js
 * @param {boolean} eta
 * @param {boolean} no_scope

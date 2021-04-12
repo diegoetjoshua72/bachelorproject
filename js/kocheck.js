@@ -1,5 +1,5 @@
 // import {init_editor} from './editor.js';
-import init, { run_test } from "../pkg/koweb.js";
+import init, { run_test, increment } from "../pkg/koweb.js";
 // import * as wasm from '../pkg/koweb.js';
 
 function remove_all_errors_dom() {
@@ -100,9 +100,7 @@ function load_text_from_url_in_editor(program_text) {
 
 async function run(program = undefined) {
     try {
-        const wasm = await init();
-        window.wasm = wasm;
-        console.log(wasm);
+        await init();
         var testing = await window.editor.getValue();
         console.log("this is testing ::: ", testing);
         if (program === undefined) {
@@ -140,4 +138,9 @@ var run_url = (document.getElementById("run_url").onclick = () => {
 var run_button = document.getElementById("run");
 run_button.onclick = async () => {
     await run();
+};
+
+var test = document.getElementById("increment");
+test.onclick = () => {
+    increment();
 };
