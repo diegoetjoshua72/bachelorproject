@@ -12,25 +12,29 @@ function load_program_from_url(context_id) {
     remove_all_errors_dom();
     const url = document.getElementById("url").value;
     if (url != "") {
-        fetch(url)
-            .then((result) => {
-                result
-                    .text() //if the string is 404 not found
-                    .then((string) => {
-                        console.log(
-                            "THIS IS THE STRING WE GET FROM THE URL :: ",
-                            string
-                        );
-                        load_text_from_url_in_editor(string);
-                    })
-                    .catch((err) => {
-                        //make 404s display the error message
-                        display_error_dom(err, context_id);
-                    });
-            })
-            .catch((err) => {
-                display_error_dom(err, context_id);
-            });
+        try {
+            fetch(url)
+                .then((result) => {
+                    result
+                        .text() //if the string is 404 not found
+                        .then((string) => {
+                            console.log(
+                                "THIS IS THE STRING WE GET FROM THE URL :: ",
+                                string
+                            );
+                            load_text_from_url_in_editor(string);
+                        })
+                        .catch((err) => {
+                            //make 404s display the error message
+                            display_error_dom(err, context_id);
+                        });
+                })
+                .catch((err) => {
+                    display_error_dom(err, context_id);
+                });
+        } catch {
+            console("fked up");
+        }
     } else {
         display_error_dom("Empty url field", context_id);
     }
@@ -122,9 +126,6 @@ async function run(program = undefined) {
         display_error_dom("something went wrong in the kontroli run", "errors");
     }
 }
-
-print_options();
-console.log(window.wasm);
 
 var load_url = (document.getElementById("load_url").onclick = () => {
     load_program_from_url("errors");
