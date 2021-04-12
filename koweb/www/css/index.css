@@ -26,6 +26,11 @@ body {
     height: 650px;
 }
 
+#errors {
+    margin: 0 auto;
+    width: 50%;
+}
+
 .error {
     text-align: center;
     background-color: #ff6961;
@@ -97,6 +102,7 @@ body {
     border-color: grey;
     background-color: black;
     margin-bottom: 50px;
+    padding-right: 10px;
 }
 
 .prompt {
@@ -112,11 +118,6 @@ body {
 .line {
     color: green;
     font-weight: bold;
-}
-
-#errors {
-    margin: 0 auto;
-    width: 50%;
 }
 
 #url {

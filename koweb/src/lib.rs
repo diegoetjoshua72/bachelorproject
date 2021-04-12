@@ -73,11 +73,10 @@ fn write_to_webpage(event: &kocheck::Event) {
     lambda_span.set_text_content(Some("λ"));
     prompt_span.set_class_name("prompt");
     prompt_span.set_text_content(Some("> "));
-    val.set_text_content(Some(format!("{}", event).as_str()));
-    val.set_class_name("line");
-
     lambda_span.append_child(&prompt_span);
     val.append_child(&lambda_span);
+    val.set_class_name("line");
+    val.set_text_content(Some(format!("{}", event).as_str()));
 
     body.append_child(&val).unwrap();
 }
