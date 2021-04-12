@@ -98,12 +98,18 @@ body {
     background-color: black;
     margin-bottom: 50px;
 }
-#lambda {
+
+.prompt {
+    color: white;
+    font-weight: bold;
+}
+
+.lambda {
     color: purple;
     font-weight: bold;
 }
 
-#line {
+.line {
     color: green;
     font-weight: bold;
 }
