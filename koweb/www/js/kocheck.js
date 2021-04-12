@@ -131,6 +131,7 @@ var load_url = (document.getElementById("load_url").onclick = () => {
     load_program_from_url("errors");
 });
 
+//this performs run
 var run_url = (document.getElementById("run_url").onclick = () => {
     run_program_from_url("errors");
 });
@@ -140,6 +141,10 @@ run_button.onclick = async () => {
     await run();
 };
 
+//i see this works quite well the state is kept intact hmm
+//i should re read the research paper
+//but i have to wait for the run before doing this but that makes sense
+//once run is done things are inscope
 var test = document.getElementById("increment");
 test.onclick = () => {
     increment();

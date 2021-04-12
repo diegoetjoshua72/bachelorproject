@@ -59,7 +59,7 @@ fn string_to_static_str(s: String) -> &'static str {
     Box::leak(s.into_boxed_str())
 }
 
-fn write_to_webconsole(event: &kocheck::Event) {
+fn write_to_webpage(event: &kocheck::Event) {
     //i need to match here on the cocheck enum ??
     let window = web_sys::window().expect("no global `window` exists");
     let document = window.document().expect("should have a document on window");
@@ -67,7 +67,18 @@ fn write_to_webconsole(event: &kocheck::Event) {
 
     // let val = document.get_element_by_id("console").unwrap();
     let val = document.create_element("p").unwrap();
+    let lambda_span = document.create_element("span").unwrap();
+    let prompt_span = document.create_element("span").unwrap();
+    lambda_span.set_class_name("lambda");
+    lambda_span.set_text_content(Some("λ"));
+    prompt_span.set_class_name("prompt");
+    prompt_span.set_text_content(Some("> "));
     val.set_text_content(Some(format!("{}", event).as_str()));
+    val.set_class_name("line");
+
+    lambda_span.append_child(&prompt_span);
+    val.append_child(&lambda_span);
+
     body.append_child(&val).unwrap();
 }
 
@@ -160,11 +171,7 @@ pub fn run_test(
 
     let iter = produce_from_js(static_cmds_str, &opt);
 
-    let mut iter =
-        Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webconsole(event)));
-    // alert(format!("{}",iter.size_hint()));
-    //lets print out the iterator to the console i think that would be useful information
-    // print_iterator(&mut iter);
+    let mut iter = Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webpage(event)));
 
     seq::consume(iter, &opt).expect("something went wrong in the consume");
 
