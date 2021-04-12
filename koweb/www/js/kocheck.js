@@ -31,6 +31,7 @@ function load_program_from_url(context_id) {
                         });
                 })
                 .catch((err) => {
+                    console.log("test2");
                     display_error_dom(err, context_id);
                 });
         } catch {
