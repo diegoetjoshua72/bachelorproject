@@ -116,6 +116,7 @@ body {
 }
 
 .line {
+    display: inline;
     color: green;
     font-weight: bold;
 }
