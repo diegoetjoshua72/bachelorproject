@@ -66,12 +66,17 @@ body {
 }
 
 #output {
+    visibility: hidden;
     padding: 10px;
     margin: 0 auto;
     width: 50%;
     border: solid;
     border-color: grey;
     background-color: black;
+}
+
+.display_output {
+    visibility: visible !important;
 }
 
 .error {

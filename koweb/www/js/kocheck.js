@@ -3,7 +3,7 @@ import init, { run_test, increment } from "../pkg/koweb.js";
 // import * as wasm from '../pkg/koweb.js';
 
 function remove_all_outputs_dom() {
-    document.querySelectorAll("line").forEach((e) => e.remove());
+    document.querySelectorAll(".prompt").forEach((e) => e.remove());
 }
 
 function remove_all_errors_dom() {
