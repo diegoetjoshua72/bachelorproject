@@ -25,7 +25,6 @@ body {
     place-items: center;
     margin: 2em;
     height: 100vh;
-
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr auto auto auto auto;
 }
@@ -43,8 +42,7 @@ body {
     align-self: stretch;
     border: solid;
     border-color: grey;
-    row-gap: 1em;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
 
 #option_panel {
@@ -53,18 +51,17 @@ body {
     flex-direction: column;
     width: max-content;
     padding: 10px;
-    row-gap: 1em;
     border-radius: 10px;
     border: solid;
     border-color: grey;
     background-color: #404040;
+    margin-bottom: 20px;
 }
 
 #operations {
     margin: 0 auto;
     width: 50%;
     width: max-content;
-    row-gap: 1em;
     border-radius: 10px;
     border-style: solid;
     border: solid;
