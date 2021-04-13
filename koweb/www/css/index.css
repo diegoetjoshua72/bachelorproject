@@ -24,7 +24,8 @@ body {
     display: grid;
     place-items: center;
     margin: 2em;
-    height: 1;
+    height: 100vh;
+
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr auto auto auto auto;
 }
@@ -36,6 +37,7 @@ body {
     /* margin-bottom: 25px; */
     /* width: 80%; */
     /* height: 650px; */
+    justify-self: stretch;
     border: solid;
     border-color: grey;
 }
@@ -45,15 +47,11 @@ body {
     display: flex;
     flex-direction: column;
     width: max-content;
-    width: 50%;
     padding: 10px;
-    margin: 0 auto;
     border-radius: 10px;
-    border-style: solid;
     border: solid;
     border-color: grey;
     background-color: #404040;
-    margin-bottom: 50px;
 }
 
 #operations {
@@ -65,7 +63,6 @@ body {
     border: solid;
     border-color: grey;
     background-color: #404040;
-    margin-bottom: 50px;
 }
 
 #output {
@@ -75,16 +72,12 @@ body {
     border: solid;
     border-color: grey;
     background-color: black;
-    margin-bottom: 50px;
 }
 
 .error {
     text-align: center;
     background-color: #ff6961;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-right: 20px;
-    padding-left: 20px;
+    padding: 20px;
     font-weight: bold;
     color: white;
     width: max-content;
