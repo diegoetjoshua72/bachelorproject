@@ -31,6 +31,8 @@ body {
 }
 
 /* style="width: 1200px; height: 800px; border: 1px solid grey" */
+/* make my editor fill its slot of the grid */
+/* make the other elements space out */
 #container {
     /* margin-left: auto; */
     /* margin-right: auto; */
@@ -38,8 +40,10 @@ body {
     /* width: 80%; */
     /* height: 650px; */
     justify-self: stretch;
+    align-self: stretch;
     border: solid;
     border-color: grey;
+    gap: 50px;
 }
 
 #option_panel {
