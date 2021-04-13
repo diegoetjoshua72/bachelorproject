@@ -18,6 +18,11 @@ body {
     color: blanchedalmond;
 }
 
+#grid {
+    display: grid;
+    place-items: center;
+}
+
 /* style="width: 1200px; height: 800px; border: 1px solid grey" */
 #container {
     margin-left: auto;

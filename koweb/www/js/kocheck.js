@@ -2,6 +2,10 @@
 import init, { run_test, increment } from "../pkg/koweb.js";
 // import * as wasm from '../pkg/koweb.js';
 
+function remove_all_outputs_dom() {
+    document.querySelectorAll("line").forEach((e) => e.remove());
+}
+
 function remove_all_errors_dom() {
     document.querySelectorAll(".error").forEach((e) => e.remove());
 }
@@ -100,6 +104,7 @@ function load_text_from_url_in_editor(program_text) {
 
 async function run(program = undefined) {
     try {
+        remove_all_outputs_dom();
         await init();
         var testing = await window.editor.getValue();
         console.log("this is testing ::: ", testing);
