@@ -18,52 +18,13 @@ body {
     color: blanchedalmond;
 }
 
+/* style="width: 1200px; height: 800px; border: 1px solid grey" */
 #container {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 25px;
     width: 80%;
     height: 650px;
-}
-
-#errors {
-    margin: 0 auto;
-    width: 50%;
-}
-
-.error {
-    text-align: center;
-    background-color: #ff6961;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-right: 20px;
-    padding-left: 20px;
-    font-weight: bold;
-    color: white;
-    width: max-content;
-    border-radius: 10px;
-    /* transform: scale(0);
-    transition: 0.5s; */
-    box-shadow: 0 0 5px rgb(240, 102, 0);
-}
-
-.bounce-in {
-    animation: bounce-in 0.8s ease;
-}
-
-@keyframes bounce-in {
-    0% {
-        opacity: 0;
-        transform: scale(0.7);
-    }
-    50% {
-        opacity: 1;
-        transform: scale(1.05);
-    }
-    /* 70% { transform: scale(.9); } */
-    100% {
-        transform: scale(1);
-    }
 }
 
 #option_panel {
@@ -105,9 +66,39 @@ body {
     padding-left: 10px;
 }
 
-.prompt {
-    color: white;
+.error {
+    text-align: center;
+    background-color: #ff6961;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
     font-weight: bold;
+    color: white;
+    width: max-content;
+    border-radius: 10px;
+    /* transform: scale(0);
+    transition: 0.5s; */
+    box-shadow: 0 0 5px rgb(240, 102, 0);
+}
+
+.bounce-in {
+    animation: bounce-in 0.8s ease;
+}
+
+@keyframes bounce-in {
+    0% {
+        opacity: 0;
+        transform: scale(0.7);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    /* 70% { transform: scale(.9); } */
+    100% {
+        transform: scale(1);
+    }
 }
 
 .lambda {

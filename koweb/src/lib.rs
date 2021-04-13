@@ -69,13 +69,9 @@ fn write_to_webpage(event: &kocheck::Event) {
     let line = document.create_element("div").unwrap();
     let val = document.create_element("p").unwrap();
     let lambda_span = document.create_element("span").unwrap();
-    let prompt_span = document.create_element("span").unwrap();
     lambda_span.set_class_name("lambda");
-    lambda_span.set_text_content(Some("λ"));
-    prompt_span.set_class_name("prompt");
-    prompt_span.set_text_content(Some("> "));
+    lambda_span.set_text_content(Some("λ> "));
 
-    lambda_span.append_child(&prompt_span);
     val.set_class_name("line");
     val.set_text_content(Some(format!("{}", event).as_str()));
 
