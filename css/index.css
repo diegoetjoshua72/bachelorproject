@@ -108,8 +108,8 @@ body {
 
 .line {
     display: inline;
-    color: green;
-    font-weight: bold;
+    color: whitesmoke;
+    /* font-weight: bold; */
 }
 
 #url {
