@@ -43,7 +43,8 @@ body {
     align-self: stretch;
     border: solid;
     border-color: grey;
-    gap: 50px;
+    row-gap: 1em;
+    margin-bottom: 50px;
 }
 
 #option_panel {
