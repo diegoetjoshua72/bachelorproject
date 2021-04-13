@@ -4,6 +4,8 @@
 
 h1 {
     text-align: center;
+    font-size: 48px;
+    font-weight: bold;
     margin-bottom: 50px;
 }
 
@@ -21,15 +23,21 @@ body {
 #grid {
     display: grid;
     place-items: center;
+    margin: 2em;
+    height: 1;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto auto auto auto;
 }
 
 /* style="width: 1200px; height: 800px; border: 1px solid grey" */
 #container {
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 25px;
-    width: 80%;
-    height: 650px;
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+    /* margin-bottom: 25px; */
+    /* width: 80%; */
+    /* height: 650px; */
+    border: solid;
+    border-color: grey;
 }
 
 #option_panel {
