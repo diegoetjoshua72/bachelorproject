@@ -23,7 +23,7 @@ body {
 #grid {
     display: grid;
     place-items: center;
-    margin: 2em;
+    margin: 8em;
     height: 100vh;
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr auto auto auto auto;
@@ -38,8 +38,7 @@ body {
     /* margin-bottom: 25px; */
     /* width: 80%; */
     /* height: 650px; */
-    justify-self: stretch;
-    align-self: stretch;
+    place-self: stretch;
     border: solid;
     border-color: grey;
     margin-bottom: 20px;
@@ -50,6 +49,7 @@ body {
     display: flex;
     flex-direction: column;
     width: max-content;
+    width: 50%;
     padding: 10px;
     border-radius: 10px;
     border: solid;
@@ -61,12 +61,13 @@ body {
 #operations {
     margin: 0 auto;
     width: 50%;
-    width: max-content;
+    /* width: max-content; */
     border-radius: 10px;
     border-style: solid;
     border: solid;
     border-color: grey;
     background-color: #404040;
+    margin-bottom: 20px;
 }
 
 #errors {
@@ -79,6 +80,7 @@ body {
     border: solid;
     border-color: grey;
     background-color: black;
+    margin-bottom: 20px;
 }
 
 .display_output {
