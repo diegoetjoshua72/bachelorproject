@@ -83,7 +83,12 @@ fn write_to_webpage(event: &kocheck::Event) {
     line.append_child(&val);
 
     //now it needs to go in the ouput
-    body.append_child(&line).unwrap();
+    let output = document.get_element_by_id("output");
+    match output {
+        Some(output) => output.append_child(&line).unwrap(),
+        None => warn!("output not found"),
+    }
+    // body.append_child(&line).unwrap();
 }
 
 //temporary i'll use the definition from bin maybe
