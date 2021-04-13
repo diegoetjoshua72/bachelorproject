@@ -78,6 +78,7 @@ fn write_to_webpage(event: &kocheck::Event) {
     lambda_span.append_child(&prompt_span);
     val.set_class_name("line");
     val.set_text_content(Some(format!("{}", event).as_str()));
+
     line.append_child(&lambda_span);
     line.append_child(&val);
 
