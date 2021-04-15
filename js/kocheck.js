@@ -12,35 +12,38 @@ function remove_all_errors_dom() {
 
 //when this is run all error tags should be cleared
 //make a run string from url and a load string from url function
+
+//we have to check the status of the ok property
+
+let check_fetch = function check_fetch(response) {
+    if (response.ok === false) {
+        display_error_dom(
+            "ERROR IN FETCH : " + result.statusText + " - " + result.url,
+            "errors"
+        );
+        throw Error(resp.statusText);
+    }
+    return response; //why do we return tho
+};
+
 function load_program_from_url(context_id) {
     remove_all_errors_dom();
     const url = document.getElementById("url").value;
     if (url != "") {
-        try {
-            fetch(url)
-                .then((result) => {
-                    result
-                        .text() //if the string is 404 not found
-                        .then((string) => {
-                            console.log(
-                                "THIS IS THE STRING WE GET FROM THE URL :: ",
-                                string
-                            );
-                            load_text_from_url_in_editor(string);
-                        })
-                        .catch((err) => {
-                            //make 404s display the error message
-                            console.log("test");
-                            display_error_dom(err, context_id);
-                        });
-                })
-                .catch((err) => {
-                    console.log("test2");
-                    display_error_dom(err, context_id);
-                });
-        } catch {
-            console("fked up");
-        }
+        fetch(url)
+            .then(check_fetch)
+            .then((result) => {
+                console.log(result);
+                result
+                    .text() //if the string is 404 not found
+                    .then((string) => {
+                        console.log(
+                            "THIS IS THE STRING FROM THE URL :: ",
+                            string
+                        );
+                        load_text_from_url_in_editor(string);
+                    });
+            });
     } else {
         display_error_dom("Empty url field", context_id);
     }
