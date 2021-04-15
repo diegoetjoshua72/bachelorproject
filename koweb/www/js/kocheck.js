@@ -18,10 +18,10 @@ function remove_all_errors_dom() {
 let check_fetch = function check_fetch(response) {
     if (response.ok === false) {
         display_error_dom(
-            "ERROR IN FETCH : " + result.statusText + " - " + result.url,
+            "ERROR IN FETCH : " + response.statusText + " - " + response.url,
             "errors"
         );
-        throw Error(resp.statusText);
+        throw Error(response.statusText);
     }
     return response; //why do we return tho
 };
@@ -33,16 +33,23 @@ function load_program_from_url(context_id) {
         fetch(url)
             .then(check_fetch)
             .then((result) => {
-                console.log(result);
                 result
                     .text() //if the string is 404 not found
                     .then((string) => {
                         console.log(
-                            "THIS IS THE STRING FROM THE URL :: ",
+                            "THIS IS THE STRING WE GET FROM THE URL :: ",
                             string
                         );
                         load_text_from_url_in_editor(string);
+                    })
+                    .catch((err) => {
+                        console.log("ERROR :", err);
+                        display_error_dom(err, context_id);
                     });
+            })
+            .catch((err) => {
+                console.log("ERROR :", err);
+                display_error_dom(err, context_id);
             });
     } else {
         display_error_dom("Empty url field", context_id);
@@ -54,6 +61,7 @@ function run_program_from_url(context_id) {
     const url = document.getElementById("url").value;
     if (url != "") {
         fetch(url)
+            .then(check_fetch)
             .then((result) => {
                 result
                     .text()
@@ -65,11 +73,12 @@ function run_program_from_url(context_id) {
                         run(string);
                     })
                     .catch((err) => {
-                        //make 404s display the error message
+                        console.log("ERROR :", err);
                         display_error_dom(err, context_id);
                     });
             })
             .catch((err) => {
+                console.log("ERROR :", err);
                 display_error_dom(err, context_id);
             });
     } else {
