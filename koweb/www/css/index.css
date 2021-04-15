@@ -35,6 +35,7 @@ body {
         "operations"
         "errors"
         "output";
+    margin-bottom: 8em;
 }
 
 /* style="width: 1200px; height: 800px; border: 1px solid grey" */
@@ -79,16 +80,17 @@ body {
 }
 
 #errors {
+    width: 50%;
+    margin-bottom: 20px;
 }
 
 #output {
     visibility: hidden;
+    width: 50%;
     padding: 10px;
-    row-gap: 1em;
     border: solid;
     border-color: grey;
     background-color: black;
-    margin-bottom: 20px;
 }
 
 .display_output {
