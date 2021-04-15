@@ -49,7 +49,7 @@ function load_program_from_url(context_id) {
             })
             .catch((err) => {
                 console.log("ERROR :", err);
-                display_error_dom(err, context_id);
+                // display_error_dom(err, context_id);
             });
     } else {
         display_error_dom("Empty url field", context_id);
