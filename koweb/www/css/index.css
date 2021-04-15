@@ -24,9 +24,17 @@ body {
     display: grid;
     place-items: center;
     margin: 8em;
+    width: 100vw;
     height: 100vh;
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr auto auto auto auto;
+    grid-template-areas:
+        "h1"
+        "container"
+        "option-panel"
+        "operations"
+        "errors"
+        "output";
 }
 
 /* style="width: 1200px; height: 800px; border: 1px solid grey" */
