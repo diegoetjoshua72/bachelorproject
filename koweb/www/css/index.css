@@ -21,10 +21,11 @@ body {
 }
 
 #grid {
+    box-sizing: border-box;
     display: grid;
     place-items: center;
-    margin: 8em 8em;
-    width: 100%;
+    margin: 8em;
+    width: auto;
     height: 100vh;
     grid-template-columns: minmax(230px, 1fr);
     grid-template-rows: auto 1fr auto auto auto auto 8em;
