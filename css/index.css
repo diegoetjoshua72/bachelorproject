@@ -35,7 +35,6 @@ body {
     display: grid;
     place-items: center;
     margin: 2em 8em 8em 8em;
-    width: auto;
     height: 100vh;
     grid-template-columns: minmax(850px, 1fr);
     grid-template-rows: auto 1fr auto auto auto auto 8em;
