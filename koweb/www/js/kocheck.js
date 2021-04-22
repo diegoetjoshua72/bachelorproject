@@ -135,11 +135,11 @@ class Prog {
     }
 
     //not sure how to do it right now 
-    static program_static = window.editor.getValue()[Symbol.iterator]();
+    // static program_static = window.editor.getValue()[Symbol.iterator]();
 
-    static get_static() {
-        return this.program_static.next;
-    }
+    // static get_static() {
+    //     return this.program_static.next;
+    // }
 
     static test = 1
 
