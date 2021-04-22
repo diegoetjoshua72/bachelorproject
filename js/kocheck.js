@@ -1,5 +1,5 @@
 // import {init_editor} from './editor.js';
-import init, { run_test, increment, greeting } from "../pkg/koweb.js";
+import init, { run_test, increment_test , greeting } from "../pkg/koweb.js";
 // import * as wasm from '../pkg/koweb.js';
 
 function remove_all_outputs_dom() {
@@ -153,6 +153,8 @@ class Prog {
     }
 }
 
+//expolorer facon async de passer des donnes de javascript vers rust
+///'/'/'/'/'/'/
 
 async function run(program = undefined) {
     try {
@@ -208,7 +210,7 @@ run_button.onclick = async () => {
 //once run is done things are inscope
 var test = document.getElementById("increment");
 test.onclick = () => {
-    increment();
+    increment_test();
 };
 
 
