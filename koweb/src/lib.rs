@@ -29,11 +29,10 @@ fn init_console_wasm_debug() {
     // ...
 }
 
-#[wasm_bindgen]
-extern "C" {
-    
-    type Prog;
 
+#[wasm_bindgen]
+extern "C" {    
+    type Prog;
 
     #[wasm_bindgen(static_method_of = Prog)]
     pub fn increment();
@@ -43,8 +42,6 @@ extern "C" {
 
     #[wasm_bindgen(js_namespace = console)]
     fn log(s: &str);
-
-
 
 }
 
@@ -162,6 +159,11 @@ pub fn increment_test() {
 //lets try and read from that js iterator in prog from rust without passing it
 
 
+
+// pub fn 
+
+
+//UTILISER LE PARSE BUFFER
 #[wasm_bindgen]
 pub fn run_test(
     cmds_from_js: String,
@@ -170,6 +172,12 @@ pub fn run_test(
     no_infer: bool,
     no_check: bool,
 ) -> Result<(), JsValue> {
+
+
+    // let mut f = File::open("foo.txt")?;
+    // let mut buffer = [0; 10];
+
+    println!("hello this is a test");
 
     console_log::init_with_level(Level::Trace);
     init_console_wasm_debug();
