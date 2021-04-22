@@ -140,10 +140,7 @@ class Prog {
 }
 
 //expolorer facon async de passer des donnes de javascript vers rust
-///'/'/'/'/'/'/
-
 //maybe i can pass a closure to the run function 
-
 async function run(program = undefined) {
     try {
         remove_all_outputs_dom();
@@ -191,10 +188,6 @@ run_button.onclick = async () => {
     await run();
 };
 
-//i see this works quite well the state is kept intact hmm
-//i should re read the research paper
-//but i have to wait for the run before doing this but that makes sense
-//once run is done things are inscope
 var test = document.getElementById("increment");
 test.onclick = () => {
     increment_test();
