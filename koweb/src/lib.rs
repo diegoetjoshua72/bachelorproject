@@ -43,7 +43,7 @@ extern "C" {
 #[wasm_bindgen]
 pub fn read_some(stuff: &str){
     let buffer = vec![0;100];
-    log(stuff);
+    alert(stuff);
     // for c in stuff.bytes(){
         // buffer.append(&mut c);
     // }
