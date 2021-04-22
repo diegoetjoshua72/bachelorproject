@@ -115,7 +115,7 @@ function load_text_from_url_in_editor(program_text) {
 // console.log(window.editor);
 
 
-function get_piece(){
+// function get_piece(){
     //so i get the string from the url or the texteditor then from 
     //rust when i need a piece i get a piece of it 
 
@@ -123,8 +123,10 @@ function get_piece(){
     //read the string only when necessary
     // a() && b()
     //if a() is false JS won't execute b()
-}
+// }
 
+
+//maybe i need a static property in this then 
 class Prog {
     constructor(program_text){
         this.program_text = program_text[Symbol.iterator]();
