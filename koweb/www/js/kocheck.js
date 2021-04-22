@@ -127,8 +127,8 @@ function get_piece(){
 
 class Prog {
     constructor(program_text){
-        this.program_txt = program_text[Symbol.iterator]();
-        this.test = program_text.next();
+        this.program_text = program_text[Symbol.iterator]();
+        this.test = this.program_text.next();
     }
 
     get_piece(){
@@ -144,7 +144,7 @@ async function run(program = undefined) {
         var testing = await window.editor.getValue();
         console.log("this is testing ::: ", testing);
 
-        const prog = new Prog(window.editor.getValue());
+        const prog = new Prog(testing);
         console.log(prog);
 
         if (program === undefined) {
