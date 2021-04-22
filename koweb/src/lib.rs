@@ -112,6 +112,7 @@ where
     }
 }
 
+
 static mut test: i32 = 0;
 
 #[wasm_bindgen()]
@@ -122,11 +123,31 @@ pub fn increment() {
     }
 }
 
-// pub fn lazy() {
-// goal is to get only a piece of the string if there is nothing left to get
-// then it returns what ? False
-// }
+//TODO list
+//1 lazi
+//2 better debug line of parse error would be nice 
+//3 loading bar
+//4 makefiles loading multiple files (multiple editor tabs and file system)
 
+
+
+
+//essayer de virer le static lifetime =)
+//essayer de passer de maniere async le code dans le text editor (lazy)
+//verification de fichier passer par le file system ou url
+//run from : ----
+//error
+// -> String ??? -> (peut etre async lazy reading)???
+//regarder le parse buffer
+//typing reduce convertible
+//i want to be able to get error messages and line numbers
+//then i want to be able to run it with the run button
+//make the loading bar thing
+//calling parse on my string when passing it in parse .as_bytes()
+// https://stackoverflow.com/questions/32674905/pass-string-to-function-taking-read-trait
+
+
+//try to get rid of the run_test arguments 
 #[wasm_bindgen]
 pub fn run_test(
     cmds_from_js: String,
@@ -135,28 +156,12 @@ pub fn run_test(
     no_infer: bool,
     no_check: bool,
 ) -> Result<(), JsValue> {
-    // wasm_logger::init(wasm_logger::Config::new(log::Level::Trace));
+
     console_log::init_with_level(Level::Trace);
     init_console_wasm_debug();
     alert(cmds_from_js.as_str());
 
     info!("testing the info part");
-    // https://stackoverflow.com/questions/19846078/how-to-read-from-chromes-console-in-javascript
-    //CAREFULLLLL when something goes wrong in the code i get unreachable in the browser console i need to find a way to get good error messages
-    //essayer de virer le static lifetime =)
-    //essayer de passer de maniere async le code dans le text editor (lazy)
-    //verification de fichier passer par le file system ou url
-    //run from : ----
-    //error
-    // -> String ??? -> (peut etre async lazy reading)???
-    //regarder le parse buffer
-
-    //typing reduce convertible
-    //something i wrong and i reach unreachable how can i fix that the logging works tho which is really cool
-
-    // env_logger::from_env(Env::default().filter_or("LOG", "warn")).init();
-    // log::debug!("hello");
-    // Introduce symbol {|Pure.Appt|const|}
 
     let static_cmds_str = string_to_static_str(cmds_from_js);
 
@@ -176,12 +181,6 @@ pub fn run_test(
     let mut iter = Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webpage(event)));
 
     seq::consume(iter, &opt).expect("something went wrong in the consume");
-
-    //i want to be able to get error messages and line numbers
-    //then i want to be able to run it with the run button
-    //make the loading bar thing
-    //calling parse on my string when passing it in parse .as_bytes()
-    // https://stackoverflow.com/questions/32674905/pass-string-to-function-taking-read-trait
 
     Ok(())
 }

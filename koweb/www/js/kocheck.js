@@ -125,9 +125,9 @@ function get_piece(){
     //if a() is false JS won't execute b()
 }
 
-class Program {
+class Prog {
     constructor(program_text){
-        this.program_text = program_text[Symbol.iterator]();
+        this.program_txt = program_text[Symbol.iterator]();
         this.test = program_text.next();
     }
 
@@ -144,7 +144,7 @@ async function run(program = undefined) {
         var testing = await window.editor.getValue();
         console.log("this is testing ::: ", testing);
 
-        const prog = new Program(window.editor.getValue());
+        const prog = new Prog(window.editor.getValue());
         console.log(prog);
 
         if (program === undefined) {
