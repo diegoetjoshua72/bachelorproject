@@ -213,6 +213,6 @@ test.onclick = () => {
 
 
 var testrev = document.getElementById("incrementfromrust");
-test.onclick = () => {
-    increment();
+testrev.onclick = () => {
+    greeting();
 };
