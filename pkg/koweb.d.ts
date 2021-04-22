@@ -1,8 +1,9 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
+* @param {string} stuff
 */
-export function greeting(): void;
+export function read_some(stuff: string): void;
 /**
 */
 export function increment_test(): void;
@@ -19,9 +20,9 @@ export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembl
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
+  readonly read_some: (a: number, b: number) => void;
   readonly increment_test: () => void;
   readonly run_test: (a: number, b: number, c: number, d: number, e: number, f: number) => void;
-  readonly greeting: () => void;
   readonly __wbindgen_malloc: (a: number) => number;
   readonly __wbindgen_realloc: (a: number, b: number, c: number) => number;
   readonly __wbindgen_exn_store: (a: number) => void;

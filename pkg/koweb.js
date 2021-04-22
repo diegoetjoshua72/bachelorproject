@@ -174,9 +174,12 @@ function getInt32Memory0() {
     return cachegetInt32Memory0;
 }
 /**
+* @param {string} stuff
 */
-export function greeting() {
-    wasm.greeting();
+export function read_some(stuff) {
+    var ptr0 = passStringToWasm0(stuff, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+    var len0 = WASM_VECTOR_LEN;
+    wasm.read_some(ptr0, len0);
 }
 
 /**
@@ -255,8 +258,8 @@ async function init(input) {
     imports.wbg.__wbindgen_object_drop_ref = function(arg0) {
         takeObject(arg0);
     };
-    imports.wbg.__wbg_increment_891f3280ade44f4d = function() {
-        Prog.increment();
+    imports.wbg.__wbg_log_c703a4c71dac371b = function(arg0, arg1) {
+        console.log(getStringFromWasm0(arg0, arg1));
     };
     imports.wbg.__wbg_alert_4914cfe43bafd4ba = function(arg0, arg1) {
         alert(getStringFromWasm0(arg0, arg1));

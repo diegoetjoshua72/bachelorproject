@@ -1,5 +1,5 @@
 // import {init_editor} from './editor.js';
-import init, { run_test, increment_test , greeting } from "../pkg/koweb.js";
+import init, { run_test, increment_test , read_some } from "../pkg/koweb.js";
 // import * as wasm from '../pkg/koweb.js';
 
 function remove_all_outputs_dom() {
@@ -134,37 +134,24 @@ class Prog {
         this.test = this.program_text.next();
     }
 
-    //not sure how to do it right now 
-    // static program_static = window.editor.getValue()[Symbol.iterator]();
-
-    // static get_static() {
-    //     return this.program_static.next;
-    // }
-
-    static test = 1
-
-    static increment() {
-        test += 1;
-        console.log(test);
-    } 
-
-    get_piece(){
-        return this.program_text.next();
+    get_piece_to_koweb(){
+        read_some(this.program_text.next());
     }
 }
 
 //expolorer facon async de passer des donnes de javascript vers rust
 ///'/'/'/'/'/'/
 
+//maybe i can pass a closure to the run function 
+
 async function run(program = undefined) {
     try {
         remove_all_outputs_dom();
         await init();
         var testing = await window.editor.getValue();
-        console.log("this is testing ::: ", testing);
-
         const prog = new Prog(testing);
         console.log(prog);
+        prog.get_piece_to_koweb();
 
         if (program === undefined) {
             run_test(
@@ -214,7 +201,7 @@ test.onclick = () => {
 };
 
 
-var testrev = document.getElementById("incrementfromrust");
-testrev.onclick = () => {
-    greeting();
-};
+// var testbuff = document.getElementById("testbuff");
+// test.onclick = () => {
+//     read_some(Prog.);
+// };
