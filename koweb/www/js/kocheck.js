@@ -1,5 +1,5 @@
 // import {init_editor} from './editor.js';
-import init, { run_test, increment } from "../pkg/koweb.js";
+import init, { run_test, increment, greeting } from "../pkg/koweb.js";
 // import * as wasm from '../pkg/koweb.js';
 
 function remove_all_outputs_dom() {
@@ -127,11 +127,26 @@ function load_text_from_url_in_editor(program_text) {
 
 
 //maybe i need a static property in this then 
+//check generator methods
 class Prog {
     constructor(program_text){
         this.program_text = program_text[Symbol.iterator]();
         this.test = this.program_text.next();
     }
+
+    //not sure how to do it right now 
+    static program_static = window.editor.getValue()[Symbol.iterator]();
+
+    static get_static() {
+        return this.program_static.next;
+    }
+
+    static test = 1
+
+    static increment() {
+        test += 1;
+        console.log(test);
+    } 
 
     get_piece(){
         return this.program_text.next();
@@ -192,6 +207,12 @@ run_button.onclick = async () => {
 //but i have to wait for the run before doing this but that makes sense
 //once run is done things are inscope
 var test = document.getElementById("increment");
+test.onclick = () => {
+    increment();
+};
+
+
+var testrev = document.getElementById("incrementfromrust");
 test.onclick = () => {
     increment();
 };

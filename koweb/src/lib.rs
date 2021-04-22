@@ -31,11 +31,20 @@ fn init_console_wasm_debug() {
 
 #[wasm_bindgen]
 extern "C" {
+    
+    type Prog;
+
+
+    #[wasm_bindgen(static_method_of = Prog)]
+    pub fn increment();
+    
     #[wasm_bindgen]
     fn alert(s: &str);
 
     #[wasm_bindgen(js_namespace = console)]
     fn log(s: &str);
+
+
 
 }
 
@@ -43,6 +52,7 @@ extern "C" {
 
 #[wasm_bindgen]
 pub fn greeting() {
+    increment();
     alert("debug code is run");
 }
 
@@ -148,6 +158,10 @@ pub fn increment() {
 
 
 //try to get rid of the run_test arguments 
+
+//lets try and read from that js iterator in prog from rust without passing it
+
+
 #[wasm_bindgen]
 pub fn run_test(
     cmds_from_js: String,
