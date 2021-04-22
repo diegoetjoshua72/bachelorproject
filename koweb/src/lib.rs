@@ -32,26 +32,24 @@ fn init_console_wasm_debug() {
 
 #[wasm_bindgen]
 extern "C" {    
-    type Prog;
-
-    #[wasm_bindgen(static_method_of = Prog)]
-    pub fn increment();
-    
     #[wasm_bindgen]
     fn alert(s: &str);
 
     #[wasm_bindgen(js_namespace = console)]
     fn log(s: &str);
-
 }
 
-//https://github.com/Deducteam/lambdapi/tree/master/editors/vscode
 
 #[wasm_bindgen]
-pub fn greeting() {
-    Prog::increment();
-    alert("debug code is run");
+pub fn read_some(stuff: &str){
+    let buffer = vec![0;100];
+    log(stuff);
+    // for c in stuff.bytes(){
+        // buffer.append(&mut c);
+    // }
+    //need to get a piece of the string defined by the user the amount 
 }
+
 
 fn produce_from_js(
     cmds_from_js: &'static str,
