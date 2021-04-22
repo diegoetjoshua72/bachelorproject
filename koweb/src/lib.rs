@@ -52,7 +52,7 @@ extern "C" {
 
 #[wasm_bindgen]
 pub fn greeting() {
-    increment();
+    Prog::increment();
     alert("debug code is run");
 }
 
