@@ -114,12 +114,39 @@ function load_text_from_url_in_editor(program_text) {
 // editor.getModel().setValue('some value');
 // console.log(window.editor);
 
+
+function get_piece(){
+    //so i get the string from the url or the texteditor then from 
+    //rust when i need a piece i get a piece of it 
+
+
+    //read the string only when necessary
+    // a() && b()
+    //if a() is false JS won't execute b()
+}
+
+class Program {
+    constructor(program_text){
+        this.program_text = program_text[Symbol.iterator]();
+        this.test = program_text.next();
+    }
+
+    get_piece(){
+        return this.program_text.next();
+    }
+}
+
+
 async function run(program = undefined) {
     try {
         remove_all_outputs_dom();
         await init();
         var testing = await window.editor.getValue();
         console.log("this is testing ::: ", testing);
+
+        const prog = new Program(window.editor.getValue());
+        console.log(prog);
+
         if (program === undefined) {
             run_test(
                 window.editor.getValue(),
