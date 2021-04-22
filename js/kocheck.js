@@ -142,7 +142,7 @@ class Prog {
 //expolorer facon async de passer des donnes de javascript vers rust
 //maybe i can pass a closure to the run function 
 async function run(program = undefined) {
-    try {
+    // try {
         remove_all_outputs_dom();
         await init();
         var testing = await window.editor.getValue();
@@ -168,10 +168,10 @@ async function run(program = undefined) {
                 document.getElementById("no_check").checked
             );
         }
-    } catch {
-        remove_all_errors_dom();
-        display_error_dom("something went wrong in the kontroli run", "errors");
-    }
+    // } catch {
+    //     remove_all_errors_dom();
+    //     display_error_dom("something went wrong in the kontroli run", "errors");
+    // }
 }
 
 var load_url = (document.getElementById("load_url").onclick = () => {
