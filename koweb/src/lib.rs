@@ -126,7 +126,7 @@ where
 static mut test: i32 = 0;
 
 #[wasm_bindgen()]
-pub fn increment() {
+pub fn increment_test() {
     unsafe {
         alert(format!("test : {}", test).as_str());
         test += 1;
