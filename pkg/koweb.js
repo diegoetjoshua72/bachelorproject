@@ -181,8 +181,8 @@ export function greeting() {
 
 /**
 */
-export function increment() {
-    wasm.increment();
+export function increment_test() {
+    wasm.increment_test();
 }
 
 /**
@@ -254,6 +254,9 @@ async function init(input) {
     imports.wbg = {};
     imports.wbg.__wbindgen_object_drop_ref = function(arg0) {
         takeObject(arg0);
+    };
+    imports.wbg.__wbg_increment_891f3280ade44f4d = function() {
+        Prog.increment();
     };
     imports.wbg.__wbg_alert_4914cfe43bafd4ba = function(arg0, arg1) {
         alert(getStringFromWasm0(arg0, arg1));
