@@ -42,7 +42,7 @@ extern "C" {
 
 #[wasm_bindgen]
 pub fn read_some(stuff: &str){
-    let buffer = vec![0;100];
+    // let buffer = vec![0;100];
     alert(stuff);
     // for c in stuff.bytes(){
         // buffer.append(&mut c);
@@ -133,8 +133,6 @@ pub fn increment_test() {
 //2 better debug line of parse error would be nice 
 //3 loading bar
 //4 makefiles loading multiple files (multiple editor tabs and file system)
-
-
 
 
 //essayer de virer le static lifetime =)
