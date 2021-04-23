@@ -131,7 +131,7 @@ function load_text_from_url_in_editor(program_text) {
 class Prog {
     constructor(program_text){
         this.program_text = program_text[Symbol.iterator]();
-        this.test = this.program_text.next();
+        // this.test = this.program_text.next();
     }
 
     get_piece_to_koweb(){
@@ -147,6 +147,7 @@ async function run(program = undefined) {
         await init();
         var testing = await window.editor.getValue();
         const prog = new Prog(testing);
+
         console.log(prog);
         prog.get_piece_to_koweb();
 
