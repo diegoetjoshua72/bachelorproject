@@ -144,16 +144,11 @@ class Prog {
         return 0;
     }
 
-
-
     //for now i will want to make it work character by character
     //but then i want it to work for 64mb pieces per next()
     //then make it modifiable by the user :D 
-
     //the js side will know that the program that it is not done passing the whole thing so i don't need to rely on rust for that 
-
     //compresion gain suppresion du bruit
-
 }
 
 
@@ -162,7 +157,7 @@ class Prog {
 // [...Buffer.from('hello world')] test this
 const myString = new String("new string that i want to pass in like maybe three next calls something like that");
 myString[Symbol.iterator] = function () {
-    let len = this.length - 1;
+    let i = this.length - 1;
     return {
         next: () => {
             return {
