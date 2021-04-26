@@ -165,8 +165,9 @@ myString[Symbol.iterator] = function () {
             return {
                 done: (i < end) ? false : true,
                 value: () => {
-                    this.slice(start, size_slice);
-                    start += size_slice;        
+                    let result = this.slice(start, size_slice);
+                    start += size_slice;
+                    return result;
                 }
             }
         }
