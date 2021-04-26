@@ -160,7 +160,7 @@ class Prog {
 
 //i will have to do like a check here for 64 MB 
 // [...Buffer.from('hello world')] test this
-const myString = "new string that i want to pass in like maybe three next calls something like that";
+const myString = new String("new string that i want to pass in like maybe three next calls something like that");
 myString[Symbol.iterator] = function () {
     let len = this.length - 1;
     return {
