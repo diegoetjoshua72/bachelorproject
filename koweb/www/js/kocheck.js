@@ -115,11 +115,47 @@ class Prog {
         // this.test = this.program_text.next();
     }
 
+    go_through_iterator(){
+        var done = false;
+        while(done != true){
+            var obj = this.program_text.next()
+            if(obj.done == true){
+                done = true;
+            }
+            console.log("it value : ", obj.value);
+            console.log("it value : ",obj.value);
+        }
+    }
+
     get_piece_to_koweb(){
         let test = this.program_text.next() + "test";
+        //next returns object with done and value properties
+        //done is true when there is nothing more to pass
         read_some(test);
     }
+
+    //export this to rust 
+    get_piece_to_koweb_js(){
+        return this.program_text.next().value + "test";
+    }
+
+    //experiment with the static method 
+    static get_piece_to_koweb_static(){
+        return 0;
+    }
+
+    //for now i will want to make it work character by character
+    //but then i want it to work for 64mb pieces per next()
+    //then make it modifiable by the user :D 
+
+    //the js side will know that the program that it is not done passing the whole thing so i don't need to rely on rust for that 
+
+
 }
+
+//so i want to empty the whole iterator from js to rust 
+//i can define the size of how much is passed at once 
+//on the rust size if the buffer is full it gets doubled in size 
 
 //do things as simple as possible 
 function get_piece(){
@@ -136,7 +172,8 @@ async function run(program = undefined) {
         const prog = new Prog(testing);
 
         console.log(prog);
-        prog.get_piece_to_koweb();
+        prog.go_through_iterator();
+        // prog.get_piece_to_koweb();
 
         if (program === undefined) {
             run_test(
