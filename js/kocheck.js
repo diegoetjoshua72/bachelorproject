@@ -108,26 +108,7 @@ function load_text_from_url_in_editor(program_text) {
     window.editor.setValue(program_text);
 }
 
-//javascript and Webassembly share the same execution thread when you execute wasm within javascript the javascript halts and vice versa
-//still some erors loadings idk
 
-// editor.getModel().setValue('some value');
-// console.log(window.editor);
-
-
-// function get_piece(){
-    //so i get the string from the url or the texteditor then from 
-    //rust when i need a piece i get a piece of it 
-
-
-    //read the string only when necessary
-    // a() && b()
-    //if a() is false JS won't execute b()
-// }
-
-
-//maybe i need a static property in this then 
-//check generator methods
 class Prog {
     constructor(program_text){
         this.program_text = program_text[Symbol.iterator]();
@@ -135,8 +116,14 @@ class Prog {
     }
 
     get_piece_to_koweb(){
-        read_some(this.program_text.next());
+        let test = this.program_text.next() + "test";
+        read_some(test);
     }
+}
+
+//do things as simple as possible 
+function get_piece(){
+    return 0;
 }
 
 //expolorer facon async de passer des donnes de javascript vers rust
