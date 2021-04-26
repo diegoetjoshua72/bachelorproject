@@ -157,12 +157,17 @@ class Prog {
 // [...Buffer.from('hello world')] test this
 const myString = new String("new string that i want to pass in like maybe three next calls something like that");
 myString[Symbol.iterator] = function () {
-    let i = this.length - 1;
+    let start = 0;
+    let end = this.length();
+    let size_slice = 2;
     return {
         next: () => {
             return {
-                done: (i >= 0) ? false : true,
-                value: this[i--]
+                done: (i < end) ? false : true,
+                value: () => {
+                    this.slice(start, size_slice);
+                    start += size_slice;        
+                }
             }
         }
     }
@@ -171,7 +176,19 @@ myString[Symbol.iterator] = function () {
 for (const char of myString) {
     console.log("CUSTOM ITERATOR TEST", char);
 }
-console.log("BYTE STRING TEST: ", [...Buffer.from(myString)])
+
+function unpack(str) {
+    var bytes = [];
+    for(var i = 0; i < str.length; i++) {
+        var char = str.charCodeAt(i);
+        bytes.push(char >>> 8);
+        bytes.push(char & 0xFF);
+    }
+    return bytes;
+}
+
+console.log("turning string into BYTES : ", unpack(myString));
+// console.log("BYTE STRING TEST: ", [...Buffer.from(myString)])
 console.log([...myString]);
 
 //so i want to empty the whole iterator from js to rust 
