@@ -123,7 +123,7 @@ class Prog {
                 done = true;
             }
             console.log("it value : ", obj.value);
-            console.log("it value : ",obj.value);
+            console.log("it done : ", obj.done);
         }
     }
 
@@ -152,6 +152,8 @@ class Prog {
 
     //the js side will know that the program that it is not done passing the whole thing so i don't need to rely on rust for that 
 
+    //compresion gain suppresion du bruit
+
 }
 
 
@@ -165,7 +167,7 @@ myString[Symbol.iterator] = function () {
         next: () => {
             return {
                 done: (i >= 0) ? false : true,
-                value: this[]
+                value: this[i--]
             }
         }
     }
