@@ -29,9 +29,13 @@ fn init_console_wasm_debug() {
     // ...
 }
 
+#[wasm_bindgen]
+extern "C" {
+    fn name() -> String;
+}
 
 #[wasm_bindgen]
-extern "C" {    
+extern "C" {
     #[wasm_bindgen]
     fn alert(s: &str);
 
@@ -39,17 +43,16 @@ extern "C" {
     fn log(s: &str);
 }
 
-
 #[wasm_bindgen]
-pub fn read_some(stuff: &str){
+pub fn read_some(stuff: &str) {
     // let buffer = vec![0;100];
+    alert(name().as_str());
     alert(stuff);
     // for c in stuff.bytes(){
-        // buffer.append(&mut c);
+    // buffer.append(&mut c);
     // }
-    //need to get a piece of the string defined by the user the amount 
+    //need to get a piece of the string defined by the user the amount
 }
-
 
 fn produce_from_js(
     cmds_from_js: &'static str,
@@ -117,7 +120,6 @@ where
     }
 }
 
-
 static mut test: i32 = 0;
 
 #[wasm_bindgen()]
@@ -130,10 +132,9 @@ pub fn increment_test() {
 
 //TODO list
 //1 lazi
-//2 better debug line of parse error would be nice 
+//2 better debug line of parse error would be nice
 //3 loading bar
 //4 makefiles loading multiple files (multiple editor tabs and file system)
-
 
 //essayer de virer le static lifetime =)
 //essayer de passer de maniere async le code dans le text editor (lazy)
@@ -149,15 +150,11 @@ pub fn increment_test() {
 //calling parse on my string when passing it in parse .as_bytes()
 // https://stackoverflow.com/questions/32674905/pass-string-to-function-taking-read-trait
 
-
-//try to get rid of the run_test arguments 
+//try to get rid of the run_test arguments
 
 //lets try and read from that js iterator in prog from rust without passing it
 
-
-
-// pub fn 
-
+// pub fn
 
 //UTILISER LE PARSE BUFFER
 #[wasm_bindgen]
@@ -168,8 +165,6 @@ pub fn run_test(
     no_infer: bool,
     no_check: bool,
 ) -> Result<(), JsValue> {
-
-
     // let mut f = File::open("foo.txt")?;
     // let mut buffer = [0; 10];
 
