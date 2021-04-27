@@ -158,7 +158,7 @@ class Prog {
 const myString = new String("new string that i want to pass in like maybe three next calls something like that");
 myString[Symbol.iterator] = function () {
     let start = 0;
-    let end = this.length();
+    let end = this.length;
     let size_slice = 2;
     return {
         next: () => {
