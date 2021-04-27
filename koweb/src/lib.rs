@@ -29,7 +29,7 @@ fn init_console_wasm_debug() {
     // ...
 }
 
-#[wasm_bindgen]
+#[wasm_bindgen(module = "kocheck.js")]
 extern "C" {
     fn name() -> String;
 }
