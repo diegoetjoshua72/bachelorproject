@@ -161,13 +161,13 @@ class Prog {
 // [...Buffer.from('hello world')] test this
 const myString = new String("new string that i want to pass in like maybe three next calls something like that");
 myString[Symbol.iterator] = function () {
-    let start = 0;
-    let end = this.length;
-    let size_slice = 2;
     return {
+        start = 0,
+        end = this.length,
+        size_slice = 2,
         next() {
             return {
-                done: (start < end) ? false : true,
+                done: (this.start < this.end) ? false : true,
                 value: () => {
                     let result = this.slice(start, size_slice);
                     start += size_slice;
@@ -191,7 +191,6 @@ function unpack(str) {
     }
     return bytes;
 }
-
 console.log("turning string into BYTES : ", unpack(myString));
 // console.log("BYTE STRING TEST: ", [...Buffer.from(myString)])
 // console.log([...myString]);
@@ -210,7 +209,8 @@ async function run(program = undefined) {
         const prog = new Prog(testing);
 
         console.log(prog);
-        prog.go_through_iterator();
+        
+        // prog.go_through_iterator();
         // prog.get_piece_to_koweb();
 
         if (program === undefined) {
