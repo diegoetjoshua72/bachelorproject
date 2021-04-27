@@ -32,6 +32,10 @@ fn init_console_wasm_debug() {
 #[wasm_bindgen(module = "/www/js/editor.js")]
 extern "C" {
     fn name() -> String;
+    type Test;
+    #[wasm_bindgen(static_method_of = Test)]
+    pub fn get_test() -> String;
+
 }
 
 #[wasm_bindgen]
@@ -127,6 +131,7 @@ pub fn increment_test() {
         alert(name().as_str());
         alert(format!("test : {}", test).as_str());
         test += 1;
+        alert(Test::get_test().as_str());
     }
 }
 
