@@ -109,6 +109,10 @@ function load_text_from_url_in_editor(program_text) {
 }
 
 
+export function name() {
+    return 'Rust';
+}
+
 class Prog {
     constructor(program_text){
         this.program_text = program_text[Symbol.iterator]();
