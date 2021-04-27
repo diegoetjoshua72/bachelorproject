@@ -169,9 +169,9 @@ pub fn run_test(
     // let mut buffer = [0; 10];
 
     println!("hello this is a test");
-
     console_log::init_with_level(Level::Trace);
     init_console_wasm_debug();
+    alert(name().as_str());
     alert(cmds_from_js.as_str());
 
     info!("testing the info part");
