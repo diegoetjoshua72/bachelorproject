@@ -1,3 +1,4 @@
+import { name } from 'kocheck.js';
 
 let wasm;
 
@@ -261,7 +262,7 @@ async function init(input) {
     imports.wbg.__wbg_alert_4914cfe43bafd4ba = function(arg0, arg1) {
         alert(getStringFromWasm0(arg0, arg1));
     };
-    imports.wbg.__wbg_name_1203328e60c36bc5 = function(arg0) {
+    imports.wbg.__wbg_name_7c1a0deaa0678f3a = function(arg0) {
         var ret = name();
         var ptr0 = passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
         var len0 = WASM_VECTOR_LEN;
