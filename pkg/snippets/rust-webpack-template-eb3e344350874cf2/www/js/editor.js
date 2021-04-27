@@ -1,11 +1,14 @@
-export class Test{
+
+export {Test, name}
+
+class Test{
     static teststring = "this is some string that i would just like to access in rust"[Symbol.iterator]();
     static get_test(){
         return this.teststring.next().value;
     }
 }
 
-export function name() {
+function name() {
     return 'Rust';
 }
 

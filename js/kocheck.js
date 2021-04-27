@@ -2,6 +2,11 @@
 import init, { run_test, increment_test , read_some } from "../pkg/koweb.js";
 // import * as wasm from '../pkg/koweb.js';
 
+export function export_test() {
+    console.log("just exporting some func")
+}
+
+
 function remove_all_outputs_dom() {
     document.querySelectorAll(".prompt").forEach((e) => e.remove());
 }
@@ -112,9 +117,9 @@ function load_text_from_url_in_editor(program_text) {
 
 
 class Prog {
-    constructor(program_text){
-        this.program_text = program_text[Symbol.iterator]();
-        // this.test = this.program_text.next();
+    static program_text;
+    constructor(program_text_input){
+        program_text = program_text_input[Symbol.iterator]();
     }
 
     go_through_iterator(){
@@ -143,7 +148,12 @@ class Prog {
 
     //experiment with the static method 
     static get_piece_to_koweb_static(){
-        return 0;
+        if(program_text != undefined){
+            return this.program_text.next().value();
+        }
+        else {
+            throw new Error("program_text was not set and we tried to get from the iterator");
+        }
     }
 
     //for now i will want to make it work character by character
@@ -157,24 +167,25 @@ class Prog {
 
 //i will have to do like a check here for 64 MB 
 // [...Buffer.from('hello world')] test this
-const myString = new String("new string that i want to pass in like maybe three next calls something like that");
-// myString[Symbol.iterator] = function () {
-//     return {
-//         start = 0,
-//         end = this.length,
-//         size_slice = 2,
-//         next() {
-//             return {
-//                 done: (this.start < this.end) ? false : true,
-//                 value: () => {
-//                     let result = this.slice(start, size_slice);
-//                     start += size_slice;
-//                     return result;
-//                 }
-//             }
-//         }
-//     }
-// }
+const myIter = "new string that i want to pass in like maybe three next calls something like that"[Symbol.iterator] = function () {
+    return {
+        start = 0,
+        end = this.length,
+        size_slice = 2,
+        next() {
+            return {
+                done: (this.start < this.end) ? false : true,
+                value: () => {
+                    let result = this.slice(start, size_slice);
+                    start += size_slice;
+                    return result;
+                }
+            }
+        }
+    }
+}
+
+console.log(myIter);
 
 // for (let i = 0; i<10 ; i++) {
 //     console.log("CUSTOM ITERATOR TEST", myString.next());
