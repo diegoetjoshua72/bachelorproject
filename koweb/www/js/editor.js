@@ -1,34 +1,3 @@
-// import * as loader from '../monaco/min/vs/loader.js'
-
-// export function init_editor(){
-
-//   var test;
-//   define('main', ["./monaco/min/vs/editor/editor.main"], function () {
-//     console.log("inside");
-//     window.test = "hello from inside"
-
-//     return {someValue: 2};
-
-//     });
-
-//   console.log(window.test);
-
-{
-    /* <script>
-var require = { paths: { vs: '../node_modules/monaco-editor/min/vs' } };
-</script>
-<script src="../node_modules/monaco-editor/min/vs/loader.js"></script>
-<script src="../node_modules/monaco-editor/min/vs/editor/editor.main.nls.js"></script>
-<script src="../node_modules/monaco-editor/min/vs/editor/editor.main.js"></script>
-
-<script>
-var editor = monaco.editor.create(document.getElementById('container'), {
-    value: ['function x() {', '\tconsole.log("Hello world!");', '}'].join('\n'),
-    language: 'javascript'
-});
-</script> */
-}
-
 export class Test{
     static teststring = "this is some string that i would just like to access in rust"[Symbol.iterator]();
     static get_test(){
@@ -36,10 +5,10 @@ export class Test{
     }
 }
 
-
 export function name() {
     return 'Rust';
 }
+
 
 var editor = 0;
 
