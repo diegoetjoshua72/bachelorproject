@@ -178,9 +178,9 @@ myString[Symbol.iterator] = function () {
     }
 }
 
-for (let i = 0; i<10 ; i++) {
-    console.log("CUSTOM ITERATOR TEST", myString.next());
-}
+// for (let i = 0; i<10 ; i++) {
+//     console.log("CUSTOM ITERATOR TEST", myString.next());
+// }
 
 function unpack(str) {
     var bytes = [];
