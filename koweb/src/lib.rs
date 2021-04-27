@@ -46,7 +46,6 @@ extern "C" {
 #[wasm_bindgen]
 pub fn read_some(stuff: &str) {
     // let buffer = vec![0;100];
-    alert(name().as_str());
     alert(stuff);
     // for c in stuff.bytes(){
     // buffer.append(&mut c);
@@ -125,6 +124,7 @@ static mut test: i32 = 0;
 #[wasm_bindgen()]
 pub fn increment_test() {
     unsafe {
+        alert(name().as_str());
         alert(format!("test : {}", test).as_str());
         test += 1;
     }
