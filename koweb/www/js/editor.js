@@ -29,6 +29,10 @@ var editor = monaco.editor.create(document.getElementById('container'), {
 </script> */
 }
 
+export function name() {
+    return 'Rust';
+}
+
 var editor = 0;
 
 require.config({ paths: { vs: "./monaco/min/vs" } });
