@@ -1,4 +1,4 @@
-import { name } from './snippets/rust-webpack-template-eb3e344350874cf2/www/js/kocheck.js';
+import { name } from './snippets/rust-webpack-template-eb3e344350874cf2/www/js/editor.js';
 
 let wasm;
 
@@ -262,7 +262,7 @@ async function init(input) {
     imports.wbg.__wbg_alert_4914cfe43bafd4ba = function(arg0, arg1) {
         alert(getStringFromWasm0(arg0, arg1));
     };
-    imports.wbg.__wbg_name_dd2e4d126afa55af = function(arg0) {
+    imports.wbg.__wbg_name_c95318a306f71eab = function(arg0) {
         var ret = name();
         var ptr0 = passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
         var len0 = WASM_VECTOR_LEN;
