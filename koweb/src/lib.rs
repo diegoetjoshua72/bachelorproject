@@ -131,7 +131,7 @@ pub fn increment_test() {
         alert(name().as_str());
         alert(format!("test : {}", test).as_str());
         test += 1;
-        alert(format!("{}{}", "amen : ", Test::get_test().as_str()));
+        alert(format!("{}{}", "amen : ", Test::get_test().as_str()).as_str());
     }
 }
 
