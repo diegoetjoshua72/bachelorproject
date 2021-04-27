@@ -174,8 +174,8 @@ myString[Symbol.iterator] = function () {
     }
 }
 
-for (const char of myString) {
-    console.log("CUSTOM ITERATOR TEST", char);
+for (i = 0; i<10 ; i++) {
+    console.log("CUSTOM ITERATOR TEST", myString.next().value);
 }
 
 function unpack(str) {
