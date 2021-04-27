@@ -163,7 +163,7 @@ myString[Symbol.iterator] = function () {
     return {
         next: () => {
             return {
-                done: (i < end) ? false : true,
+                done: (start < end) ? false : true,
                 value: () => {
                     let result = this.slice(start, size_slice);
                     start += size_slice;
