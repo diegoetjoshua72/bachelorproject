@@ -165,7 +165,7 @@ myString[Symbol.iterator] = function () {
     let end = this.length;
     let size_slice = 2;
     return {
-        next: () => {
+        next() {
             return {
                 done: (start < end) ? false : true,
                 value: () => {
@@ -179,7 +179,7 @@ myString[Symbol.iterator] = function () {
 }
 
 for (let i = 0; i<10 ; i++) {
-    console.log("CUSTOM ITERATOR TEST", myString.next);
+    console.log("CUSTOM ITERATOR TEST", myString.next());
 }
 
 function unpack(str) {
