@@ -194,16 +194,9 @@ function unpack(str) {
 
 console.log("turning string into BYTES : ", unpack(myString));
 // console.log("BYTE STRING TEST: ", [...Buffer.from(myString)])
-console.log([...myString]);
+// console.log([...myString]);
 
-//so i want to empty the whole iterator from js to rust 
-//i can define the size of how much is passed at once 
-//on the rust size if the buffer is full it gets doubled in size 
 
-//do things as simple as possible 
-function get_piece(){
-    return 0;
-}
 
 //expolorer facon async de passer des donnes de javascript vers rust
 //maybe i can pass a closure to the run function 
