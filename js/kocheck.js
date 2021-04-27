@@ -160,23 +160,23 @@ class Prog {
 //i will have to do like a check here for 64 MB 
 // [...Buffer.from('hello world')] test this
 const myString = new String("new string that i want to pass in like maybe three next calls something like that");
-myString[Symbol.iterator] = function () {
-    return {
-        start = 0,
-        end = this.length,
-        size_slice = 2,
-        next() {
-            return {
-                done: (this.start < this.end) ? false : true,
-                value: () => {
-                    let result = this.slice(start, size_slice);
-                    start += size_slice;
-                    return result;
-                }
-            }
-        }
-    }
-}
+// myString[Symbol.iterator] = function () {
+//     return {
+//         start = 0,
+//         end = this.length,
+//         size_slice = 2,
+//         next() {
+//             return {
+//                 done: (this.start < this.end) ? false : true,
+//                 value: () => {
+//                     let result = this.slice(start, size_slice);
+//                     start += size_slice;
+//                     return result;
+//                 }
+//             }
+//         }
+//     }
+// }
 
 // for (let i = 0; i<10 ; i++) {
 //     console.log("CUSTOM ITERATOR TEST", myString.next());
@@ -209,7 +209,7 @@ async function run(program = undefined) {
         const prog = new Prog(testing);
 
         console.log(prog);
-        
+
         // prog.go_through_iterator();
         // prog.get_piece_to_koweb();
 
