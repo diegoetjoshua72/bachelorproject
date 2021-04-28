@@ -33,7 +33,7 @@ function fetch_make_text_from_url(){
                     })
                     .catch((err) => {
                         console.log("ERROR :", err);
-                        display_error_dom(err, context_id);
+                        display_error_dom(err, "errors");
                     });
             })
             .catch((err) => {
@@ -41,7 +41,7 @@ function fetch_make_text_from_url(){
                 // display_error_dom(err, context_id);
             });
     } else {
-        display_error_dom("Empty url field", context_id);
+        display_error_dom("Empty url field", "errors");
     }
 }
 
