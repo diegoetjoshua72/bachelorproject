@@ -49,7 +49,7 @@ function split_tokens(text){
 //i need to have the link to the initial .mk file 
 //\w+.mk
 // two regular expressions one for the names that end in .ml
-console.log(fetch_make_text_from_url("https://raw.githubusercontent.com/diegoetjoshua72/bachelorproject/master/examples/kontroli.mk"))
+console.log(fetch_make_text_from_url())
 
 //anytime there is a \n\t or a space its a new word 
 //would be nice to match words with any number of spaces in between
