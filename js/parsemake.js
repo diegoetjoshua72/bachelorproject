@@ -6,7 +6,7 @@ let example = `%.dko:
 
  
 
-function fetch_make_text_from_url(url){
+function fetch_make_text_from_url(){
     const url = document.getElementById("urlmake").value;
     if (url != "") {
         fetch(url)
@@ -19,7 +19,7 @@ function fetch_make_text_from_url(url){
                             "THIS IS THE STRING WE GET FROM THE URL :: ",
                             string
                         );
-                        split_tokens(string);
+                        return string;
                     })
                     .catch((err) => {
                         console.log("ERROR :", err);
@@ -49,7 +49,8 @@ function split_tokens(text){
 //i need to have the link to the initial .mk file 
 //\w+.mk
 // two regular expressions one for the names that end in .ml
-console.log(fetch_make_text_from_url())
+console.log(fetch_make_text_from_url());
+console.log(split_token(fetch_make_text_from_url()));
 
 //anytime there is a \n\t or a space its a new word 
 //would be nice to match words with any number of spaces in between

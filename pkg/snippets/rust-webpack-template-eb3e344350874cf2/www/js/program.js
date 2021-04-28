@@ -1,4 +1,4 @@
-export class Prog {
+export default class Prog {
 
     static program_text = "";
     static  static_constructor(program_text_input){
