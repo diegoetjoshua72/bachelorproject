@@ -157,7 +157,7 @@ async function run(program = undefined) {
         remove_all_outputs_dom();
         await init();
         var testing = await window.editor.getValue();
-        const prog = Prog.static_constructor(testing);
+        const prog = Program.Prog.static_constructor(testing);
         console.log(prog);
         //si la classe casse trop les couilles je peut faire une closure mais je pense la classes c'est bien
 
