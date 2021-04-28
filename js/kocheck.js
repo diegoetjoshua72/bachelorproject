@@ -2,9 +2,9 @@
 import init, { run_test, increment_test , read_some } from "../pkg/koweb.js";
 // import * as wasm from '../pkg/koweb.js';
 
-export function export_test() {
-    return "export from kocheck.js"
-}
+// export function export_test() {
+//     return "export from kocheck.js"
+// }
 
 
 function remove_all_outputs_dom() {
