@@ -200,7 +200,7 @@ function unpack(str) {
     }
     return bytes;
 }
-console.log("turning string into BYTES : ", unpack(myString));
+// console.log("turning string into BYTES : ", unpack(myString));
 // console.log("BYTE STRING TEST: ", [...Buffer.from(myString)])
 // console.log([...myString]);
 
