@@ -43,14 +43,7 @@
 
 
 
-        <!-- PARSER FOR MAKEFILES WILL ONLY WORK WITH .mk FORMAT ONLINE RAW FILES -->
-        <!-- 1) split the string in what matters we won't care about flags --x -->
-        <!-- 2) keep names and filenames in the array -->
-        <!-- 3) generate the raw github urls for each file -->
-        <!-- 4) fetch data from each of those files then store it somewhere perhaps on the generated html idk this step hmmm make some global constant with a promise and these file values or something -->
-        <!-- 5) on file name click it puts the content of the file in the editor -->
-        <!--  -->
-        <script src="js/parsemake.js"></script>
+
 
 
 
@@ -115,6 +108,14 @@
 
     </div>
 
+    <!-- PARSER FOR MAKEFILES WILL ONLY WORK WITH .mk FORMAT ONLINE RAW FILES -->
+    <!-- 1) split the string in what matters we won't care about flags --x -->
+    <!-- 2) keep names and filenames in the array -->
+    <!-- 3) generate the raw github urls for each file -->
+    <!-- 4) fetch data from each of those files then store it somewhere perhaps on the generated html idk this step hmmm make some global constant with a promise and these file values or something -->
+    <!-- 5) on file name click it puts the content of the file in the editor -->
+    <!--  -->
+    <script src="js/parsemake.js"></script>
 
     <script src="./monaco/min/vs/loader.js"></script>
     <script src="./js/editor.js"></script>
