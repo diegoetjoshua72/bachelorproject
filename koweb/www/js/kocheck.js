@@ -3,7 +3,7 @@ import init, { run_test, increment_test , read_some } from "../pkg/koweb.js";
 // import * as wasm from '../pkg/koweb.js';
 
 export function export_test() {
-    console.log("just exporting some func")
+    return "export from kocheck.js"
 }
 
 

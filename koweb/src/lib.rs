@@ -38,6 +38,11 @@ extern "C" {
 
 }
 
+#[wasm_bindgen(module = "/www/js/kocheck.js")]
+extern "C" {
+    fn export_test() -> String;
+}
+
 #[wasm_bindgen]
 extern "C" {
     #[wasm_bindgen]
@@ -128,6 +133,7 @@ static mut test: i32 = 0;
 #[wasm_bindgen()]
 pub fn increment_test() {
     unsafe {
+        alert(export_test().as_str());
         alert(name().as_str());
         alert(format!("test : {}", test).as_str());
         test += 1;
