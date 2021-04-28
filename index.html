@@ -19,16 +19,27 @@
 
 
         <div id="file_sys">
-            <detail>
+            <details class="details-example">
                 <summary>Name of make module</summary>
                 <ul id="module">
                     <li> 
                         <button>nat.dk</button>
                     </li>
                 </ul>
-            </detail>
+            </details>
         </div>
 
+        <script>
+             const detailsElement = document.querySelector('.details-example');
+
+            detailsElement.addEventListener('toggle', event => {
+                if (event.target.open) {
+                    console.log('open');
+                } else {
+                    console.log('closed');
+                }
+            });
+        </script>
 
         <div id="container"></div>
         <div id="option_panel">
