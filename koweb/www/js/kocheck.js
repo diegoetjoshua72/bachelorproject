@@ -1,5 +1,5 @@
 import init, { run_test, increment_test , read_some } from "../pkg/koweb.js";
-import Prog from "program.js";
+import Prog from "./program.js";
 
 
 function remove_all_outputs_dom() {
