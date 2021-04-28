@@ -1,18 +1,4 @@
 
-// export {Test, name}
-
-// class Test{
-//     static teststring = "this is some string that i would just like to access in rust"[Symbol.iterator]();
-//     static get_test(){
-//         return this.teststring.next().value;
-//     }
-// }
-
-// function name() {
-//     return 'Rust';
-// }
-
-
 var editor = 0;
 
 require.config({ paths: { vs: "./monaco/min/vs" } });

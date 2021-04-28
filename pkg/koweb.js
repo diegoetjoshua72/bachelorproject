@@ -1,4 +1,3 @@
-import { name, Test } from './snippets/rust-webpack-template-eb3e344350874cf2/www/js/editor.js';
 import { Prog } from './snippets/rust-webpack-template-eb3e344350874cf2/www/js/program.js';
 
 let wasm;
@@ -265,20 +264,6 @@ async function init(input) {
     };
     imports.wbg.__wbg_getpiecetokowebstatic_4980993410174c6a = function(arg0) {
         var ret = Prog.get_piece_to_koweb_static();
-        var ptr0 = passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
-        var len0 = WASM_VECTOR_LEN;
-        getInt32Memory0()[arg0 / 4 + 1] = len0;
-        getInt32Memory0()[arg0 / 4 + 0] = ptr0;
-    };
-    imports.wbg.__wbg_name_c95318a306f71eab = function(arg0) {
-        var ret = name();
-        var ptr0 = passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
-        var len0 = WASM_VECTOR_LEN;
-        getInt32Memory0()[arg0 / 4 + 1] = len0;
-        getInt32Memory0()[arg0 / 4 + 0] = ptr0;
-    };
-    imports.wbg.__wbg_gettest_7a5ba4b0b4858732 = function(arg0) {
-        var ret = Test.get_test();
         var ptr0 = passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
         var len0 = WASM_VECTOR_LEN;
         getInt32Memory0()[arg0 / 4 + 1] = len0;
