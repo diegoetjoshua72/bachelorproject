@@ -151,6 +151,15 @@ body {
     border: none;
 }
 
+#urlmake {
+    padding-left: 10px;
+    width: 80%;
+    background-color: #e7e4e4;
+    margin-bottom: 10px;
+    border: none;
+}
+
+
 .btn {
     border-radius: 5px;
     padding: 10px 15px;
