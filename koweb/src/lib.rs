@@ -40,7 +40,7 @@ extern "C" {
 
 #[wasm_bindgen(module = "/www/js/kocheck.js")]
 extern "C" {
-    fn export_test() -> String;
+    // fn export_test() -> String;
 }
 
 #[wasm_bindgen]
