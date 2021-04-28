@@ -12,3 +12,7 @@ function split_tokens(text){
 }
 
 split_tokens(example);
+
+
+//would be nice to match words with any number of spaces in between
+// text.match(/[a-z'\-]+/gi);
