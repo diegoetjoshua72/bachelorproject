@@ -7,7 +7,7 @@ let example = `%.dko:
 function split_tokens(text){
     let result = text.trim();
     result = text.split(" ");
-    console.log("result");
+    console.log(result);
 
 }
 
