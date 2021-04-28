@@ -118,9 +118,9 @@ function load_text_from_url_in_editor(program_text) {
 
 class Prog {
 
-    static program_text;
-    static  statitc_constructor(program_text_input){
-        program_text = program_text_input[Symbol.iterator]();
+    static program_text = "";
+    static  static_constructor(program_text_input){
+        this.program_text = program_text_input[Symbol.iterator]();
     }
 
     go_through_iterator(){
@@ -216,8 +216,7 @@ async function run(program = undefined) {
         remove_all_outputs_dom();
         await init();
         var testing = await window.editor.getValue();
-        const prog = Prog.statitc_constructor(testing);
-
+        const prog = Prog.static_constructor(testing);
         console.log(prog);
         //si la classe casse trop les couilles je peut faire une closure mais je pense la classes c'est bien
 
