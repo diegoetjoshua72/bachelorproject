@@ -125,10 +125,8 @@ static mut test: i32 = 0;
 pub fn increment_test() {
     unsafe {
         alert(Prog::get_piece_to_koweb_static().as_str());
-        alert(name().as_str());
         alert(format!("test : {}", test).as_str());
         test += 1;
-        alert(format!("{}{}", "amen : ", Test::get_test().as_str()).as_str());
     }
 }
 
@@ -173,7 +171,6 @@ pub fn run_test(
     println!("hello this is a test");
     console_log::init_with_level(Level::Trace);
     init_console_wasm_debug();
-    alert(name().as_str());
     alert(cmds_from_js.as_str());
 
     info!("testing the info part");
