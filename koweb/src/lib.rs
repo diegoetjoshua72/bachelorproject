@@ -25,17 +25,6 @@ use std::panic;
 //i should get the the automatic code format and debugger going as well today
 fn init_console_wasm_debug() {
     panic::set_hook(Box::new(console_error_panic_hook::hook));
-
-    // ...
-}
-
-#[wasm_bindgen(module = "/www/js/editor.js")]
-extern "C" {
-    fn name() -> String;
-    type Test;
-    #[wasm_bindgen(static_method_of = Test)]
-    pub fn get_test() -> String;
-
 }
 
 #[wasm_bindgen(module = "/www/js/program.js")]

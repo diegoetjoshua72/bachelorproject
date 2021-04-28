@@ -6,6 +6,16 @@ let example = `%.dko:
 
  
 
+function display_error_dom(error_msg, context) {
+    var error_msg_dom = document.createElement("p");
+    var text = document.createTextNode(error_msg);
+    error_msg_dom.classList.add("error");
+    error_msg_dom.classList.add("bounce-in");
+    error_msg_dom.appendChild(text);
+    var element = document.getElementById(context);
+    element.appendChild(error_msg_dom);
+}    
+
 function fetch_make_text_from_url(){
     const url = document.getElementById("urlmake").value;
     if (url != "") {
