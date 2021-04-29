@@ -208,6 +208,10 @@ test.onclick = () => {
     increment_test();
 };
 
+var load_make = document.getElementById("load_make");
+test.onclick = () => {
+    fetch_make_text_from_url();
+};
 
 // var testbuff = document.getElementById("testbuff");
 // test.onclick = () => {
