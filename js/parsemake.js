@@ -67,21 +67,14 @@ function split_tokens(text){
     return files;
 }
 
-
-//i need to have the link to the initial .mk file 
-//\w+.mk
-// two regular expressions one for the names that end in .ml
 console.log(fetch_make_text_from_url());
 console.log(split_tokens(fetch_make_text_from_url()));
+console.log(generate_gitraw_urls(split_tokens(fetch_make_text_from_url())));
 
-//anytime there is a \n\t or a space its a new word 
-//would be nice to match words with any number of spaces in between
-// text.match(/[a-z'\-]+/gi);
 
 function generate_gitraw_urls(filenames){
     const url = "https://raw.githubusercontent.com/diegoetjoshua72/bachelorproject/master/examples/kontroli.mk";
     const mkfile = url.match(/[^\/]+(?=\/$|$)/);
-    
     const dkfile_context = url.slice(0,(url.length - mkfile.length));
     let result_list = [];
     console.log(dkfile_context);
@@ -89,6 +82,7 @@ function generate_gitraw_urls(filenames){
     for (const file of filenames) {
         if(file.includes("../")){
             continue;
+            //i would have to strip a ../ for every level
             //right now 1 level sub dir will work but i want to make ../../../ and so on work as well
         }else{
             let dkurl = dkfile_context + file;
@@ -114,4 +108,5 @@ function generate_html_fs(){
 //will do that after this example works tho
 //but i also need to be able to handle relative paths so ../ should make it go one folder down when making the github urls 
 
-//TODO when i do run and i have multiple files they should also be passed in some order 
+//TODO when i do run and i have multiple files they should also be passed in the order they appear in the dk file 
+
