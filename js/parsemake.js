@@ -72,7 +72,7 @@ function split_tokens(text){
 //\w+.mk
 // two regular expressions one for the names that end in .ml
 console.log(fetch_make_text_from_url());
-console.log(split_token(fetch_make_text_from_url()));
+console.log(split_tokens(fetch_make_text_from_url()));
 
 //anytime there is a \n\t or a space its a new word 
 //would be nice to match words with any number of spaces in between

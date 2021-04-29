@@ -44,4 +44,4 @@ export default class Prog {
     //then make it modifiable by the user :D 
     //the js side will know that the program that it is not done passing the whole thing so i don't need to rely on rust for that 
     //compresion gain suppresion du bruit
-}
+};
