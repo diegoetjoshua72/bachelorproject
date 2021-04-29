@@ -83,7 +83,9 @@ function generate_gitraw_urls(make_text){
     let result_list = [];
 
     for (const file of filenames) {
+        console.log("FILE : ", file);
         if(file.includes("../")){
+
             //1) count the number of ../ in the file
             //2) use that count for the regex to create the context
             //3) 
@@ -101,21 +103,19 @@ function generate_gitraw_urls(make_text){
             continue;
             //i would have to strip a ../ for every level
             //right now 1 level sub dir will work but i want to make ../../../ and so on work as well
-        }else{
+        }
+        else{
             let dkurl = dkfile_context + file;
             console.log("NEW GITRAW URL : ", dkurl);
-            result_list += dkurl;
+            result_list.push(dkurl);
         }
     }
     console.log(result_list);
-    //then here i fetch the data ()
+    //then here i fetch the data for each of the links in the result_list I THINK I NEED TO STORE LIKE TUPLES WITH NAME/LINKVALUE IN RESULT LIST() AND THEN FETCH FILE DATA THE RESULT LIST IS A LIST OF FILENAME / PROGRAM
     //then i create the html details here ()
-    
-    
     return 0;
 }
 
-fetch_make_text_from_url();
 
 
 function fetch_files_data(urls){
