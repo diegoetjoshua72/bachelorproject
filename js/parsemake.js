@@ -127,6 +127,7 @@ function generate_html_fs(){
 }
 
 
+fetch_make_text_from_url();
 
 //TODO
 //will do that after this example works tho
