@@ -81,6 +81,20 @@ function generate_gitraw_urls(filenames){
     console.log(mkfile);
     for (const file of filenames) {
         if(file.includes("../")){
+            //1) count the number of ../ in the file
+            //2) use that count for the regex to create the context
+            //3) 
+            let count_sub_dir = file.match(/..\//).length();
+            console.log(count_sub_dir);
+            
+            var index = url.lastIndexOf("/");
+            var fileName = url.substr(index)
+
+            console.log("index returned from lastIndexOf : ", index);
+            console.log("alternative fileName : ", fileName);
+
+            let relative_context = 0;
+
             continue;
             //i would have to strip a ../ for every level
             //right now 1 level sub dir will work but i want to make ../../../ and so on work as well
