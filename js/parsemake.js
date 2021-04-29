@@ -63,23 +63,25 @@ function fetch_make_text_from_url(){
 function split_tokens(text){
     let result = text.trim();
     result = text.split(" ");
-    console.log("FILES: ",text.match(/\w+.mk/g));
-    console.log("NAMES: ", text.match(/\w+:/g));
+    // console.log("FILES: ",text.match(/\w+.mk/g));
+    // console.log("NAMES: ", text.match(/\w+:/g));
     files = text.match(/\w+:/g);
     console.log(result);
     return files;
 }
 
 
-
 function generate_gitraw_urls(make_text){
     filenames = split_tokens(make_text);
-    const url = "https://raw.githubusercontent.com/diegoetjoshua72/bachelorproject/master/examples/kontroli.mk";
-    const mkfile = url.match(/[^\/]+(?=\/$|$)/);
-    const dkfile_context = url.slice(0,(url.length - mkfile.length));
+    console.log("FILENAMES : ", filenames);
+    let url = "https://raw.githubusercontent.com/diegoetjoshua72/bachelorproject/master/examples/kontroli.mk";
+    let mkfile = url.match(/[^\/]+(?=\/$|$)/);
+    console.log("MAKEFILE : ", mkfile);
+    let dkfile_context = url.slice(0,(url.length - mkfile.length));
+    console.log("DK FILE CONTEXT : ", dkfile_context);
+
     let result_list = [];
-    console.log(dkfile_context);
-    console.log(mkfile);
+
     for (const file of filenames) {
         if(file.includes("../")){
             //1) count the number of ../ in the file
@@ -101,6 +103,7 @@ function generate_gitraw_urls(make_text){
             //right now 1 level sub dir will work but i want to make ../../../ and so on work as well
         }else{
             let dkurl = dkfile_context + file;
+            console.log("NEW GITRAW URL : ", dkurl);
             result_list += dkurl;
         }
     }
@@ -112,7 +115,7 @@ function generate_gitraw_urls(make_text){
     return 0;
 }
 
-console.log(fetch_make_text_from_url());
+fetch_make_text_from_url();
 
 
 function fetch_files_data(urls){
