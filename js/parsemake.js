@@ -28,6 +28,9 @@ let check_fetch = function check_fetch(response) {
     return response; //why do we return tho
 };
 
+
+
+//i call this with button 
 function fetch_make_text_from_url(){
     const url = "https://raw.githubusercontent.com/diegoetjoshua72/bachelorproject/master/examples/kontroli.mk";
     if (url != "") {
@@ -41,7 +44,7 @@ function fetch_make_text_from_url(){
                             "THIS IS THE STRING WE GET FROM THE URL :: ",
                             string
                         );
-                        return string;
+                        generate_gitraw_urls(string);
                     })
                     .catch((err) => {
                         console.log("ERROR :", err);
@@ -67,12 +70,10 @@ function split_tokens(text){
     return files;
 }
 
-console.log(fetch_make_text_from_url());
-console.log(split_tokens(fetch_make_text_from_url()));
-console.log(generate_gitraw_urls(split_tokens(fetch_make_text_from_url())));
 
 
-function generate_gitraw_urls(filenames){
+function generate_gitraw_urls(make_text){
+    filenames = split_tokens(make_text);
     const url = "https://raw.githubusercontent.com/diegoetjoshua72/bachelorproject/master/examples/kontroli.mk";
     const mkfile = url.match(/[^\/]+(?=\/$|$)/);
     const dkfile_context = url.slice(0,(url.length - mkfile.length));
@@ -89,12 +90,12 @@ function generate_gitraw_urls(filenames){
             
             var index = url.lastIndexOf("/");
             var fileName = url.substr(index)
-
+            
             console.log("index returned from lastIndexOf : ", index);
             console.log("alternative fileName : ", fileName);
-
+            
             let relative_context = 0;
-
+            
             continue;
             //i would have to strip a ../ for every level
             //right now 1 level sub dir will work but i want to make ../../../ and so on work as well
@@ -102,11 +103,17 @@ function generate_gitraw_urls(filenames){
             let dkurl = dkfile_context + file;
             result_list += dkurl;
         }
-
     }
     console.log(result_list);
+    //then here i fetch the data ()
+    //then i create the html details here ()
+    
+    
     return 0;
 }
+
+console.log(fetch_make_text_from_url());
+
 
 function fetch_files_data(urls){
     return 0;
