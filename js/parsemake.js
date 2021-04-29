@@ -17,7 +17,7 @@ function display_error_dom(error_msg, context) {
 }    
 
 function fetch_make_text_from_url(){
-    const url = document.getElementById("urlmake").value;
+    const url = "https://raw.githubusercontent.com/diegoetjoshua72/bachelorproject/master/examples/kontroli.mk";
     if (url != "") {
         fetch(url)
             .then(check_fetch)
