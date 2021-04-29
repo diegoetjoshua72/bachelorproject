@@ -79,7 +79,24 @@ console.log(split_tokens(fetch_make_text_from_url()));
 // text.match(/[a-z'\-]+/gi);
 
 function generate_gitraw_urls(filenames){
+    const url = "https://raw.githubusercontent.com/diegoetjoshua72/bachelorproject/master/examples/kontroli.mk";
+    const mkfile = url.match(/[^\/]+(?=\/$|$)/);
+    
+    const dkfile_context = url.slice(0,(url.length - mkfile.length));
+    let result_list = [];
+    console.log(dkfile_context);
+    console.log(mkfile);
+    for (const file of filenames) {
+        if(file.includes("../")){
+            continue;
+            //right now 1 level sub dir will work but i want to make ../../../ and so on work as well
+        }else{
+            let dkurl = dkfile_context + file;
+            result_list += dkurl;
+        }
 
+    }
+    console.log(result_list);
     return 0;
 }
 
