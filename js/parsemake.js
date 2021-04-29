@@ -5,7 +5,7 @@ let example = `%.dko:
 	$(MAKE) --silent -f deps.mk -f kontroli.mk $*.dko | xargs cat | kocheck $(KOFLAGS) -`
 
  
-
+//duplicate
 function display_error_dom(error_msg, context) {
     var error_msg_dom = document.createElement("p");
     var text = document.createTextNode(error_msg);
@@ -15,6 +15,18 @@ function display_error_dom(error_msg, context) {
     var element = document.getElementById(context);
     element.appendChild(error_msg_dom);
 }    
+
+//duplicate
+let check_fetch = function check_fetch(response) {
+    if (response.ok === false) {
+        display_error_dom(
+            "ERROR IN FETCH : " + response.statusText + " - " + response.url,
+            "errors"
+        );
+        throw Error(response.statusText);
+    }
+    return response; //why do we return tho
+};
 
 function fetch_make_text_from_url(){
     const url = "https://raw.githubusercontent.com/diegoetjoshua72/bachelorproject/master/examples/kontroli.mk";
