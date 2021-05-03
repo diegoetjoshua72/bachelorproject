@@ -275,10 +275,11 @@ pub fn get_graph_rust(make_text_js: String) -> JsValue {
     }
 
     graph.print_graph();
-    println!("VEC_NAME : {:?}", &vec_names);
-    println!("FINAL OUTPUT SENT TO JS : {:?}", output);
+    info!("VEC_NAME : {:?}", &vec_names);
+    info!("FINAL OUTPUT SENT TO JS : {:?}", output);
     JsValue::from_serde(&output).unwrap()
 }
+
 //possible to look into
 fn check_self_dependence() {
     ();
