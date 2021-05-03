@@ -3,6 +3,35 @@ import init, { run_test, increment_test , get_graph_rust} from "../pkg/koweb.js"
 
 
 
+
+
+class Mem {
+    constructor() {
+        this.program_list = [];
+    }
+
+    add_mem(item){
+        this.program_list.push(item);
+    }
+
+    clear_mem(){
+        this.program_list = [];
+    }
+}
+
+class Program {
+    constructor(text, dependency, raw_url){
+        this.text = text;
+        this.dependency = dependency;
+        this.raw_url = raw_url;
+    }
+    //get bit of string function that will need to be passed to rust ?
+    //
+}
+
+let memory = new Mem();
+
+
 function remove_all_outputs_dom() {
     document.querySelectorAll(".prompt").forEach((e) => e.remove());
 }
@@ -280,6 +309,16 @@ load_make.onclick = () => {
 
 function generate_gitraw_urls(make_text){
     console.log(make_text);
+    //todo 
+    //generating the gitraw urls 
+    //fetching the data and storing it somewhere only when the user clicks on a sub button
+    //i need some kind of memory that keeps track of all the programs loaded 
+    //global variable ? session ? i think i will just use global object called
+    //Mem with a list that contains prog objects that have the program text and their 
+    //dependency tree 
+
+    //and that checks before loading them how large they are
+    //this memory will also be used for the running of the programs 
 }
 
 //first lets make the url work rather than passing the hardcoded
