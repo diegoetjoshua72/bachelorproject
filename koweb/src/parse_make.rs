@@ -27,6 +27,7 @@
 //given the makefile string and the name of what we want to execute get the dependency graph
 //if you depend on someone that one can't depend on you otherwise it will crash
 
+use log::{info, trace, warn, Level};
 use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsValue;
@@ -124,6 +125,7 @@ impl Graph {
         //first thing should be sudoku.dk
         //here we should get sudoku.dk , bool.dk
         println!("RECURSION {:?} :: {:?}", self.graph[index].data, result);
+        info!("recursion");
         Some(result)
     }
 
