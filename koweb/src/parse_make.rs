@@ -282,7 +282,8 @@ pub fn get_graph_rust(make_text_js: String) -> JsValue {
         ));
     }
 
-    graph.print_graph();
+    // graph.print_graph();
+    info!("GRAPH : {:?}", graph);
     info!("VEC_NAME : {:?}", &vec_names);
     info!("FINAL OUTPUT SENT TO JS : {:?}", output);
     JsValue::from_serde(&output).unwrap()
