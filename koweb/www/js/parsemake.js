@@ -30,8 +30,6 @@ let check_fetch = function check_fetch(response) {
 
 
 
-
-
 //i call this with button 
 function fetch_make_text_from_url(){
     const url = "https://raw.githubusercontent.com/diegoetjoshua72/bachelorproject/master/examples/kontroli.mk";
