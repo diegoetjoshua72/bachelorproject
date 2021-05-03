@@ -215,11 +215,23 @@ fn create_graph(make_text_js: String) -> Graph {
             let mut temp = line.split(' '); //something went wrong in the parsing when calling from js
                                             //but i am not sure what caused it it looks like i got a ", something weird
                                             //in my make text investigate further and get it to work
-            temp.next(); //This will cause the one line ../kontroli.mk to not work
-            files.push(temp.collect::<Vec<&str>>());
+
+            //
+            temp.next();
+            let mut result = vec![];
+            for x in temp {
+                if x != "" {
+                    result.push(x);
+                }
+            }
+            files.push(result);
+
+            // files.push(temp.collect::<Vec<&str>>());
         }
     }
     info!("create_graph : files (before o removal): {:?}", &files);
+
+    //lets not let any "" get into our stuff
 
     for i in 0..files.len() {
         for j in 0..files[i].len() {
