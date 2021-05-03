@@ -212,11 +212,14 @@ fn create_graph(make_text_js: String) -> Graph {
     let line_iter = make_text_js.lines();
     for line in line_iter {
         if line != "" {
-            let mut temp = line.split(' ');
+            let mut temp = line.split(' '); //something went wrong in the parsing when calling from js
+                                            //but i am not sure what caused it it looks like i got a ", something weird
+                                            //in my make text investigate further and get it to work
             temp.next(); //This will cause the one line ../kontroli.mk to not work
             files.push(temp.collect::<Vec<&str>>());
         }
     }
+    info!("create_graph : files (before o removal): {:?}", &files);
 
     for i in 0..files.len() {
         for j in 0..files[i].len() {
@@ -225,7 +228,7 @@ fn create_graph(make_text_js: String) -> Graph {
             }
         }
     }
-    println!("files vec : {:?}", files);
+    info!("create_graph : files (after o removal): {:?}", &files);
 
     for i in 0..files.len() {
         for j in 0..files[i].len() {
@@ -248,6 +251,7 @@ fn create_graph(make_text_js: String) -> Graph {
         }
     }
 
+    info!("create_graph : final graph created : {:?}", &graph);
     return graph;
 }
 
@@ -272,6 +276,7 @@ pub fn get_graph_rust(make_text_js: String) -> JsValue {
             vec_names.push(node.data.clone());
         }
     }
+
     let mut output = vec![];
     info!("NAME VEC : {:?}", &vec_names);
     for name in &vec_names {
