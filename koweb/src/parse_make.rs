@@ -47,9 +47,7 @@ stuf: test.dk blabla.dk ../bool.dk
 
 stuf: blabla.dk sudoku.dk
 
-
 lotsofchild: lotsofchild.dk test.dk blabla.dk sudoku.dk ../bool.dk bool.dk
-
 
 ../bool.dko: ../bool.dk
 
