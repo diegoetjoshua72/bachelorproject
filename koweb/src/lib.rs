@@ -1,18 +1,19 @@
 use wasm_bindgen::prelude::*;
-
 //parses strings into commands which are then either
-use colosseum::unsync::Arena;
 // use kontroli::error::SignatureError;
-use kontroli::rc::{Intro, Rule, Signature, Typing};
-use kontroli::scope::{Command, Symbols};
-
+// use kontroli::rc::{Intro, Rule, Signature, Typing};
+// use kontroli::scope::{Command, Symbols};
 // use kontroli::error::Error;
-use kontroli::error::SymbolsError;
+// use kontroli::error::SymbolsError;
 
 use byte_unit::{Byte, ByteError};
 use kocheck::{parse, seq, Error, Event, Opt};
 
 use log::{info, trace, warn, Level};
+
+// use crate::itertools::Itertools;
+
+pub mod parse_make;
 
 //not sure what wee alloc does
 #[cfg(feature = "wee_alloc")]

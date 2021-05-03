@@ -30,6 +30,8 @@ let check_fetch = function check_fetch(response) {
 
 
 
+
+
 //i call this with button 
 function fetch_make_text_from_url(){
     const url = "https://raw.githubusercontent.com/diegoetjoshua72/bachelorproject/master/examples/kontroli.mk";
@@ -44,7 +46,7 @@ function fetch_make_text_from_url(){
                             "THIS IS THE STRING WE GET FROM THE URL :: ",
                             string
                         );
-                        generate_gitraw_urls(string);
+                        generate_gitraw_urls(string); //donc ici je vais utiliser un fonction rust qui permetra de get let dependences 
                     })
                     .catch((err) => {
                         console.log("ERROR :", err);
@@ -135,3 +137,26 @@ fetch_make_text_from_url();
 
 //TODO when i do run and i have multiple files they should also be passed in the order they appear in the dk file 
 
+
+// # solve_easy.dko: solve_easy.dk sudoku.dko
+
+// # in this case the solve_easy.dk depends on everything that comes afterwards
+
+//dko c'est un peu le object file name 
+//make a tree for dependencies solve_easy.dk depends on sudoku.dko
+//sudoku.dk depends on bool.dko
+//USER GIVES ENTRY FILE
+//IF THE USER CHOSES TO LOAD SOLVE EASY THEN WE DETERMINE THE DEPENDENCIES AND THE ORDER THINGS NEEDS TO BE PASSED IN 
+//PAS PASSER LA CONCATENATION DE TOUT EN ENTIER 
+//LOOK FOR A CRATE THAT READS MAKEFILES AND DEPENDENCY GRAPHS 
+
+
+
+// https://crates.io/crates/depgraph
+// fetch dans js le .mk parse dans rust le .mk 
+// les fichier et leur dependence : list of tuples (ficher, vec[dependence])
+// return ca 
+
+
+// # ../bool.dko: ../bool.dk
+// # sudoku.dko: sudoku.dk ../bool.dko
