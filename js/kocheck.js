@@ -245,11 +245,13 @@ load_make.onclick = () => {
 ../bool.dko: ../bool.dk
 
 sudoku.dko: sudoku.dk ../bool.dko`;
-
     let test = get_graph_rust(make_text);
     console.log(test);
 };
 
+//first lets make the url work rather than passing the hardcoded
+//ok now that i have this output it needs to be stored somehow 
+//and somewhere but i am not sure where it would get stored 
 
 
 

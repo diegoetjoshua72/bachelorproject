@@ -32,7 +32,8 @@ let check_fetch = function check_fetch(response) {
 
 //i call this with button 
 function fetch_make_text_from_url(){
-    const url = "https://raw.githubusercontent.com/diegoetjoshua72/bachelorproject/master/examples/kontroli.mk";
+    // const url = "https://raw.githubusercontent.com//bachelorproject/master/examples/kontroli.mk";
+    const url = document.getElementById("urlmake").value; //continue here
     if (url != "") {
         fetch(url)
             .then(check_fetch)
@@ -44,8 +45,8 @@ function fetch_make_text_from_url(){
                             "THIS IS THE STRING WE GET FROM THE URL :: ",
                             string
                         );
-                        generate_gitraw_urls(string); //donc ici je vais utiliser un fonction rust qui permetra de get let dependences 
-                    })
+                        generate_gitraw_urls(get_graph_rust(string)); //donc ici je vais utiliser un fonction rust qui permetra de get let dependences 
+                    })  //here we need to call the get dep from rust then we can generate the html and the css from it and the raw urls
                     .catch((err) => {
                         console.log("ERROR :", err);
                         display_error_dom(err, "errors");
@@ -60,56 +61,59 @@ function fetch_make_text_from_url(){
     }
 }
 
-function split_tokens(text){
-    let result = text.trim();
-    result = text.split(" ");
-    // console.log("FILES: ",text.match(/\w+.mk/g));
-    // console.log("NAMES: ", text.match(/\w+:/g));
-    files = text.match(/\w+:/g);
-    console.log(result);
-    return files;
-}
+// function split_tokens(text){
+//     let result = text.trim();
+//     result = text.split(" ");
+//     // console.log("FILES: ",text.match(/\w+.mk/g));
+//     // console.log("NAMES: ", text.match(/\w+:/g));
+//     files = text.match(/\w+:/g);
+//     console.log(result);
+//     return files;
+// }
 
 
 function generate_gitraw_urls(make_text){
-    filenames = split_tokens(make_text);
-    console.log("FILENAMES : ", filenames);
-    let url = "https://raw.githubusercontent.com/diegoetjoshua72/bachelorproject/master/examples/kontroli.mk";
-    let mkfile = url.match(/[^\/]+(?=\/$|$)/);
-    console.log("MAKEFILE : ", mkfile);
-    let dkfile_context = url.slice(0,(url.length - mkfile.length));
-    console.log("DK FILE CONTEXT : ", dkfile_context);
 
-    let result_list = [];
+    console.log("gitraw urls: make_text: ", make_text);
 
-    for (const file of filenames) {
-        console.log("FILE : ", file);
-        if(file.includes("../")){
+    // filenames = split_tokens(make_text);
+    // console.log("FILENAMES : ", filenames);
+    // let url = "https://raw.githubusercontent.com/diegoetjoshua72/bachelorproject/master/examples/kontroli.mk";
+    // let mkfile = url.match(/[^\/]+(?=\/$|$)/);
+    // console.log("MAKEFILE : ", mkfile);
+    // let dkfile_context = url.slice(0,(url.length - mkfile.length));
+    // console.log("DK FILE CONTEXT : ", dkfile_context);
 
-            //1) count the number of ../ in the file
-            //2) use that count for the regex to create the context
-            //3) 
-            let count_sub_dir = file.match(/..\//).length();
-            console.log(count_sub_dir);
+    // let result_list = [];
+
+    // for (const file of filenames) {
+    //     console.log("FILE : ", file);
+    //     if(file.includes("../")){
+
+    //         //1) count the number of ../ in the file
+    //         //2) use that count for the regex to create the context
+    //         //3) 
+    //         let count_sub_dir = file.match(/..\//).length();
+    //         console.log(count_sub_dir);
             
-            var index = url.lastIndexOf("/");
-            var fileName = url.substr(index)
+    //         var index = url.lastIndexOf("/");
+    //         var fileName = url.substr(index)
             
-            console.log("index returned from lastIndexOf : ", index);
-            console.log("alternative fileName : ", fileName);
+    //         console.log("index returned from lastIndexOf : ", index);
+    //         console.log("alternative fileName : ", fileName);
             
-            let relative_context = 0;
+    //         let relative_context = 0;
             
-            continue;
-            //i would have to strip a ../ for every level
-            //right now 1 level sub dir will work but i want to make ../../../ and so on work as well
-        }
-        else{
-            let dkurl = dkfile_context + file;
-            console.log("NEW GITRAW URL : ", dkurl);
-            result_list.push(dkurl);
-        }
-    }
+    //         continue;
+    //         //i would have to strip a ../ for every level
+    //         //right now 1 level sub dir will work but i want to make ../../../ and so on work as well
+    //     }
+    //     else{
+    //         let dkurl = dkfile_context + file;
+    //         console.log("NEW GITRAW URL : ", dkurl);
+    //         result_list.push(dkurl);
+    //     }
+    // }
     console.log(result_list);
     //then here i fetch the data for each of the links in the result_list I THINK I NEED TO STORE LIKE TUPLES WITH NAME/LINKVALUE IN RESULT LIST() AND THEN FETCH FILE DATA THE RESULT LIST IS A LIST OF FILENAME / PROGRAM
     //then i create the html details here ()
