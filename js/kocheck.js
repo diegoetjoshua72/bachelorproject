@@ -269,6 +269,10 @@ test.onclick = () => {
 //talk about async programing and why wasm needs to be loaded async
 // you need to get to the mulithreading part i want to talk about if it is possible or not to do multithreading and why not or why it is 
 
+
+
+
+// https://github.com/01mf02/kontroli-rs/blob/master/examples/sudoku/deps.mk
 function fetch_make_text_from_url(){
     // const url = "https://raw.githubusercontent.com//bachelorproject/master/examples/kontroli.mk";
     const url = document.getElementById("urlmake").value; //continue here
