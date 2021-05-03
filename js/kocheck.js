@@ -246,6 +246,7 @@ load_make.onclick = () => {
     ../bool.dko: ../bool.dk
     
     sudoku.dko: sudoku.dk ../bool.dko`;
+
     let test = get_graph_rust(make_text);
     console.log(test);
 };
