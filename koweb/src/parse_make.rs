@@ -263,6 +263,7 @@ pub struct Output {
 
 #[wasm_bindgen]
 pub fn get_graph_rust(make_text_js: String) -> JsValue {
+    info!("MAKE TEXT FULL : {}", &make_text_js);
     let graph = create_graph(make_text_js);
     //dependencies looking good
     let mut vec_names = vec![];
