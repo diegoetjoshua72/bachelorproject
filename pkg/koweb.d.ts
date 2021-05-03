@@ -1,6 +1,11 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
+* @param {string} make_text_js
+* @returns {any}
+*/
+export function get_graph_rust(make_text_js: string): any;
+/**
 * @param {string} stuff
 */
 export function read_some(stuff: string): void;
@@ -20,6 +25,7 @@ export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembl
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
+  readonly get_graph_rust: (a: number, b: number) => number;
   readonly read_some: (a: number, b: number) => void;
   readonly increment_test: () => void;
   readonly run_test: (a: number, b: number, c: number, d: number, e: number, f: number) => void;

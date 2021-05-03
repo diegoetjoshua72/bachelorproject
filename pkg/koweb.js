@@ -1,4 +1,4 @@
-import { Prog } from './snippets/rust-webpack-template-eb3e344350874cf2/www/js/program.js';
+import { Prog } from './snippets/koweb-f1445fac41f4790a/www/js/program.js';
 
 let wasm;
 
@@ -175,6 +175,17 @@ function getInt32Memory0() {
     return cachegetInt32Memory0;
 }
 /**
+* @param {string} make_text_js
+* @returns {any}
+*/
+export function get_graph_rust(make_text_js) {
+    var ptr0 = passStringToWasm0(make_text_js, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+    var len0 = WASM_VECTOR_LEN;
+    var ret = wasm.get_graph_rust(ptr0, len0);
+    return takeObject(ret);
+}
+
+/**
 * @param {string} stuff
 */
 export function read_some(stuff) {
@@ -259,10 +270,14 @@ async function init(input) {
     imports.wbg.__wbindgen_object_drop_ref = function(arg0) {
         takeObject(arg0);
     };
-    imports.wbg.__wbg_alert_4914cfe43bafd4ba = function(arg0, arg1) {
+    imports.wbg.__wbindgen_json_parse = function(arg0, arg1) {
+        var ret = JSON.parse(getStringFromWasm0(arg0, arg1));
+        return addHeapObject(ret);
+    };
+    imports.wbg.__wbg_alert_fff1db3e10118ea7 = function(arg0, arg1) {
         alert(getStringFromWasm0(arg0, arg1));
     };
-    imports.wbg.__wbg_getpiecetokowebstatic_4980993410174c6a = function(arg0) {
+    imports.wbg.__wbg_getpiecetokowebstatic_efb89c8390f8a41e = function(arg0) {
         var ret = Prog.get_piece_to_koweb_static();
         var ptr0 = passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
         var len0 = WASM_VECTOR_LEN;

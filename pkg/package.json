@@ -1,9 +1,9 @@
 {
-  "name": "rust-webpack-template",
+  "name": "koweb",
   "collaborators": [
-    "You <you@example.com>"
+    "joshua.caumont@gmail.com"
   ],
-  "description": "My super awesome Rust, WebAssembly, and Webpack project!",
+  "description": "kontroli wasm",
   "version": "0.1.0",
   "files": [
     "koweb_bg.wasm",
