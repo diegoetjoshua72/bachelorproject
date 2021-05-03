@@ -103,7 +103,7 @@ impl Graph {
 
     fn get_all_children(&self, index: usize) -> Option<Vec<usize>> {
         let mut result = vec![];
-        info!("get all children graph : {:?}", self.graph);
+        // info!("get all children graph : {:?}", self.graph);
         for child_idx in self.graph[index].children.clone() {
             if self.get_index_node_with_value(self.graph[child_idx].data.clone()) != None {
                 if self.graph[child_idx].children.len() != 0 {
@@ -131,8 +131,8 @@ impl Graph {
 
         //first thing should be sudoku.dk
         //here we should get sudoku.dk , bool.dk
-        println!("RECURSION {:?} :: {:?}", self.graph[index].data, result);
-        info!("recursion");
+        // println!("RECURSION {:?} :: {:?}", self.graph[index].data, result);
+        // info!("recursion");
         Some(result)
     }
 
@@ -152,11 +152,11 @@ impl Graph {
                 }
                 dep_order.push(node.data.clone());
 
-                println!("-------------------------------");
-                println!("FULL DEP :: {:?}", dep_order);
+                // println!("-------------------------------");
+                // println!("FULL DEP :: {:?}", dep_order);
 
                 let dep_order_no_dup = remove_dup(dep_order);
-                println!("FUll DEP NO DUP :: {:?}", dep_order_no_dup);
+                // println!("FUll DEP NO DUP :: {:?}", dep_order_no_dup);
                 return Some(dep_order_no_dup);
             }
         }
@@ -212,11 +212,7 @@ fn create_graph(make_text_js: String) -> Graph {
     let line_iter = make_text_js.lines();
     for line in line_iter {
         if line != "" {
-            let mut temp = line.split(' '); //something went wrong in the parsing when calling from js
-                                            //but i am not sure what caused it it looks like i got a ", something weird
-                                            //in my make text investigate further and get it to work
-
-            //
+            let mut temp = line.split(' ');
             temp.next();
             let mut result = vec![];
             for x in temp {
@@ -229,7 +225,7 @@ fn create_graph(make_text_js: String) -> Graph {
             // files.push(temp.collect::<Vec<&str>>());
         }
     }
-    info!("create_graph : files (before o removal): {:?}", &files);
+    // info!("create_graph : files (before o removal): {:?}", &files);
 
     //lets not let any "" get into our stuff
 
@@ -240,7 +236,7 @@ fn create_graph(make_text_js: String) -> Graph {
             }
         }
     }
-    info!("create_graph : files (after o removal): {:?}", &files);
+    // info!("create_graph : files (after o removal): {:?}", &files);
 
     for i in 0..files.len() {
         for j in 0..files[i].len() {
@@ -263,7 +259,6 @@ fn create_graph(make_text_js: String) -> Graph {
         }
     }
 
-    info!("create_graph : final graph created : {:?}", &graph);
     return graph;
 }
 
@@ -279,7 +274,6 @@ pub struct Output {
 
 #[wasm_bindgen]
 pub fn get_graph_rust(make_text_js: String) -> JsValue {
-    info!("MAKE TEXT FULL : {}", &make_text_js);
     let graph = create_graph(make_text_js);
     //dependencies looking good
     let mut vec_names = vec![];
@@ -290,7 +284,7 @@ pub fn get_graph_rust(make_text_js: String) -> JsValue {
     }
 
     let mut output = vec![];
-    info!("NAME VEC : {:?}", &vec_names);
+    // info!("NAME VEC : {:?}", &vec_names);
     for name in &vec_names {
         output.push((
             name.clone(),
