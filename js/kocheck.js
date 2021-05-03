@@ -239,15 +239,48 @@ test.onclick = () => {
 //how is the wasm executed with regards to javascript 
 //talk about async programing and why wasm needs to be loaded async
 // you need to get to the mulithreading part i want to talk about if it is possible or not to do multithreading and why not or why it is 
+
+function fetch_make_text_from_url(){
+    // const url = "https://raw.githubusercontent.com//bachelorproject/master/examples/kontroli.mk";
+    const url = document.getElementById("urlmake").value; //continue here
+    if (url != "") {
+        fetch(url)
+            .then(check_fetch)
+            .then((result) => {
+                result
+                    .text() //if the string is 404 not found
+                    .then((string) => {
+                        console.log(
+                            "THIS IS THE STRING WE GET FROM THE URL :: ",
+                            string
+                        );
+                        generate_gitraw_urls(get_graph_rust(string)); //donc ici je vais utiliser un fonction rust qui permetra de get let dependences 
+                    })  //here we need to call the get dep from rust then we can generate the html and the css from it and the raw urls
+                    .catch((err) => {
+                        console.log("ERROR :", err);
+                        display_error_dom(err, "errors");
+                    });
+            })
+            .catch((err) => {
+                console.log("ERROR :", err);
+                // display_error_dom(err, context_id);
+            });
+    } else {
+        display_error_dom("Empty url field", "errors");
+    }
+}
+
+
 var load_make = document.getElementById("load_make");
 load_make.onclick = () => {
-    let make_text =`solve_easy.dko: solve_easy.dk sudoku.dko
-../bool.dko: ../bool.dk
-
-sudoku.dko: sudoku.dk ../bool.dko`;
-    let test = get_graph_rust(make_text);
-    console.log(test);
+    fetch_make_text_from_url();
+    // let test = get_graph_rust(make_text);
+    // console.log(test);
 };
+
+function generate_gitraw_urls(make_text){
+    console.log(make_text);
+}
 
 //first lets make the url work rather than passing the hardcoded
 //ok now that i have this output it needs to be stored somehow 
