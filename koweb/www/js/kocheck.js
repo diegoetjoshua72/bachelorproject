@@ -240,7 +240,7 @@ test.onclick = () => {
 //talk about async programing and why wasm needs to be loaded async
 // you need to get to the mulithreading part i want to talk about if it is possible or not to do multithreading and why not or why it is 
 var load_make = document.getElementById("load_make");
-test.onclick = () => {
+load_make.onclick = () => {
     make_text =`solve_easy.dko: solve_easy.dk sudoku.dko
 
     ../bool.dko: ../bool.dk
