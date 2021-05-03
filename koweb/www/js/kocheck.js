@@ -241,7 +241,7 @@ test.onclick = () => {
 // you need to get to the mulithreading part i want to talk about if it is possible or not to do multithreading and why not or why it is 
 var load_make = document.getElementById("load_make");
 load_make.onclick = () => {
-    make_text =`solve_easy.dko: solve_easy.dk sudoku.dko
+    let make_text =`solve_easy.dko: solve_easy.dk sudoku.dko
 
     ../bool.dko: ../bool.dk
     
