@@ -1,4 +1,4 @@
-import init, { run_test, increment_test , read_some } from "../pkg/koweb.js";
+import init, { run_test, increment_test , get_graph_rust} from "../pkg/koweb.js";
 import * as Program from "./program.js";
 
 
@@ -208,10 +208,41 @@ test.onclick = () => {
     increment_test();
 };
 
+
+
+//TODO
+//now the wasm is compiling 
+//try import the new function 
+//try run it here on the make button 
+//see if i can console.log the output if i can that would be great i then just need to adapt the code in the parse.js
+//and do everything in this onclick i guess 
+//1 user clicks
+//2 gets the make string from url
+//3 passes the maek string to rust
+//4 rust returns everything 
+// -> generate gitraw urls for each file that we might need
+//5 generate html and css for the modules
+//6 store the information returned by rust permanently somehow 
+// -> when clicking on the file name it will do a fetch for its raw url but how can i determine how large it is whilst fetching
+// -> using a HEAD Request ???
+//7 enable the possibility to load the files in the editor WITH WARNING IF THE FIlE IS TOO LARGE <--- GOAL FOR TODAY
+
+//8 create a program queue and a program class make the parse buffer work and the passing of string data to the parse buffer
+//take and give 
+//9 add the possibility for run to run mulitiple files 
 var load_make = document.getElementById("load_make");
 test.onclick = () => {
-    fetch_make_text_from_url();
+    make_text =`solve_easy.dko: solve_easy.dk sudoku.dko
+
+    ../bool.dko: ../bool.dk
+    
+    sudoku.dko: sudoku.dk ../bool.dko`;
+    let test = fetch_make_text_from_url(make_text);
+    console.log(test);
 };
+
+
+
 
 // var testbuff = document.getElementById("testbuff");
 // test.onclick = () => {
