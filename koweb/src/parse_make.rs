@@ -54,6 +54,12 @@ lotsofchild: lotsofchild.dk test.dk blabla.dk sudoku.dk ../bool.dk bool.dk
 
 sudoku.dko: sudoku.dk ../bool.dko";
 
+static make_text_2: &str = "solve_easy.dko: solve_easy.dk sudoku.dko
+
+../bool.dko: ../bool.dk
+
+sudoku.dko: sudoku.dk ../bool.dko";
+
 #[derive(Debug)]
 struct Graph {
     graph: Vec<Node>,
@@ -97,6 +103,7 @@ impl Graph {
 
     fn get_all_children(&self, index: usize) -> Option<Vec<usize>> {
         let mut result = vec![];
+        info!("get all children graph : {:?}", self.graph);
         for child_idx in self.graph[index].children.clone() {
             if self.get_index_node_with_value(self.graph[child_idx].data.clone()) != None {
                 if self.graph[child_idx].children.len() != 0 {
@@ -265,6 +272,7 @@ pub fn get_graph_rust(make_text_js: String) -> JsValue {
         }
     }
     let mut output = vec![];
+    info!("NAME VEC : {:?}", &vec_names);
     for name in &vec_names {
         output.push((
             name.clone(),
