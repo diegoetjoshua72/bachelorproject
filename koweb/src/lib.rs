@@ -28,12 +28,12 @@ fn init_console_wasm_debug() {
     panic::set_hook(Box::new(console_error_panic_hook::hook));
 }
 
-#[wasm_bindgen(module = "/www/js/program.js")]
-extern "C" {
-    type Prog;
-    #[wasm_bindgen(static_method_of = Prog)]
-    fn get_piece_to_koweb_static() -> String;
-}
+// #[wasm_bindgen(module = "/www/js/program.js")]
+// extern "C" {
+// type Prog;
+// #[wasm_bindgen(static_method_of = Prog)]
+// fn get_piece_to_koweb_static() -> String;
+// }
 
 #[wasm_bindgen]
 extern "C" {
@@ -125,7 +125,7 @@ static mut test: i32 = 0;
 #[wasm_bindgen()]
 pub fn increment_test() {
     unsafe {
-        alert(Prog::get_piece_to_koweb_static().as_str());
+        // alert(Prog::get_piece_to_koweb_static().as_str());
         alert(format!("test : {}", test).as_str());
         test += 1;
     }
