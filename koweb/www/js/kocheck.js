@@ -242,10 +242,9 @@ test.onclick = () => {
 var load_make = document.getElementById("load_make");
 load_make.onclick = () => {
     let make_text =`solve_easy.dko: solve_easy.dk sudoku.dko
+../bool.dko: ../bool.dk
 
-    ../bool.dko: ../bool.dk
-    
-    sudoku.dko: sudoku.dk ../bool.dko`;
+sudoku.dko: sudoku.dk ../bool.dko`;
 
     let test = get_graph_rust(make_text);
     console.log(test);
