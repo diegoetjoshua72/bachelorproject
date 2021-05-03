@@ -246,7 +246,7 @@ test.onclick = () => {
     ../bool.dko: ../bool.dk
     
     sudoku.dko: sudoku.dk ../bool.dko`;
-    let test = fetch_make_text_from_url(make_text);
+    let test = get_graph_rust(make_text);
     console.log(test);
 };
 
