@@ -1,5 +1,5 @@
 import init, { run_test, increment_test , get_graph_rust} from "../pkg/koweb.js";
-import * as Program from "./program.js";
+// import * as Program from "./program.js";
 
 
 
@@ -157,8 +157,8 @@ async function run(program = undefined) {
         remove_all_outputs_dom();
         await init();
         var testing = await window.editor.getValue();
-        const prog = Program.Prog.static_constructor(testing);
-        console.log(prog);
+        // const prog = Program.Prog.static_constructor(testing);
+        // console.log(prog);
         //si la classe casse trop les couilles je peut faire une closure mais je pense la classes c'est bien
 
 
@@ -230,6 +230,15 @@ test.onclick = () => {
 //8 create a program queue and a program class make the parse buffer work and the passing of string data to the parse buffer
 //take and give 
 //9 add the possibility for run to run mulitiple files 
+
+
+//TODO IMPORTANT FOR UNDERSTANDING AND PRESENTATION / WRITTING PAPER 
+//make a little comparison program for sieves of primes to see what gains in performance can be obtained with wasm (talk about the use of the sieves prime for cpu tests)
+//understand how javascript function are passed to rust 
+//understand how rust gets transpiled to wasm 
+//how is the wasm executed with regards to javascript 
+//talk about async programing and why wasm needs to be loaded async
+// you need to get to the mulithreading part i want to talk about if it is possible or not to do multithreading and why not or why it is 
 var load_make = document.getElementById("load_make");
 test.onclick = () => {
     make_text =`solve_easy.dko: solve_easy.dk sudoku.dko
