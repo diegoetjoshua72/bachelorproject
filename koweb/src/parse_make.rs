@@ -1,45 +1,7 @@
-// solve_easy.dko: solve_easy.dk sudoku.dko
-
-// ../bool.dko: ../bool.dk
-
-// sudoku.dko: sudoku.dk ../bool.dko
-
-//i want to parse this into
-// [
-//(solve_easy.dk, [sudoku.dk])
-//(sudoku.dk, [bool.dk])
-//(bool.dk, [])
-//]
-//and then if i want to load sudoku.dk i would look in array and load its dependencies
-//so i would see bool.dk check if bool.dk has any dependencies in this case no
-//so the order that we get is bool.dk -> sudoku.dk
-
-//in the case of solve_easy.dk we would look at its dependency
-//we would see that there is sudoku.dk we then search for the sudoku.dk tuple before we search we establish sudoku.dk -> solve_easy.dk
-//then we look in the dependencies of sudoku.dk and we see bool.dk so we get bool.dk -> sudoku.dk -> solve_easy.dk
-
-//but what if a tupel has multiple ones like (x,[y,z]) then z -> y -> x or y -> z -> x i think the later i depends if y depends on z or if z depends on y
-//what about loops in the dependency graph -> if a dependency is not in the graph don't add it no more
-
-//idk doesn't work not sure why
-// use crate::solvent::DepGraph;
-
-//given the makefile string and the name of what we want to execute get the dependency graph
-//if you depend on someone that one can't depend on you otherwise it will crash
-
 use log::{info, trace, warn, Level};
 use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsValue;
-
-//when i tried to get the full dep path for every possible node the loops got executed and we
-//ran out of stack memory at some point so thats no good but for now just tell the user
-//not to make dependency loops
-// loop: this.dk that.dk
-
-// loop: that.dk this.dk
-
-// new: new.dk this.dk that.dk
 
 static make_text: &str =
     "solve_easy.dko: solve_easy.dk sudoku.dko test.dko blabla.dko lotsofchild.dk
@@ -69,7 +31,6 @@ struct Graph {
 struct Node {
     index: usize,
     data: String,
-    // parent: Vec<Node>, //by def can't be a leaf
     children: Vec<usize>, // vector of indices
 }
 impl Node {
@@ -93,14 +54,6 @@ fn remove_dup(vec: Vec<String>) -> Vec<String> {
 }
 
 impl Graph {
-    //1) get a child index list from the main index
-    //2) get the first child index then check if it is already in the list (ALSO CHECK IF IT EXISTS IN THE GRAPH IF NOT THROW ERROR)
-    //3) if it is not then add that index to the list and go look what childrens it has if any
-    //4) if it does not have children go next
-
-    //thing is i can't know if its already in the result or not because its recursive
-    //but what we can do however is check for loops before getting the dep graph however idk if it matters to be honest just don't make loops
-
     fn get_all_children(&self, index: usize) -> Option<Vec<usize>> {
         let mut result = vec![];
         // info!("get all children graph : {:?}", self.graph);
@@ -227,8 +180,6 @@ fn create_graph(make_text_js: String) -> Graph {
     }
     // info!("create_graph : files (before o removal): {:?}", &files);
 
-    //lets not let any "" get into our stuff
-
     for i in 0..files.len() {
         for j in 0..files[i].len() {
             if files[i][j].contains(".dko") {
@@ -261,10 +212,6 @@ fn create_graph(make_text_js: String) -> Graph {
 
     return graph;
 }
-
-//actually the output would be alist of string
-//now the problem comes back of importing shit not working
-//i guess i will dedicate some time to this issue i need a better understanding of rust project structures anyways
 
 #[derive(Serialize, Deserialize)]
 pub struct Output {
