@@ -1,4 +1,3 @@
-import { Prog } from './snippets/koweb-f1445fac41f4790a/www/js/program.js';
 
 let wasm;
 
@@ -276,13 +275,6 @@ async function init(input) {
     };
     imports.wbg.__wbg_alert_fff1db3e10118ea7 = function(arg0, arg1) {
         alert(getStringFromWasm0(arg0, arg1));
-    };
-    imports.wbg.__wbg_getpiecetokowebstatic_efb89c8390f8a41e = function(arg0) {
-        var ret = Prog.get_piece_to_koweb_static();
-        var ptr0 = passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
-        var len0 = WASM_VECTOR_LEN;
-        getInt32Memory0()[arg0 / 4 + 1] = len0;
-        getInt32Memory0()[arg0 / 4 + 0] = ptr0;
     };
     imports.wbg.__wbindgen_string_new = function(arg0, arg1) {
         var ret = getStringFromWasm0(arg0, arg1);
