@@ -279,7 +279,7 @@ function fetch_make_text_from_url(){
     const url = document.getElementById("urlmake").value; //continue here
     console.log(url);
     if (url != "") {
-        fetch(url,{mode: 'no-cors'})
+        fetch(url,{{mode: 'no-cors'}})
             .then(check_fetch)
             .then((result) => {
                 result
