@@ -412,7 +412,7 @@ function generate_html(graph_data){
 
     }
     details.appendChild(ul);
-    document.getElementById("file_sys").appendChild(details);
+    document.getElementById("file_sys").appendChild(details_outer);
 }
 
 
