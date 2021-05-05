@@ -327,7 +327,7 @@ function use_graph_data(graph_data){
 
     let list_of_files = [];
     
-    for (i = 0; i < dependency_list.length; i++) {
+    for (let i = 0; i < dependency_list.length; i++) {
         list_of_files.push(dependency_list[i][0])
     }
     console.log("LIST OF FILES : ", list_of_files);
@@ -372,6 +372,8 @@ function save_to_memory(){
 }
 
 
+//also fix css of the filesystem most likely
 //ONCE ALL THREE ARE DONE FIX THE CSS REMOVE SOME OF THE USElESS TEST AND ADD THE RUN OPTION 
 //ALSO TRY TO RUN A DK THAT REQUIRES A DEPENDENCY WITHOUT AND WITH THE DEPENDENCY BEFORE SEE IF THAT WORKS OUT OR NOT 
 
+//setup my keyboard for korean and japanese typing on linux 
