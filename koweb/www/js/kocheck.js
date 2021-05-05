@@ -377,8 +377,21 @@ function generate_html(graph_data){
         let button = document.createElement("button");
         let text_top_level = document.createTextNode(node[0]);
         let text_list_dependencies = node[1];
+        let span = document.createElement("span");
+        
+        for (const dep of text_list_dependencies){
+            if (text_list_dependencies.length - 1 !== text_list_dependencies.indexOf(dep)){
+                span.appendChild(document.createTextNode(dep + " -> "))
+            }
+            else {
+                span.appendChild(document.createTextNode(dep))
+            }
+        }
+
+
         button.appendChild(text_top_level);
         li.appendChild(button);
+        li.appendChild(span);
         ul.appendChild(li);
     }
     details.appendChild(ul);
