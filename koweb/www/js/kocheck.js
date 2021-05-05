@@ -353,7 +353,7 @@ function generate_html(graph_data){
         let ul = document.createElement("ul");
         let li = document.createElement("li");
         let button = document.createElement("button");
-        let text_top_level = node[0];
+        let text_top_level = createTextNode(node[0]);
         let text_list_dependencies = node[1];
         button.appendChild(text_top_level);
         li.appendChild(button);
