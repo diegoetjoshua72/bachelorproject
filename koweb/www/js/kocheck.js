@@ -359,10 +359,12 @@ function generate_html(graph_data){
 </ul>
 </details> */
 
-    let details = document.createElement("details");
+
+//add a span to the li with the full path make the span look cool with css after
+    let details = document.createElement("DETAILS");
     details.classList.add("fs")
 
-    let summary = document.createElement("summary")
+    let summary = document.createElement("SUMMARY")
     let summary_text = document.createTextNode("Kontroli module")
     summary.appendChild(summary_text);
 
@@ -382,6 +384,8 @@ function generate_html(graph_data){
     details.appendChild(ul);
     document.getElementById("file_sys").appendChild(details);
 }
+
+
 
 function generate_gitraw_urls(){
     //TODO MAKE RELATIVE PATHS WORK HERE
