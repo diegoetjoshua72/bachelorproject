@@ -339,18 +339,38 @@ function use_graph_data(graph_data){
 }
 
 
+
+function remove_all_files_dom() {
+    document.querySelectorAll(".fs").forEach((e) => e.remove());
+}
+
 function generate_html(graph_data){
     console.log("GENERATE_HTML : ",graph_data);
-// inside details top_level_mk
-// <ul id="file">
-//     <li> 
-//         <button>nat.dk</button>
-//     </li>
-// </ul>
 
-    const context = document.getElementById("top_level_mk");
+
+//i need to reset this fs everytime there is a new load i don't want thing to append all the time so i need to clear everything in the div each time this is run    
+    
+/* <details class="details-example">
+<summary id="top_level_mk"></summary>
+<ul id="file">
+    <li> 
+        <button>nat.dk</button>
+    </li>
+</ul>
+</details> */
+
+    let details = document.createElement("details");
+    details.classList.add("fs")
+
+    let summary = document.createElement("summary")
+    let summary_text = document.createTextNode("Kontroli module")
+    summary.appendChild(summary_text);
+
+    details.appendChild(summary)
+    
+    let ul = document.createElement("ul");
+
     for (const node of graph_data){
-        let ul = document.createElement("ul");
         let li = document.createElement("li");
         let button = document.createElement("button");
         let text_top_level = document.createTextNode(node[0]);
@@ -358,12 +378,48 @@ function generate_html(graph_data){
         button.appendChild(text_top_level);
         li.appendChild(button);
         ul.appendChild(li);
-        document.getElementById("top_level_mk").appendChild(ul);
     }
+    details.appendChild(ul);
+    document.getElementById("file_sys").appendChild(details);
 }
 
 function generate_gitraw_urls(){
     //TODO MAKE RELATIVE PATHS WORK HERE
+    //this right here
+    // let result_list = [];
+
+    // for (const file of filenames) {
+    //     console.log("FILE : ", file);
+    //     if(file.includes("../")){
+
+    //         //1) count the number of ../ in the file
+    //         //2) use that count for the regex to create the context
+    //         //3) 
+    //         let count_sub_dir = file.match(/..\//).length();
+    //         console.log(count_sub_dir);
+            
+    //         var index = url.lastIndexOf("/");
+    //         var fileName = url.substr(index)
+            
+    //         console.log("index returned from lastIndexOf : ", index);
+    //         console.log("alternative fileName : ", fileName);
+            
+    //         let relative_context = 0;
+            
+    //         continue;
+    //         //i would have to strip a ../ for every level
+    //         //right now 1 level sub dir will work but i want to make ../../../ and so on work as well
+    //     }
+    //     else{
+    //         let dkurl = dkfile_context + file;
+    //         console.log("NEW GITRAW URL : ", dkurl);
+    //         result_list.push(dkurl);
+    //     }
+    // }
+    // console.log(result_list);
+
+
+
     return "nothing";
 }
 
