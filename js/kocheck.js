@@ -411,7 +411,7 @@ function generate_html(graph_data){
         ul.appendChild(li_top);
 
     }
-    details.appendChild(ul);
+    details_outer.appendChild(ul);
     document.getElementById("file_sys").appendChild(details_outer);
 }
 
