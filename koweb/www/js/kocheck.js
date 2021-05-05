@@ -354,7 +354,7 @@ function generate_html(graph_data){
     remove_all_files_dom();
 
     let details_outer = document.createElement("DETAILS");
-    details.classList.add("fs")
+    details_outer.classList.add("fs")
 
     let summary_outer = document.createElement("SUMMARY")
     let summary_outer_text = document.createTextNode("Kontroli module")
