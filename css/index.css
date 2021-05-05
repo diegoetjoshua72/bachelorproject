@@ -36,6 +36,12 @@ ul {
     margin-bottom: 10px;
 }
 
+
+.deps_path {
+    font-weight: bold;
+    color: #b16186;
+}
+
 #grid {
     box-sizing: border-box;
     display: grid;

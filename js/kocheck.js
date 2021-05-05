@@ -348,25 +348,40 @@ function generate_html(graph_data){
     console.log("GENERATE_HTML : ",graph_data);
 
     //TODO NEXT DO THE REMOVE 
+    //oh maybe i can add a detail for the each file like solve easy bool and sudoku and then it split in like load and the dependency path 
+    //i need to add a class on the span deps_path
 
-    let details = document.createElement("DETAILS");
+    remove_all_files_dom();
+
+    let details_outer = document.createElement("DETAILS");
     details.classList.add("fs")
 
-    let summary = document.createElement("SUMMARY")
-    let summary_text = document.createTextNode("Kontroli module")
-    summary.appendChild(summary_text);
+    let summary_outer = document.createElement("SUMMARY")
+    let summary_outer_text = document.createTextNode("Kontroli module")
+    summary_outer.appendChild(summary_outer_text);
 
-    details.appendChild(summary)
+    details_outer.appendChild(summary_outer)
     
     let ul = document.createElement("ul");
 
     for (const node of graph_data){
-        let ul_inner = document.createElement("ul"); 
+        
+
+        let li_top = document.createElement("li");
+        let ul_inner = document.createElement("ul");
+        
+        let details_inner = document.createElement("DETAILS");
+        let summary_inner = document.createElement("SUMMARY");
+
+
         let li_button = document.createElement("li");
         let li_span = document.createElement("li");
+
         let button = document.createElement("button");
         let text_top_level = document.createTextNode(node[0]);
         let text_list_dependencies = node[1];
+        
+        
         let span = document.createElement("span");
         
         for (const dep of text_list_dependencies){
@@ -377,6 +392,7 @@ function generate_html(graph_data){
                 span.appendChild(document.createTextNode(dep))
             }
         }
+        span.classList.add("deps_path")
 
 
         button.appendChild(text_top_level);
@@ -384,7 +400,8 @@ function generate_html(graph_data){
         li_span.appendChild(span);
         ul_inner.appendChild(li_button);
         ul_inner.appendChild(li_span);
-        ul.appendChild(ul_inner);
+        li_top.appendChild(ul_inner);
+        ul.appendChild(li_top);
 
     }
     details.appendChild(ul);
