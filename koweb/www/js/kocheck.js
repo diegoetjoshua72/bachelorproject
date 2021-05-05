@@ -353,7 +353,7 @@ function generate_html(graph_data){
         let ul = document.createElement("ul");
         let li = document.createElement("li");
         let button = document.createElement("button");
-        let text_top_level = createTextNode(node[0]);
+        let text_top_level = document.createTextNode(node[0]);
         let text_list_dependencies = node[1];
         button.appendChild(text_top_level);
         li.appendChild(button);
@@ -373,7 +373,9 @@ function save_to_memory(){
 
 
 //also fix css of the filesystem most likely
-//ONCE ALL THREE ARE DONE FIX THE CSS REMOVE SOME OF THE USElESS TEST AND ADD THE RUN OPTION 
+//ONCE ALL THREE ARE DONE FIX THE CSS REMOVE SOME OF THE USElESS TEST AND ADD THE RUN OPTION drop down select box 
 //ALSO TRY TO RUN A DK THAT REQUIRES A DEPENDENCY WITHOUT AND WITH THE DEPENDENCY BEFORE SEE IF THAT WORKS OUT OR NOT 
+
+//i want some file or something to organize things i want to learn 
 
 //setup my keyboard for korean and japanese typing on linux 
