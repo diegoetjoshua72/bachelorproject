@@ -298,7 +298,7 @@ async function fetch_make_text_from_url(){
                             "THIS IS THE STRING WE GET FROM THE URL :: ",
                             string
                         );
-                        return get_graph_rust(string); //donc ici je vais utiliser un fonction rust qui permetra de get let dependences 
+                        return await get_graph_rust(string); //donc ici je vais utiliser un fonction rust qui permetra de get let dependences 
                     })  //here we need to call the get dep from rust then we can generate the html and the css from it and the raw urls
                     .catch((err) => {
                         console.log("ERROR :", err);
