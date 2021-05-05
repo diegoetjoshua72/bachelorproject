@@ -333,7 +333,7 @@ function use_graph_data(graph_data){
     console.log("LIST OF FILES : ", list_of_files);
 
     
-    generate_htlm(graph_data);
+    generate_html(graph_data);
     const urls = generate_gitraw_urls(list_of_files);
 
 }
