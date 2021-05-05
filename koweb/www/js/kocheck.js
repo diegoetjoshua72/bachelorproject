@@ -281,9 +281,9 @@ test.onclick = () => {
 //3) implement the program queue and the program class 
 //4)
 
+// const url = "https://raw.githubusercontent.com//bachelorproject/master/examples/kontroli.mk";
 // https://github.com/01mf02/kontroli-rs/blob/master/examples/sudoku/deps.mk
-async function fetch_make_text_from_url(){
-    // const url = "https://raw.githubusercontent.com//bachelorproject/master/examples/kontroli.mk";
+function fetch_make_text_from_url(){
     remove_all_errors_dom();
     const url = document.getElementById("urlmake").value; //continue here
     console.log(url);
@@ -298,7 +298,7 @@ async function fetch_make_text_from_url(){
                             "THIS IS THE STRING WE GET FROM THE URL :: ",
                             string
                         );
-                        return await get_graph_rust(string); //donc ici je vais utiliser un fonction rust qui permetra de get let dependences 
+                        use_graph_data(get_graph_rust(string)); //donc ici je vais utiliser un fonction rust qui permetra de get let dependences 
                     })  //here we need to call the get dep from rust then we can generate the html and the css from it and the raw urls
                     .catch((err) => {
                         console.log("ERROR :", err);
@@ -316,13 +316,15 @@ async function fetch_make_text_from_url(){
 
 
 var load_make = document.getElementById("load_make");
-load_make.onclick = async () => {
-    const dependency_list = await fetch_make_text_from_url();
-    console.log("DEPENDENCY LIST : ", dependency_list)
-    const file_urls = generate_gitraw_urls(dependency_list);
-
+load_make.onclick = () => {
+    fetch_make_text_from_url();
 };
 
-function generate_gitraw_urls(make_text){
-    console.log("GENERATE GIT RAW URLS : ", make_text);
+function use_graph_data(graph_data){
+    const dependency_list = graph_data;
+    console.log( "DEPENDENCY LIST : ", make_text);
+    
+    let list_of_files = dependency_list[0][0];
+    console.log("LIST OF FILES : ", list_of_files);
+
 }
