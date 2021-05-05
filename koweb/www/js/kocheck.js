@@ -282,7 +282,7 @@ test.onclick = () => {
 //4)
 
 // https://github.com/01mf02/kontroli-rs/blob/master/examples/sudoku/deps.mk
-function fetch_make_text_from_url(){
+async function fetch_make_text_from_url(){
     // const url = "https://raw.githubusercontent.com//bachelorproject/master/examples/kontroli.mk";
     remove_all_errors_dom();
     const url = document.getElementById("urlmake").value; //continue here
