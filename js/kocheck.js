@@ -322,7 +322,7 @@ load_make.onclick = () => {
 
 function use_graph_data(graph_data){
     const dependency_list = graph_data;
-    console.log( "DEPENDENCY LIST : ", make_text);
+    console.log( "DEPENDENCY LIST : ", graph_data);
     
     let list_of_files = dependency_list[0][0];
     console.log("LIST OF FILES : ", list_of_files);
