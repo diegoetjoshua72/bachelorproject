@@ -35,7 +35,7 @@ function fetch_make_text_from_url(){
     // const url = "https://raw.githubusercontent.com//bachelorproject/master/examples/kontroli.mk";
     const url = document.getElementById("urlmake").value; //continue here
     if (url != "") {
-        fetch(url)
+        fetch(url,{mode: 'no-cors'})
             .then(check_fetch)
             .then((result) => {
                 result
