@@ -349,7 +349,7 @@ function generate_html(graph_data){
 // </ul>
 
     const context = document.getElementById("top_level_mk");
-    for (node of graph_data){
+    for (const node of graph_data){
         let ul = document.createElement("ul");
         let li = document.createElement("li");
         let button = document.createElement("button");
