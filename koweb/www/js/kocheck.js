@@ -373,6 +373,12 @@ function generate_html(graph_data){
         let details_inner = document.createElement("DETAILS");
         let summary_inner = document.createElement("SUMMARY");
 
+        let summary_inner_text = document.createTextNode(node[0])
+        summary_inner.appendChild(summary_inner_text);
+        details_inner.appendChild(summary_inner);
+        
+
+        //todo this i need to have details - summary - ul - li - li and append that to the ul above the for loop
 
         let li_button = document.createElement("li");
         let li_span = document.createElement("li");
@@ -400,7 +406,8 @@ function generate_html(graph_data){
         li_span.appendChild(span);
         ul_inner.appendChild(li_button);
         ul_inner.appendChild(li_span);
-        li_top.appendChild(ul_inner);
+        details_inner.appendChild(ul_inner);
+        li_top.appendChild(details_inner);
         ul.appendChild(li_top);
 
     }
