@@ -272,6 +272,9 @@ test.onclick = () => {
 
 
 
+
+//OK I AM RETARDED 
+
 // https://github.com/01mf02/kontroli-rs/blob/master/examples/sudoku/deps.mk
 function fetch_make_text_from_url(){
     // const url = "https://raw.githubusercontent.com//bachelorproject/master/examples/kontroli.mk";
@@ -279,7 +282,7 @@ function fetch_make_text_from_url(){
     const url = document.getElementById("urlmake").value; //continue here
     console.log(url);
     if (url != "") {
-        fetch(url,{{mode: 'no-cors'}})
+        fetch(url,{mode: 'no-cors'})
             .then(check_fetch)
             .then((result) => {
                 result
@@ -314,7 +317,7 @@ load_make.onclick = () => {
 };
 
 function generate_gitraw_urls(make_text){
-    console.log(make_text);
+    console.log("GENERATE GIT RAW URLS : ", make_text);
     //todo 
     //generating the gitraw urls 
     //fetching the data and storing it somewhere only when the user clicks on a sub button
