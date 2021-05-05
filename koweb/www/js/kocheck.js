@@ -347,20 +347,8 @@ function remove_all_files_dom() {
 function generate_html(graph_data){
     console.log("GENERATE_HTML : ",graph_data);
 
+    //TODO NEXT DO THE REMOVE 
 
-//i need to reset this fs everytime there is a new load i don't want thing to append all the time so i need to clear everything in the div each time this is run    
-    
-/* <details class="details-example">
-<summary id="top_level_mk"></summary>
-<ul id="file">
-    <li> 
-        <button>nat.dk</button>
-    </li>
-</ul>
-</details> */
-
-
-//add a span to the li with the full path make the span look cool with css after
     let details = document.createElement("DETAILS");
     details.classList.add("fs")
 
@@ -373,7 +361,9 @@ function generate_html(graph_data){
     let ul = document.createElement("ul");
 
     for (const node of graph_data){
-        let li = document.createElement("li");
+        let ul_inner = document.createElement("ul"); 
+        let li_button = document.createElement("li");
+        let li_span = document.createElement("li");
         let button = document.createElement("button");
         let text_top_level = document.createTextNode(node[0]);
         let text_list_dependencies = node[1];
@@ -390,9 +380,12 @@ function generate_html(graph_data){
 
 
         button.appendChild(text_top_level);
-        li.appendChild(button);
-        li.appendChild(span);
-        ul.appendChild(li);
+        li_button.appendChild(button);
+        li_span.appendChild(span);
+        ul_inner.appendChild(li_button);
+        ul_inner.appendChild(li_span);
+        ul.appendChild(ul_inner);
+
     }
     details.appendChild(ul);
     document.getElementById("file_sys").appendChild(details);
