@@ -324,7 +324,54 @@ function use_graph_data(graph_data){
     const dependency_list = graph_data;
     console.log( "DEPENDENCY LIST : ", graph_data);
     
-    let list_of_files = dependency_list[0][0];
+
+    let list_of_files = [];
+    
+    for (i = 0; i < dependency_list.length; i++) {
+        list_of_files.push(dependency_list[i][0])
+    }
     console.log("LIST OF FILES : ", list_of_files);
 
+    
+    generate_htlm(graph_data);
+    const urls = generate_gitraw_urls(list_of_files);
+
 }
+
+
+function generate_html(graph_data){
+    console.log("GENERATE_HTML : ",graph_data);
+// inside details top_level_mk
+// <ul id="file">
+//     <li> 
+//         <button>nat.dk</button>
+//     </li>
+// </ul>
+
+    const context = document.getElementById("top_level_mk");
+    for (node of graph_data){
+        let ul = document.createElement("ul");
+        let li = document.createElement("li");
+        let button = document.createElement("button");
+        let text_top_level = node[0];
+        let text_list_dependencies = node[1];
+        button.appendChild(text_top_level);
+        li.appendChild(button);
+        ul.appendChild(li);
+        document.getElementById(context).appendChild(ul);
+    }
+}
+
+function generate_gitraw_urls(){
+    //TODO MAKE RELATIVE PATHS WORK HERE
+    return "nothing";
+}
+
+function save_to_memory(){
+
+}
+
+
+//ONCE ALL THREE ARE DONE FIX THE CSS REMOVE SOME OF THE USElESS TEST AND ADD THE RUN OPTION 
+//ALSO TRY TO RUN A DK THAT REQUIRES A DEPENDENCY WITHOUT AND WITH THE DEPENDENCY BEFORE SEE IF THAT WORKS OUT OR NOT 
+
