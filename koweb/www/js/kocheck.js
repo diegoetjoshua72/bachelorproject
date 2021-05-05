@@ -358,7 +358,7 @@ function generate_html(graph_data){
         button.appendChild(text_top_level);
         li.appendChild(button);
         ul.appendChild(li);
-        document.getElementById(context).appendChild(ul);
+        document.getElementById("top_level_mk").appendChild(ul);
     }
 }
 
