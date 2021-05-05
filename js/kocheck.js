@@ -275,6 +275,12 @@ test.onclick = () => {
 
 //OK I AM RETARDED 
 
+//1) generate the gitraw urls that i will need
+//2) put everything in the mem instance 
+//3) make the html graph once that is done
+//3) implement the program queue and the program class 
+//4)
+
 // https://github.com/01mf02/kontroli-rs/blob/master/examples/sudoku/deps.mk
 function fetch_make_text_from_url(){
     // const url = "https://raw.githubusercontent.com//bachelorproject/master/examples/kontroli.mk";
@@ -282,7 +288,7 @@ function fetch_make_text_from_url(){
     const url = document.getElementById("urlmake").value; //continue here
     console.log(url);
     if (url != "") {
-        fetch(url,{mode: 'no-cors'})
+        fetch(url)
             .then(check_fetch)
             .then((result) => {
                 result
@@ -292,7 +298,7 @@ function fetch_make_text_from_url(){
                             "THIS IS THE STRING WE GET FROM THE URL :: ",
                             string
                         );
-                        generate_gitraw_urls(get_graph_rust(string)); //donc ici je vais utiliser un fonction rust qui permetra de get let dependences 
+                        return get_graph_rust(string); //donc ici je vais utiliser un fonction rust qui permetra de get let dependences 
                     })  //here we need to call the get dep from rust then we can generate the html and the css from it and the raw urls
                     .catch((err) => {
                         console.log("ERROR :", err);
@@ -310,33 +316,13 @@ function fetch_make_text_from_url(){
 
 
 var load_make = document.getElementById("load_make");
-load_make.onclick = () => {
-    fetch_make_text_from_url();
-    // let test = get_graph_rust(make_text);
-    // console.log(test);
+load_make.onclick = async () => {
+    const dependency_list = await fetch_make_text_from_url();
+    console.log("DEPENDENCY LIST : ", dependency_list)
+    const file_urls = generate_gitraw_urls(dependency_list);
+
 };
 
 function generate_gitraw_urls(make_text){
     console.log("GENERATE GIT RAW URLS : ", make_text);
-    //todo 
-    //generating the gitraw urls 
-    //fetching the data and storing it somewhere only when the user clicks on a sub button
-    //i need some kind of memory that keeps track of all the programs loaded 
-    //global variable ? session ? i think i will just use global object called
-    //Mem with a list that contains prog objects that have the program text and their 
-    //dependency tree 
-
-    //and that checks before loading them how large they are
-    //this memory will also be used for the running of the programs 
 }
-
-//first lets make the url work rather than passing the hardcoded
-//ok now that i have this output it needs to be stored somehow 
-//and somewhere but i am not sure where it would get stored 
-
-
-
-// var testbuff = document.getElementById("testbuff");
-// test.onclick = () => {
-//     read_some(Prog.);
-// };
