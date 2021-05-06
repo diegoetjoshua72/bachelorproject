@@ -186,15 +186,6 @@ export function get_graph_rust(make_text_js) {
 }
 
 /**
-* @param {string} stuff
-*/
-export function read_some(stuff) {
-    var ptr0 = passStringToWasm0(stuff, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
-    var len0 = WASM_VECTOR_LEN;
-    wasm.read_some(ptr0, len0);
-}
-
-/**
 */
 export function increment_test() {
     wasm.increment_test();
