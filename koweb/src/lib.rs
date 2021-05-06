@@ -44,14 +44,14 @@ extern "C" {
     fn log(s: &str);
 }
 
-#[wasm_bindgen(module = "/www/js/kocheck.js")]
-extern "C" {
-    //reflect object might be what we are looking for
-    pub type Test2;
+// #[wasm_bindgen(module = "/www/js/kocheck.js")]
+// extern "C" {
+//     //reflect object might be what we are looking for
+//     pub type Test2;
 
-    #[wasm_bindgen(static_method_of = Test2)]
-    pub fn test_text2() -> String;
-}
+//     #[wasm_bindgen(static_method_of = Test2)]
+//     pub fn test_text2() -> String;
+// }
 
 #[wasm_bindgen(module = "/www/js/program.js")]
 extern "C" {
@@ -70,7 +70,7 @@ pub fn increment_test() {
         // alert(Prog::get_piece_to_koweb_static().as_str());
         alert(format!("test : {}", test).as_str());
         alert(Test::test_text().as_str());
-        alert(Test2::test_text2().as_str());
+        // alert(Test2::test_text2().as_str()); MIME TYPE ISSUE AAA
 
         // let value = js_sys::Reflect::get(&target, &property_key).expect("reflect failed");
         test += 1;
