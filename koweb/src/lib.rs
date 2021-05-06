@@ -44,14 +44,14 @@ extern "C" {
     fn log(s: &str);
 }
 
-// #[wasm_bindgen(module = "/www/js/kocheck.js")]
-// extern "C" {
-//     //reflect object might be what we are looking for
-//     pub type Program;
+#[wasm_bindgen(module = "/www/js/kocheck.js")]
+extern "C" {
+    //reflect object might be what we are looking for
+    pub type Test2;
 
-//     #[wasm_bindgen(static_method_of = Program)]
-//     pub fn get_piece_of_text() -> String;
-// }
+    #[wasm_bindgen(static_method_of = Test2)]
+    pub fn test_text2() -> String;
+}
 
 #[wasm_bindgen(module = "/www/js/program.js")]
 extern "C" {
@@ -62,14 +62,17 @@ extern "C" {
     pub fn test_text() -> String;
 }
 
-#[wasm_bindgen]
-pub fn read_some(stuff: &str) {
-    // let buffer = vec![0;100];
-    alert(stuff);
-    // for c in stuff.bytes(){
-    // buffer.append(&mut c);
-    // }
-    //need to get a piece of the string defined by the user the amount
+static mut test: i32 = 0;
+
+#[wasm_bindgen()]
+pub fn increment_test() {
+    unsafe {
+        // alert(Prog::get_piece_to_koweb_static().as_str());
+        alert(format!("test : {}", test).as_str());
+        alert(Test::test_text().as_str());
+        // let value = js_sys::Reflect::get(&target, &property_key).expect("reflect failed");
+        test += 1;
+    }
 }
 
 fn produce_from_js(
@@ -130,20 +133,6 @@ where
             Result::Ok(Event) => log(format!("{}", Event).as_str()),
             Result::Err(Error) => log(format!("something went wrong : {:?}", Error).as_str()),
         }
-    }
-}
-
-static mut test: i32 = 0;
-
-#[wasm_bindgen()]
-pub fn increment_test() {
-    unsafe {
-        // alert(Prog::get_piece_to_koweb_static().as_str());
-        alert(format!("test : {}", test).as_str());
-        read_some("blabla");
-        alert(Test::test_text().as_str());
-        // let value = js_sys::Reflect::get(&target, &property_key).expect("reflect failed");
-        test += 1;
     }
 }
 

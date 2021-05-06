@@ -1,10 +1,20 @@
 import init, { run_test, increment_test , get_graph_rust} from "../pkg/koweb.js";
 import {Test} from "./program.js";
 
+
+export class Test2{
+    constructor(){
+        this.test = "pipotest"
+    }
+    
+    static test_text2 () {
+        return this.test;
+    }   
+    
+}
+
 const test = new Test;
 console.log(test.test);
-
-
 
 class Mem {
     constructor() {
@@ -19,6 +29,7 @@ class Mem {
         this.program_list = [];
     }
 }
+
 
 class Program {
     constructor(text, dependency, raw_url){
@@ -454,7 +465,7 @@ function generate_gitraw_urls(list_of_files){
             //right now 1 level sub dir will work but i want to make ../../../ and so on work as well
         }
         else{
-            let dkurl = dkfile_context + file;
+            let dkurl = top_url + file;
             console.log("NEW GITRAW URL : ", dkurl);
             result_list.push(dkurl);
         }
