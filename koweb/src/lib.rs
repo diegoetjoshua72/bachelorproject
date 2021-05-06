@@ -64,6 +64,20 @@ extern "C" {
 
 static mut test: i32 = 0;
 
+#[wasm_bindgen]
+pub fn get_string_js(string_js: String) -> String {
+    return string_js;
+}
+//this function is called in the js or rust context and executes in the rust context
+//so i can pass a string as argument in js and use it here
+//
+//the other way i thought is to get a function that i can call in rust that executes in the
+//js context and that allowes me to read a string from the js context
+//
+//like i could call a function that i export from js that calls a function
+//that is exported from rust
+//that will pass the string TODO this <- ->
+
 #[wasm_bindgen()]
 pub fn increment_test() {
     unsafe {
