@@ -46,7 +46,11 @@
     //compresion gain suppresion du bruit
 // };
 
-export default class Test {
+
+//i hope it is because of the default keyword that i got errors
+
+
+export class Test {
     constructor(){
         this.test = "pipotest"
     }
