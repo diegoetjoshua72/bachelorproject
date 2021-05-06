@@ -50,4 +50,8 @@ export default class Test {
     constructor(){
         this.test = "pipotest"
     }
+
+    static test_text () {
+        return this.test;
+    }   
 }

@@ -53,6 +53,15 @@ extern "C" {
     pub fn get_piece_of_text() -> String;
 }
 
+#[wasm_bindgen(module = "/www/js/program.js")]
+extern "C" {
+    //reflect object might be what we are looking for
+    pub type Test;
+
+    #[wasm_bindgen(static_method_of = Program)]
+    pub fn test_text() -> String;
+}
+
 #[wasm_bindgen]
 pub fn read_some(stuff: &str) {
     // let buffer = vec![0;100];
