@@ -238,8 +238,8 @@ run_button.onclick = async () => {
     await run();
 };
 
-var test = document.getElementById("increment");
-test.onclick = () => {
+var test_click = document.getElementById("increment");
+test_click.onclick = () => {
     increment_test();
 };
 
