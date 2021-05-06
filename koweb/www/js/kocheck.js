@@ -1,5 +1,5 @@
 import init, { run_test, increment_test , get_graph_rust} from "../pkg/koweb.js";
-import Test from "./program.js";
+import {Test} from "./program.js";
 
 const test = new Test;
 console.log(test.test);
