@@ -419,7 +419,7 @@ function generate_gitraw_urls(list_of_files){
 
     let result_list = [];
 
-    for (let file of filenames) {
+    for (let file of list_of_files) {
         console.log("FILE : ", file);
         if(file.startsWith("../")){
             let sub_dir_counter = 0;
