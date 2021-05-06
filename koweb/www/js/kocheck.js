@@ -346,11 +346,6 @@ function remove_all_files_dom() {
 
 function generate_html(graph_data){
     console.log("GENERATE_HTML : ",graph_data);
-
-    //TODO NEXT DO THE REMOVE 
-    //oh maybe i can add a detail for the each file like solve easy bool and sudoku and then it split in like load and the dependency path 
-    //i need to add a class on the span deps_path
-
     remove_all_files_dom();
 
     let details_outer = document.createElement("DETAILS");
@@ -378,8 +373,6 @@ function generate_html(graph_data){
         details_inner.appendChild(summary_inner);
         
 
-        //todo this i need to have details - summary - ul - li - li and append that to the ul above the for loop
-
         let li_button = document.createElement("li");
         let li_span = document.createElement("li");
 
@@ -400,7 +393,6 @@ function generate_html(graph_data){
         }
         span.classList.add("deps_path")
 
-
         button.appendChild(text_top_level);
         li_button.appendChild(button);
         li_span.appendChild(span);
@@ -417,44 +409,42 @@ function generate_html(graph_data){
 
 
 
-function generate_gitraw_urls(){
-    //TODO MAKE RELATIVE PATHS WORK HERE
-    //this right here
-    // let result_list = [];
+function generate_gitraw_urls(list_of_files){
+    const top_url = document.getElementById("urlmake").value; 
 
-    // for (const file of filenames) {
-    //     console.log("FILE : ", file);
-    //     if(file.includes("../")){
+    let result_list = [];
 
-    //         //1) count the number of ../ in the file
-    //         //2) use that count for the regex to create the context
-    //         //3) 
-    //         let count_sub_dir = file.match(/..\//).length();
-    //         console.log(count_sub_dir);
+    for (const file of filenames) {
+        console.log("FILE : ", file);
+        if(file.includes("../")){
+
+            //1) count the number of ../ in the file
+            //2) use that count for the regex to create the context
+            //3) 
+            let count_sub_dir = file.match(/..\//).length();
+            console.log(count_sub_dir);
             
-    //         var index = url.lastIndexOf("/");
-    //         var fileName = url.substr(index)
+            var index = url.lastIndexOf("/");
+            var fileName = url.substr(index)
             
-    //         console.log("index returned from lastIndexOf : ", index);
-    //         console.log("alternative fileName : ", fileName);
+            console.log("index returned from lastIndexOf : ", index);
+            console.log("alternative fileName : ", fileName);
             
-    //         let relative_context = 0;
+            let relative_context = 0;
             
-    //         continue;
-    //         //i would have to strip a ../ for every level
-    //         //right now 1 level sub dir will work but i want to make ../../../ and so on work as well
-    //     }
-    //     else{
-    //         let dkurl = dkfile_context + file;
-    //         console.log("NEW GITRAW URL : ", dkurl);
-    //         result_list.push(dkurl);
-    //     }
-    // }
-    // console.log(result_list);
+            continue;
+            //i would have to strip a ../ for every level
+            //right now 1 level sub dir will work but i want to make ../../../ and so on work as well
+        }
+        else{
+            let dkurl = dkfile_context + file;
+            console.log("NEW GITRAW URL : ", dkurl);
+            result_list.push(dkurl);
+        }
+    }
+    console.log("GENERATE URL FINAL :",result_list);
 
-
-
-    return "nothing";
+    return result_list;
 }
 
 function save_to_memory(){
