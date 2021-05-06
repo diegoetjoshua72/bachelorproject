@@ -44,6 +44,14 @@ extern "C" {
     fn log(s: &str);
 }
 
+#[wasm_bindgen(module = "/www/js/kocheck.js")]
+extern "C" {
+    pub type Program;
+
+    #[wasm_bindgen(static_method_of = Program)]
+    pub fn get_piece_of_text() -> String;
+}
+
 #[wasm_bindgen]
 pub fn read_some(stuff: &str) {
     // let buffer = vec![0;100];
@@ -72,21 +80,17 @@ fn write_to_webpage(event: &kocheck::Event) {
     let window = web_sys::window().expect("no global `window` exists");
     let document = window.document().expect("should have a document on window");
     let body = document.body().expect("document should have a body");
-
     // let val = document.get_element_by_id("console").unwrap();
     let div = document.create_element("div").unwrap();
     let text = document.create_element("p").unwrap();
     let lambda_span = document.create_element("span").unwrap();
     lambda_span.set_class_name("lambda");
     lambda_span.set_text_content(Some("λ> "));
-
     text.set_class_name("line");
     text.set_text_content(Some(format!("{}", event).as_str()));
-
     div.set_class_name("prompt");
     div.append_child(&lambda_span);
     div.append_child(&text);
-
     let output = document.get_element_by_id("output").unwrap();
     output.set_class_name("display_output");
     output.append_child(&div).unwrap();
@@ -114,7 +118,6 @@ where
     for element in iter {
         match element {
             Result::Ok(Event) => log(format!("{}", Event).as_str()),
-
             Result::Err(Error) => log(format!("something went wrong : {:?}", Error).as_str()),
         }
     }
@@ -127,6 +130,8 @@ pub fn increment_test() {
     unsafe {
         // alert(Prog::get_piece_to_koweb_static().as_str());
         alert(format!("test : {}", test).as_str());
+        read_some("blabla");
+        alert(Program::get_piece_of_text().as_str());
         test += 1;
     }
 }

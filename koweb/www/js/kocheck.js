@@ -25,6 +25,11 @@ class Program {
         this.dependency = dependency;
         this.raw_url = raw_url;
     }
+
+
+    static get_piece_of_text(buffer_size){
+        return this.text.slice(buffer_size, this.text.length -1);
+    }
     //get bit of string function that will need to be passed to rust ?
     //
 }
@@ -186,7 +191,7 @@ async function run(program = undefined) {
         remove_all_outputs_dom();
         await init();
         var testing = await window.editor.getValue();
-        // const prog = Program.Prog.static_constructor(testing);
+        const prog = new Program(testing, "pipo", "toto");
         // console.log(prog);
         //si la classe casse trop les couilles je peut faire une closure mais je pense la classes c'est bien
 
@@ -458,6 +463,7 @@ function generate_gitraw_urls(list_of_files){
     return result_list;
 }
 
+
 function save_to_memory(){
 //The fact that i need to run something before loading a module is not really acceptable 
 //i need to do the init function as soon as the page loads not only when run 
@@ -467,7 +473,8 @@ function save_to_memory(){
 
 //test running a dk that requires some dependencies and see what happens 
 
-
+//maybe the string itself does not need to be static but the function that i pass to rust i think does need to be 
+//3hours 
 }
 
 
