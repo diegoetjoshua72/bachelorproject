@@ -46,6 +46,7 @@ extern "C" {
 
 #[wasm_bindgen(module = "/www/js/kocheck.js")]
 extern "C" {
+    //reflect object might be what we are looking for
     pub type Program;
 
     #[wasm_bindgen(static_method_of = Program)]
@@ -132,6 +133,7 @@ pub fn increment_test() {
         alert(format!("test : {}", test).as_str());
         read_some("blabla");
         alert(Program::get_piece_of_text().as_str());
+        // let value = js_sys::Reflect::get(&target, &property_key).expect("reflect failed");
         test += 1;
     }
 }
