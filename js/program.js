@@ -55,7 +55,7 @@ export class Test {
         this.test = "pipotest"
     }
 
-    static test_static = "pipotest static";
+    static test_static = "pipotest static"; //but this also just works righ tnwo 
 
     static test_text () {
         return this.test_static;
@@ -65,5 +65,9 @@ export class Test {
         return this.test;
     } 
 
+}
 
+//something like this sounds promissing
+export function call_exported_rust_func () {
+    get_string_js("test pass");
 }

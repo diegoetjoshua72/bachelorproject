@@ -6,6 +6,11 @@
 */
 export function get_graph_rust(make_text_js: string): any;
 /**
+* @param {string} string_js
+* @returns {string}
+*/
+export function get_string_js(string_js: string): string;
+/**
 */
 export function increment_test(): void;
 /**
@@ -22,12 +27,14 @@ export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembl
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
   readonly get_graph_rust: (a: number, b: number) => number;
+  readonly get_string_js: (a: number, b: number, c: number) => void;
   readonly increment_test: () => void;
   readonly run_test: (a: number, b: number, c: number, d: number, e: number, f: number) => void;
   readonly __wbindgen_malloc: (a: number) => number;
   readonly __wbindgen_realloc: (a: number, b: number, c: number) => number;
-  readonly __wbindgen_exn_store: (a: number) => void;
+  readonly __wbindgen_add_to_stack_pointer: (a: number) => number;
   readonly __wbindgen_free: (a: number, b: number) => void;
+  readonly __wbindgen_exn_store: (a: number) => void;
 }
 
 /**

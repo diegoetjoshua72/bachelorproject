@@ -438,7 +438,7 @@ function generate_gitraw_urls(list_of_files){
             while (file.startsWith("../")){
                 sub_dir_counter += 1;
                 console.log("file before remove ../",file);
-                file.slice(2,file.length - 1);
+                file = file.slice(2,file.length - 1);
                 console.log("file after remove ../",file);
             }
 
