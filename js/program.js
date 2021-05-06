@@ -58,7 +58,7 @@ export class Test {
     static test_static = "pipotest static";
 
     static test_text () {
-        return this.test;
+        return this.test_static;
     }
 
     get_string() {
