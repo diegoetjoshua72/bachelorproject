@@ -45,3 +45,9 @@
     //the js side will know that the program that it is not done passing the whole thing so i don't need to rely on rust for that 
     //compresion gain suppresion du bruit
 // };
+
+export default class Test {
+    constructor(){
+        this.test = "pipotest"
+    }
+}
