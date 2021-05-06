@@ -1,4 +1,4 @@
-import { Program } from './snippets/koweb-f1445fac41f4790a/www/js/kocheck.js';
+import { Test } from './snippets/koweb-f1445fac41f4790a/www/js/program.js';
 
 let wasm;
 
@@ -274,8 +274,8 @@ async function init(input) {
         var ret = JSON.parse(getStringFromWasm0(arg0, arg1));
         return addHeapObject(ret);
     };
-    imports.wbg.__wbg_getpieceoftext_41f2792a1297028f = function(arg0) {
-        var ret = Program.get_piece_of_text();
+    imports.wbg.__wbg_testtext_485895b3661725ed = function(arg0) {
+        var ret = Test.test_text();
         var ptr0 = passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
         var len0 = WASM_VECTOR_LEN;
         getInt32Memory0()[arg0 / 4 + 1] = len0;
