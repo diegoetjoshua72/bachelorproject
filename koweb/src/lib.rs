@@ -44,21 +44,21 @@ extern "C" {
     fn log(s: &str);
 }
 
-#[wasm_bindgen(module = "/www/js/kocheck.js")]
-extern "C" {
-    //reflect object might be what we are looking for
-    pub type Program;
+// #[wasm_bindgen(module = "/www/js/kocheck.js")]
+// extern "C" {
+//     //reflect object might be what we are looking for
+//     pub type Program;
 
-    #[wasm_bindgen(static_method_of = Program)]
-    pub fn get_piece_of_text() -> String;
-}
+//     #[wasm_bindgen(static_method_of = Program)]
+//     pub fn get_piece_of_text() -> String;
+// }
 
 #[wasm_bindgen(module = "/www/js/program.js")]
 extern "C" {
     //reflect object might be what we are looking for
     pub type Test;
 
-    #[wasm_bindgen(static_method_of = Program)]
+    #[wasm_bindgen(static_method_of = Test)]
     pub fn test_text() -> String;
 }
 
