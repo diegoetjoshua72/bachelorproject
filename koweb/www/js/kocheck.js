@@ -414,23 +414,34 @@ function generate_gitraw_urls(list_of_files){
 
     let result_list = [];
 
-    for (const file of filenames) {
+    for (let file of filenames) {
         console.log("FILE : ", file);
-        if(file.includes("../")){
+        if(file.startsWith("../")){
+            let sub_dir_counter = 0;
+            while (file.startsWith("../")){
+                sub_dir_counter += 1;
+                console.log("file before remove ../",file);
+                file.slice(2,file.length - 1);
+                console.log("file after remove ../",file);
+            }
 
             //1) count the number of ../ in the file
             //2) use that count for the regex to create the context
             //3) 
-            let count_sub_dir = file.match(/..\//).length();
-            console.log(count_sub_dir);
+
+            console.log("subdir Counter : ", sub_dir_counter);
+            console.log("file final : ", file);
+
+            // let count_sub_dir = file.match(/..\//).length();
+            // console.log(count_sub_dir);
             
-            var index = url.lastIndexOf("/");
-            var fileName = url.substr(index)
+            // var index = url.lastIndexOf("/");
+            // var fileName = url.substr(index)
             
-            console.log("index returned from lastIndexOf : ", index);
-            console.log("alternative fileName : ", fileName);
+            // console.log("index returned from lastIndexOf : ", index);
+            // console.log("alternative fileName : ", fileName);
             
-            let relative_context = 0;
+            // let relative_context = 0;
             
             continue;
             //i would have to strip a ../ for every level
@@ -442,20 +453,23 @@ function generate_gitraw_urls(list_of_files){
             result_list.push(dkurl);
         }
     }
-    console.log("GENERATE URL FINAL :",result_list);
+    console.log("GENERATE URL FINAL :", result_list);
 
     return result_list;
 }
 
 function save_to_memory(){
+//The fact that i need to run something before loading a module is not really acceptable 
+//i need to do the init function as soon as the page loads not only when run 
+//
+
+//also fix the css a bit 
+
+//test running a dk that requires some dependencies and see what happens 
+
 
 }
 
 
-//also fix css of the filesystem most likely
-//ONCE ALL THREE ARE DONE FIX THE CSS REMOVE SOME OF THE USElESS TEST AND ADD THE RUN OPTION drop down select box 
-//ALSO TRY TO RUN A DK THAT REQUIRES A DEPENDENCY WITHOUT AND WITH THE DEPENDENCY BEFORE SEE IF THAT WORKS OUT OR NOT 
 
-//i want some file or something to organize things i want to learn 
 
-//setup my keyboard for korean and japanese typing on linux 
