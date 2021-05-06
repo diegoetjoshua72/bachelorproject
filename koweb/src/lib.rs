@@ -141,7 +141,7 @@ pub fn increment_test() {
         // alert(Prog::get_piece_to_koweb_static().as_str());
         alert(format!("test : {}", test).as_str());
         read_some("blabla");
-        alert(Program::get_piece_of_text().as_str());
+        alert(Test::test_text().as_str());
         // let value = js_sys::Reflect::get(&target, &property_key).expect("reflect failed");
         test += 1;
     }
