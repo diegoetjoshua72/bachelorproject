@@ -64,12 +64,12 @@ extern "C" {
 
 }
 
-#[wasm_bindgen(module = "/www/js/init_wasm.js")]
-extern "C" {
-    //reflect object might be what we are looking for
+// #[wasm_bindgen(module = "/www/js/init_wasm.js")]
+// extern "C" {
+//     //reflect object might be what we are looking for
 
-    pub fn call_exported_rust_func() -> String;
-}
+//     pub fn call_exported_rust_func() -> String;
+// }
 
 static mut test: i32 = 0;
 
@@ -110,6 +110,7 @@ pub fn increment_test() {
 
 //the parse buffer trait implements the following functions
 //fill
+//keepds reading until either the buffer is full or the reader returns no data.
 
 //and it implements the iterator trait
 //this is the complicated looking part
@@ -128,6 +129,26 @@ pub fn increment_test() {
 //R is what we are reading
 //P function that returns a result of parsing some input IResult the input is an array of &[u8] and the output is of type O or verbose Error
 //F in case of failure this function takes in the parsing error and returns an E which is the error type
+
+//next()
+//returns an option with an item with inside a result<O,E>
+//what does a loop return in rust ?
+//matching on two things at the same time its not actually its calling a fuction
+//self.parse calls a function with self.buf.data as argument and we match on that
+//if no more space and position is 0 then we double otherwise we shift ?
+//
+//if the available space is not 0 and we parsed something incomplete then we call self fill()
+//if there is no more available data in the buffer then we break
+//else if there was nothing in the read_byte variable that we set to the reutrn of fill
+//then the code itself is incomplete so we send an error
+//
+//if we match an err that is not an err::incomplete we break
+
+//if the parsing was ok then we break and we return something about the data remaining
+//and some ok toplevel ok the breaks return the value to consumed and result
+//
+
+//
 
 fn produce_from_js(
     cmds_from_js: &'static str,

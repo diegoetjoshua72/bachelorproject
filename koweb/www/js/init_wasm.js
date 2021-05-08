@@ -4,6 +4,6 @@ async function init_wasm_module(){
 }
 init_wasm_module();
 //something like this sounds promissing
-export function call_exported_rust_func () {
-    get_string_js("test pass");
-}
+// export function call_exported_rust_func () {
+//     get_string_js("test pass");
+// }
