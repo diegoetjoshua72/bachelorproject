@@ -42,8 +42,6 @@ export class Test2{
 const test = new Test;
 console.log(test.test);
 
-
-
 class Program {
     constructor(text, dependency, raw_url){
         this.text = text;
@@ -57,8 +55,6 @@ class Program {
     //get bit of string function that will need to be passed to rust ?
     //
 }
-
-
 
 function remove_all_outputs_dom() {
     document.querySelectorAll(".prompt").forEach((e) => e.remove());
@@ -352,7 +348,6 @@ function use_graph_data(graph_data){
     const dependency_list = graph_data;
     console.log( "DEPENDENCY LIST : ", graph_data);
     
-
     let list_of_files = [];
     
     for (let i = 0; i < dependency_list.length; i++) {
@@ -360,7 +355,6 @@ function use_graph_data(graph_data){
     }
     console.log("LIST OF FILES : ", list_of_files);
 
-    
     generate_html(graph_data);
     const urls = generate_gitraw_urls(list_of_files);
     //then here store program objects in the []
@@ -371,6 +365,7 @@ function use_graph_data(graph_data){
 function remove_all_files_dom() {
     document.querySelectorAll(".fs").forEach((e) => e.remove());
 }
+
 
 function generate_html(graph_data){
     console.log("GENERATE_HTML : ",graph_data);
@@ -479,17 +474,12 @@ function generate_gitraw_urls(list_of_files){
 }
 
 
-function save_to_memory(){
-//The fact that i need to run something before loading a module is not really acceptable 
-//i need to do the init function as soon as the page loads not only when run 
-//
-
-//also fix the css a bit 
-
-//test running a dk that requires some dependencies and see what happens 
-
-//maybe the string itself does not need to be static but the function that i pass to rust i think does need to be 
-//3hours 
+//like this it relies on the fact that all three arrays are ordered based on list_of_files
+function save_to_memory(graph_data, urls){  
+    //relies on the order of urls being the same as the names in graph data which tehy should be 
+    for (let i = 0; i < list_of_files.length; i++){
+        program_list.push(new Program(graph_data[i][0], graph_data[i][1], urls[i]))
+    }
 }
 
 
