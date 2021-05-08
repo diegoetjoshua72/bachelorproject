@@ -453,6 +453,7 @@ function generate_gitraw_urls(list_of_files){
             while (sub_dir_counter != 0){
                 firstpart = top_url.substring(0,-1);
                 firstpart = top_url.substring(0,firstpart.lastIndexOf("/"));
+                sub_dir_counter -= 1;
             }
 
             console.log("ROOT RELATIVE PATH: ", firstpart);
