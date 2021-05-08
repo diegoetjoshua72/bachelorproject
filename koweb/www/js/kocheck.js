@@ -25,7 +25,7 @@ let program_list = [];
 //then i don't even need to pass strings from js to rust. and the problem is solved 
 
 //still first the right urls have to be made and the program also 
-//and 
+//first investigate the two way 
 
 
 export class Test2{
