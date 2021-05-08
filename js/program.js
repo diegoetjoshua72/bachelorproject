@@ -50,6 +50,8 @@
 //i hope it is because of the default keyword that i got errors
 
 
+import get_string_js from "../pkg/koweb.js";
+
 export class Test {
     constructor(){
         this.test = "pipotest"
@@ -66,6 +68,8 @@ export class Test {
     } 
 
 }
+
+
 
 //something like this sounds promissing
 export function call_exported_rust_func () {
