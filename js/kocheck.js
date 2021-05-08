@@ -46,7 +46,7 @@ console.log(test.test);
 
 class Program {
     constructor(name, dependency, raw_url){
-        this.name = text;
+        this.name = name;
         this.dependency = dependency;
         this.raw_url = raw_url;
     }
