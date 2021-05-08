@@ -94,7 +94,7 @@ pub fn increment_test() {
         // alert(Prog::get_piece_to_koweb_static().as_str());
         alert(format!("test : {}", test).as_str());
         alert(Test::test_text().as_str());
-        alert(call_exported_rust_func().as_str());
+        // alert(call_exported_rust_func().as_str());
         // alert(Test2::test_text2().as_str()); MIME TYPE ISSUE AAA
 
         // let value = js_sys::Reflect::get(&target, &property_key).expect("reflect failed");
