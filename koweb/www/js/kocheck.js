@@ -474,7 +474,7 @@ function generate_gitraw_urls(list_of_files){
 
 
 //like this it relies on the fact that all three arrays are ordered based on list_of_files
-function save_to_memory(graph_data, urls){  
+function save_to_program_list(graph_data, urls){  
     //relies on the order of urls being the same as the names in graph data which tehy should be 
     for (let i = 0; i < list_of_files.length; i++){
         program_list.push(new Program(graph_data[i][0], graph_data[i][1], urls[i]));
