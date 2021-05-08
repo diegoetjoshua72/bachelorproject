@@ -13,6 +13,7 @@ use log::{info, trace, warn, Level};
 
 // use crate::itertools::Itertools;
 
+pub mod lazy_fetch;
 pub mod parse_make;
 
 //not sure what wee alloc does
@@ -70,6 +71,7 @@ static mut test: i32 = 0;
 pub fn get_string_js(string_js: String) -> String {
     return string_js;
 }
+
 //this function is called in the js or rust context and executes in the rust context
 //so i can pass a string as argument in js and use it here
 //
@@ -86,6 +88,7 @@ pub fn increment_test() {
         // alert(Prog::get_piece_to_koweb_static().as_str());
         alert(format!("test : {}", test).as_str());
         alert(Test::test_text().as_str());
+        alert(call_exported_rust_func().as_str());
         // alert(Test2::test_text2().as_str()); MIME TYPE ISSUE AAA
 
         // let value = js_sys::Reflect::get(&target, &property_key).expect("reflect failed");
