@@ -50,7 +50,7 @@
 //i hope it is because of the default keyword that i got errors
 
 
-import get_string_js from "../pkg/koweb.js";
+// import get_string_js from "../pkg/koweb.js";
 
 export class Test {
     constructor(){
