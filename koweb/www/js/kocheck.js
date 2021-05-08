@@ -456,7 +456,7 @@ function generate_gitraw_urls(list_of_files){
             
             let firstpart = top_url.substring(0,top_url.lastIndexOf("/"));
             while (sub_dir_counter != 0){
-                firstpart = top.url.substring(0,-1);
+                firstpart = top_url.substring(0,-1);
                 firspart = top_url.substring(0,top_url.lastIndexOf("/"));
             }
 
