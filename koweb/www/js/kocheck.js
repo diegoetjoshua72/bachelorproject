@@ -2,10 +2,6 @@ import init, { run_test, increment_test , get_graph_rust} from "../pkg/koweb.js"
 import {Test} from "./program.js";
 
 
-async function init_wasm_module(){
-    await init();
-}
-init_wasm_module();
 let program_list = [];
 
 //TODO
@@ -385,8 +381,7 @@ function generate_html(graph_data){
     let ul = document.createElement("ul");
 
     for (const node of graph_data){
-        
-
+    
         let li_top = document.createElement("li");
         let ul_inner = document.createElement("ul");
         
@@ -479,7 +474,6 @@ function save_to_program_list(graph_data, urls){
     for (let i = 0; i < graph_data.length; i++){
         program_list.push(new Program(graph_data[i][0], graph_data[i][1], urls[i]));
     }
-
     console.log(program_list);
 }
 
