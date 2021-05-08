@@ -454,7 +454,7 @@ function generate_gitraw_urls(list_of_files){
             let result_relative_url = top_url.substring(0,top_url.lastIndexOf("/"));
             while (sub_dir_counter != 0){
                 result_relative_url = result_relative_url.slice(0,-1);
-                firstpart = result_relative_url.substring(0,result_relative_url.lastIndexOf("/"));
+                result_relative_url = result_relative_url.substring(0,result_relative_url.lastIndexOf("/"));
                 sub_dir_counter -= 1;
             }
             result_list.push(result_relative_url + "/" + file)
@@ -476,7 +476,7 @@ function generate_gitraw_urls(list_of_files){
 //like this it relies on the fact that all three arrays are ordered based on list_of_files
 function save_to_program_list(graph_data, urls){  
     //relies on the order of urls being the same as the names in graph data which tehy should be 
-    for (let i = 0; i < list_of_files.length; i++){
+    for (let i = 0; i < graph_data.length; i++){
         program_list.push(new Program(graph_data[i][0], graph_data[i][1], urls[i]));
     }
 
