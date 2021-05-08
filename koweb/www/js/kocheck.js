@@ -451,17 +451,13 @@ function generate_gitraw_urls(list_of_files){
             }
 
             
-            let firstpart = top_url.substring(0,top_url.lastIndexOf("/"));
+            let result_relative_url = top_url.substring(0,top_url.lastIndexOf("/"));
             while (sub_dir_counter != 0){
-                firstpart = firstpart.slice(0,-1);
-                firstpart = firstpart.substring(0,firstpart.lastIndexOf("/"));
+                result_relative_url = result_relative_url.slice(0,-1);
+                firstpart = result_relative_url.substring(0,result_relative_url.lastIndexOf("/"));
                 sub_dir_counter -= 1;
             }
-
-            console.log("ROOT RELATIVE PATH: ", firstpart); //did not work
-            
-            continue;
-
+            result_list.push(result_relative_url + "/" + file)
         }
         else{
             //so i need to get the url till the last /
