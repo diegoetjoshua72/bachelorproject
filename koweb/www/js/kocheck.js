@@ -2,6 +2,13 @@ import init, { run_test, increment_test , get_graph_rust} from "../pkg/koweb.js"
 import {Test} from "./program.js";
 
 
+async function init_wasm_module(){
+    await init();
+}
+init_wasm_module();
+let program_list = [];
+
+
 export class Test2{
     constructor(){
         this.test = "pipotest"
@@ -16,19 +23,6 @@ export class Test2{
 const test = new Test;
 console.log(test.test);
 
-class Mem {
-    constructor() {
-        this.program_list = [];
-    }
-
-    add_mem(item){
-        this.program_list.push(item);
-    }
-
-    clear_mem(){
-        this.program_list = [];
-    }
-}
 
 
 class Program {
@@ -37,7 +31,6 @@ class Program {
         this.dependency = dependency;
         this.raw_url = raw_url;
     }
-
 
     static get_piece_of_text(buffer_size){
         return this.text.slice(buffer_size, this.text.length -1);
@@ -201,7 +194,7 @@ function unpack(str) {
 async function run(program = undefined) {
     // try {
         remove_all_outputs_dom();
-        await init();
+        // await init();
         var testing = await window.editor.getValue();
         const prog = new Program(testing, "pipo", "toto");
         // console.log(prog);
