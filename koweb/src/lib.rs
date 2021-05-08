@@ -60,6 +60,8 @@ extern "C" {
 
     #[wasm_bindgen(static_method_of = Test)]
     pub fn test_text() -> String;
+
+    pub fn call_exported_rust_func() -> String;
 }
 
 static mut test: i32 = 0;

@@ -449,34 +449,26 @@ function generate_gitraw_urls(list_of_files){
             while (file.startsWith("../")){
                 sub_dir_counter += 1;
                 console.log("file before remove ../",file);
-                file = file.slice(2,file.length - 1);
+                file = file.slice(3,file.length);
                 console.log("file after remove ../",file);
             }
 
-            //1) count the number of ../ in the file
-            //2) use that count for the regex to create the context
-            //3) 
+            
+            let firstpart = top_url.substring(0,top_url.lastIndexOf("/"));
+            while (sub_dir_counter != 0){
+                firstpart = top.url.substring(0,-1);
+                firspart = top_url.substring(0,top_url.lastIndexOf("/"));
+            }
 
-            console.log("subdir Counter : ", sub_dir_counter);
-            console.log("file final : ", file);
-
-            // let count_sub_dir = file.match(/..\//).length();
-            // console.log(count_sub_dir);
-            
-            // var index = url.lastIndexOf("/");
-            // var fileName = url.substr(index)
-            
-            // console.log("index returned from lastIndexOf : ", index);
-            // console.log("alternative fileName : ", fileName);
-            
-            // let relative_context = 0;
+            console.log("ROOT RELATIVE PATH: ", firstpart);
             
             continue;
-            //i would have to strip a ../ for every level
-            //right now 1 level sub dir will work but i want to make ../../../ and so on work as well
+
         }
         else{
-            let dkurl = top_url + file;
+            //so i need to get the url till the last /
+            var firstpart = top_url.substring(0,top_url.lastIndexOf("/"));
+            let dkurl = firstpart + "/" +file; //this is not correct i need to remove the n.mk then add file 
             console.log("NEW GITRAW URL : ", dkurl);
             result_list.push(dkurl);
         }
