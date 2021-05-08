@@ -24,6 +24,8 @@ let program_list = [];
 //https://nordicapis.com/everything-you-need-to-know-about-api-pagination/ interesting stuff here for this and maybe the fetch can all be done in rust that would be quite cool 
 //then i don't even need to pass strings from js to rust. and the problem is solved 
 
+//attends donc peut etre enfait ce que je vais faire c'est utiliser webpack enfait mais je ferais ca vers la fin 
+
 //still first the right urls have to be made and the program also 
 //first investigate the two way 
 
@@ -451,12 +453,12 @@ function generate_gitraw_urls(list_of_files){
             
             let firstpart = top_url.substring(0,top_url.lastIndexOf("/"));
             while (sub_dir_counter != 0){
-                firstpart = top_url.substring(0,-1);
-                firstpart = top_url.substring(0,firstpart.lastIndexOf("/"));
+                firstpart = firstpart.slice(0,-1);
+                firstpart = firstpart.substring(0,firstpart.lastIndexOf("/"));
                 sub_dir_counter -= 1;
             }
 
-            console.log("ROOT RELATIVE PATH: ", firstpart);
+            console.log("ROOT RELATIVE PATH: ", firstpart); //did not work
             
             continue;
 
