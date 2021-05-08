@@ -70,8 +70,3 @@ export class Test {
 }
 
 
-
-//something like this sounds promissing
-export function call_exported_rust_func () {
-    get_string_js("test pass");
-}
