@@ -1,4 +1,4 @@
-import { Test } from './snippets/koweb-f1445fac41f4790a/www/js/program.js';
+import { Test, call_exported_rust_func } from './snippets/koweb-f1445fac41f4790a/www/js/program.js';
 
 let wasm;
 
@@ -286,6 +286,13 @@ async function init(input) {
     };
     imports.wbg.__wbg_testtext_485895b3661725ed = function(arg0) {
         var ret = Test.test_text();
+        var ptr0 = passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        var len0 = WASM_VECTOR_LEN;
+        getInt32Memory0()[arg0 / 4 + 1] = len0;
+        getInt32Memory0()[arg0 / 4 + 0] = ptr0;
+    };
+    imports.wbg.__wbg_callexportedrustfunc_564e00d5edf9c754 = function(arg0) {
+        var ret = call_exported_rust_func();
         var ptr0 = passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
         var len0 = WASM_VECTOR_LEN;
         getInt32Memory0()[arg0 / 4 + 1] = len0;
