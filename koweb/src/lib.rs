@@ -62,6 +62,12 @@ extern "C" {
     #[wasm_bindgen(static_method_of = Test)]
     pub fn test_text() -> String;
 
+}
+
+#[wasm_bindgen(module = "/www/js/init_wasm.js")]
+extern "C" {
+    //reflect object might be what we are looking for
+
     pub fn call_exported_rust_func() -> String;
 }
 
@@ -96,6 +102,32 @@ pub fn increment_test() {
     }
 }
 //manage to get strings from koweb
+
+//parse buffer info
+//it is a struct with some fields buffer that is a circular buffer and
+// read parse fail which are generic types and i assume they each become something like koparse are whater
+//read needs to implement the read trait
+
+//the parse buffer trait implements the following functions
+//fill
+
+//and it implements the iterator trait
+//this is the complicated looking part
+//the implementation of the next function for this buffer
+
+//the subtype is type Item = Result<O,E>
+
+//Iresult is the result of parsing functions it depends on I the input type and O the output type
+//donce P
+
+//pub enum IResult<I, O, E = u32>
+
+//it takes 5 generic types
+//O it looks like its the output type
+//E it looks like this is the error type
+//R is what we are reading
+//P function that returns a result of parsing some input IResult the input is an array of &[u8] and the output is of type O or verbose Error
+//F in case of failure this function takes in the parsing error and returns an E which is the error type
 
 fn produce_from_js(
     cmds_from_js: &'static str,
