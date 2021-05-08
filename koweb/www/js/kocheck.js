@@ -8,6 +8,25 @@ async function init_wasm_module(){
 init_wasm_module();
 let program_list = [];
 
+//TODO
+//1)init was at load : DONE
+//2)generate correct gitraw urls: 
+//3)create and set up all the program objects:
+//4)based on what is available generate the options on what to run:
+//5)Try running a .dk that requires dependencies and see what is the output:
+//6)Try to load a hard .mk file like given previously
+//prio) work on parse buffer and getting the string data to rust !
+
+
+//si je passe les urls a rust ? direct peut etre c'est mieux 
+
+//7)Check if it is possible to fetch bit by bit in JS https://api.video/blog/tutorials/uploading-large-files-with-javascript file and blob api like video split things in segments 
+//https://nordicapis.com/everything-you-need-to-know-about-api-pagination/ interesting stuff here for this and maybe the fetch can all be done in rust that would be quite cool 
+//then i don't even need to pass strings from js to rust. and the problem is solved 
+
+//still first the right urls have to be made and the program also 
+//and 
+
 
 export class Test2{
     constructor(){
@@ -39,7 +58,6 @@ class Program {
     //
 }
 
-let memory = new Mem();
 
 
 function remove_all_outputs_dom() {
