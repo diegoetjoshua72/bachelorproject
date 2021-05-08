@@ -359,7 +359,7 @@ function use_graph_data(graph_data){
 
     generate_html(graph_data);
     const urls = generate_gitraw_urls(list_of_files);
-    //then here store program objects in the []
+    save_to_program_list(graph_data,urls);
 }
 
 
@@ -477,8 +477,10 @@ function generate_gitraw_urls(list_of_files){
 function save_to_memory(graph_data, urls){  
     //relies on the order of urls being the same as the names in graph data which tehy should be 
     for (let i = 0; i < list_of_files.length; i++){
-        program_list.push(new Program(graph_data[i][0], graph_data[i][1], urls[i]))
+        program_list.push(new Program(graph_data[i][0], graph_data[i][1], urls[i]));
     }
+
+    console.log(program_list);
 }
 
 
