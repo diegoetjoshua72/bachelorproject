@@ -478,7 +478,7 @@ function dependencies_as_urls(){
     let dep_url_list_list = [];
     for (let program of program_list){
         let dep_url_list = [];
-        for(dep of program.dependency){
+        for(let dep of program.dependency){
             for(let program_inner of program_list){
                 if(program_inner.name == dep){
                     dep_url_list.push(program_inner.raw_url);
