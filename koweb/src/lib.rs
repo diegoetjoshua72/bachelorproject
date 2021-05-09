@@ -206,16 +206,6 @@ pub fn run_test(
 
 // Result::unwrap()` on an `Err` value: Error("invalid type: string \"[]\", expected a sequence", line: 1, column: 4)', koweb/./src/lib.rs:209:69
 
-// Stack:
-
-// panicked at 'called `Result::unwrap()` on an `Err` value: Error("invalid type: string \"[{\\\"name\\\":\\\"solve_easy.dk\\\",\\\"dependency\\\":[\\\"../bool.dk\\\"
-// ,\\\"sudoku.dk\\\",\\\"solve_easy.dk\\\"],\\\"raw_url\\\":\\\"https://raw.githubusercontent.com/diegoetjoshua72/bachelorproject/master/examples/sudoku/solve_easy.dk\\\"}
-// ,{\\\"name\\\":\\\"sudoku.dk\\\",\\\"dependency\\\":[\\\"../bool.dk\\\",\\\"sudoku.dk\\\"],\\\"raw_url\\\":\\\"https://raw.githubusercontent.com/diegoetjoshua72/bachelorproject/master/examples/sudoku/sudoku.dk\\\"}
-// ,{\\\"name\\\":\\\"../bool.dk\\\",\\\"dependency\\\":[\\\"../bool.dk\\\"],\\\"raw_url\\\":\\\"https://raw.githubusercontent.com/diegoetjoshua72/bachelorproject/master/examples/bool.dk\\\"}]\",
-// expected a sequence", line: 1, column: 565)', koweb/./src/lib.rs:220:55
-
-// Stack:
-
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Program {
     name: String,
@@ -225,6 +215,8 @@ pub struct Program {
 
 #[wasm_bindgen]
 pub fn run_multiple(graph_data: &JsValue) {
+    console_log::init_with_level(Level::Trace);
+    init_console_wasm_debug();
     let graph: Vec<Program> = graph_data.into_serde().unwrap();
     info!(
         "this is what we get for graph data in rust with serde : {:?}",

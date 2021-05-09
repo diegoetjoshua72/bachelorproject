@@ -16,7 +16,7 @@ crate-type = ["cdylib", "rlib"]
 env_logger = "0.7"
 colosseum = "0.2"
 byte-unit = "3.0"
-serde = { version = "1.0", features = ["derive", "serde-serialize"] }
+serde = { version = "1.0", features = ["derive"] }
 wasm-bindgen = { version = "0.2", features = ["serde-serialize"] }
 kocheck = { path = "../kocheck" }
 kontroli = { path = "../kontroli" }
