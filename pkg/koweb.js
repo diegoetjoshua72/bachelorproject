@@ -223,11 +223,22 @@ export function run_test(cmds_from_js, eta, no_scope, no_infer, no_check) {
     wasm.run_test(ptr0, len0, eta, no_scope, no_infer, no_check);
 }
 
+let stack_pointer = 32;
+
+function addBorrowedObject(obj) {
+    if (stack_pointer == 1) throw new Error('out of js stack');
+    heap[--stack_pointer] = obj;
+    return stack_pointer;
+}
 /**
 * @param {any} graph_data
 */
 export function run_multiple(graph_data) {
-    wasm.run_multiple(addHeapObject(graph_data));
+    try {
+        wasm.run_multiple(addBorrowedObject(graph_data));
+    } finally {
+        heap[stack_pointer++] = undefined;
+    }
 }
 
 function isLikeNone(x) {
