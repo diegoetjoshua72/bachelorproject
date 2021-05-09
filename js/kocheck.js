@@ -477,7 +477,7 @@ function generate_gitraw_urls(list_of_files){
 function dependencies_as_urls(){
     let dep_url_list_list = [];
     for (let program of program_list){
-        dep_url_list = [];
+        let dep_url_list = [];
         for(dep of program.dependency){
             for(let program_inner of program_list){
                 if(program_inner.name == dep){
