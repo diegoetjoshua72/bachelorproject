@@ -41,9 +41,10 @@ const test = new Test;
 console.log(test.test);
 
 class Program {
-    constructor(name, dependency, raw_url){
+    constructor(name, dependency, dependency_urls, raw_url){
         this.name = name;
         this.dependency = dependency;
+        this.dependency_urls;
         this.raw_url = raw_url;
     }
 
@@ -361,6 +362,7 @@ function use_graph_data(graph_data){
 
     generate_html(graph_data);
     const urls = generate_gitraw_urls(list_of_files);
+    const dependency_list_urls = dependencies_as_urls(graph_data,urls);
     save_to_program_list(graph_data,urls);
 }
 
@@ -474,17 +476,18 @@ function generate_gitraw_urls(list_of_files){
 }
 
 
-function dependencies_as_urls(){
+function dependencies_as_urls(graph_data, urls){
+    let counter = 0;
     let dep_url_list_list = [];
-    for (let program of program_list){
+    for (let node of graph_data){
         let dep_url_list = [];
-        for(let dep of program.dependency){
+        for(let name of node[1]){
             for(let program_inner of program_list){
-                if(program_inner.name == dep){
-                    dep_url_list.push(program_inner.raw_url);
+                if(node[0] == name){
+                    dep_url_list.push(urls[counter]);
+                    counter += 1;
                 }
             }
-
         }
         dep_url_list_list.push(dep_url_list);
     }
@@ -493,13 +496,12 @@ function dependencies_as_urls(){
 }
 
 //like this it relies on the fact that all three arrays are ordered based on list_of_files
-function save_to_program_list(graph_data, urls){  
+function save_to_program_list(graph_data, urls, dependcy_list_urls){  
     //relies on the order of urls being the same as the names in graph data which tehy should be 
     for (let i = 0; i < graph_data.length; i++){
-        program_list.push(new Program(graph_data[i][0], graph_data[i][1], urls[i]));
+        program_list.push(new Program(graph_data[i][0], graph_data[i][1],dependency_url_list[i], urls[i]));
     }
     console.log("PROGRAM LIST : ", program_list);
-    dependencies_as_urls();
 }
 
 
