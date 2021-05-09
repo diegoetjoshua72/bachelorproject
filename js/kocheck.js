@@ -496,7 +496,7 @@ function dependencies_as_urls(graph_data, urls){
 }
 
 //like this it relies on the fact that all three arrays are ordered based on list_of_files
-function save_to_program_list(graph_data, urls, dependcy_list_urls){  
+function save_to_program_list(graph_data, urls, dependency_url_list){  
     //relies on the order of urls being the same as the names in graph data which tehy should be 
     for (let i = 0; i < graph_data.length; i++){
         program_list.push(new Program(graph_data[i][0], graph_data[i][1],dependency_url_list[i], urls[i]));
