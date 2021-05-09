@@ -256,7 +256,7 @@ run_button.onclick = async () => {
 
 var run_multiple_button = document.getElementById("run_multiple");
 run_multiple_button.onclick = async () => {
-    console.log(JSON.stringify(program_list));
+    console.log(program_list);
     await run_multiple(program_list);
 };
 
