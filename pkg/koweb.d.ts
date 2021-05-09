@@ -22,9 +22,9 @@ export function increment_test(): void;
 */
 export function run_test(cmds_from_js: string, eta: boolean, no_scope: boolean, no_infer: boolean, no_check: boolean): void;
 /**
-* @param {any} graph_data
+* @param {any} programs
 */
-export function run_multiple(graph_data: any): void;
+export function run_multiple(programs: any): void;
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 

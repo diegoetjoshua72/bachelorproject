@@ -231,11 +231,11 @@ function addBorrowedObject(obj) {
     return stack_pointer;
 }
 /**
-* @param {any} graph_data
+* @param {any} programs
 */
-export function run_multiple(graph_data) {
+export function run_multiple(programs) {
     try {
-        wasm.run_multiple(addBorrowedObject(graph_data));
+        wasm.run_multiple(addBorrowedObject(programs));
     } finally {
         heap[stack_pointer++] = undefined;
     }
@@ -297,6 +297,15 @@ async function init(input) {
     imports.wbg = {};
     imports.wbg.__wbindgen_object_drop_ref = function(arg0) {
         takeObject(arg0);
+    };
+    imports.wbg.__wbindgen_cb_drop = function(arg0) {
+        const obj = takeObject(arg0).original;
+        if (obj.cnt-- == 1) {
+            obj.a = 0;
+            return true;
+        }
+        var ret = false;
+        return ret;
     };
     imports.wbg.__wbindgen_json_parse = function(arg0, arg1) {
         var ret = JSON.parse(getStringFromWasm0(arg0, arg1));
