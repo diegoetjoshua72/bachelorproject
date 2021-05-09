@@ -208,6 +208,14 @@ pub fn run_test(
 
 // Stack:
 
+// panicked at 'called `Result::unwrap()` on an `Err` value: Error("invalid type: string \"[{\\\"name\\\":\\\"solve_easy.dk\\\",\\\"dependency\\\":[\\\"../bool.dk\\\"
+// ,\\\"sudoku.dk\\\",\\\"solve_easy.dk\\\"],\\\"raw_url\\\":\\\"https://raw.githubusercontent.com/diegoetjoshua72/bachelorproject/master/examples/sudoku/solve_easy.dk\\\"}
+// ,{\\\"name\\\":\\\"sudoku.dk\\\",\\\"dependency\\\":[\\\"../bool.dk\\\",\\\"sudoku.dk\\\"],\\\"raw_url\\\":\\\"https://raw.githubusercontent.com/diegoetjoshua72/bachelorproject/master/examples/sudoku/sudoku.dk\\\"}
+// ,{\\\"name\\\":\\\"../bool.dk\\\",\\\"dependency\\\":[\\\"../bool.dk\\\"],\\\"raw_url\\\":\\\"https://raw.githubusercontent.com/diegoetjoshua72/bachelorproject/master/examples/bool.dk\\\"}]\",
+// expected a sequence", line: 1, column: 565)', koweb/./src/lib.rs:220:55
+
+// Stack:
+
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Program {
     name: String,
