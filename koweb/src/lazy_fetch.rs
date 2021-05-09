@@ -78,7 +78,7 @@ pub async fn get_chunk(url: String, chunk_size: u32) -> Result<std::io::Cursor<V
 
     let content = response.text().await?;
     std::io::copy(&mut content.as_bytes(), &mut buffer)?;
-
+    info!("content : {:?}", content);
     println!("Finished with success!");
 
     let mut program_text = std::io::Cursor::new(buffer);
