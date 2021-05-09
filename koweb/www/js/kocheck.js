@@ -44,7 +44,7 @@ class Program {
     constructor(name, dependency, dependency_urls, raw_url){
         this.name = name;
         this.dependency = dependency;
-        this.dependency_urls;
+        this.dependency_urls = dependency_urls;
         this.raw_url = raw_url;
     }
 
