@@ -224,6 +224,7 @@ pub fn run_multiple(programs: &JsValue) {
 
     for program in vec_of_programs {
         let result = lazy_fetch::get_chunk(program.raw_url, 1000);
-        info!("result of chunk")
+        //i don't want to return a future here
+        info!("result of chunk");
     }
 }
