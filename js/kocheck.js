@@ -41,10 +41,10 @@ const test = new Test;
 console.log(test.test);
 
 class Program {
-    constructor(name, dependency, dependency_urls, raw_url){
+    constructor(name, dependency, dependency_url_list, raw_url){
         this.name = name;
         this.dependency = dependency;
-        this.dependency_urls = dependency_urls;
+        this.dependency_url_list = dependency_url_list;
         this.raw_url = raw_url;
     }
 
