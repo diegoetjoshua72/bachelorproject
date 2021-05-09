@@ -481,13 +481,11 @@ function dependencies_as_urls(graph_data, urls){
     let dep_url_list_list = [];
     for (let node of graph_data){
         let dep_url_list = [];
-        for(let file_list of node[1]){
-            for(let file of file_list){
-                console.log("a : ", file);
-                if(node[0] == file){
-                    dep_url_list.push(urls[counter]);
-                    counter += 1;
-                }
+        for(let file of node[1]){
+            console.log("a : ", file);
+            if(node[0] == file){
+                dep_url_list.push(urls[counter]);
+                counter += 1;
             }
         }
         dep_url_list_list.push(dep_url_list);
