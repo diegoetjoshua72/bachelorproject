@@ -5,9 +5,9 @@ use wasm_bindgen::prelude::*;
 // use kontroli::scope::{Command, Symbols};
 // use kontroli::error::Error;
 // use kontroli::error::SymbolsError;
-
 use byte_unit::{Byte, ByteError};
 use kocheck::{parse, seq, Error, Event, Opt};
+use serde::{Deserialize, Serialize};
 
 use log::{info, trace, warn, Level};
 
@@ -204,9 +204,20 @@ pub fn run_test(
     Ok(())
 }
 
+// Result::unwrap()` on an `Err` value: Error("invalid type: string \"[]\", expected a sequence", line: 1, column: 4)', koweb/./src/lib.rs:209:69
+
+// Stack:
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct Program {
+    name: String,
+    dependency: String,
+    raw_url: String,
+}
+
 #[wasm_bindgen]
-pub fn run_multiple(graph_data: JsValue) {
-    let graph: Vec<(String, Vec<String>)> = graph_data.into_serde().unwrap();
+pub fn run_multiple(graph_data: &JsValue) {
+    let graph: Vec<Program> = graph_data.into_serde().unwrap();
     info!(
         "this is what we get for graph data in rust with serde : {:?}",
         graph
