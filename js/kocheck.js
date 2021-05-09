@@ -1,4 +1,4 @@
-import init, { run_test, increment_test , get_graph_rust} from "../pkg/koweb.js";
+import init, { run_test, increment_test , get_graph_rust, run_multiple} from "../pkg/koweb.js";
 import {Test} from "./program.js";
 
 
@@ -6,12 +6,12 @@ let program_list = [];
 
 //TODO
 //1)init was at load : DONE
-//2)generate correct gitraw urls: 
-//3)create and set up all the program objects:
-//4)based on what is available generate the options on what to run:
+//2)generate correct gitraw urls: DONE
+//3)create and set up all the program objects: DONE 
+//prio) work on parse buffer and getting the string data to rust !
+//4)based on what is available generate the options on what to run: LATER FIRST TRY TO GET DATA TO RUST 
 //5)Try running a .dk that requires dependencies and see what is the output:
 //6)Try to load a hard .mk file like given previously
-//prio) work on parse buffer and getting the string data to rust !
 
 
 //si je passe les urls a rust ? direct peut etre c'est mieux 
@@ -252,6 +252,11 @@ var run_url = (document.getElementById("run_url").onclick = () => {
 var run_button = document.getElementById("run");
 run_button.onclick = async () => {
     await run();
+};
+
+var run_multiple_button = document.getElementById("run_multiple");
+run_multiple_button.onclick = async () => {
+    await run_multiple(program_list);
 };
 
 var test_click = document.getElementById("increment");
