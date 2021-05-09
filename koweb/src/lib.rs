@@ -103,53 +103,6 @@ pub fn increment_test() {
 }
 //manage to get strings from koweb
 
-//parse buffer info
-//it is a struct with some fields buffer that is a circular buffer and
-// read parse fail which are generic types and i assume they each become something like koparse are whater
-//read needs to implement the read trait
-
-//the parse buffer trait implements the following functions
-//fill
-//keepds reading until either the buffer is full or the reader returns no data.
-
-//and it implements the iterator trait
-//this is the complicated looking part
-//the implementation of the next function for this buffer
-
-//the subtype is type Item = Result<O,E>
-
-//Iresult is the result of parsing functions it depends on I the input type and O the output type
-//donce P
-
-//pub enum IResult<I, O, E = u32>
-
-//it takes 5 generic types
-//O it looks like its the output type
-//E it looks like this is the error type
-//R is what we are reading
-//P function that returns a result of parsing some input IResult the input is an array of &[u8] and the output is of type O or verbose Error
-//F in case of failure this function takes in the parsing error and returns an E which is the error type
-
-//next()
-//returns an option with an item with inside a result<O,E>
-//what does a loop return in rust ?
-//matching on two things at the same time its not actually its calling a fuction
-//self.parse calls a function with self.buf.data as argument and we match on that
-//if no more space and position is 0 then we double otherwise we shift ?
-//
-//if the available space is not 0 and we parsed something incomplete then we call self fill()
-//if there is no more available data in the buffer then we break
-//else if there was nothing in the read_byte variable that we set to the reutrn of fill
-//then the code itself is incomplete so we send an error
-//
-//if we match an err that is not an err::incomplete we break
-
-//if the parsing was ok then we break and we return something about the data remaining
-//and some ok toplevel ok the breaks return the value to consumed and result
-//
-
-//
-
 fn produce_from_js(
     cmds_from_js: &'static str,
     opt: &Opt,
@@ -211,33 +164,6 @@ where
     }
 }
 
-//TODO list
-//1 lazi
-//2 better debug line of parse error would be nice
-//3 loading bar
-//4 makefiles loading multiple files (multiple editor tabs and file system)
-
-//essayer de virer le static lifetime =)
-//essayer de passer de maniere async le code dans le text editor (lazy)
-//verification de fichier passer par le file system ou url
-//run from : ----
-//error
-// -> String ??? -> (peut etre async lazy reading)???
-//regarder le parse buffer
-//typing reduce convertible
-//i want to be able to get error messages and line numbers
-//then i want to be able to run it with the run button
-//make the loading bar thing
-//calling parse on my string when passing it in parse .as_bytes()
-// https://stackoverflow.com/questions/32674905/pass-string-to-function-taking-read-trait
-
-//try to get rid of the run_test arguments
-
-//lets try and read from that js iterator in prog from rust without passing it
-
-// pub fn
-
-//UTILISER LE PARSE BUFFER
 #[wasm_bindgen]
 pub fn run_test(
     cmds_from_js: String,
@@ -276,4 +202,21 @@ pub fn run_test(
     seq::consume(iter, &opt).expect("something went wrong in the consume");
 
     Ok(())
+}
+
+#[wasm_bindgen]
+pub fn run_multiple(graph_data: JsValue) {
+    let graph: Vec<(String, Vec<String>)> = graph_data.into_serde().unwrap();
+    info!(
+        "this is what we get for graph data in rust with serde : {:?}",
+        graph
+    );
+    //i need to undo the json from graph data here
+    // for(){
+    //     while(){
+    //         lazy_fetch::get_chunk(url: String, chunk_size: u32)
+    //     }
+    // }
+    //how does the parse buffer fit in this
+    //
 }

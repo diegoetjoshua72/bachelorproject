@@ -1,0 +1,13 @@
+/home/kami/Programing/wasm/bachelorproject/koweb/target/rls/debug/deps/tracing-9d4a38f753729991.rmeta: /home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/tracing-0.1.26/src/lib.rs /home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/tracing-0.1.26/src/macros.rs /home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/tracing-0.1.26/src/dispatcher.rs /home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/tracing-0.1.26/src/field.rs /home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/tracing-0.1.26/src/instrument.rs /home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/tracing-0.1.26/src/level_filters.rs /home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/tracing-0.1.26/src/span.rs /home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/tracing-0.1.26/src/stdlib.rs /home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/tracing-0.1.26/src/subscriber.rs
+
+/home/kami/Programing/wasm/bachelorproject/koweb/target/rls/debug/deps/tracing-9d4a38f753729991.d: /home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/tracing-0.1.26/src/lib.rs /home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/tracing-0.1.26/src/macros.rs /home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/tracing-0.1.26/src/dispatcher.rs /home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/tracing-0.1.26/src/field.rs /home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/tracing-0.1.26/src/instrument.rs /home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/tracing-0.1.26/src/level_filters.rs /home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/tracing-0.1.26/src/span.rs /home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/tracing-0.1.26/src/stdlib.rs /home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/tracing-0.1.26/src/subscriber.rs
+
+/home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/tracing-0.1.26/src/lib.rs:
+/home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/tracing-0.1.26/src/macros.rs:
+/home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/tracing-0.1.26/src/dispatcher.rs:
+/home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/tracing-0.1.26/src/field.rs:
+/home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/tracing-0.1.26/src/instrument.rs:
+/home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/tracing-0.1.26/src/level_filters.rs:
+/home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/tracing-0.1.26/src/span.rs:
+/home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/tracing-0.1.26/src/stdlib.rs:
+/home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/tracing-0.1.26/src/subscriber.rs:

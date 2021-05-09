@@ -1,0 +1,11 @@
+/home/kami/Programing/wasm/bachelorproject/koweb/target/rls/debug/deps/futures_core-be617ae354712a4f.rmeta: /home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-core-0.3.14/src/lib.rs /home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-core-0.3.14/src/future.rs /home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-core-0.3.14/src/stream.rs /home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-core-0.3.14/src/task/mod.rs /home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-core-0.3.14/src/task/poll.rs /home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-core-0.3.14/src/task/__internal/mod.rs /home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-core-0.3.14/src/task/__internal/atomic_waker.rs
+
+/home/kami/Programing/wasm/bachelorproject/koweb/target/rls/debug/deps/futures_core-be617ae354712a4f.d: /home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-core-0.3.14/src/lib.rs /home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-core-0.3.14/src/future.rs /home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-core-0.3.14/src/stream.rs /home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-core-0.3.14/src/task/mod.rs /home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-core-0.3.14/src/task/poll.rs /home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-core-0.3.14/src/task/__internal/mod.rs /home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-core-0.3.14/src/task/__internal/atomic_waker.rs
+
+/home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-core-0.3.14/src/lib.rs:
+/home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-core-0.3.14/src/future.rs:
+/home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-core-0.3.14/src/stream.rs:
+/home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-core-0.3.14/src/task/mod.rs:
+/home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-core-0.3.14/src/task/poll.rs:
+/home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-core-0.3.14/src/task/__internal/mod.rs:
+/home/kami/.cargo/registry/src/github.com-1ecc6299db9ec823/futures-core-0.3.14/src/task/__internal/atomic_waker.rs:

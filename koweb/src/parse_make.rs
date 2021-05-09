@@ -256,11 +256,11 @@ fn check_loops() {
     ();
 }
 
-#[test]
-fn testing_parse() {
-    // create_graph(make_text.to_string());
-    get_graph_rust(make_text.to_string());
-}
+// #[test]
+// fn testing_parse() {
+//     // create_graph(make_text.to_string());
+//     get_graph_rust(make_text.to_string());
+// }
 
 //check for loops in dependency graph and just ignore them
 //
