@@ -213,14 +213,6 @@ pub struct Program {
     raw_url: String,
 }
 
-fn list_of_dependency_to_list_of_urls(programs: &Vec<Program>, name: &String) {
-    for &program in programs{
-        if program.name == name{
-            let 
-        }
-    }
-}
-
 #[wasm_bindgen]
 pub fn run_multiple(programs: &JsValue) {
     console_log::init_with_level(Level::Trace);
