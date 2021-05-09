@@ -256,7 +256,7 @@ run_button.onclick = async () => {
 
 var run_multiple_button = document.getElementById("run_multiple");
 run_multiple_button.onclick = async () => {
-    await run_multiple();
+    await run_multiple(program_list);
 };
 
 var test_click = document.getElementById("increment");
