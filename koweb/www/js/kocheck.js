@@ -474,13 +474,33 @@ function generate_gitraw_urls(list_of_files){
 }
 
 
+function dependencies_as_urls(){
+    let dep_url_list_list = [];
+    for (let program of program_list){
+        dep_url_list = [];
+        for(dep of program.dependency){
+            for(let program_inner of program_list){
+                if(program_inner.name == dep){
+                    dep_url_list.push(program_inner.raw_url);
+                }
+            }
+
+        }
+        dep_url_list_list.push(dep_url_list);
+    }
+    console.log(dep_url_list_list);
+    return dep_url_list_list;
+}
+
 //like this it relies on the fact that all three arrays are ordered based on list_of_files
 function save_to_program_list(graph_data, urls){  
     //relies on the order of urls being the same as the names in graph data which tehy should be 
+
     for (let i = 0; i < graph_data.length; i++){
         program_list.push(new Program(graph_data[i][0], graph_data[i][1], urls[i]));
     }
     console.log(program_list);
+    dependencies_as_urls();
 }
 
 

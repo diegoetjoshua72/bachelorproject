@@ -213,21 +213,25 @@ pub struct Program {
     raw_url: String,
 }
 
+fn list_of_dependency_to_list_of_urls(programs: &Vec<Program>, name: &String) {
+    for &program in programs{
+        if program.name == name{
+            let 
+        }
+    }
+}
+
 #[wasm_bindgen]
-pub fn run_multiple(graph_data: &JsValue) {
+pub fn run_multiple(programs: &JsValue) {
     console_log::init_with_level(Level::Trace);
     init_console_wasm_debug();
-    let graph: Vec<Program> = graph_data.into_serde().unwrap();
-    info!(
-        "this is what we get for graph data in rust with serde : {:?}",
-        graph
-    );
-    //i need to undo the json from graph data here
-    // for(){
-    //     while(){
-    //         lazy_fetch::get_chunk(url: String, chunk_size: u32)
-    //     }
-    // }
-    //how does the parse buffer fit in this
-    //
+    let vec_of_programs: Vec<Program> = programs.into_serde().unwrap();
+    info!("PROGRAM LIST IN RUST : {:?}", vec_of_programs);
+
+    //i would need the list of url for the dependencies
+
+    for program in vec_of_programs {
+        let result = lazy_fetch::get_chunk(program.raw_url, 1000);
+        info!("result of chunk")
+    }
 }
