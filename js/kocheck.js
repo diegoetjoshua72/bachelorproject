@@ -481,9 +481,9 @@ function dependencies_as_urls(graph_data, urls){
     let dep_url_list_list = [];
     for (let node of graph_data){
         let dep_url_list = [];
-        for(let name of node[1]){
-            for(let program_inner of program_list){
-                if(node[0] == name){
+        for(let file_list of node[1]){
+            for(let file of file_list){
+                if(node[0] == file){
                     dep_url_list.push(urls[counter]);
                     counter += 1;
                 }
