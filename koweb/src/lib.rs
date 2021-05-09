@@ -223,9 +223,11 @@ pub fn run_multiple(programs: &JsValue) {
     //i would need the list of url for the dependencies
 
     for program in vec_of_programs {
-        info!("program : {:?}", program);
-        let result = lazy_fetch::get_chunk(program.raw_url, 1000);
-        //i don't want to return a future here
-        info!("result of chunk");
+        // info!("program : {:?}", program);
+
+        async {
+            let result = lazy_fetch::get_chunk(program.raw_url, 1000).await;
+            info!("result of chunk : {:?} ", result.unwrap().into_inner());
+        };
     }
 }
