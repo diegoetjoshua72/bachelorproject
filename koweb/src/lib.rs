@@ -209,7 +209,7 @@ pub fn run_test(
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Program {
     name: String,
-    dependency: String,
+    dependency: Vec<String>,
     raw_url: String,
 }
 
