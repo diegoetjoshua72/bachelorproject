@@ -70,7 +70,7 @@ pub async fn get_chunk(url: &String, chunk_size: u32) -> Result<std::io::Cursor<
         // let mut headers = HeaderMap::new() //verify if the headers are good
         // header(RANGE, range)
         //now i don't have the issue anymore with the CORS
-        let mut response = client.get(url).send().await?;
+        let mut response = client.get(url).header(RANGE, range).send().await?;
         let status = response.status();
         if !(status == StatusCode::OK || status == StatusCode::PARTIAL_CONTENT) {
             error_chain::bail!("Unexpected server response: {}", status)
