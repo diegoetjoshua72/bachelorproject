@@ -230,8 +230,9 @@ pub async fn run_multiple(programs: JsValue) {
         //how can i do this
         //tokio spawn blocking
         //TODO HERE AND FETCH_PARSE_BUFFER
-        let res = block_on(lazy_fetch::get_chunk(program.raw_url, 1000)).unwrap();
-        info!("RESULT : {:?}", res);
+        //block on does not work here however
+
+        let res = lazy_fetch::get_chunk(program.raw_url, 1000);
         // info!("result of chunk : {:?} ", result.wait());
         // break;
     }
