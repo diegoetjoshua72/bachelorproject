@@ -2,6 +2,8 @@
 //
 //CA ME CASSE LE COUILLES LA GO TEST CA
 
+use tokio::task;
+
 use error_chain::error_chain;
 use reqwest::header::{HeaderValue, CONTENT_LENGTH, RANGE};
 use reqwest::StatusCode;
@@ -53,6 +55,7 @@ impl Iterator for PartialRangeIter {
 }
 
 pub async fn get_chunk(url: String, chunk_size: u32) -> Result<std::io::Cursor<Vec<u8>>> {
+    // let join_handle = task::spawn_blocking(move || {
     let client = reqwest::Client::new();
     let response = client.head(&url).send().await?; //make a head request
     let length = response //reqwest response
@@ -61,35 +64,29 @@ pub async fn get_chunk(url: String, chunk_size: u32) -> Result<std::io::Cursor<V
         .ok_or("response does not include the content length")?;
 
     let length = u64::from_str(length.to_str()?).map_err(|_| "invalid Content-Length header")?;
-
     let mut buffer: Vec<u8> = vec![];
-
     info!("fetching piece of size : {}", chunk_size);
     for range in PartialRangeIter::new(0, length - 1, chunk_size)? {
         info!("range {:?}", range);
         let mut response = client.get(&url).header(RANGE, range).send().await?;
-
         let status = response.status();
         if !(status == StatusCode::OK || status == StatusCode::PARTIAL_CONTENT) {
             error_chain::bail!("Unexpected server response: {}", status)
         }
         // std::io::copy(&mut response.bytes(), &mut buffer)?; //what does this line do
     }
-
     let content = response.text().await?;
     std::io::copy(&mut content.as_bytes(), &mut buffer)?;
     use std::io::Read;
     let mut program_text = std::io::Cursor::new(buffer);
-
     let mut buffer = String::new();
-
     info!(
         "content : {:?}",
         program_text.read_to_string(&mut buffer).unwrap()
     );
-
     println!("Finished with success!");
     return Ok(program_text);
+    // });
 }
 
 //whenever the parse runs out of things to parse we call this thing that gives him some more

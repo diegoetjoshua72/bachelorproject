@@ -213,6 +213,9 @@ pub struct Program {
     raw_url: String,
 }
 
+use futures::executor::block_on;
+use tokio::task;
+
 #[wasm_bindgen]
 pub fn run_multiple(programs: &JsValue) {
     console_log::init_with_level(Level::Trace);
@@ -225,9 +228,10 @@ pub fn run_multiple(programs: &JsValue) {
     for program in vec_of_programs {
         // info!("program : {:?}", program);
         //how can i do this
-        let result = lazy_fetch::get_chunk(program.raw_url, 1000)
-            .poll(self: Pin<&mut Self>, cx: &mut Context<'_>);
-        info!("result of chunk : {:?} ", result.unwrap().into_inner());
-        break;
+        //tokio spawn blocking
+        //TODO HERE AND FETCH_PARSE_BUFFER
+        block_on(lazy_fetch::get_chunk(program.raw_url, 1000));
+        // info!("result of chunk : {:?} ", result.wait());
+        // break;
     }
 }
