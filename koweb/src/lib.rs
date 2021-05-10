@@ -214,7 +214,6 @@ pub struct Program {
 }
 
 use futures::executor::block_on;
-use tokio::task;
 
 #[wasm_bindgen]
 pub fn run_multiple(programs: &JsValue) {
