@@ -76,17 +76,19 @@ pub async fn get_chunk(url: &String, chunk_size: u32) -> Result<std::io::Cursor<
             error_chain::bail!("Unexpected server response: {}", status)
         }
         std::io::copy(&mut response.text().await?.as_bytes(), &mut buffer)?;
-        info!("MAAAAN : {:?}", buffer);
+        info!("FIRST COPY : {:?}", buffer);
     }
     let content = response.text().await?;
     std::io::copy(&mut content.as_bytes(), &mut buffer)?;
+    info!("SECOND COPY : {:?}", buffer);
     let mut program_text = std::io::Cursor::new(buffer);
 
     let mut result = String::new();
 
     info!(
-        "content program_text: {:?}",
-        program_text.read_to_string(&mut result).unwrap()
+        "content program_text: {:?} {}",
+        program_text.read_to_string(&mut result).unwrap(),
+        result
     );
 
     println!("Finished with success!");
