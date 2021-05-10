@@ -23,8 +23,9 @@ export function increment_test(): void;
 export function run_test(cmds_from_js: string, eta: boolean, no_scope: boolean, no_infer: boolean, no_check: boolean): void;
 /**
 * @param {any} programs
+* @returns {any}
 */
-export function run_multiple(programs: any): void;
+export function run_multiple(programs: any): any;
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
@@ -34,14 +35,15 @@ export interface InitOutput {
   readonly get_string_js: (a: number, b: number, c: number) => void;
   readonly increment_test: () => void;
   readonly run_test: (a: number, b: number, c: number, d: number, e: number, f: number) => void;
-  readonly run_multiple: (a: number) => void;
+  readonly run_multiple: (a: number) => number;
   readonly __wbindgen_malloc: (a: number) => number;
   readonly __wbindgen_realloc: (a: number, b: number, c: number) => number;
   readonly __wbindgen_export_2: WebAssembly.Table;
-  readonly wasm_bindgen__convert__closures__invoke1_mut__h216297d8735a2f1d: (a: number, b: number, c: number) => void;
+  readonly wasm_bindgen__convert__closures__invoke1_mut__h0956c4504cf5a357: (a: number, b: number, c: number) => void;
   readonly __wbindgen_add_to_stack_pointer: (a: number) => number;
   readonly __wbindgen_free: (a: number, b: number) => void;
   readonly __wbindgen_exn_store: (a: number) => void;
+  readonly wasm_bindgen__convert__closures__invoke2_mut__h3d9698845ee087f1: (a: number, b: number, c: number, d: number) => void;
 }
 
 /**
