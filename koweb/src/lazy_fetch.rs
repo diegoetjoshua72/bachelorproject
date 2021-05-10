@@ -2,8 +2,6 @@
 //
 //CA ME CASSE LE COUILLES LA GO TEST CA
 
-use tokio::task;
-
 use error_chain::error_chain;
 use reqwest::header::{HeaderValue, CONTENT_LENGTH, RANGE};
 use reqwest::StatusCode;
