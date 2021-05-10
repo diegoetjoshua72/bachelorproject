@@ -223,13 +223,15 @@ pub async fn run_multiple(programs: JsValue) {
     info!("PROGRAM LIST IN RUST : {:?}", vec_of_programs);
 
     //i would need the list of url for the dependencies
-
+    //TILL HERE IT WORKS
     for program in vec_of_programs {
+        info!("Program : {:?}", program);
         // info!("program : {:?}", program);
         //how can i do this
         //tokio spawn blocking
         //TODO HERE AND FETCH_PARSE_BUFFER
-        block_on(lazy_fetch::get_chunk(program.raw_url, 1000));
+        let res = block_on(lazy_fetch::get_chunk(program.raw_url, 1000)).unwrap();
+        info!("RESULT : {:?}", res);
         // info!("result of chunk : {:?} ", result.wait());
         // break;
     }
