@@ -7,6 +7,7 @@ use reqwest::header::{HeaderValue, CONTENT_LENGTH, RANGE};
 use reqwest::StatusCode;
 // use std::fs::File;
 use log::{info, trace, warn, Level};
+use std::io::Read;
 use std::str::FromStr;
 
 error_chain! {
@@ -53,41 +54,43 @@ impl Iterator for PartialRangeIter {
 }
 
 pub async fn get_chunk(url: &String, chunk_size: u32) -> Result<std::io::Cursor<Vec<u8>>> {
-    // let join_handle = task::spawn_blocking(move || {
-    // maybe because it is not the js fetch api it doesn't let me
     let client = reqwest::Client::new();
     let response = client.head(url).send().await?; //make a head request
     let length = response //reqwest response
         .headers()
         .get(CONTENT_LENGTH)
         .ok_or("response does not include the content length")?;
-
     let length = u64::from_str(length.to_str()?).map_err(|_| "invalid Content-Length header")?;
+
     let mut buffer: Vec<u8> = vec![];
+
     info!("fetching piece of size : {}", chunk_size);
     for range in PartialRangeIter::new(0, length - 1, chunk_size)? {
         info!("range {:?}", range);
         // let mut headers = HeaderMap::new() //verify if the headers are good
         // header(RANGE, range)
+        //now i don't have the issue anymore with the CORS
         let mut response = client.get(url).send().await?;
         let status = response.status();
         if !(status == StatusCode::OK || status == StatusCode::PARTIAL_CONTENT) {
             error_chain::bail!("Unexpected server response: {}", status)
         }
-        // std::io::copy(&mut response, &mut buffer)?;
+        std::io::copy(&mut response.text().await?.as_bytes(), &mut buffer)?;
+        info!("MAAAAN : {:?}", buffer);
     }
     let content = response.text().await?;
     std::io::copy(&mut content.as_bytes(), &mut buffer)?;
-    use std::io::Read;
     let mut program_text = std::io::Cursor::new(buffer);
-    let mut buffer = String::new();
+
+    let mut result = String::new();
+
     info!(
-        "content : {:?}",
-        program_text.read_to_string(&mut buffer).unwrap()
+        "content program_text: {:?}",
+        program_text.read_to_string(&mut result).unwrap()
     );
+
     println!("Finished with success!");
     return Ok(program_text);
-    // });
 }
 
 //whenever the parse runs out of things to parse we call this thing that gives him some more
