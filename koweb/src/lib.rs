@@ -216,7 +216,7 @@ pub struct Program {
 use futures::executor::block_on;
 
 #[wasm_bindgen]
-pub fn run_multiple(programs: &JsValue) {
+pub async fn run_multiple(programs: JsValue) {
     console_log::init_with_level(Level::Trace);
     init_console_wasm_debug();
     let vec_of_programs: Vec<Program> = programs.into_serde().unwrap();
