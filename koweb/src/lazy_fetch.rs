@@ -55,7 +55,7 @@ impl Iterator for PartialRangeIter {
 pub async fn get_chunk(url: &String, chunk_size: u32) -> Result<std::io::Cursor<Vec<u8>>> {
     // let join_handle = task::spawn_blocking(move || {
     let client = reqwest::Client::new();
-    let response = client.head(&url).send().await?; //make a head request
+    let response = client.head(url).send().await?; //make a head request
     let length = response //reqwest response
         .headers()
         .get(CONTENT_LENGTH)
@@ -66,7 +66,7 @@ pub async fn get_chunk(url: &String, chunk_size: u32) -> Result<std::io::Cursor<
     info!("fetching piece of size : {}", chunk_size);
     for range in PartialRangeIter::new(0, length - 1, chunk_size)? {
         info!("range {:?}", range);
-        let mut response = client.get(&url).header(RANGE, range).send().await?;
+        let mut response = client.get(url).header(RANGE, range).send().await?;
         let status = response.status();
         if !(status == StatusCode::OK || status == StatusCode::PARTIAL_CONTENT) {
             error_chain::bail!("Unexpected server response: {}", status)
