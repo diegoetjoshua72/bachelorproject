@@ -54,6 +54,7 @@ impl Iterator for PartialRangeIter {
 
 pub async fn get_chunk(url: &String, chunk_size: u32) -> Result<std::io::Cursor<Vec<u8>>> {
     // let join_handle = task::spawn_blocking(move || {
+    // maybe because it is not the js fetch api it doesn't let me
     let client = reqwest::Client::new();
     let response = client.head(url).send().await?; //make a head request
     let length = response //reqwest response
@@ -66,12 +67,14 @@ pub async fn get_chunk(url: &String, chunk_size: u32) -> Result<std::io::Cursor<
     info!("fetching piece of size : {}", chunk_size);
     for range in PartialRangeIter::new(0, length - 1, chunk_size)? {
         info!("range {:?}", range);
-        let mut response = client.get(url).header(RANGE, range).send().await?;
+        // let mut headers = HeaderMap::new() //verify if the headers are good
+        // header(RANGE, range)
+        let mut response = client.get(url).send().await?;
         let status = response.status();
         if !(status == StatusCode::OK || status == StatusCode::PARTIAL_CONTENT) {
             error_chain::bail!("Unexpected server response: {}", status)
         }
-        // std::io::copy(&mut response.bytes(), &mut buffer)?; //what does this line do
+        // std::io::copy(&mut response, &mut buffer)?;
     }
     let content = response.text().await?;
     std::io::copy(&mut content.as_bytes(), &mut buffer)?;
