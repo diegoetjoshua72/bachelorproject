@@ -224,10 +224,10 @@ pub fn run_multiple(programs: &JsValue) {
 
     for program in vec_of_programs {
         // info!("program : {:?}", program);
-
-        async {
-            let result = lazy_fetch::get_chunk(program.raw_url, 1000).await;
-            info!("result of chunk : {:?} ", result.unwrap().into_inner());
-        };
+        //how can i do this
+        let result = lazy_fetch::get_chunk(program.raw_url, 1000)
+            .poll(self: Pin<&mut Self>, cx: &mut Context<'_>);
+        info!("result of chunk : {:?} ", result.unwrap().into_inner());
+        break;
     }
 }
