@@ -232,7 +232,8 @@ pub async fn run_multiple(programs: JsValue) {
         //TODO HERE AND FETCH_PARSE_BUFFER
         //block on does not work here however
 
-        let res = lazy_fetch::get_chunk(program.raw_url, 1000);
+        //like this it worked hmm
+        let res = lazy_fetch::get_chunk(program.raw_url, 1000).await;
         // info!("result of chunk : {:?} ", result.wait());
         // break;
     }
