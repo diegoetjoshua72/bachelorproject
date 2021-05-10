@@ -238,4 +238,6 @@ pub async fn run_multiple(programs: JsValue) {
         // info!("result of chunk : {:?} ", result.wait());
         // break;
     }
+    info!("CURLTEST");
+    lazy_fetch::curl_test();
 }

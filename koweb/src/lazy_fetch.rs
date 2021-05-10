@@ -95,6 +95,18 @@ pub async fn get_chunk(url: &String, chunk_size: u32) -> Result<std::io::Cursor<
     return Ok(program_text);
 }
 
+use curl::easy::{Easy, List};
+pub fn curl_test() {
+    let mut easy = Easy::new();
+    easy.url("https://raw.githubusercontent.com/diegoetjoshua72/bachelorproject/master/examples/sudoku/solve_easy.dk").unwrap();
+
+    let mut list = List::new();
+    list.append("range: bytes=0-50").unwrap();
+    easy.http_headers(list).unwrap();
+    easy.perform().unwrap();
+    println!("{}", easy.response_code().unwrap());
+}
+
 //whenever the parse runs out of things to parse we call this thing that gives him some more
 //if we run out we need pass something empty to him and he will understand
 
