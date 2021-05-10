@@ -52,7 +52,7 @@ impl Iterator for PartialRangeIter {
     }
 }
 
-pub async fn get_chunk(url: String, chunk_size: u32) -> Result<std::io::Cursor<Vec<u8>>> {
+pub async fn get_chunk(url: &String, chunk_size: u32) -> Result<std::io::Cursor<Vec<u8>>> {
     // let join_handle = task::spawn_blocking(move || {
     let client = reqwest::Client::new();
     let response = client.head(&url).send().await?; //make a head request

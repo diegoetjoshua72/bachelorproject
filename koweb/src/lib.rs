@@ -210,6 +210,7 @@ pub fn run_test(
 pub struct Program {
     name: String,
     dependency: Vec<String>,
+    dependency_url_list: Vec<String>,
     raw_url: String,
 }
 
@@ -233,7 +234,7 @@ pub async fn run_multiple(programs: JsValue) {
         //block on does not work here however
 
         //like this it worked hmm
-        let res = lazy_fetch::get_chunk(program.raw_url, 1000).await;
+        let res = lazy_fetch::get_chunk(&program.dependency_url_list[0], 1000).await;
         // info!("result of chunk : {:?} ", result.wait());
         // break;
     }
