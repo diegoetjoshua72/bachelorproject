@@ -255,9 +255,13 @@ run_button.onclick = async () => {
     await run();
 };
 
+
+
 var run_multiple_button = document.getElementById("run_multiple");
 run_multiple_button.onclick = async () => {
     console.log(program_list);
+    //i can try to use the js fetch api see if it works then but how does it work on that site \
+    console.log(editor.getValueInRange({startLineNumber: 1, endLineNumber: 3}))
     await run_multiple(program_list);
 };
 
