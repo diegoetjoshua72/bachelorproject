@@ -216,11 +216,46 @@ pub struct Program {
 
 use futures::executor::block_on;
 
+use js_sys::{Error as JsError, JsString, Reflect};
+use web_sys::console;
+
 #[wasm_bindgen]
 pub async fn run_multiple(programs: JsValue) {
     console_log::init_with_level(Level::Trace);
     init_console_wasm_debug();
     let vec_of_programs: Vec<Program> = programs.into_serde().unwrap();
+
+    let window = web_sys::window().expect("no window found");
+    // let editor = window.editor();
+    let object = match Reflect::get(&window, &js_sys::JsString::from("editor")) {
+        Ok(value) if value.is_object() => Ok(value),
+        _ => Err("Window object doesn't have a suitable property"),
+    }
+    .unwrap();
+
+    let method: js_sys::Function = match Reflect::get(&object, &js_sys::JsString::from("getValue"))
+    {
+        Ok(value) if value.is_function() => {
+            // wasm_bindgen::JsValue => js_sys::Function
+            Ok(value.into())
+        }
+        _ => Err("object does not have the specified method"),
+    }
+    .unwrap();
+
+    let arguments = js_sys::Array::new();
+
+    match Reflect::apply(&method, &object, &arguments) {
+        Ok(_result) => {
+            info!("Applied method successfully.");
+            Ok(())
+        }
+        Err(error) => {
+            info!("Attempt to apply method failed.");
+            Err(error)
+        }
+    }
+    .unwrap();
     info!("PROGRAM LIST IN RUST : {:?}", vec_of_programs);
 
     //i would need the list of url for the dependencies
