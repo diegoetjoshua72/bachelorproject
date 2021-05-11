@@ -246,8 +246,9 @@ pub async fn run_multiple(programs: JsValue) {
     let arguments = js_sys::Array::new();
 
     match Reflect::apply(&method, &object, &arguments) {
-        Ok(_result) => {
+        Ok(result) => {
             info!("Applied method successfully.");
+            info!("This is the result {:?}", result);
             Ok(())
         }
         Err(error) => {
