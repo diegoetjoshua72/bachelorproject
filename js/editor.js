@@ -264,7 +264,7 @@ require(["vs/editor/editor.main"], function () {
 
     //this is taken outside the normal execution flow and its a problem because i need window to be set before i continue
     window.editor = monaco.editor.create(document.getElementById("container"), {
-        theme: "vs-gruv",
+        theme: "vs-dark",
         value: getCode(),
         language: "lambdapi",
         automaticLayout: true,

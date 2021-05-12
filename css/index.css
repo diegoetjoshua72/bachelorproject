@@ -52,6 +52,7 @@ ul {
     grid-template-rows: auto 1fr auto auto auto auto 8em;
     grid-template-areas:
         "h1"
+        "file_sys"
         "container"
         "option-panel"
         "operations"
@@ -70,6 +71,7 @@ ul {
     /* width: 80%; */
     /* height: 650px; */
     place-self: stretch;
+    align-self: stretch;
     /* width: 80%; */
     border: solid;
     border-color: grey;
@@ -97,7 +99,6 @@ ul {
     border-style: solid;
     border: solid;
     border-color: grey;
-    background-color: #404040;
     margin-bottom: 20px;
 }
 
@@ -111,6 +112,7 @@ ul {
     padding: 10px;
     border: solid;
     border-color: grey;
+    background-color: rgb(20, 20, 20);
 }
 
 #footer {
