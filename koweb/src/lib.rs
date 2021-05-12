@@ -137,9 +137,12 @@ fn get_text_from_editor() -> Result<String, ()> {
     Err(())
 }
 
-fn produce_from_js(cmds_from_js: &[u8], opt: &Opt) -> impl Iterator<Item = Result<Event, Error>> {
+fn produce_from_js(
+    cmds_from_js: &'static str,
+    opt: &Opt,
+) -> impl Iterator<Item = Result<Event, Error>> {
     let module = std::iter::once(Ok(Event::Module(vec!["js".to_string()])));
-    let cmds = parse(cmds_from_js, opt).map(|cmd| cmd.map(Event::Command));
+    let cmds = parse(cmds_from_js.as_bytes(), opt).map(|cmd| cmd.map(Event::Command));
     module.chain(cmds)
 }
 
@@ -212,7 +215,7 @@ pub fn run_test(
 
     let program_text = get_text_from_editor().unwrap();
 
-    // let static_cmds_str = string_to_static_str(cmds_from_js);
+    let static_cmds_str = string_to_static_str(cmds_from_js);
 
     let opt = Opt {
         eta,
@@ -225,7 +228,7 @@ pub fn run_test(
         files: vec![],
     };
 
-    let iter = produce_from_js(program_text.as_bytes(), &opt);
+    let iter = produce_from_js(static_cmds_str, &opt);
 
     let mut iter = Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webpage(event)));
 
