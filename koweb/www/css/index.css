@@ -14,10 +14,10 @@ body {
   margin-right: 10%; */
     margin: 0;
     padding: 0;
-    background: linear-gradient(150deg, #333, #111);
+    background-color: #FFFAFA;
     /* background-color: #1e1e1e; */
     font-family: "Roboto", sans-serif;
-    color: blanchedalmond;
+    color: rgb(20, 20, 20);
 }
 
 /* make it nice on the phone as well  */
