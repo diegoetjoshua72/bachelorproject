@@ -103,12 +103,43 @@ pub fn increment_test() {
 }
 //manage to get strings from koweb
 
-fn produce_from_js(
-    cmds_from_js: &'static str,
-    opt: &Opt,
-) -> impl Iterator<Item = Result<Event, Error>> {
+fn get_text_from_editor() -> Result<String, ()> {
+    let window = web_sys::window().expect("no window found");
+    // let editor = window.editor();
+    let object = match Reflect::get(&window, &js_sys::JsString::from("editor")) {
+        Ok(value) if value.is_object() => Ok(value),
+        _ => Err("Window object doesn't have a suitable property"),
+    }
+    .unwrap();
+
+    let method: js_sys::Function = match Reflect::get(&object, &js_sys::JsString::from("getValue"))
+    {
+        Ok(value) if value.is_function() => {
+            // wasm_bindgen::JsValue => js_sys::Function
+            Ok(value.into())
+        }
+        _ => Err("object does not have the specified method"),
+    }
+    .unwrap();
+
+    let arguments = js_sys::Array::new();
+
+    match Reflect::apply(&method, &object, &arguments) {
+        Ok(result) => {
+            info!("Applied method successfully.");
+            info!("This is the result {:?}", result);
+            return Ok(result.as_string().unwrap()); //find how to change JsValue to string
+        }
+        Err(error) => {
+            info!("Attempt to apply method failed.");
+        }
+    }
+    Err(())
+}
+
+fn produce_from_js(cmds_from_js: &[u8], opt: &Opt) -> impl Iterator<Item = Result<Event, Error>> {
     let module = std::iter::once(Ok(Event::Module(vec!["js".to_string()])));
-    let cmds = parse(cmds_from_js.as_bytes(), opt).map(|cmd| cmd.map(Event::Command));
+    let cmds = parse(cmds_from_js, opt).map(|cmd| cmd.map(Event::Command));
     module.chain(cmds)
 }
 
@@ -175,14 +206,13 @@ pub fn run_test(
     // let mut f = File::open("foo.txt")?;
     // let mut buffer = [0; 10];
 
-    println!("hello this is a test");
     console_log::init_with_level(Level::Trace);
     init_console_wasm_debug();
-    alert(cmds_from_js.as_str());
+    // alert(cmds_from_js.as_str());
 
-    info!("testing the info part");
+    let program_text = get_text_from_editor().unwrap();
 
-    let static_cmds_str = string_to_static_str(cmds_from_js);
+    // let static_cmds_str = string_to_static_str(cmds_from_js);
 
     let opt = Opt {
         eta,
@@ -195,7 +225,7 @@ pub fn run_test(
         files: vec![],
     };
 
-    let iter = produce_from_js(static_cmds_str, &opt);
+    let iter = produce_from_js(program_text.as_bytes(), &opt);
 
     let mut iter = Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webpage(event)));
 
@@ -225,38 +255,6 @@ pub async fn run_multiple(programs: JsValue) {
     init_console_wasm_debug();
     let vec_of_programs: Vec<Program> = programs.into_serde().unwrap();
 
-    let window = web_sys::window().expect("no window found");
-    // let editor = window.editor();
-    let object = match Reflect::get(&window, &js_sys::JsString::from("editor")) {
-        Ok(value) if value.is_object() => Ok(value),
-        _ => Err("Window object doesn't have a suitable property"),
-    }
-    .unwrap();
-
-    let method: js_sys::Function = match Reflect::get(&object, &js_sys::JsString::from("getValue"))
-    {
-        Ok(value) if value.is_function() => {
-            // wasm_bindgen::JsValue => js_sys::Function
-            Ok(value.into())
-        }
-        _ => Err("object does not have the specified method"),
-    }
-    .unwrap();
-
-    let arguments = js_sys::Array::new();
-
-    match Reflect::apply(&method, &object, &arguments) {
-        Ok(result) => {
-            info!("Applied method successfully.");
-            info!("This is the result {:?}", result);
-            Ok(())
-        }
-        Err(error) => {
-            info!("Attempt to apply method failed.");
-            Err(error)
-        }
-    }
-    .unwrap();
     info!("PROGRAM LIST IN RUST : {:?}", vec_of_programs);
 
     //i would need the list of url for the dependencies
