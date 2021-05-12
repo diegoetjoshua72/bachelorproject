@@ -252,6 +252,13 @@ var run_url = (document.getElementById("run_url").onclick = () => {
 
 var run_button = document.getElementById("run");
 run_button.onclick = async () => {
+    console.log(program_list);
+    //i can try to use the js fetch api see if it works then but how does it work on that site \
+    console.log("RANGE : ", window.editor.getValueInRange({startLineNumber: 1, endLineNumber: 3}))
+    console.log("EDITOR : ", window.moncaco.editor);
+    console.log("VALUE MON : ", window.monaco.editor.getValue());
+    console.log("RANGE MON : ", window.monaco.editor.getValueInRange({startLineNumber: 1, endLineNumber: 3}));
+    console.log("RANGE MON : ", window.monaco.editor.getModel().getValueInRange({startLineNumber: 1, endLineNumber: 3}));
     await run();
 };
 
@@ -259,14 +266,28 @@ run_button.onclick = async () => {
 
 var run_multiple_button = document.getElementById("run_multiple");
 run_multiple_button.onclick = async () => {
-    console.log(program_list);
-    //i can try to use the js fetch api see if it works then but how does it work on that site \
-    // console.log(editor.getValueInRange({startLineNumber: 1, endLineNumber: 3}))
     await run_multiple(program_list);
 };
 
 var test_click = document.getElementById("increment");
 test_click.onclick = () => {
+    
+    var url = "https://raw.githubusercontent.com/diegoetjoshua72/bachelorproject/master/examples/sudoku/deps.mk";
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url);
+
+    xhr.setRequestHeader("range", "bytes=0-50");
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            console.log(xhr.status);
+            console.log(xhr.responseText);
+        }
+    };
+
+    xhr.send();
+
     increment_test();
 };
 
