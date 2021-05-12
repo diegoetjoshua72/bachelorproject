@@ -279,7 +279,7 @@ test_click.onclick = () => {
     // };
     // xhr.send();
     
-    console.log("RANGE : ", window.editor.getValueInRange({startLineNumber: 1, endLineNumber: 3}))
+    // console.log("RANGE : ", window.editor.getValueInRange({startLineNumber: 1, endLineNumber: 3}))
     console.log("EDITOR : ", window.moncaco.editor);
     console.log("VALUE MON : ", window.monaco.editor.getValue());
     console.log("RANGE MON : ", window.monaco.editor.getValueInRange({startLineNumber: 1, endLineNumber: 3}));
