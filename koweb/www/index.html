@@ -44,6 +44,11 @@
             </div>
 
             <div>
+                <input type="text" id="buffer_size" class="option" names="buffer_size">
+                <label for="no_check">buffer_size</label>
+            </div>
+
+            <div>
                 <input type="url" name="url" id="url" placeholder="https://dkfile.com" pattern="https://.*" size="30"
                     required>
             </div>
@@ -52,6 +57,7 @@
                 <input type="url" name="urlmake" id="urlmake" placeholder="https://makefile.com" pattern="https://.*" size="30"
                     required>
             </div>
+
         </div>
 
         <div id="operations">
@@ -59,10 +65,8 @@
             <button id="load_url" class="btn blue">Load text from the url in the text editor</button>
             <button id="run_url" class="btn green">Run from Url</button>
             <button id="run" class="btn green">Run</button>
+            <button id="run_multiple" class="btn green">test run multiple</button>
             <button id="increment">test</button>
-            <!-- put the buffer  -->
-            <textarea id="initialbsize"></textarea> 
-            <button id="run_multiple">test run multiple</button>
         </div>
 
         <div id="errors">
