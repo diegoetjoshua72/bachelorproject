@@ -159,51 +159,6 @@ function load_text_from_url_in_editor(program_text) {
 
 
 
-//i will have to do like a check here for 64 MB 
-// [...Buffer.from('hello world')] test this
-const myIter = new String("new string that i want to pass in like maybe three next calls something like that")[Symbol.iterator] = function () {
-    return {
-        start: 0,
-        end: this.length,
-        size_slice: 2,
-        next() {
-            return {
-                done: (this.start < this.end) ? false : true,
-                value: () => {
-                    let result = this.slice(this.start, this.size_slice);
-                    this.start += this.size_slice;
-                    return result;
-                }
-            }
-        }
-    }
-}
-
-console.log(myIter);
-
-// for (let i = 0; i<10 ; i++) {
-//     console.log("CUSTOM ITERATOR TEST", myString.next());
-// }
-
-function unpack(str) {
-    var bytes = [];
-    for(var i = 0; i < str.length; i++) {
-        var char = str.charCodeAt(i);
-        bytes.push(char >>> 8);
-        bytes.push(char & 0xFF);
-    }
-    return bytes;
-}
-// console.log("turning string into BYTES : ", unpack(myString));
-// console.log("BYTE STRING TEST: ", [...Buffer.from(myString)])
-// console.log([...myString]);
-
-
-
-//expolorer facon async de passer des donnes de javascript vers rust
-//maybe i can pass a closure to the run function 
-//iterators and generators 
-//
 async function run(program = undefined) {
     // try {
         remove_all_outputs_dom();
