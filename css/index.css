@@ -49,7 +49,7 @@ ul {
     margin: 2em 8em 8em 8em;
     height: 100vh;
     grid-template-columns: minmax(800px, 1fr);
-    grid-template-rows: auto 1fr auto auto auto auto 8em;
+    grid-template-rows: auto auto 1fr auto auto auto auto 8em;
     grid-template-areas:
         "h1"
         "file_sys"
