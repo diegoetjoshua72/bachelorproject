@@ -216,7 +216,7 @@ pub fn run_test(
 
     let program_text = get_text_from_editor().unwrap();
 
-    let static_cmds_str = string_to_static_str(cmds_from_js);
+    // let static_cmds_str = string_to_static_str(cmds_from_js);
 
     let opt = Opt {
         eta,
@@ -229,9 +229,7 @@ pub fn run_test(
         files: vec![],
     };
 
-    let mut iter = produce_from_js(&program_text, &opt);
-
-    print_iterator(&mut iter);
+    let iter = produce_from_js(&program_text, &opt);
 
     let mut iter = Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webpage(event)));
 
