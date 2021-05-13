@@ -267,21 +267,8 @@ run_multiple_button.onclick = async () => {
 var test_click = document.getElementById("increment");
 test_click.onclick = () => {
     
-    // var url = "https://raw.githubusercontent.com/diegoetjoshua72/bachelorproject/master/examples/sudoku/deps.mk";
-    // var xhr = new XMLHttpRequest();
-    // xhr.open("GET", url);
-    // xhr.setRequestHeader("range", "bytes=0-50");
-    // xhr.onreadystatechange = function () {
-    //     if (xhr.readyState === 4) {
-    //         console.log(xhr.status);
-    //         console.log(xhr.responseText);
-    //     }
-    // };
-    // xhr.send();
-    
-    // console.log("RANGE : ", window.editor.getValueInRange({startLineNumber: 1, endLineNumber: 3}))
     console.log(window.editor);
-    console.log(window.editor.getModel())
+    console.log(window.editor.getModel().getValueInRange());
     increment_test();
 };
 
@@ -321,7 +308,6 @@ test_click.onclick = () => {
 
 
 
-//OK I AM RETARDED 
 
 //1) generate the gitraw urls that i will need
 //2) put everything in the mem instance 

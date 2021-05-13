@@ -17,24 +17,16 @@ pub mod lazy_fetch;
 pub mod parse_make;
 
 //not sure what wee alloc does
-#[cfg(feature = "wee_alloc")]
-#[global_allocator]
-static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
+// #[cfg(feature = "wee_alloc")]
+// #[global_allocator]
+// static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 extern crate console_error_panic_hook;
 use std::panic;
 
-//i should get the the automatic code format and debugger going as well today
 fn init_console_wasm_debug() {
     panic::set_hook(Box::new(console_error_panic_hook::hook));
 }
-
-// #[wasm_bindgen(module = "/www/js/program.js")]
-// extern "C" {
-// type Prog;
-// #[wasm_bindgen(static_method_of = Prog)]
-// fn get_piece_to_koweb_static() -> String;
-// }
 
 #[wasm_bindgen]
 extern "C" {
@@ -45,32 +37,6 @@ extern "C" {
     fn log(s: &str);
 }
 
-// #[wasm_bindgen(module = "/www/js/kocheck.js")]
-// extern "C" {
-//     //reflect object might be what we are looking for
-//     pub type Test2;
-
-//     #[wasm_bindgen(static_method_of = Test2)]
-//     pub fn test_text2() -> String;
-// }
-
-#[wasm_bindgen(module = "/www/js/program.js")]
-extern "C" {
-    //reflect object might be what we are looking for
-    pub type Test;
-
-    #[wasm_bindgen(static_method_of = Test)]
-    pub fn test_text() -> String;
-
-}
-
-// #[wasm_bindgen(module = "/www/js/init_wasm.js")]
-// extern "C" {
-//     //reflect object might be what we are looking for
-
-//     pub fn call_exported_rust_func() -> String;
-// }
-
 static mut test: i32 = 0;
 
 #[wasm_bindgen]
@@ -78,30 +44,18 @@ pub fn get_string_js(string_js: String) -> String {
     return string_js;
 }
 
-//this function is called in the js or rust context and executes in the rust context
-//so i can pass a string as argument in js and use it here
-//
-//the other way i thought is to get a function that i can call in rust that executes in the
-//js context and that allowes me to read a string from the js context
-//
-//like i could call a function that i export from js that calls a function
-//that is exported from rust
-//that will pass the string TODO this <- ->
-
 #[wasm_bindgen()]
 pub fn increment_test() {
     unsafe {
         // alert(Prog::get_piece_to_koweb_static().as_str());
-        alert(format!("test : {}", test).as_str());
-        alert(Test::test_text().as_str());
+        // alert(Test::test_text().as_str());
         // alert(call_exported_rust_func().as_str());
         // alert(Test2::test_text2().as_str()); MIME TYPE ISSUE AAA
-
         // let value = js_sys::Reflect::get(&target, &property_key).expect("reflect failed");
+        alert(format!("test : {}", test).as_str());
         test += 1;
     }
 }
-//manage to get strings from koweb
 
 fn get_text_from_editor() -> Result<String, ()> {
     let window = web_sys::window().expect("no window found");
