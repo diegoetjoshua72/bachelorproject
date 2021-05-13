@@ -1,4 +1,3 @@
-import { Test } from './snippets/koweb-f1445fac41f4790a/www/js/program.js';
 
 let wasm;
 
@@ -272,7 +271,7 @@ function handleError(f, args) {
         wasm.__wbindgen_exn_store(addHeapObject(e));
     }
 }
-function __wbg_adapter_114(arg0, arg1, arg2, arg3) {
+function __wbg_adapter_112(arg0, arg1, arg2, arg3) {
     wasm.wasm_bindgen__convert__closures__invoke2_mut__h33f3cef94c0c61e6(arg0, arg1, addHeapObject(arg2), addHeapObject(arg3));
 }
 
@@ -336,13 +335,6 @@ async function init(input) {
     imports.wbg.__wbindgen_json_parse = function(arg0, arg1) {
         var ret = JSON.parse(getStringFromWasm0(arg0, arg1));
         return addHeapObject(ret);
-    };
-    imports.wbg.__wbg_testtext_485895b3661725ed = function(arg0) {
-        var ret = Test.test_text();
-        var ptr0 = passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
-        var len0 = WASM_VECTOR_LEN;
-        getInt32Memory0()[arg0 / 4 + 1] = len0;
-        getInt32Memory0()[arg0 / 4 + 0] = ptr0;
     };
     imports.wbg.__wbg_alert_fff1db3e10118ea7 = function(arg0, arg1) {
         alert(getStringFromWasm0(arg0, arg1));
@@ -518,7 +510,7 @@ async function init(input) {
                 const a = state0.a;
                 state0.a = 0;
                 try {
-                    return __wbg_adapter_114(a, state0.b, arg0, arg1);
+                    return __wbg_adapter_112(a, state0.b, arg0, arg1);
                 } finally {
                     state0.a = a;
                 }
@@ -609,7 +601,7 @@ async function init(input) {
         var ret = wasm.memory;
         return addHeapObject(ret);
     };
-    imports.wbg.__wbindgen_closure_wrapper270 = function(arg0, arg1, arg2) {
+    imports.wbg.__wbindgen_closure_wrapper267 = function(arg0, arg1, arg2) {
         var ret = makeMutClosure(arg0, arg1, 113, __wbg_adapter_28);
         return addHeapObject(ret);
     };
