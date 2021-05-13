@@ -6,10 +6,10 @@ use wasm_bindgen::prelude::*;
 // use kontroli::error::Error;
 // use kontroli::error::SymbolsError;
 use byte_unit::{Byte, ByteError};
+use js_sys::{Error as JsError, JsString, Reflect};
 use kocheck::{parse, seq, Error, Event, Opt};
-use serde::{Deserialize, Serialize};
-
 use log::{info, trace, warn, Level};
+use serde::{Deserialize, Serialize};
 
 // use crate::itertools::Itertools;
 
@@ -245,11 +245,6 @@ pub struct Program {
     dependency_url_list: Vec<String>,
     raw_url: String,
 }
-
-use futures::executor::block_on;
-
-use js_sys::{Error as JsError, JsString, Reflect};
-use web_sys::console;
 
 #[wasm_bindgen]
 pub async fn run_multiple(programs: JsValue) {
