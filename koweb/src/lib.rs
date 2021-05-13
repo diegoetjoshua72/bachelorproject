@@ -137,13 +137,14 @@ fn get_text_from_editor() -> Result<String, ()> {
     Err(())
 }
 
-fn produce_from_js(
-    cmds_from_js: &'static str,
+fn produce_from_js<'a>(
+    cmds_from_js: &'a String,
     opt: &Opt,
-) -> impl Iterator<Item = Result<Event, Error>> {
-    let module = std::iter::once(Ok(Event::Module(vec!["js".to_string()])));
-    let cmds = parse(cmds_from_js.as_bytes(), opt).map(|cmd| cmd.map(Event::Command));
-    module.chain(cmds)
+) -> impl Iterator<Item = Result<Event, Error>> + 'a {
+    // let module = std::iter::once(Ok(Event::Module(vec!["js".to_string()])));
+    return parse(cmds_from_js.as_bytes(), opt).map(|cmd| cmd.map(Event::Command));
+    // cmds
+    // module.chain(cmds)
 }
 
 fn string_to_static_str(s: String) -> &'static str {
@@ -228,7 +229,9 @@ pub fn run_test(
         files: vec![],
     };
 
-    let iter = produce_from_js(static_cmds_str, &opt);
+    let mut iter = produce_from_js(&program_text, &opt);
+
+    print_iterator(&mut iter);
 
     let mut iter = Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webpage(event)));
 
@@ -236,8 +239,6 @@ pub fn run_test(
 
     Ok(())
 }
-
-// Result::unwrap()` on an `Err` value: Error("invalid type: string \"[]\", expected a sequence", line: 1, column: 4)', koweb/./src/lib.rs:209:69
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Program {
