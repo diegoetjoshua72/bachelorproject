@@ -221,7 +221,7 @@ pub async fn run_multiple(programs: JsValue, module_to_run: String) {
             info!("this is what we got from the fetching {:?}", res);
 
             let test_string = String::from_utf8(res.unwrap().into_inner()).unwrap();
-            println!(
+            info!(
                 "this is what we got from the fetching turned into a string: {}",
                 test_string
             );
