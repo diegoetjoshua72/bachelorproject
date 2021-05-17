@@ -447,7 +447,7 @@ function dependencies_as_urls(graph_data, urls) {
         let dep_url_list = [];
         console.log("DEBUG CURRENT NODE :", node);
 
-        console("TEST SOLUTION -> ", generate_gitraw_urls(node[1]));
+        console.log("TEST SOLUTION -> ", generate_gitraw_urls(node[1]));
         for (let file of node[1]) {
             console.log("DEBUG FILE : ", file);
             if (node[0] == file) {
