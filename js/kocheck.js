@@ -444,9 +444,14 @@ function dependencies_as_urls(graph_data, urls) {
     let dep_url_list_list = [];
     for (let node of graph_data) {
         let dep_url_list = [];
+        console("DEBUG CURRENT NODE :", node);
+
+        console("TEST SOLUTION -> ", generate_gitraw_urls(node[1]));
         for (let file of node[1]) {
+            console.log("DEBUG FILE : ", file);
             if (node[0] == file) {
-                // this does not make sense
+                // this does not make sense what this does is just add the url of the main thig in the node
+                //but not the dependencies in order
                 dep_url_list.push(urls[counter]);
                 counter += 1;
             }
