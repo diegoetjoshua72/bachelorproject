@@ -53,7 +53,7 @@ impl Iterator for PartialRangeIter {
     }
 }
 
-pub async fn get_chunk(url: &String, chunk_size: u32) -> Result<std::io::Cursor<Vec<u8>>> {
+pub async fn get_program_text(url: &String) -> Result<std::io::Cursor<Vec<u8>>> {
     let client = reqwest::Client::new();
     let response = client.head(url).send().await?; //make a head request
     let length = response //reqwest response
@@ -66,7 +66,7 @@ pub async fn get_chunk(url: &String, chunk_size: u32) -> Result<std::io::Cursor<
 
     info!("content_length we are fetching  : {}", length);
     let mut response_get = client.get(url).send().await?;
-    let status = response.status();
+    let status = response_get.status();
     if !(status == StatusCode::OK || status == StatusCode::PARTIAL_CONTENT) {
         error_chain::bail!("Unexpected server response: {}", status)
     }
@@ -81,13 +81,11 @@ pub async fn get_chunk(url: &String, chunk_size: u32) -> Result<std::io::Cursor<
     //     if !(status == StatusCode::OK || status == StatusCode::PARTIAL_CONTENT) {
     //         error_chain::bail!("Unexpected server response: {}", status)
     //     }
-    //     std::io::copy(&mut response.text().await?.as_bytes(), &mut buffer)?;
     //     info!("FIRST COPY : {:?}", buffer);
     // }
-
-    let content = response.text().await?;
-    std::io::copy(&mut content.as_bytes(), &mut buffer)?;
-    info!("SECOND COPY : {:?}", buffer);
+    // let content = response_get.text().await?;
+    std::io::copy(&mut response_get.text().await?.as_bytes(), &mut buffer)?;
+    // std::io::copy(&mut content.as_bytes(), &mut buffer)?;
     let mut program_text = std::io::Cursor::new(buffer);
     let mut result = String::new();
 

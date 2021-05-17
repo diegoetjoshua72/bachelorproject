@@ -217,7 +217,7 @@ pub async fn run_multiple(programs: JsValue, module_to_run: String) {
         if program.name == module_to_run {
             info!("This is all the program info -> {:?}", program);
             info!("Name of the Program we want to run -> {}", module_to_run);
-            let res = lazy_fetch::get_chunk(&program.dependency_url_list[0], 1000).await;
+            let res = lazy_fetch::get_program_text(&program.dependency_url_list[0]).await;
             info!("this is what we got from the fetching {:?}", res);
         }
     }
