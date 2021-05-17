@@ -169,7 +169,7 @@ fn create_graph(make_text_js: String) -> Graph {
             temp.next();
             let mut result = vec![];
             for x in temp {
-                if x != "" {
+                if x != "" && x != ":" {
                     result.push(x);
                 }
             }
