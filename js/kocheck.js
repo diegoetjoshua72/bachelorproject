@@ -197,15 +197,13 @@ run_button.onclick = async () => {
 var run_multiple_button = document.getElementById("run_multiple");
 run_multiple_button.onclick = async () => {
     // if the program_list is empty and this is clicked show some error message
-    await run_multiple(program_list);
+    let module_to_run = document.getElementById("file_to_run").value;
+    await run_multiple(program_list, module_to_run);
 };
 
 var test_click = document.getElementById("increment");
 test_click.onclick = () => {
-    console.log(
-        "value in select -> ",
-        document.getElementById("file_to_run").value
-    ); //check if the select works the way i want
+    console.log("value in select -> "); //check if the select works the way i want
     console.log(window.editor);
     console.log(window.editor.getModel().getValueInRange());
     // increment_test();
@@ -285,7 +283,7 @@ function fetch_make_text_from_url() {
 
 function use_graph_data(graph_data) {
     const dependency_list = graph_data;
-    console.log("DEPENDENCY LIST : ", graph_data);
+    console.log("GRAPH DATA : ", graph_data);
 
     let list_of_files = [];
 
@@ -323,7 +321,7 @@ function remove_all_files_dom() {
 }
 
 function generate_html(graph_data) {
-    console.log("GENERATE_HTML : ", graph_data);
+    // console.log("GENERATE_HTML : ", graph_data);
     remove_all_files_dom();
 
     let details_outer = document.createElement("DETAILS");

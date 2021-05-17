@@ -23,9 +23,10 @@ export function increment_test(): void;
 export function run_test(cmds_from_js: string, eta: boolean, no_scope: boolean, no_infer: boolean, no_check: boolean): void;
 /**
 * @param {any} programs
+* @param {string} module_to_run
 * @returns {any}
 */
-export function run_multiple(programs: any): any;
+export function run_multiple(programs: any, module_to_run: string): any;
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
@@ -35,7 +36,7 @@ export interface InitOutput {
   readonly get_string_js: (a: number, b: number, c: number) => void;
   readonly increment_test: () => void;
   readonly run_test: (a: number, b: number, c: number, d: number, e: number, f: number) => void;
-  readonly run_multiple: (a: number) => number;
+  readonly run_multiple: (a: number, b: number, c: number) => number;
   readonly __wbindgen_malloc: (a: number) => number;
   readonly __wbindgen_realloc: (a: number, b: number, c: number) => number;
   readonly __wbindgen_export_2: WebAssembly.Table;
