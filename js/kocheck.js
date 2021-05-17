@@ -217,7 +217,7 @@ var test_click = document.getElementById("increment");
 test_click.onclick = () => {
     console.log(
         "value in select -> ",
-        document.getElementById("file_to_run").value()
+        document.getElementById("file_to_run").value
     ); //check if the select works the way i want
     console.log(window.editor);
     console.log(window.editor.getModel().getValueInRange());
