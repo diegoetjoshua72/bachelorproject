@@ -438,13 +438,14 @@ function generate_gitraw_urls(list_of_files) {
 }
 
 // TODO fix this i think
+//TODO i should only display run selected module when tehre is something loaded or display a message like nothing was loaded
 function dependencies_as_urls(graph_data, urls) {
     console.log("DEBUG DEPENDENCY AS URL");
     let counter = 0;
     let dep_url_list_list = [];
     for (let node of graph_data) {
         let dep_url_list = [];
-        console("DEBUG CURRENT NODE :", node);
+        console.log("DEBUG CURRENT NODE :", node);
 
         console("TEST SOLUTION -> ", generate_gitraw_urls(node[1]));
         for (let file of node[1]) {
