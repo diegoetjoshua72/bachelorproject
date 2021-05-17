@@ -426,18 +426,14 @@ function generate_gitraw_urls(list_of_files) {
 // TODO fix this i think
 // TODO i should only display run selected module when tehre is something loaded or display a message like nothing was loaded
 function dependencies_as_urls(graph_data, urls) {
-    console.log("DEBUG DEPENDENCY AS URL");
+    // console.log("DEBUG DEPENDENCY AS URL");
     // let counter = 0;
     let dep_url_list_list = [];
     for (let node of graph_data) {
         let dep_url_list = generate_gitraw_urls(node[1]);
-        console.log("DEBUG LIST PUSHED IN LIST LIST", dep_url_list);
+        // console.log("DEBUG LIST PUSHED IN LIST LIST", dep_url_list);
         dep_url_list_list.push(dep_url_list);
     }
-    console.log(
-        "DEBUG FINAL LIST OF DEPENDENCIES URL's should be in order as well matching what we got from rust :",
-        dep_url_list_list
-    );
     return dep_url_list_list;
 }
 
