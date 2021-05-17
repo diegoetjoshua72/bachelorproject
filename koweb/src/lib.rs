@@ -201,26 +201,34 @@ pub struct Program {
 }
 
 #[wasm_bindgen]
-pub async fn run_multiple(programs: JsValue) {
+pub async fn run_multiple(programs: JsValue, module_to_run: String) {
     console_log::init_with_level(Level::Trace);
     init_console_wasm_debug();
     let vec_of_programs: Vec<Program> = programs.into_serde().unwrap();
-
+    info!(
+        "this is the program we want to run : {} ",
+        module_to_run.as_str()
+    );
     info!("PROGRAM LIST IN RUST : {:?}", vec_of_programs);
 
     //i would need the list of url for the dependencies
     //TILL HERE IT WORKS
     for program in vec_of_programs {
-        info!("Program : {:?}", program);
-        // info!("program : {:?}", program);
-        //how can i do this
-        //tokio spawn blocking
-        //TODO HERE AND FETCH_PARSE_BUFFER
-        //block on does not work here however
-
-        //like this it worked hmm
-        let res = lazy_fetch::get_chunk(&program.dependency_url_list[0], 1000).await;
-        // info!("result of chunk : {:?} ", result.wait());
-        // break;
+        if program.name == module_to_run {
+            info!("Program we want to run {}", module_to_run);
+        }
     }
+    // let res = lazy_fetch::get_chunk(&program.dependency_url_list[0], 1000).await;
+    // info!("result of chunk : {:?} ", result.wait());
+    // break;
+
+    // info!("Program : {:?}", program);
+    // info!("program : {:?}", program);
+    //how can i do this
+    //tokio spawn blocking
+    //TODO HERE AND FETCH_PARSE_BUFFER
+    //block on does not work here however
+
+    //like this it worked hmm
+    //
 }
