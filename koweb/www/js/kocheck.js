@@ -211,6 +211,7 @@ run_button.onclick = async () => {
 
 var run_multiple_button = document.getElementById("run_multiple");
 run_multiple_button.onclick = async () => {
+    // if the program_list is empty and this is clicked show some error message
     await run_multiple(program_list);
 };
 
@@ -256,6 +257,10 @@ test_click.onclick = () => {
 //3) implement the program queue and the program class
 //4)
 
+var load_make = document.getElementById("load_make");
+load_make.onclick = () => {
+    fetch_make_text_from_url();
+};
 // const url = "https://raw.githubusercontent.com//bachelorproject/master/examples/kontroli.mk";
 // https://github.com/01mf02/kontroli-rs/blob/master/examples/sudoku/deps.mk
 function fetch_make_text_from_url() {
@@ -270,7 +275,7 @@ function fetch_make_text_from_url() {
                     .text() //if the string is 404 not found
                     .then((string) => {
                         console.log(
-                            "THIS IS THE STRING WE GET FROM THE URL :: ",
+                            "THIS IS THE MAKE STRING WE GOT FROM :: ",
                             string
                         );
                         use_graph_data(get_graph_rust(string)); //donc ici je vais utiliser un fonction rust qui permetra de get let dependences
@@ -288,11 +293,6 @@ function fetch_make_text_from_url() {
         display_error_dom("Empty url field", "errors");
     }
 }
-
-var load_make = document.getElementById("load_make");
-load_make.onclick = () => {
-    fetch_make_text_from_url();
-};
 
 function use_graph_data(graph_data) {
     const dependency_list = graph_data;
@@ -312,14 +312,20 @@ function use_graph_data(graph_data) {
     save_to_program_list(graph_data, urls, dependency_url_list);
 }
 
+function remove_all_select_options() {
+    document.querySelectorAll(".select").forEach((e) => e.remove());
+}
+
 function generate_run_options_html(graph_data) {
+    remove_all_select_options();
     let parent_select = document.getElementById("file_to_run");
     for (const node of graph_data) {
         let option = document.createElement("option");
         let test = document.createTextNode(node[0]);
         option.appendChild(test);
+        option.classList.add("select");
+        option.value = node[0];
         parent_select.appendChild(option);
-        // need to add the value as well but lets try this
     }
 }
 
