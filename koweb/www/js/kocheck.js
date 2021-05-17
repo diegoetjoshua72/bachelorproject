@@ -28,19 +28,6 @@ let program_list = [];
 //still first the right urls have to be made and the program also
 //first investigate the two way
 
-export class Test2 {
-    constructor() {
-        this.test = "pipotest";
-    }
-
-    static test_text2() {
-        return this.test;
-    }
-}
-
-const test = new Test();
-console.log(test.test);
-
 class Program {
     constructor(name, dependency, dependency_url_list, raw_url) {
         this.name = name;
@@ -428,17 +415,16 @@ function generate_gitraw_urls(list_of_files) {
             //so i need to get the url till the last /
             var firstpart = top_url.substring(0, top_url.lastIndexOf("/"));
             let dkurl = firstpart + "/" + file; //this is not correct i need to remove the n.mk then add file
-            console.log("NEW GITRAW URL : ", dkurl);
+            // console.log("NEW GITRAW URL : ", dkurl);
             result_list.push(dkurl);
         }
     }
-    console.log("GENERATE URL FINAL :", result_list);
-
+    // console.log("GENERATE URL FINAL :", result_list);
     return result_list;
 }
 
 // TODO fix this i think
-//TODO i should only display run selected module when tehre is something loaded or display a message like nothing was loaded
+// TODO i should only display run selected module when tehre is something loaded or display a message like nothing was loaded
 function dependencies_as_urls(graph_data, urls) {
     console.log("DEBUG DEPENDENCY AS URL");
     // let counter = 0;
