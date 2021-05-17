@@ -1,55 +1,56 @@
-import init, { run_test, increment_test , get_graph_rust, run_multiple} from "../pkg/koweb.js";
-import {Test} from "./program.js";
-
+import init, {
+    run_test,
+    increment_test,
+    get_graph_rust,
+    run_multiple,
+} from "../pkg/koweb.js";
+import { Test } from "./program.js";
 
 let program_list = [];
 
 //TODO
 //1)init was at load : DONE
 //2)generate correct gitraw urls: DONE
-//3)create and set up all the program objects: DONE 
+//3)create and set up all the program objects: DONE
 //prio) work on parse buffer and getting the string data to rust !
-//4)based on what is available generate the options on what to run: LATER FIRST TRY TO GET DATA TO RUST 
+//4)based on what is available generate the options on what to run: LATER FIRST TRY TO GET DATA TO RUST
 //5)Try running a .dk that requires dependencies and see what is the output:
 //6)Try to load a hard .mk file like given previously
 
+//si je passe les urls a rust ? direct peut etre c'est mieux
 
-//si je passe les urls a rust ? direct peut etre c'est mieux 
+//7)Check if it is possible to fetch bit by bit in JS https://api.video/blog/tutorials/uploading-large-files-with-javascript file and blob api like video split things in segments
+//https://nordicapis.com/everything-you-need-to-know-about-api-pagination/ interesting stuff here for this and maybe the fetch can all be done in rust that would be quite cool
+//then i don't even need to pass strings from js to rust. and the problem is solved
 
-//7)Check if it is possible to fetch bit by bit in JS https://api.video/blog/tutorials/uploading-large-files-with-javascript file and blob api like video split things in segments 
-//https://nordicapis.com/everything-you-need-to-know-about-api-pagination/ interesting stuff here for this and maybe the fetch can all be done in rust that would be quite cool 
-//then i don't even need to pass strings from js to rust. and the problem is solved 
+//attends donc peut etre enfait ce que je vais faire c'est utiliser webpack enfait mais je ferais ca vers la fin
 
-//attends donc peut etre enfait ce que je vais faire c'est utiliser webpack enfait mais je ferais ca vers la fin 
+//still first the right urls have to be made and the program also
+//first investigate the two way
 
-//still first the right urls have to be made and the program also 
-//first investigate the two way 
-
-
-export class Test2{
-    constructor(){
-        this.test = "pipotest"
+export class Test2 {
+    constructor() {
+        this.test = "pipotest";
     }
-    
-    static test_text2 () {
+
+    static test_text2() {
         return this.test;
-    }   
-    
+    }
 }
 
-const test = new Test;
+const test = new Test();
 console.log(test.test);
 
 class Program {
-    constructor(name, dependency, dependency_url_list, raw_url){
+    constructor(name, dependency, dependency_url_list, raw_url) {
         this.name = name;
         this.dependency = dependency;
         this.dependency_url_list = dependency_url_list;
         this.raw_url = raw_url;
     }
 
-    static get_piece_of_text(buffer_size){
-        return this.text.slice(buffer_size, this.text.length -1);
+    static get_piece_of_text(buffer_size) {
+        return this.text.slice(buffer_size, this.text.length - 1);
     }
     //get bit of string function that will need to be passed to rust ?
     //
@@ -156,40 +157,36 @@ function load_text_from_url_in_editor(program_text) {
     window.editor.setValue(program_text);
 }
 
-
-
-
 async function run(program = undefined) {
     // try {
-        remove_all_outputs_dom();
-        // await init();
-        var testing = await window.editor.getValue();
-        const prog = new Program(testing, "pipo", "toto");
-        // console.log(prog);
-        //si la classe casse trop les couilles je peut faire une closure mais je pense la classes c'est bien
+    remove_all_outputs_dom();
+    // await init();
+    var testing = await window.editor.getValue();
+    const prog = new Program(testing, "pipo", "toto");
+    // console.log(prog);
+    //si la classe casse trop les couilles je peut faire une closure mais je pense la classes c'est bien
 
+    // prog.go_through_iterator();
+    // prog.get_piece_to_koweb();
 
-        // prog.go_through_iterator();
-        // prog.get_piece_to_koweb();
-
-        if (program === undefined) {
-            run_test(
-                window.editor.getValue(),
-                document.getElementById("eta").checked,
-                document.getElementById("no_scope").checked,
-                document.getElementById("no_infer").checked,
-                document.getElementById("no_check").checked
-            );
-        } else {
-            console.log("ran from url");
-            run_test(
-                program,
-                document.getElementById("eta").checked,
-                document.getElementById("no_scope").checked,
-                document.getElementById("no_infer").checked,
-                document.getElementById("no_check").checked
-            );
-        }
+    if (program === undefined) {
+        run_test(
+            window.editor.getValue(),
+            document.getElementById("eta").checked,
+            document.getElementById("no_scope").checked,
+            document.getElementById("no_infer").checked,
+            document.getElementById("no_check").checked
+        );
+    } else {
+        console.log("ran from url");
+        run_test(
+            program,
+            document.getElementById("eta").checked,
+            document.getElementById("no_scope").checked,
+            document.getElementById("no_infer").checked,
+            document.getElementById("no_check").checked
+        );
+    }
     // } catch {
     //     remove_all_errors_dom();
     //     display_error_dom("something went wrong in the kontroli run", "errors");
@@ -212,8 +209,6 @@ run_button.onclick = async () => {
     await run();
 };
 
-
-
 var run_multiple_button = document.getElementById("run_multiple");
 run_multiple_button.onclick = async () => {
     await run_multiple(program_list);
@@ -221,58 +216,49 @@ run_multiple_button.onclick = async () => {
 
 var test_click = document.getElementById("increment");
 test_click.onclick = () => {
-    
     console.log(window.editor);
     console.log(window.editor.getModel().getValueInRange());
     increment_test();
 };
 
-
-
 //TODO
-//now the wasm is compiling 
-//try import the new function 
-//try run it here on the make button 
+//now the wasm is compiling
+//try import the new function
+//try run it here on the make button
 //see if i can console.log the output if i can that would be great i then just need to adapt the code in the parse.js
-//and do everything in this onclick i guess 
+//and do everything in this onclick i guess
 //1 user clicks
 //2 gets the make string from url
 //3 passes the maek string to rust
-//4 rust returns everything 
+//4 rust returns everything
 // -> generate gitraw urls for each file that we might need
 //5 generate html and css for the modules
-//6 store the information returned by rust permanently somehow 
+//6 store the information returned by rust permanently somehow
 // -> when clicking on the file name it will do a fetch for its raw url but how can i determine how large it is whilst fetching
 // -> using a HEAD Request ???
 //7 enable the possibility to load the files in the editor WITH WARNING IF THE FIlE IS TOO LARGE <--- GOAL FOR TODAY
 
 //8 create a program queue and a program class make the parse buffer work and the passing of string data to the parse buffer
-//take and give 
-//9 add the possibility for run to run mulitiple files 
+//take and give
+//9 add the possibility for run to run mulitiple files
 
-
-//TODO IMPORTANT FOR UNDERSTANDING AND PRESENTATION / WRITTING PAPER 
+//TODO IMPORTANT FOR UNDERSTANDING AND PRESENTATION / WRITTING PAPER
 //make a little comparison program for sieves of primes to see what gains in performance can be obtained with wasm (talk about the use of the sieves prime for cpu tests)
-//understand how javascript function are passed to rust 
-//understand how rust gets transpiled to wasm 
-//how is the wasm executed with regards to javascript 
+//understand how javascript function are passed to rust
+//understand how rust gets transpiled to wasm
+//how is the wasm executed with regards to javascript
 //talk about async programing and why wasm needs to be loaded async
-// you need to get to the mulithreading part i want to talk about if it is possible or not to do multithreading and why not or why it is 
-
-
-
-
-
+// you need to get to the mulithreading part i want to talk about if it is possible or not to do multithreading and why not or why it is
 
 //1) generate the gitraw urls that i will need
-//2) put everything in the mem instance 
+//2) put everything in the mem instance
 //3) make the html graph once that is done
-//3) implement the program queue and the program class 
+//3) implement the program queue and the program class
 //4)
 
 // const url = "https://raw.githubusercontent.com//bachelorproject/master/examples/kontroli.mk";
 // https://github.com/01mf02/kontroli-rs/blob/master/examples/sudoku/deps.mk
-function fetch_make_text_from_url(){
+function fetch_make_text_from_url() {
     remove_all_errors_dom();
     const url = document.getElementById("urlmake").value; //continue here
     console.log(url);
@@ -287,8 +273,8 @@ function fetch_make_text_from_url(){
                             "THIS IS THE STRING WE GET FROM THE URL :: ",
                             string
                         );
-                        use_graph_data(get_graph_rust(string)); //donc ici je vais utiliser un fonction rust qui permetra de get let dependences 
-                    })  //here we need to call the get dep from rust then we can generate the html and the css from it and the raw urls
+                        use_graph_data(get_graph_rust(string)); //donc ici je vais utiliser un fonction rust qui permetra de get let dependences
+                    }) //here we need to call the get dep from rust then we can generate the html and the css from it and the raw urls
                     .catch((err) => {
                         console.log("ERROR :", err);
                         display_error_dom(err, "errors");
@@ -303,63 +289,69 @@ function fetch_make_text_from_url(){
     }
 }
 
-
 var load_make = document.getElementById("load_make");
 load_make.onclick = () => {
     fetch_make_text_from_url();
 };
 
-function use_graph_data(graph_data){
+function use_graph_data(graph_data) {
     const dependency_list = graph_data;
-    console.log( "DEPENDENCY LIST : ", graph_data);
-    
+    console.log("DEPENDENCY LIST : ", graph_data);
+
     let list_of_files = [];
-    
+
     for (let i = 0; i < dependency_list.length; i++) {
-        list_of_files.push(dependency_list[i][0])
+        list_of_files.push(dependency_list[i][0]);
     }
     console.log("LIST OF FILES : ", list_of_files);
 
     generate_html(graph_data);
+    generate_run_options_html(graph_data);
     const urls = generate_gitraw_urls(list_of_files);
-    const dependency_url_list = dependencies_as_urls(graph_data,urls);
-    save_to_program_list(graph_data,urls,dependency_url_list);
+    const dependency_url_list = dependencies_as_urls(graph_data, urls);
+    save_to_program_list(graph_data, urls, dependency_url_list);
 }
 
-
+function generate_run_options_html(graph_data) {
+    let parent_select = document.getElementById("file_to_run");
+    for (const node of graph_data) {
+        let option = document.createElement("option");
+        let test = document.createTextNode(node[0]);
+        option.appendChild(test);
+        parent_select.appendChild(option);
+        // need to add the value as well but lets try this
+    }
+}
 
 function remove_all_files_dom() {
     document.querySelectorAll(".fs").forEach((e) => e.remove());
 }
 
-
-function generate_html(graph_data){
-    console.log("GENERATE_HTML : ",graph_data);
+function generate_html(graph_data) {
+    console.log("GENERATE_HTML : ", graph_data);
     remove_all_files_dom();
 
     let details_outer = document.createElement("DETAILS");
-    details_outer.classList.add("fs")
+    details_outer.classList.add("fs");
 
-    let summary_outer = document.createElement("SUMMARY")
-    let summary_outer_text = document.createTextNode("Kontroli module")
+    let summary_outer = document.createElement("SUMMARY");
+    let summary_outer_text = document.createTextNode("Kontroli module");
     summary_outer.appendChild(summary_outer_text);
 
-    details_outer.appendChild(summary_outer)
-    
+    details_outer.appendChild(summary_outer);
+
     let ul = document.createElement("ul");
 
-    for (const node of graph_data){
-    
+    for (const node of graph_data) {
         let li_top = document.createElement("li");
         let ul_inner = document.createElement("ul");
-        
+
         let details_inner = document.createElement("DETAILS");
         let summary_inner = document.createElement("SUMMARY");
 
-        let summary_inner_text = document.createTextNode(node[0])
+        let summary_inner_text = document.createTextNode(node[0]);
         summary_inner.appendChild(summary_inner_text);
         details_inner.appendChild(summary_inner);
-        
 
         let li_button = document.createElement("li");
         let li_span = document.createElement("li");
@@ -367,19 +359,20 @@ function generate_html(graph_data){
         let button = document.createElement("button");
         let text_top_level = document.createTextNode(node[0]);
         let text_list_dependencies = node[1];
-        
-        
+
         let span = document.createElement("span");
-        
-        for (const dep of text_list_dependencies){
-            if (text_list_dependencies.length - 1 !== text_list_dependencies.indexOf(dep)){
-                span.appendChild(document.createTextNode(dep + " -> "))
-            }
-            else {
-                span.appendChild(document.createTextNode(dep))
+
+        for (const dep of text_list_dependencies) {
+            if (
+                text_list_dependencies.length - 1 !==
+                text_list_dependencies.indexOf(dep)
+            ) {
+                span.appendChild(document.createTextNode(dep + " -> "));
+            } else {
+                span.appendChild(document.createTextNode(dep));
             }
         }
-        span.classList.add("deps_path")
+        span.classList.add("deps_path");
 
         button.appendChild(text_top_level);
         li_button.appendChild(button);
@@ -389,43 +382,44 @@ function generate_html(graph_data){
         details_inner.appendChild(ul_inner);
         li_top.appendChild(details_inner);
         ul.appendChild(li_top);
-
     }
     details_outer.appendChild(ul);
     document.getElementById("file_sys").appendChild(details_outer);
 }
 
-
-
-function generate_gitraw_urls(list_of_files){
-    const top_url = document.getElementById("urlmake").value; 
+function generate_gitraw_urls(list_of_files) {
+    const top_url = document.getElementById("urlmake").value;
 
     let result_list = [];
 
     for (let file of list_of_files) {
         console.log("FILE : ", file);
-        if(file.startsWith("../")){
+        if (file.startsWith("../")) {
             let sub_dir_counter = 0;
-            while (file.startsWith("../")){
+            while (file.startsWith("../")) {
                 sub_dir_counter += 1;
-                console.log("file before remove ../",file);
-                file = file.slice(3,file.length);
-                console.log("file after remove ../",file);
+                console.log("file before remove ../", file);
+                file = file.slice(3, file.length);
+                console.log("file after remove ../", file);
             }
 
-            
-            let result_relative_url = top_url.substring(0,top_url.lastIndexOf("/"));
-            while (sub_dir_counter != 0){
-                result_relative_url = result_relative_url.slice(0,-1);
-                result_relative_url = result_relative_url.substring(0,result_relative_url.lastIndexOf("/"));
+            let result_relative_url = top_url.substring(
+                0,
+                top_url.lastIndexOf("/")
+            );
+            while (sub_dir_counter != 0) {
+                result_relative_url = result_relative_url.slice(0, -1);
+                result_relative_url = result_relative_url.substring(
+                    0,
+                    result_relative_url.lastIndexOf("/")
+                );
                 sub_dir_counter -= 1;
             }
-            result_list.push(result_relative_url + "/" + file)
-        }
-        else{
+            result_list.push(result_relative_url + "/" + file);
+        } else {
             //so i need to get the url till the last /
-            var firstpart = top_url.substring(0,top_url.lastIndexOf("/"));
-            let dkurl = firstpart + "/" +file; //this is not correct i need to remove the n.mk then add file 
+            var firstpart = top_url.substring(0, top_url.lastIndexOf("/"));
+            let dkurl = firstpart + "/" + file; //this is not correct i need to remove the n.mk then add file
             console.log("NEW GITRAW URL : ", dkurl);
             result_list.push(dkurl);
         }
@@ -435,31 +429,33 @@ function generate_gitraw_urls(list_of_files){
     return result_list;
 }
 
-
-function dependencies_as_urls(graph_data, urls){
+function dependencies_as_urls(graph_data, urls) {
     let counter = 0;
     let dep_url_list_list = [];
-    for (let node of graph_data){
+    for (let node of graph_data) {
         let dep_url_list = [];
-        for(let file of node[1]){
-            if(node[0] == file){
+        for (let file of node[1]) {
+            if (node[0] == file) {
                 dep_url_list.push(urls[counter]);
                 counter += 1;
             }
         }
         dep_url_list_list.push(dep_url_list);
     }
-    console.log("DEPENDENCIES AS URLS FINAL :",dep_url_list_list);
+    console.log("DEPENDENCIES AS URLS FINAL :", dep_url_list_list);
     return dep_url_list_list;
 }
 
-function save_to_program_list(graph_data, urls, dependency_url_list){  
-    for (let i = 0; i < graph_data.length; i++){
-        program_list.push(new Program(graph_data[i][0], graph_data[i][1], dependency_url_list[i], urls[i]));
+function save_to_program_list(graph_data, urls, dependency_url_list) {
+    for (let i = 0; i < graph_data.length; i++) {
+        program_list.push(
+            new Program(
+                graph_data[i][0],
+                graph_data[i][1],
+                dependency_url_list[i],
+                urls[i]
+            )
+        );
     }
     console.log("PROGRAM LIST : ", program_list);
 }
-
-
-
-
