@@ -219,6 +219,12 @@ pub async fn run_multiple(programs: JsValue, module_to_run: String) {
             info!("Name of the Program we want to run -> {}", module_to_run);
             let res = lazy_fetch::get_program_text(&program.dependency_url_list[0]).await;
             info!("this is what we got from the fetching {:?}", res);
+
+            let test_string = String::from_utf8(res.unwrap().into_inner()).unwrap();
+            println!(
+                "this is what we got from the fetching turned into a string: {}",
+                test_string
+            );
         }
     }
 }
