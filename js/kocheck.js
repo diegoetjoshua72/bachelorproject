@@ -437,20 +437,27 @@ function generate_gitraw_urls(list_of_files) {
     return result_list;
 }
 
+// TODO fix this i think
 function dependencies_as_urls(graph_data, urls) {
+    console.log("DEBUG DEPENDENCY AS URL");
     let counter = 0;
     let dep_url_list_list = [];
     for (let node of graph_data) {
         let dep_url_list = [];
         for (let file of node[1]) {
             if (node[0] == file) {
+                // this does not make sense
                 dep_url_list.push(urls[counter]);
                 counter += 1;
             }
         }
+        console.log("DEBUG LIST PUSHED IN LIST LIST", dep_url_list);
         dep_url_list_list.push(dep_url_list);
     }
-    console.log("DEPENDENCIES AS URLS FINAL :", dep_url_list_list);
+    console.log(
+        "DEBUG FINAL LIST OF DEPENDENCIES URL's should be in order as well matching what we got from rust :",
+        dep_url_list_list
+    );
     return dep_url_list_list;
 }
 
