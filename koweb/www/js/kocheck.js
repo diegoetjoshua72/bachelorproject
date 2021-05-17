@@ -204,8 +204,6 @@ var run_url = (document.getElementById("run_url").onclick = () => {
 
 var run_button = document.getElementById("run");
 run_button.onclick = async () => {
-    console.log(program_list);
-    //i can try to use the js fetch api see if it works then but how does it work on that site \
     await run();
 };
 
@@ -217,9 +215,13 @@ run_multiple_button.onclick = async () => {
 
 var test_click = document.getElementById("increment");
 test_click.onclick = () => {
+    console.log(
+        "value in select -> ",
+        document.getElementById("file_to_run").value()
+    ); //check if the select works the way i want
     console.log(window.editor);
     console.log(window.editor.getModel().getValueInRange());
-    increment_test();
+    // increment_test();
 };
 
 //TODO

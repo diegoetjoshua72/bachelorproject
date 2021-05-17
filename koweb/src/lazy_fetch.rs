@@ -64,25 +64,31 @@ pub async fn get_chunk(url: &String, chunk_size: u32) -> Result<std::io::Cursor<
 
     let mut buffer: Vec<u8> = vec![];
 
-    info!("fetching piece of size : {}", chunk_size);
-    for range in PartialRangeIter::new(0, length - 1, chunk_size)? {
-        // info!("range {:?}", range);
-        // let mut headers = HeaderMap::new() //verify if the headers are good
-        // header(RANGE, range)
-        //now i don't have the issue anymore with the CORS
-        let mut response = client.get(url).header(RANGE, range).send().await?;
-        let status = response.status();
-        if !(status == StatusCode::OK || status == StatusCode::PARTIAL_CONTENT) {
-            error_chain::bail!("Unexpected server response: {}", status)
-        }
-        std::io::copy(&mut response.text().await?.as_bytes(), &mut buffer)?;
-        info!("FIRST COPY : {:?}", buffer);
+    info!("content_length we are fetching  : {}", length);
+    let mut response_get = client.get(url).send().await?;
+    let status = response.status();
+    if !(status == StatusCode::OK || status == StatusCode::PARTIAL_CONTENT) {
+        error_chain::bail!("Unexpected server response: {}", status)
     }
+
+    // for range in PartialRangeIter::new(0, length - 1, chunk_size)? {
+    //     // info!("range {:?}", range);
+    //     // let mut headers = HeaderMap::new() //verify if the headers are good
+    //     // header(RANGE, range)
+    //     //now i don't have the issue anymore with the CORS
+    //     let mut response = client.get(url).send().await?;
+    //     let status = response.status();
+    //     if !(status == StatusCode::OK || status == StatusCode::PARTIAL_CONTENT) {
+    //         error_chain::bail!("Unexpected server response: {}", status)
+    //     }
+    //     std::io::copy(&mut response.text().await?.as_bytes(), &mut buffer)?;
+    //     info!("FIRST COPY : {:?}", buffer);
+    // }
+
     let content = response.text().await?;
     std::io::copy(&mut content.as_bytes(), &mut buffer)?;
     info!("SECOND COPY : {:?}", buffer);
     let mut program_text = std::io::Cursor::new(buffer);
-
     let mut result = String::new();
 
     info!(
