@@ -200,6 +200,8 @@ pub struct Program {
     raw_url: String,
 }
 
+pub mod fetch_buffer;
+
 #[wasm_bindgen]
 pub async fn run_multiple(programs: JsValue, module_to_run: String) {
     console_log::init_with_level(Level::Trace);
@@ -226,6 +228,10 @@ pub async fn run_multiple(programs: JsValue, module_to_run: String) {
                 test_string
             );
         }
+
+        // when the parse buffer is empty we will want to fetch a new file if there is something to fetch
+        //the part where the buffer is gets an array with all the urls that we need and it then calls the read fo the parse buffer when it is emtpry which will then fetch
+        //make it so that it does one file at a time
     }
 }
 
