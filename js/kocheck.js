@@ -401,7 +401,7 @@ function generate_gitraw_urls(list_of_files) {
     let result_list = [];
 
     for (let file of list_of_files) {
-        console.log("FILE : ", file);
+        // console.log("FILE : ", file);
         if (file.startsWith("../")) {
             let sub_dir_counter = 0;
             while (file.startsWith("../")) {
@@ -441,22 +441,10 @@ function generate_gitraw_urls(list_of_files) {
 //TODO i should only display run selected module when tehre is something loaded or display a message like nothing was loaded
 function dependencies_as_urls(graph_data, urls) {
     console.log("DEBUG DEPENDENCY AS URL");
-    let counter = 0;
+    // let counter = 0;
     let dep_url_list_list = [];
     for (let node of graph_data) {
-        let dep_url_list = [];
-        console.log("DEBUG CURRENT NODE :", node);
-
-        console.log("TEST SOLUTION -> ", generate_gitraw_urls(node[1]));
-        for (let file of node[1]) {
-            console.log("DEBUG FILE : ", file);
-            if (node[0] == file) {
-                // this does not make sense what this does is just add the url of the main thig in the node
-                //but not the dependencies in order
-                dep_url_list.push(urls[counter]);
-                counter += 1;
-            }
-        }
+        let dep_url_list = generate_gitraw_urls(node[1]);
         console.log("DEBUG LIST PUSHED IN LIST LIST", dep_url_list);
         dep_url_list_list.push(dep_url_list);
     }
