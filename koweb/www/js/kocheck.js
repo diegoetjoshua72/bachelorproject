@@ -203,7 +203,6 @@ run_multiple_button.onclick = async () => {
 
 var test_click = document.getElementById("increment");
 test_click.onclick = () => {
-    console.log("value in select -> "); //check if the select works the way i want
     console.log(window.editor);
     console.log(window.editor.getModel().getValueInRange());
     // increment_test();
