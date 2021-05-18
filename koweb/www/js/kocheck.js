@@ -198,7 +198,14 @@ var run_multiple_button = document.getElementById("run_multiple");
 run_multiple_button.onclick = async () => {
     // if the program_list is empty and this is clicked show some error message
     let module_to_run = document.getElementById("file_to_run").value;
-    await run_multiple(program_list, module_to_run);
+    await run_multiple(
+        program_list,
+        module_to_run,
+        document.getElementById("eta").checked,
+        document.getElementById("no_scope").checked,
+        document.getElementById("no_infer").checked,
+        document.getElementById("no_check").checked
+    );
 };
 
 var test_click = document.getElementById("increment");
