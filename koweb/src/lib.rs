@@ -213,38 +213,49 @@ pub async fn run_multiple(
         module_to_run.as_str()
     );
     // info!("PROGRAM LIST IN RUST : {:?}", vec_of_programs);
+
     for program in vec_of_programs {
         if program.name == module_to_run {
             info!("This is all the program info -> {:?}", program);
             info!("Name of the Program we want to run -> {}", module_to_run);
-            let res = lazy_fetch::get_program_text(&program.dependency_url_list[0]).await;
-            info!("this is what we got from the fetching {:?}", res);
-
-            let test_string = String::from_utf8(res.unwrap().into_inner()).unwrap();
-            info!(
-                "this is what we got from the fetching turned into a string: {}",
-                test_string
-            );
-
-            let opt = Opt {
-                eta,
-                no_scope,
-                no_infer,
-                no_check,
-                buffer: Byte::from_str("64MB").unwrap(),
-                channel_capacity: None,
-                jobs: None,
-                files: vec![],
-            };
-            let iter = produce_from_js(&test_string, &opt);
-
-            let mut iter =
-                Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webpage(event)));
-
-            seq::consume(iter, &opt).expect("something went wrong in the consume");
-            info!("function is finished 0-0");
+            for file in program.dependency_url_list {
+                info!("running file => {}", file);
+                let res = lazy_fetch::get_program_text(&file).await;
+                info!("this is what we got from the fetching {:?}", res);
+                let test_string = String::from_utf8(res.unwrap().into_inner()).unwrap();
+                info!(
+                    "this is what we got from the fetching turned into a string: {}",
+                    test_string
+                );
+                let opt = Opt {
+                    eta,
+                    no_scope,
+                    no_infer,
+                    no_check,
+                    buffer: Byte::from_str("64MB").unwrap(),
+                    channel_capacity: None,
+                    jobs: None,
+                    files: vec![],
+                };
+                let iter = produce_from_js(&test_string, &opt);
+                //TODO module names and separation in the output
+                let mut iter =
+                    Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webpage(event)));
+                seq::consume(iter, &opt).expect("something went wrong in the consume");
+                info!("function is finished 0-0");
+            }
         }
         //TODO
         //i have to make a parse buffer now uh and my own parse function then passing the list of the urls instead of the file
+        //how come i am not getting an error when i run a single file
+
+        //ok so the thing that i am fetching is not actually the right thing
+        //i am fetching the first one in the dependency
+        //so i am actually running sttfa.dk right now that makes sense lets try to run something that i can't actually run
+
+        // [2021-05-18T11:23:16Z INFO  kocheck] Open module /bigops
+        // [2021-05-18T11:23:16Z INFO  kocheck] Introduce symbol sameF_upto
+        // Error: Ko(Scope(UndeclaredSymbol("sttfa.etap")))
+        //so this is what i get when i run it with kocheckj why don't i get this when i run it with koweb
     }
 }
