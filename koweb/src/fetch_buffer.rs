@@ -26,18 +26,17 @@ impl<R: Read, P, F> FetchBuffer<R, P, F> {
     /// the reader returns no data.
     /// This particularly helps the performance when parsing from stdin.
 
-    //for me this functino needs to change rather than reading a file we need to fetch on the web so
-    //there are two cases one in which we might need to call fill again from the vec because we ran out of space and the file was too large and one case
-    //in which we need to fetch from a new url
-
-    //we need to a way to know how much of teh vector that we are curretnly reading is left to read
-    //and how many more files there are left to read
+    //TODO if no inspiration before when back from grandparents just do it teh shit way whatever
+    //maybe try if i can block but i don't think i will be able to do any of that so
+    //so yeah just make it work the bad way and then make it all work
+    //add separations in the output and then work on the python udp thing tomorow morning
+    //oh yeah and try it the way i have it now with the span locals
 
     fn number_of_files_left(&self) -> usize {
         return self.urls.len() - self.file_counter;
     }
 
-    fn number_of_bytes_left_in_file(&mut self, already_read_bytes: usize) -> usize {
+    fn number_of_bytes_left_in_file(&self, already_read_bytes: usize) -> usize {
         let reef = self.read.clone();
         let reef2 = self.read.clone();
         info!(
@@ -62,7 +61,7 @@ impl<R: Read, P, F> FetchBuffer<R, P, F> {
 
     //TODO the conditions for the fetching of the new content (these conditions have to be in the next and yeah so i need the number of bytes left in the file to read so how can i get that does read.into_inner().len() work ??)
     //TODO for the debug can i do carriage return counting for the line number of the error
-    pub fn fill(&mut self) -> io::Result<usize> {
+    pub async fn fill(&mut self) -> io::Result<usize> {
         let mut total_read_bytes = 0;
 
         loop {
@@ -79,12 +78,32 @@ impl<R: Read, P, F> FetchBuffer<R, P, F> {
             );
             self.buf.fill(read_bytes);
             total_read_bytes += read_bytes;
+
             if read_bytes == 0 || self.buf.available_space() == 0 {
+                info!("we got to the end of the file breaking out of fill");
+                //TODO but if i update it here then its just going to read everything at once oh no because then i just break ok ok
+                if self.urls.len() != self.file_counter + 1 {
+                    info!("there are more files to read");
+                    self.file_counter += 1;
+                    self.new_read();
+                }
                 break Ok(total_read_bytes);
+            } else {
+                info!("this is how many bytes we read -> {}", total_read_bytes);
             }
         }
     }
 }
+
+//looks like stream is what i am looking for
+// use std::stream::Stream;
+
+// impl<O, E, R: Read, P, F> Stream for FetchBuffer<R, P, F>
+// where
+//     P: Fn(&[u8]) -> IResult<&[u8], O, VerboseError<&[u8]>>,
+//     F: Fn(nom::Err<VerboseError<&[u8]>>) -> E,
+// {
+// }
 
 impl<O, E, R: Read, P, F> Iterator for FetchBuffer<R, P, F>
 where
@@ -92,6 +111,10 @@ where
     F: Fn(nom::Err<VerboseError<&[u8]>>) -> E,
 {
     type Item = Result<O, E>;
+    //calling next once starts a loop hmmmm
+    //that is a bit of a strange way to implement iterator
+    //maybe it is possible to do it without the trait then non pas vraiment le reste depends beaucoup la desus
+    //
 
     fn next(&mut self) -> Option<Self::Item> {
         let (consumed, result) = loop {
@@ -108,10 +131,19 @@ where
                         }
                     }
 
-                    let read_bytes = self.fill().unwrap();
+                    wasm_bindgen_futures::spawn_local(async {
+                        let test = self.fill().await.unwrap();
+                        info!(
+                            "well this is what i got in test not sure when it returns -> {}",
+                            test
+                        )()
+                    });
+                    let read_bytes = 0;
+                    // info!("this is read bytes right now ")
 
                     if self.buf.available_data() == 0 {
                         // no more data to read or parse, stopping the reading loop
+
                         break (0, None);
                     } else if read_bytes == 0 {
                         break (0, Some(Err((self.fail)(Err::Incomplete(n)))));
@@ -137,7 +169,13 @@ where
                 self.buf.capacity()
             );
             self.buf.shift();
-            self.fill().unwrap();
+            wasm_bindgen_futures::spawn_local(async {
+                let test = self.fill().await.unwrap();
+                info!(
+                    "well this is what i got in test not sure when it returns -> {}",
+                    test
+                )()
+            });
         }
 
         result

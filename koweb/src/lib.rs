@@ -194,6 +194,7 @@ pub struct Program {
     raw_url: String,
 }
 
+//TODO split in multiple files better after
 pub mod fetch_buffer;
 
 #[wasm_bindgen]
@@ -237,6 +238,8 @@ pub async fn run_multiple(
                     jobs: None,
                     files: vec![],
                 };
+                //TODO right now things are done here but i just want to pass the program that we wan to run to a produce fetch or something
+                //so i don't really want to use produce js
                 let iter = produce_from_js(&test_string, &opt);
                 //TODO module names and separation in the output
                 let mut iter =
@@ -245,17 +248,87 @@ pub async fn run_multiple(
                 info!("function is finished 0-0");
             }
         }
-        //TODO
-        //i have to make a parse buffer now uh and my own parse function then passing the list of the urls instead of the file
-        //how come i am not getting an error when i run a single file
-
-        //ok so the thing that i am fetching is not actually the right thing
-        //i am fetching the first one in the dependency
-        //so i am actually running sttfa.dk right now that makes sense lets try to run something that i can't actually run
-
-        // [2021-05-18T11:23:16Z INFO  kocheck] Open module /bigops
-        // [2021-05-18T11:23:16Z INFO  kocheck] Introduce symbol sameF_upto
-        // Error: Ko(Scope(UndeclaredSymbol("sttfa.etap")))
-        //so this is what i get when i run it with kocheckj why don't i get this when i run it with koweb
     }
 }
+
+use fetch_buffer::FetchBuffer;
+use kontroli::error::Error as KoError;
+use kontroli::parse::Command;
+use nom::error::VerboseError;
+use std::convert::TryInto;
+use std::io::Read;
+
+//but one fill might be too large for the buffer if its a very large file so
+//i need to fill what i can and then check if i go to the end of the file being fetched
+//if i did and there are other files
+
+//do i need to change next no not really right
+
+async fn produce_from_fetch(dependency_url_list: Vec<String>, opt: &Opt) {
+    //create a parse buffer here with the data
+    use kontroli::parse::{opt_lex, phrase, Parse, Parser};
+    let parse: fn(&[u8]) -> Parse<_> = |i| opt_lex(phrase(Command::parse))(i);
+
+    //TODO let's try and do everything here and then we will see
+
+    let mut pb = FetchBuffer {
+        buf: circular::Buffer::with_capacity(opt.buffer.get_bytes().try_into().unwrap()),
+        read_r: std::io::Cursor::new(vec![]),
+        read: std::io::Cursor::new(vec![]),
+        parse,
+        fail: |_: nom::Err<VerboseError<&[u8]>>| Error::Ko(KoError::Parse),
+        urls: dependency_url_list,
+        file_counter: 0,
+    };
+
+    //TODO think maybe i don't need to do anything in the next ?
+    //but im pretty sure that i do or maybe
+    //right now fill is called here once and in next but it looks like next is called implicitly because i have not found any place
+    //where it is called explicitly
+    pb.fill().await.unwrap();
+    pb.map(|entry| entry.transpose()).flatten(); //on this produce called .map(|cmd| cmd.map(Event::Command));
+                                                 //     // cmds
+                                                 //     // module.chain(cmds)
+}
+
+fn parse_fetch() {}
+
+//produce js calls parse which makes the parse buffer that parses the string
+
+//like i could just pass the list of urls in here
+// fn produce_from_js<'a>(
+//     cmds_from_js: &'a String,
+//     opt: &Opt,
+// ) -> impl Iterator<Item = Result<Event, Error>> + 'a {
+//     // let module = std::iter::once(Ok(Event::Module(vec!["js".to_string()]))); //TODO is this needed ?
+//     return parse(cmds_from_js.as_bytes(), opt).map(|cmd| cmd.map(Event::Command));
+//     // cmds
+//     // module.chain(cmds)
+// }
+
+// pub fn parse<R: Read>(read: R, opt: &Opt) -> impl Iterator<Item = Result<Command, Error>> {
+//     use kontroli::parse::{opt_lex, phrase, Parse, Parser};
+//     let parse: fn(&[u8]) -> Parse<_> = |i| opt_lex(phrase(Command::parse))(i);
+//     let mut pb = ParseBuffer {
+//         buf: circular::Buffer::with_capacity(opt.buffer.get_bytes().try_into().unwrap()),
+//         read,
+//         parse,
+//         fail: |_: nom::Err<VerboseError<&[u8]>>| Error::Ko(KoError::Parse),
+//     };
+//     pb.fill().unwrap();
+//     // consider only non-whitespace entries
+//     pb.map(|entry| entry.transpose()).flatten()
+// }
+
+//TODO
+//i have to make a parse buffer now uh and my own parse function then passing the list of the urls instead of the file
+//how come i am not getting an error when i run a single file
+
+//ok so the thing that i am fetching is not actually the right thing
+//i am fetching the first one in the dependency
+//so i am actually running sttfa.dk right now that makes sense lets try to run something that i can't actually run
+
+// [2021-05-18T11:23:16Z INFO  kocheck] Open module /bigops
+// [2021-05-18T11:23:16Z INFO  kocheck] Introduce symbol sameF_upto
+// Error: Ko(Scope(UndeclaredSymbol("sttfa.etap")))
+//so this is what i get when i run it with kocheckj why don't i get this when i run it with koweb
