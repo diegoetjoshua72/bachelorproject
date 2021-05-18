@@ -213,9 +213,6 @@ pub async fn run_multiple(
         module_to_run.as_str()
     );
     // info!("PROGRAM LIST IN RUST : {:?}", vec_of_programs);
-
-    //i would need the list of url for the dependencies
-    //TILL HERE IT WORKS
     for program in vec_of_programs {
         if program.name == module_to_run {
             info!("This is all the program info -> {:?}", program);
@@ -245,8 +242,8 @@ pub async fn run_multiple(
                 Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webpage(event)));
 
             seq::consume(iter, &opt).expect("something went wrong in the consume");
+            info!("function is finished 0-0");
         }
-
         //TODO
         //i have to make a parse buffer now uh and my own parse function then passing the list of the urls instead of the file
     }
