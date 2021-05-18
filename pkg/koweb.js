@@ -258,12 +258,16 @@ export function run_test(cmds_from_js, eta, no_scope, no_infer, no_check) {
 /**
 * @param {any} programs
 * @param {string} module_to_run
+* @param {boolean} eta
+* @param {boolean} no_scope
+* @param {boolean} no_infer
+* @param {boolean} no_check
 * @returns {any}
 */
-export function run_multiple(programs, module_to_run) {
+export function run_multiple(programs, module_to_run, eta, no_scope, no_infer, no_check) {
     var ptr0 = passStringToWasm0(module_to_run, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
     var len0 = WASM_VECTOR_LEN;
-    var ret = wasm.run_multiple(addHeapObject(programs), ptr0, len0);
+    var ret = wasm.run_multiple(addHeapObject(programs), ptr0, len0, eta, no_scope, no_infer, no_check);
     return takeObject(ret);
 }
 
@@ -604,7 +608,7 @@ async function init(input) {
         var ret = wasm.memory;
         return addHeapObject(ret);
     };
-    imports.wbg.__wbindgen_closure_wrapper287 = function(arg0, arg1, arg2) {
+    imports.wbg.__wbindgen_closure_wrapper290 = function(arg0, arg1, arg2) {
         var ret = makeMutClosure(arg0, arg1, 137, __wbg_adapter_28);
         return addHeapObject(ret);
     };

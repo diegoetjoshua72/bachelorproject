@@ -5,7 +5,7 @@ export function get_graph_rust(a: number, b: number): number;
 export function get_string_js(a: number, b: number, c: number): void;
 export function increment_test(): void;
 export function run_test(a: number, b: number, c: number, d: number, e: number, f: number): void;
-export function run_multiple(a: number, b: number, c: number): number;
+export function run_multiple(a: number, b: number, c: number, d: number, e: number, f: number, g: number): number;
 export function __wbindgen_malloc(a: number): number;
 export function __wbindgen_realloc(a: number, b: number, c: number): number;
 export const __wbindgen_export_2: WebAssembly.Table;
