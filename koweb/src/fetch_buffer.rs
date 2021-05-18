@@ -1,4 +1,5 @@
 use super::lazy_fetch;
+use log::{info, trace, warn, Level};
 use nom::error::VerboseError;
 use nom::{Err, IResult, Offset};
 use std::io::{self, Read};
@@ -6,10 +7,11 @@ use std::io::{self, Read};
 /// Buffered parsing of a sequence of items.
 pub struct FetchBuffer<R, P, F> {
     pub buf: circular::Buffer,
-    pub read_R: R,
+    pub read_r: R,
     pub read: std::io::Cursor<Vec<u8>>,
     pub parse: P,
     pub fail: F,
+    // pub current_name: String,
     pub urls: Vec<String>,
     pub file_counter: usize,
 }
@@ -34,26 +36,47 @@ impl<R: Read, P, F> FetchBuffer<R, P, F> {
     fn number_of_files_left(&self) -> usize {
         return self.urls.len() - self.file_counter;
     }
-    fn number_of_bytes_left_in_file(&self) -> usize {
+
+    fn number_of_bytes_left_in_file(&mut self, already_read_bytes: usize) -> usize {
+        let reef = self.read.clone();
+        let reef2 = self.read.clone();
+        info!(
+            "THIS IS HOW MANY BYTES ARE IN THE FILE {}",
+            reef.into_inner().len()
+        );
+
+        info!(
+            "This is how many bytes are left in the file : {} ",
+            reef2.into_inner().len() - already_read_bytes
+        );
         return 0;
     }
 
     pub async fn new_read(&mut self) {
         //make this work this is quite interesting more than debug js so i will do this tomorow morning what a banger
-        self.read = lazy_fetch::get_program_text(&program.dependency_url_list[self.file_counter])
+        self.read = lazy_fetch::get_program_text(&self.urls[self.file_counter])
             .await
             .unwrap();
         self.file_counter += 1;
     }
 
+    //TODO the conditions for the fetching of the new content (these conditions have to be in the next and yeah so i need the number of bytes left in the file to read so how can i get that does read.into_inner().len() work ??)
+    //TODO for the debug can i do carriage return counting for the line number of the error
     pub fn fill(&mut self) -> io::Result<usize> {
         let mut total_read_bytes = 0;
 
         loop {
             // read from file to free space of buffer
             let read_bytes = self.read.read(self.buf.space())?;
-            //println!("Read {} bytes from file", read_bytes);
-
+            println!("Read {} bytes from file", read_bytes);
+            println!(
+                "Number of bytes left in the file {}",
+                self.number_of_bytes_left_in_file(read_bytes)
+            );
+            println!(
+                "Number of files left to read {}",
+                self.number_of_files_left()
+            );
             self.buf.fill(read_bytes);
             total_read_bytes += read_bytes;
             if read_bytes == 0 || self.buf.available_space() == 0 {

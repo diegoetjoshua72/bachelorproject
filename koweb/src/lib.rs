@@ -203,7 +203,14 @@ pub struct Program {
 pub mod fetch_buffer;
 
 #[wasm_bindgen]
-pub async fn run_multiple(programs: JsValue, module_to_run: String) {
+pub async fn run_multiple(
+    programs: JsValue,
+    module_to_run: String,
+    eta: bool,
+    no_scope: bool,
+    no_infer: bool,
+    no_check: bool,
+) {
     console_log::init_with_level(Level::Trace);
     init_console_wasm_debug();
     let vec_of_programs: Vec<Program> = programs.into_serde().unwrap();
@@ -227,14 +234,24 @@ pub async fn run_multiple(programs: JsValue, module_to_run: String) {
                 "this is what we got from the fetching turned into a string: {}",
                 test_string
             );
+
+            let opt = Opt {
+                eta,
+                no_scope,
+                no_infer,
+                no_check,
+                buffer: Byte::from_str("64MB").unwrap(),
+                channel_capacity: None,
+                jobs: None,
+                files: vec![],
+            };
+            let iter = produce_from_js(&test_string, &opt);
+
+            let mut iter =
+                Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webpage(event)));
         }
 
-        // when the parse buffer is empty we will want to fetch a new file if there is something to fetch
-        //the part where the buffer is gets an array with all the urls that we need and it then calls the read fo the parse buffer when it is emtpry which will then fetch
-        //make it so that it does one file at a time
+        //TODO
+        //i have to make a parse buffer now uh and my own parse function then passing the list of the urls instead of the file
     }
 }
-
-// make everything on the rust side work and add the done
-//green checkmark output when running was successfull
-//also make the separation between running the files clear in the output box
