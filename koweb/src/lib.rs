@@ -95,7 +95,7 @@ fn produce_from_js<'a>(
     cmds_from_js: &'a String,
     opt: &Opt,
 ) -> impl Iterator<Item = Result<Event, Error>> + 'a {
-    // let module = std::iter::once(Ok(Event::Module(vec!["js".to_string()])));
+    // let module = std::iter::once(Ok(Event::Module(vec!["js".to_string()]))); //TODO is this needed ?
     return parse(cmds_from_js.as_bytes(), opt).map(|cmd| cmd.map(Event::Command));
     // cmds
     // module.chain(cmds)
@@ -154,13 +154,7 @@ where
 }
 
 #[wasm_bindgen]
-pub fn run_test(
-    cmds_from_js: String,
-    eta: bool,
-    no_scope: bool,
-    no_infer: bool,
-    no_check: bool,
-) -> Result<(), JsValue> {
+pub fn run_test(cmds_from_js: String, eta: bool, no_scope: bool, no_infer: bool, no_check: bool) {
     // let mut f = File::open("foo.txt")?;
     // let mut buffer = [0; 10];
 
@@ -189,7 +183,7 @@ pub fn run_test(
 
     seq::consume(iter, &opt).expect("something went wrong in the consume");
 
-    Ok(())
+    // Ok(())
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -249,6 +243,8 @@ pub async fn run_multiple(
 
             let mut iter =
                 Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webpage(event)));
+
+            seq::consume(iter, &opt).expect("something went wrong in the consume");
         }
 
         //TODO
