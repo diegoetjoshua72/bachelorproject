@@ -245,6 +245,13 @@ use std::io::Read;
 //TODO do the TODO
 //
 
+fn produce_test<'a>(
+    program_text: &'a [u8],
+    opt: &Opt,
+) -> impl Iterator<Item = Result<Event, Error>> + 'a {
+    return parse(program_text, opt).map(|cmd| cmd.map(Event::Command));
+}
+
 async fn produce_from_fetch(dependency_url_list: Vec<String>, opt: &Opt) {
     use kontroli::parse::{opt_lex, phrase, Parse, Parser};
     let parse_txt: fn(&[u8]) -> Parse<_> = |i| opt_lex(phrase(Command::parse))(i);
@@ -260,17 +267,12 @@ async fn produce_from_fetch(dependency_url_list: Vec<String>, opt: &Opt) {
             test_string
         );
 
-        parse_txt(&res.into_inner()[..]).unwrap();
-        // let result = loop{
-        //     match parse_txt(res){
+        let iter = produce_from_js(&test_string, opt);
 
-        //     Err(e) => break (0, Some(Err((self.fail)(e)))),
+        let mut iter =
+            Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webpage(event)));
 
-        //     Ok((remaining, toplevel)) => {
-        //         break (self.buf.data().offset(remaining), Some(Ok(toplevel)));
-        //         }
-        //     }
-        // }
+        seq::consume(iter, &opt).expect("something went wrong in the consume");
     }
 
     // pb.fill().await.unwrap();
