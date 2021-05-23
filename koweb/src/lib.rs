@@ -255,26 +255,11 @@ pub async fn run_multiple(
     }
 }
 
-// use fetch_buffer::FetchBuffer;
-use kontroli::error::Error as KoError;
-use kontroli::parse::Command;
-use nom::error::VerboseError;
-use std::convert::TryInto;
-use std::io::Read;
-
-//TODO do the TODO
-//
-
-fn produce_test<'a>(
-    program_text: &'a [u8],
-    opt: &Opt,
-) -> impl Iterator<Item = Result<Event, Error>> + 'a {
-    return parse(program_text, opt).map(|cmd| cmd.map(Event::Command));
-}
-
+// use kontroli::parse::Command;
 async fn produce_from_fetch(dependency_url_list: Vec<String>, opt: &Opt) {
-    use kontroli::parse::{opt_lex, phrase, Parse, Parser};
-    let parse_txt: fn(&[u8]) -> Parse<_> = |i| opt_lex(phrase(Command::parse))(i);
+    // use kontroli::parse::{opt_lex, phrase, Parse, Parser};
+    // let parse_txt: fn(&[u8]) -> Parse<_> = |i| opt_lex(phrase(Command::parse))(i);
+    info!("got to produce");
     for file in dependency_url_list {
         info!("running file => {}", file);
         write_output_header(&file);
@@ -285,7 +270,7 @@ async fn produce_from_fetch(dependency_url_list: Vec<String>, opt: &Opt) {
         let test_string = String::from_utf8(res.clone().into_inner()).unwrap();
         info!(
             "this is what we got from the fetching turned into a string: {}",
-            test_string
+            &test_string
         );
 
         let iter = produce_from_js(&test_string, opt);
