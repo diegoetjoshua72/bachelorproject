@@ -250,7 +250,7 @@ pub async fn run_multiple(
                 files: vec![],
             };
             //maybe i will just do the run here
-            produce_from_fetch(program.dependency_url_list, &opt);
+            produce_from_fetch(program.dependency_url_list, &opt).await;
         }
     }
 }
