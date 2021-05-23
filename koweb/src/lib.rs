@@ -94,8 +94,9 @@ fn get_text_from_editor() -> Result<String, ()> {
 fn produce_from_js<'a>(
     cmds_from_js: &'a String,
     opt: &Opt,
+    module_name: String,
 ) -> impl Iterator<Item = Result<Event, Error>> + 'a {
-    let module = std::iter::once(Ok(Event::Module(vec!["sttfa".to_string()])));
+    let module = std::iter::once(Ok(Event::Module(vec![module_name])));
     let commands = parse(cmds_from_js.as_bytes(), opt).map(|cmd| cmd.map(Event::Command));
     // cmds
     module.chain(commands)
@@ -197,7 +198,7 @@ pub fn run_test(cmds_from_js: String, eta: bool, no_scope: bool, no_infer: bool,
         files: vec![],
     };
 
-    let iter = produce_from_js(&program_text, &opt);
+    let iter = produce_from_js(&program_text, &opt, String::from("js"));
 
     let mut iter = Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webpage(event)));
 
@@ -273,7 +274,7 @@ async fn produce_from_fetch(dependency_url_list: Vec<(String, String)>, opt: &Op
     // let test = Box::new(std::iter::empty());
     for (file_name, url) in dependency_url_list {
         info!("running file => {}", file_name);
-        write_output_header(&url, &file_name); //TODO print the dko file name rahter than the url
+        write_output_header(&url, &file_name);
         let res = lazy_fetch::get_program_text(&url)
             .await
             .expect("fetch did not return anything");
@@ -281,19 +282,26 @@ async fn produce_from_fetch(dependency_url_list: Vec<(String, String)>, opt: &Op
         test_string += String::from_utf8(res.clone().into_inner())
             .unwrap()
             .as_str();
-    }
 
+        let iter = produce_from_js(
+            &test_string,
+            opt,
+            file_name[0..file_name.len() - 3].to_string(),
+        );
+        let mut iter =
+            Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webpage(event)));
+        seq::consume(iter, &opt).expect("something went wrong in the consume");
+    }
     info!(
         "this is what we got from the fetching turned into a string: {}",
         &test_string
     );
+
+    //not sure now i should have modules and such
     //add module name to produce
     //i probably need to remove everything including . in the filename variable
     //pass it to produce from js
     //
-    let iter = produce_from_js(&test_string, opt);
-    let mut iter = Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webpage(event)));
-    seq::consume(iter, &opt).expect("something went wrong in the consume");
     // i need module sttfa when i run sttfa.dk and then maybe i don't need to have all the files
     // loaded at once it would make sense that sttfa.etap is syntax to get stuff from the sttfa module
     //that means i need to run them one by one to make all the modules ?
