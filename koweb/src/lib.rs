@@ -95,7 +95,7 @@ fn produce_from_js<'a>(
     cmds_from_js: &'a String,
     opt: &Opt,
 ) -> impl Iterator<Item = Result<Event, Error>> + 'a {
-    let module = std::iter::once(Ok(Event::Module(vec!["js".to_string()])));
+    let module = std::iter::once(Ok(Event::Module(vec!["stffa".to_string()])));
     let commands = parse(cmds_from_js.as_bytes(), opt).map(|cmd| cmd.map(Event::Command));
     // cmds
     module.chain(commands)
@@ -280,6 +280,10 @@ async fn produce_from_fetch(dependency_url_list: Vec<String>, opt: &Opt) {
     let iter = produce_from_js(&test_string, opt);
     let mut iter = Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webpage(event)));
     seq::consume(iter, &opt).expect("something went wrong in the consume");
+    // i need module sttfa when i run sttfa.dk and then maybe i don't need to have all the files
+    // loaded at once it would make sense that sttfa.etap is syntax to get stuff from the sttfa module
+    //that means i need to run them one by one to make all the modules ?
+
     //hope it works this way it does not something to do with how symbols and things are stored
     //how could it not work its this .etap things that does not want to work im only calling comsume once so
     // def True :
