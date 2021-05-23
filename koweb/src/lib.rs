@@ -95,7 +95,7 @@ fn produce_from_js<'a>(
     cmds_from_js: &'a String,
     opt: &Opt,
 ) -> impl Iterator<Item = Result<Event, Error>> + 'a {
-    let module = std::iter::once(Ok(Event::Module(vec!["stffa".to_string()])));
+    let module = std::iter::once(Ok(Event::Module(vec!["sttfa".to_string()])));
     let commands = parse(cmds_from_js.as_bytes(), opt).map(|cmd| cmd.map(Event::Command));
     // cmds
     module.chain(commands)
