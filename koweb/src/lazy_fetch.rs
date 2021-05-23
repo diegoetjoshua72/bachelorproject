@@ -89,11 +89,11 @@ pub async fn get_program_text(url: &String) -> Result<std::io::Cursor<Vec<u8>>> 
     let mut program_text = std::io::Cursor::new(buffer);
     let mut result = String::new();
 
-    info!(
-        "content program_text: {:?} content result -> {}",
-        program_text.read_to_string(&mut result).unwrap(),
-        result
-    );
+    // info!(
+    //     "content program_text: {:?} content result -> {}",
+    //     program_text.read_to_string(&mut result).unwrap(),
+    //     result
+    // );
 
     println!("Finished with success!");
     return Ok(program_text);

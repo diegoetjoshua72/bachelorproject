@@ -280,6 +280,7 @@ async fn produce_from_fetch(dependency_url_list: Vec<String>, opt: &Opt) {
     let iter = produce_from_js(&test_string, opt);
     let mut iter = Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webpage(event)));
     seq::consume(iter, &opt).expect("something went wrong in the consume");
+    //hope it works this way
     // def True :
     // sttfa.etap (sttfa.p sttfa.bool())
     //this fails and its the first line of the second file so is the first file not executed properly ?
