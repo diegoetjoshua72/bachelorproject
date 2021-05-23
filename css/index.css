@@ -215,6 +215,11 @@ ul {
     color: #b16186;
     font-weight: bold;
 }
+.lambda {
+    color: blue;
+    font-weight: bold;
+    font-size: 16px;
+}
 
 .line {
     display: inline;
