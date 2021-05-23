@@ -95,10 +95,10 @@ fn produce_from_js<'a>(
     cmds_from_js: &'a String,
     opt: &Opt,
 ) -> impl Iterator<Item = Result<Event, Error>> + 'a {
-    // let module = std::iter::once(Ok(Event::Module(vec!["js".to_string()]))); //TODO is this needed ?
-    return parse(cmds_from_js.as_bytes(), opt).map(|cmd| cmd.map(Event::Command));
+    let module = std::iter::once(Ok(Event::Module(vec!["js".to_string()])));
+    let commands = parse(cmds_from_js.as_bytes(), opt).map(|cmd| cmd.map(Event::Command));
     // cmds
-    // module.chain(cmds)
+    module.chain(commands)
 }
 
 fn string_to_static_str(s: String) -> &'static str {
@@ -280,7 +280,8 @@ async fn produce_from_fetch(dependency_url_list: Vec<String>, opt: &Opt) {
     let iter = produce_from_js(&test_string, opt);
     let mut iter = Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webpage(event)));
     seq::consume(iter, &opt).expect("something went wrong in the consume");
-    //hope it works this way
+    //hope it works this way it does not something to do with how symbols and things are stored
+    //how could it not work its this .etap things that does not want to work im only calling comsume once so
     // def True :
     // sttfa.etap (sttfa.p sttfa.bool())
     //this fails and its the first line of the second file so is the first file not executed properly ?
