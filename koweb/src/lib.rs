@@ -1,9 +1,9 @@
 use wasm_bindgen::prelude::*;
 //parses strings into commands which are then either
 // use kontroli::error::SignatureError;
+// use kontroli::error::Error;
 // use kontroli::rc::{Intro, Rule, Signature, Typing};
 // use kontroli::scope::{Command, Symbols};
-// use kontroli::error::Error;
 // use kontroli::error::SymbolsError;
 use byte_unit::{Byte, ByteError};
 use js_sys::{Error as JsError, JsString, Reflect};
@@ -260,24 +260,27 @@ async fn produce_from_fetch(dependency_url_list: Vec<String>, opt: &Opt) {
     // use kontroli::parse::{opt_lex, phrase, Parse, Parser};
     // let parse_txt: fn(&[u8]) -> Parse<_> = |i| opt_lex(phrase(Command::parse))(i);
     info!("got to produce");
+    let mut test_string = String::from("");
     for file in dependency_url_list {
         info!("running file => {}", file);
-        write_output_header(&file);
+        write_output_header(&file); //TODO print the dko file name rahter than the url
         let res = lazy_fetch::get_program_text(&file)
             .await
             .expect("fetch did not return anything");
         // info!("this is what we got from the fetching {:?}", res);
-        let test_string = String::from_utf8(res.clone().into_inner()).unwrap();
-        info!(
-            "this is what we got from the fetching turned into a string: {}",
-            &test_string
-        );
-
-        let iter = produce_from_js(&test_string, opt);
-
-        let mut iter =
-            Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webpage(event)));
-
-        seq::consume(iter, &opt).expect("something went wrong in the consume");
+        test_string += String::from_utf8(res.clone().into_inner())
+            .unwrap()
+            .as_str();
     }
+
+    info!(
+        "this is what we got from the fetching turned into a string: {}",
+        &test_string
+    );
+    let iter = produce_from_js(&test_string, opt);
+    let mut iter = Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webpage(event)));
+    seq::consume(iter, &opt).expect("something went wrong in the consume");
+    // def True :
+    // sttfa.etap (sttfa.p sttfa.bool())
+    //this fails and its the first line of the second file so is the first file not executed properly ?
 }
