@@ -126,6 +126,26 @@ fn write_to_webpage(event: &kocheck::Event) {
     output.append_child(&div).unwrap();
 }
 
+fn write_output_header(filename: &String) {
+    let window = web_sys::window().expect("no global `window` exists");
+    let document = window.document().expect("should have a document on window");
+    let body = document.body().expect("document should have a body");
+    // let val = document.get_element_by_id("console").unwrap();
+    let div = document.create_element("div").unwrap();
+    let text = document.create_element("p").unwrap();
+    let header_span = document.create_element("span").unwrap();
+    header_span.set_class_name("header_output");
+    header_span.set_text_content(Some("#> "));
+    text.set_class_name("line");
+    text.set_text_content(Some(format!("{}", filename).as_str()));
+    div.set_class_name("prompt");
+    div.append_child(&header_span);
+    div.append_child(&text);
+    let output = document.get_element_by_id("output").unwrap();
+    output.set_class_name("display_output");
+    output.append_child(&div).unwrap();
+}
+
 //temporary i'll use the definition from bin maybe
 pub fn flatten_nested_results<O, I, T, E>(outer: O) -> impl Iterator<Item = Result<T, E>>
 where
@@ -257,6 +277,7 @@ async fn produce_from_fetch(dependency_url_list: Vec<String>, opt: &Opt) {
     let parse_txt: fn(&[u8]) -> Parse<_> = |i| opt_lex(phrase(Command::parse))(i);
     for file in dependency_url_list {
         info!("running file => {}", file);
+        write_output_header(&file);
         let res = lazy_fetch::get_program_text(&file)
             .await
             .expect("fetch did not return anything");
@@ -274,14 +295,4 @@ async fn produce_from_fetch(dependency_url_list: Vec<String>, opt: &Opt) {
 
         seq::consume(iter, &opt).expect("something went wrong in the consume");
     }
-
-    // pb.fill().await.unwrap();
-    // pb.map(|entry| entry.transpose()).flatten();
-    //TODO right now things are done here but i just want to pass the program that we wan to run to a produce fetch or something
-    //so i don't really want to use produce js
-    // let iter = produce_from_js(&test_string, &opt);
-    //TODO module names and separation in the output
-    // let mut iter =
-    // Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webpage(event)));
-    // seq::consume(iter, &opt).expect("something went wrong in the consume");
 }
