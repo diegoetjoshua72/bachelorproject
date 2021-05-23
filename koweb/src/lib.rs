@@ -229,7 +229,8 @@ pub async fn run_multiple(
                 jobs: None,
                 files: vec![],
             };
-            produce_from_fetch(program.dependency_url_list, opt);
+            //maybe i will just do the run here
+            produce_from_fetch(program.dependency_url_list, &opt);
         }
     }
 }
@@ -252,7 +253,7 @@ async fn produce_from_fetch(dependency_url_list: Vec<String>, opt: &Opt) {
         let res = lazy_fetch::get_program_text(&file)
             .await
             .expect("fetch did not return anything");
-        info!("this is what we got from the fetching {:?}", res);
+        // info!("this is what we got from the fetching {:?}", res);
         let test_string = String::from_utf8(res.clone().into_inner()).unwrap();
         info!(
             "this is what we got from the fetching turned into a string: {}",
