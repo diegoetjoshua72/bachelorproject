@@ -219,38 +219,17 @@ pub async fn run_multiple(
         if program.name == module_to_run {
             info!("This is all the program info -> {:?}", program);
             info!("Name of the Program we want to run -> {}", module_to_run);
-            //this is each .dk file
-            //1) lets try to modify get_program_text to work with what michael has sent me
-            for file in program.dependency_url_list {
-                info!("running file => {}", file);
-                let res = lazy_fetch::get_program_text(&file).await;
-                info!("this is what we got from the fetching {:?}", res);
-
-                let test_string = String::from_utf8(res.unwrap().into_inner()).unwrap();
-                info!(
-                    "this is what we got from the fetching turned into a string: {}",
-                    test_string
-                );
-                let opt = Opt {
-                    eta,
-                    no_scope,
-                    no_infer,
-                    no_check,
-                    buffer: Byte::from_str("64MB").unwrap(),
-                    channel_capacity: None,
-                    jobs: None,
-                    files: vec![],
-                };
-                //TODO right now things are done here but i just want to pass the program that we wan to run to a produce fetch or something
-                //so i don't really want to use produce js
-                // let iter = produce_from_js(&test_string, &opt);
-                //TODO module names and separation in the output
-                // let mut iter =
-                // Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webpage(event)));
-                // seq::consume(iter, &opt).expect("something went wrong in the consume");
-                info!("file is finished 0-0");
-            }
-            info!("function is finished");
+            let opt = Opt {
+                eta,
+                no_scope,
+                no_infer,
+                no_check,
+                buffer: Byte::from_str("64MB").unwrap(),
+                channel_capacity: None,
+                jobs: None,
+                files: vec![],
+            };
+            produce_from_fetch(program.dependency_url_list, opt);
         }
     }
 }
@@ -265,10 +244,41 @@ use std::io::Read;
 //TODO do the TODO
 //
 
-// async fn produce_from_fetch(dependency_url_list: Vec<String>, opt: &Opt) {
-//     //create a parse buffer here with the data
-//     use kontroli::parse::{opt_lex, phrase, Parse, Parser};
-//     let parse: fn(&[u8]) -> Parse<_> = |i| opt_lex(phrase(Command::parse))(i);
-//     pb.fill().await.unwrap();
-//     pb.map(|entry| entry.transpose()).flatten();
-// }
+async fn produce_from_fetch(dependency_url_list: Vec<String>, opt: &Opt) {
+    use kontroli::parse::{opt_lex, phrase, Parse, Parser};
+    let parse_txt: fn(&[u8]) -> Parse<_> = |i| opt_lex(phrase(Command::parse))(i);
+    for file in dependency_url_list {
+        info!("running file => {}", file);
+        let res = lazy_fetch::get_program_text(&file)
+            .await
+            .expect("fetch did not return anything");
+        info!("this is what we got from the fetching {:?}", res);
+        let test_string = String::from_utf8(res.clone().into_inner()).unwrap();
+        info!(
+            "this is what we got from the fetching turned into a string: {}",
+            test_string
+        );
+
+        parse_txt(&res.into_inner()[..]).unwrap();
+        // let result = loop{
+        //     match parse_txt(res){
+
+        //     Err(e) => break (0, Some(Err((self.fail)(e)))),
+
+        //     Ok((remaining, toplevel)) => {
+        //         break (self.buf.data().offset(remaining), Some(Ok(toplevel)));
+        //         }
+        //     }
+        // }
+    }
+
+    // pb.fill().await.unwrap();
+    // pb.map(|entry| entry.transpose()).flatten();
+    //TODO right now things are done here but i just want to pass the program that we wan to run to a produce fetch or something
+    //so i don't really want to use produce js
+    // let iter = produce_from_js(&test_string, &opt);
+    //TODO module names and separation in the output
+    // let mut iter =
+    // Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webpage(event)));
+    // seq::consume(iter, &opt).expect("something went wrong in the consume");
+}
