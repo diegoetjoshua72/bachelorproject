@@ -98,10 +98,3 @@ pub async fn get_program_text(url: &String) -> Result<std::io::Cursor<Vec<u8>>> 
     println!("Finished with success!");
     return Ok(program_text);
 }
-
-//whenever the parse runs out of things to parse we call this thing that gives him some more
-//if we run out we need pass something empty to him and he will understand
-
-//This sounds promising
-// std::io::Cursor
-// std::io::Cursor is a simple and useful wrapper that implements Read for Vec<u8>, so it allows to use vector as a readable entity.
