@@ -126,7 +126,7 @@ fn write_to_webpage(event: &kocheck::Event) {
     output.append_child(&div).unwrap();
 }
 
-fn write_output_header(filename: &String) {
+fn write_output_header(url: &String, module_name: &String) {
     let window = web_sys::window().expect("no global `window` exists");
     let document = window.document().expect("should have a document on window");
     let body = document.body().expect("document should have a body");
@@ -137,7 +137,7 @@ fn write_output_header(filename: &String) {
     header_span.set_class_name("header_output");
     header_span.set_text_content(Some("#> "));
     text.set_class_name("line");
-    text.set_text_content(Some(format!("{}", filename).as_str()));
+    text.set_text_content(Some(format!("{}", module_name).as_str()));
     div.set_class_name("prompt");
     div.append_child(&header_span);
     div.append_child(&text);
@@ -250,21 +250,31 @@ pub async fn run_multiple(
                 files: vec![],
             };
             //maybe i will just do the run here
-            produce_from_fetch(program.dependency_url_list, &opt).await;
+
+            produce_from_fetch(
+                program
+                    .dependency
+                    .into_iter()
+                    .zip(program.dependency_url_list.into_iter())
+                    .collect(),
+                &opt,
+            )
+            .await;
         }
     }
 }
 
 // use kontroli::parse::Command;
-async fn produce_from_fetch(dependency_url_list: Vec<String>, opt: &Opt) {
+async fn produce_from_fetch(dependency_url_list: Vec<(String, String)>, opt: &Opt) {
     // use kontroli::parse::{opt_lex, phrase, Parse, Parser};
     // let parse_txt: fn(&[u8]) -> Parse<_> = |i| opt_lex(phrase(Command::parse))(i);
     info!("got to produce");
     let mut test_string = String::from("");
-    for file in dependency_url_list {
-        info!("running file => {}", file);
-        write_output_header(&file); //TODO print the dko file name rahter than the url
-        let res = lazy_fetch::get_program_text(&file)
+    // let test = Box::new(std::iter::empty());
+    for (file_name, url) in dependency_url_list {
+        info!("running file => {}", file_name);
+        write_output_header(&url, &file_name); //TODO print the dko file name rahter than the url
+        let res = lazy_fetch::get_program_text(&url)
             .await
             .expect("fetch did not return anything");
         // info!("this is what we got from the fetching {:?}", res);
@@ -277,6 +287,10 @@ async fn produce_from_fetch(dependency_url_list: Vec<String>, opt: &Opt) {
         "this is what we got from the fetching turned into a string: {}",
         &test_string
     );
+    //add module name to produce
+    //i probably need to remove everything including . in the filename variable
+    //pass it to produce from js
+    //
     let iter = produce_from_js(&test_string, opt);
     let mut iter = Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webpage(event)));
     seq::consume(iter, &opt).expect("something went wrong in the consume");
