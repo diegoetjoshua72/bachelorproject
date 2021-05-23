@@ -271,7 +271,7 @@ async fn produce_from_fetch(dependency_url_list: Vec<(String, String)>, opt: &Op
     // use kontroli::parse::{opt_lex, phrase, Parse, Parser};
     // let parse_txt: fn(&[u8]) -> Parse<_> = |i| opt_lex(phrase(Command::parse))(i);
     info!("got to produce");
-    let mut test_string = String::from("");
+    // let mut test_string = String::from("");
     // let test = Box::new(std::iter::empty());
     for (file_name, url) in dependency_url_list {
         info!("running file => {}", file_name);
@@ -280,9 +280,7 @@ async fn produce_from_fetch(dependency_url_list: Vec<(String, String)>, opt: &Op
             .await
             .expect("fetch did not return anything");
         // info!("this is what we got from the fetching {:?}", res);
-        test_string += String::from_utf8(res.clone().into_inner())
-            .unwrap()
-            .as_str();
+        let test_string = String::from_utf8(res.clone().into_inner()).unwrap();
 
         let iter = produce_from_js(
             &test_string,
@@ -292,11 +290,13 @@ async fn produce_from_fetch(dependency_url_list: Vec<(String, String)>, opt: &Op
         let mut iter =
             Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webpage(event)));
         seq::consume(iter, &opt).expect("something went wrong in the consume");
+        info!(
+            "this is what we got from the fetching turned into a string: {}",
+            &test_string
+        );
     }
-    info!(
-        "this is what we got from the fetching turned into a string: {}",
-        &test_string
-    );
+    //it looks like it stores file paths for modules does it read the files again for the symbols ??
+    //
 
     //not sure now i should have modules and such
     //add module name to produce
