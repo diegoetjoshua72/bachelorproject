@@ -128,7 +128,7 @@ fn write_to_webpage(event: &kocheck::Event) {
     output.append_child(&div).unwrap();
 }
 
-fn write_output_header(url: &String, module_name: &String) {
+fn write_output_header(module_name: &String) {
     let window = web_sys::window().expect("no global `window` exists");
     let document = window.document().expect("should have a document on window");
     let body = document.body().expect("document should have a body");
@@ -266,50 +266,57 @@ pub async fn run_multiple(
     }
 }
 
-// use kontroli::parse::Command;
 async fn produce_from_fetch(dependency_url_list: Vec<(String, String)>, opt: &Opt) {
-    // use kontroli::parse::{opt_lex, phrase, Parse, Parser};
-    // let parse_txt: fn(&[u8]) -> Parse<_> = |i| opt_lex(phrase(Command::parse))(i);
     info!("got to produce");
-    // let mut test_string = String::from("");
-    // let test = Box::new(std::iter::empty());
+    let mut list_text = vec![];
+    let mut list_module = vec![];
     for (file_name, url) in dependency_url_list {
         info!("running file => {}", file_name);
-        write_output_header(&url, &file_name);
+        write_output_header(&file_name);
+
         let res = lazy_fetch::get_program_text(&url)
             .await
             .expect("fetch did not return anything");
-        // info!("this is what we got from the fetching {:?}", res);
+
         let test_string = String::from_utf8(res.clone().into_inner()).unwrap();
-
-        let iter = produce_from_js(
-            &test_string,
-            opt,
-            file_name[0..file_name.len() - 3].to_string(),
-        );
-        let mut iter =
-            Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webpage(event)));
-        seq::consume(iter, &opt).expect("something went wrong in the consume");
-        info!(
-            "this is what we got from the fetching turned into a string: {}",
-            &test_string
-        );
+        list_text.push(test_string);
+        list_module.push(file_name);
     }
-    //it looks like it stores file paths for modules does it read the files again for the symbols ??
-    //
+    let vec_iter = produce_from_js_multiple(&list_text, &opt, list_module);
+    let iter = vec_iter.into_iter().flat_map(|it| it);
+    let mut iter = Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webpage(event)));
 
-    //not sure now i should have modules and such
-    //add module name to produce
-    //i probably need to remove everything including . in the filename variable
-    //pass it to produce from js
-    //
-    // i need module sttfa when i run sttfa.dk and then maybe i don't need to have all the files
-    // loaded at once it would make sense that sttfa.etap is syntax to get stuff from the sttfa module
-    //that means i need to run them one by one to make all the modules ?
-
-    //hope it works this way it does not something to do with how symbols and things are stored
-    //how could it not work its this .etap things that does not want to work im only calling comsume once so
-    // def True :
-    // sttfa.etap (sttfa.p sttfa.bool())
-    //this fails and its the first line of the second file so is the first file not executed properly ?
+    seq::consume(iter, &opt).expect("something went wrong in the consume");
 }
+
+fn produce_from_js_multiple<'a>(
+    list_text: &'a Vec<String>,
+    opt: &Opt,
+    list_module: Vec<String>,
+) -> Vec<impl Iterator<Item = Result<Event, Error>> + 'a> {
+    let mut result = vec![];
+    for i in 0..list_text.len() {
+        let commands = parse(list_text[i].as_bytes(), opt).map(|cmd| cmd.map(Event::Command));
+        let module = std::iter::once(Ok(Event::Module(vec![list_module[i].clone()])));
+        result.push(module.chain(commands));
+    }
+    result
+}
+
+//it looks like it stores file paths for modules does it read the files again for the symbols ??
+//Ko(Scope(UndeclaredSymbol("sttfa.etap")))
+
+//not sure now i should have modules and such
+//add module name to produce
+//i probably need to remove everything including . in the filename variable
+//pass it to produce from js
+//
+// i need module sttfa when i run sttfa.dk and then maybe i don't need to have all the files
+// loaded at once it would make sense that sttfa.etap is syntax to get stuff from the sttfa module
+//that means i need to run them one by one to make all the modules ?
+
+//hope it works this way it does not something to do with how symbols and things are stored
+//how could it not work its this .etap things that does not want to work im only calling comsume once so
+// def True :
+// sttfa.etap (sttfa.p sttfa.bool())
+//this fails and its the first line of the second file so is the first file not executed properly ?
