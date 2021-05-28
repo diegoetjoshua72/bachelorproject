@@ -280,11 +280,20 @@ async fn produce_from_fetch(dependency_url_list: Vec<(String, String)>, opt: &Op
 
         let test_string = String::from_utf8(res.clone().into_inner()).unwrap();
         list_text.push(test_string);
+        //parse b
         list_module.push(file_name);
     }
+    //
     let vec_iter = produce_from_js_multiple(&list_text, &opt, list_module);
     let iter = vec_iter.into_iter().flat_map(|it| it);
     let mut iter = Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webpage(event)));
+
+    //
+    //iterateur de iterateur pas de vec de iterateur
+    //utiliser flatten nested result
+    //tester si le site freeze pas
+    //structure du document headlines + estimation section
+    //
 
     seq::consume(iter, &opt).expect("something went wrong in the consume");
 }
@@ -297,11 +306,22 @@ fn produce_from_js_multiple<'a>(
     let mut result = vec![];
     for i in 0..list_text.len() {
         let commands = parse(list_text[i].as_bytes(), opt).map(|cmd| cmd.map(Event::Command));
-        let module = std::iter::once(Ok(Event::Module(vec![list_module[i].clone()])));
+        let module = std::iter::once(Ok(Event::Module(vec![list_module[i].clone()
+            [0..list_module[i].len() - 3]
+            .to_string()])));
+        //.dk enlever
         result.push(module.chain(commands));
     }
     result
 }
+
+//enlever.dk
+//
+
+// symbol checking is performed on the address of the pointer, making them constant-time operations.
+// so the symbol that i care about is sttfa.etap
+// two different symbols pointing to equivalent strings are not equal
+// To consistently assign the same symbols to equivalent strings, you can use the Symbols type.
 
 //it looks like it stores file paths for modules does it read the files again for the symbols ??
 //Ko(Scope(UndeclaredSymbol("sttfa.etap")))
