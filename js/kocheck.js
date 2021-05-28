@@ -104,7 +104,6 @@ function run_program_from_url(context_id) {
                     .then((string) => {
                         console.log(
                             "THIS IS THE STRING WE RUN FROM THE URL :: ",
-                            string
                         );
                         run(string);
                     })
@@ -196,7 +195,11 @@ run_button.onclick = async () => {
 
 var run_multiple_button = document.getElementById("run_multiple");
 run_multiple_button.onclick = async () => {
-    // if the program_list is empty and this is clicked show some error message
+
+    let worker = new Worker("worker.js");
+    //workers run in another GLOBAL context damn interesting
+    //finish reading the workers article after eating
+
     let module_to_run = document.getElementById("file_to_run").value;
     await run_multiple(
         program_list,
