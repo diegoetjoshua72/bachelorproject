@@ -219,6 +219,8 @@ pub async fn run_multiple(
         if program.name == module_to_run {
             info!("This is all the program info -> {:?}", program);
             info!("Name of the Program we want to run -> {}", module_to_run);
+            //this is each .dk file
+            //1) lets try to modify get_program_text to work with what michael has sent me
             for file in program.dependency_url_list {
                 info!("running file => {}", file);
                 let res = lazy_fetch::get_program_text(&file).await;
@@ -240,13 +242,14 @@ pub async fn run_multiple(
                 };
                 //TODO right now things are done here but i just want to pass the program that we wan to run to a produce fetch or something
                 //so i don't really want to use produce js
-                let iter = produce_from_js(&test_string, &opt);
+                // let iter = produce_from_js(&test_string, &opt);
                 //TODO module names and separation in the output
-                let mut iter =
-                    Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webpage(event)));
-                seq::consume(iter, &opt).expect("something went wrong in the consume");
-                info!("function is finished 0-0");
+                // let mut iter =
+                // Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webpage(event)));
+                // seq::consume(iter, &opt).expect("something went wrong in the consume");
+                info!("file is finished 0-0");
             }
+            info!("function is finished");
         }
     }
 }
@@ -258,11 +261,8 @@ use nom::error::VerboseError;
 use std::convert::TryInto;
 use std::io::Read;
 
-//but one fill might be too large for the buffer if its a very large file so
-//i need to fill what i can and then check if i go to the end of the file being fetched
-//if i did and there are other files
-
-//do i need to change next no not really right
+//TODO do the TODO
+//
 
 async fn produce_from_fetch(dependency_url_list: Vec<String>, opt: &Opt) {
     //create a parse buffer here with the data
