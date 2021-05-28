@@ -196,11 +196,33 @@ run_button.onclick = async () => {
 var run_multiple_button = document.getElementById("run_multiple");
 run_multiple_button.onclick = async () => {
 
-    let worker = new Worker("worker.js");
+
+    if (typeof(worker) == "undefined"){
+        let worker = new Worker("worker.js");
+    }
+
+    worker.postMessage({
+        program_list: program_list,
+        module_to_run: module_to_run,
+        eta: document.getElementById("eta").checked,
+        no_scope: document.getElementById("no_scope").checked,
+        no_infer: document.getElementById("no_infer").checked,
+        no_check: document.getElementById("no_check").checked
+
+    });
     //workers run in another GLOBAL context damn interesting
     //finish reading the workers article after eating
+    //hmm i can't manipulate the dom in worker so the writing to webpage in rust might not work 
+    //data is sent between the worker and the main thread via a system of messages
+
+    //so i need to update the dom with the result of this webworker
+    //but that is quite annoying i think 
+
+    //i could add an onmessage listener that first lets pass data to the worker and do the run multiple there 
+    
 
     let module_to_run = document.getElementById("file_to_run").value;
+
     await run_multiple(
         program_list,
         module_to_run,
@@ -218,45 +240,13 @@ test_click.onclick = () => {
     // increment_test();
 };
 
-//TODO
-//now the wasm is compiling
-//try import the new function
-//try run it here on the make button
-//see if i can console.log the output if i can that would be great i then just need to adapt the code in the parse.js
-//and do everything in this onclick i guess
-//1 user clicks
-//2 gets the make string from url
-//3 passes the maek string to rust
-//4 rust returns everything
-// -> generate gitraw urls for each file that we might need
-//5 generate html and css for the modules
-//6 store the information returned by rust permanently somehow
-// -> when clicking on the file name it will do a fetch for its raw url but how can i determine how large it is whilst fetching
-// -> using a HEAD Request ???
-//7 enable the possibility to load the files in the editor WITH WARNING IF THE FIlE IS TOO LARGE <--- GOAL FOR TODAY
-
-//8 create a program queue and a program class make the parse buffer work and the passing of string data to the parse buffer
-//take and give
-//9 add the possibility for run to run mulitiple files
-
-//TODO IMPORTANT FOR UNDERSTANDING AND PRESENTATION / WRITTING PAPER
-//make a little comparison program for sieves of primes to see what gains in performance can be obtained with wasm (talk about the use of the sieves prime for cpu tests)
-//understand how javascript function are passed to rust
-//understand how rust gets transpiled to wasm
-//how is the wasm executed with regards to javascript
-//talk about async programing and why wasm needs to be loaded async
-// you need to get to the mulithreading part i want to talk about if it is possible or not to do multithreading and why not or why it is
-
-//1) generate the gitraw urls that i will need
-//2) put everything in the mem instance
-//3) make the html graph once that is done
-//3) implement the program queue and the program class
-//4)
 
 var load_make = document.getElementById("load_make");
 load_make.onclick = () => {
     fetch_make_text_from_url();
 };
+
+
 // const url = "https://raw.githubusercontent.com//bachelorproject/master/examples/kontroli.mk";
 // https://github.com/01mf02/kontroli-rs/blob/master/examples/sudoku/deps.mk
 function fetch_make_text_from_url() {
