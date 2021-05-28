@@ -221,16 +221,16 @@ run_multiple_button.onclick = async () => {
     //i could add an onmessage listener that first lets pass data to the worker and do the run multiple there 
     
 
-    let module_to_run = document.getElementById("file_to_run").value;
+    // let module_to_run = document.getElementById("file_to_run").value;
 
-    await run_multiple(
-        program_list,
-        module_to_run,
-        document.getElementById("eta").checked,
-        document.getElementById("no_scope").checked,
-        document.getElementById("no_infer").checked,
-        document.getElementById("no_check").checked
-    );
+    // await run_multiple(
+    //     program_list,
+    //     module_to_run,
+    //     document.getElementById("eta").checked,
+    //     document.getElementById("no_scope").checked,
+    //     document.getElementById("no_infer").checked,
+    //     document.getElementById("no_check").checked
+    // );
 };
 
 var test_click = document.getElementById("increment");
