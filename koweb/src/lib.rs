@@ -288,13 +288,6 @@ async fn produce_from_fetch(dependency_url_list: Vec<(String, String)>, opt: &Op
     let iter = vec_iter.into_iter().flat_map(|it| it);
     let mut iter = Box::new(iter).inspect(|r| r.iter().for_each(|event| write_to_webpage(event)));
 
-    //
-    //iterateur de iterateur pas de vec de iterateur
-    //utiliser flatten nested result
-    //tester si le site freeze pas
-    //structure du document headlines + estimation section
-    //
-
     seq::consume(iter, &opt).expect("something went wrong in the consume");
 }
 
