@@ -14,17 +14,14 @@ var g_importObject = {
 var g_objInstance = null;
 
 //why does it run twice 
-onmessage = function(event) {
-    console.log('Message received from main script');
-    console.log(event.data)
-    console.log('Posting message back to main script');
-    postMessage("hello from woker");
+self.onmessage = function(event) {
+    console.log(event)
     const objData = event.data;
     if (objData.type == "CompiledModule") {
         console.log("we are trying to initialize the module");
-        WebAssembly.instantiate(objData.WasmModule, g_importObject).then(instance => {
-            console.log("this is the instance that we get : -> ", instance);
-            g_objInstance = instance // Hold onto the module's instance so that we can reuse it
+        //im guessing im fucking up with this g import thing 
+        WebAssembly.instantiate(objData.WasmModule).then(instance => {
+            g_objInstance = instance
         });
         console.log(g_objInstance)
     }
