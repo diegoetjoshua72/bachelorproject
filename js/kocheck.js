@@ -231,7 +231,11 @@ load_make.onclick = () => {
     //this would just start the worker thread and await its response or something ?
     let worker = new Worker("/bachelorproject/js/worker_graph.js");
 
-    worker.postMessage("hello");
+    const url = document.getElementById("urlmake").value;;
+    worker.postMessage({
+        type: "url",
+        value: url,
+    });
 
     worker.onmessage = function(e) {
         // result.textContent = e.data;
