@@ -1,9 +1,9 @@
-// import init, {
-//     run_test,
-//     increment_test,
-//     get_graph_rust,
-//     run_multiple,
-// } from "../pkg/koweb.js";
+import init, {
+    run_test,
+    increment_test,
+    get_graph_rust,
+    run_multiple,
+} from "../pkg/koweb.js";
 
 let program_list = [];
 
@@ -235,6 +235,7 @@ load_make.onclick = () => {
     worker.postMessage({
         type: "url",
         value: url,
+        func: get_graph_rust(),
     });
 
     worker.onmessage = function(e) {

@@ -22,19 +22,22 @@
     //cool it works
     //now get wasm to work here 
 // importScripts("/bachelorproject/pkg/koweb.js");
-import init, {
-    run_test,
-    increment_test,
-    get_graph_rust,
-    run_multiple,
-} from "/bachelorproject/pkg/koweb.js";
 
+
+//look like i might need to pass the module with a post 
 
 onmessage = function(e) {
     console.log('Message received from main script');
     console.log(e.data)
     console.log('Posting message back to main script');
     postMessage("hello from woker");
+    const {type, value} = e.data;
+    if (type == "MODUlE") {
+        console.log("we are trying to initialize the module");
+    }
+    else{
+        console.log("we want to generate teh graph of the following url :)")
+    }
   }
 
 // function fetch_make_text_from_url() {
