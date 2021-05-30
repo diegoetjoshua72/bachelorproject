@@ -3,3 +3,4 @@ async function init_wasm_module() {
     await init();
 }
 init_wasm_module();
+var test = "test global other file";

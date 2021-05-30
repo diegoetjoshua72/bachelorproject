@@ -5,6 +5,8 @@ import init, {
     run_multiple,
 } from "../pkg/koweb.js";
 
+console.log(test);
+
 let worker = new Worker("/bachelorproject/js/worker_graph.js");
 fetch("/bachelorproject/pkg/koweb_bg.wasm").then(response =>
     response.arrayBuffer()
