@@ -11,7 +11,7 @@ var g_importObject = {
     }
   };
   
-  var g_objInstance = null;
+var g_objInstance = null;
 
 onmessage = function(event) {
     console.log('Message received from main script');
@@ -22,9 +22,10 @@ onmessage = function(event) {
     if (objData.type == "CompiledModule") {
         console.log("we are trying to initialize the module");
         WebAssembly.instantiate(objData.WasmModule, g_importObject).then(instance => 
+            
             g_objInstance = instance // Hold onto the module's instance so that we can reuse it
         );
-        console .log(g_objInstance)
+        console.log(g_objInstance)
     }
     else{
         g_objInstance.exports.get_graph_rust(objData.value)
