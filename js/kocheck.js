@@ -5,6 +5,21 @@ import init, {
     run_multiple,
 } from "../pkg/koweb.js";
 
+let worker = new Worker("/bachelorproject/js/worker_graph.js");
+fetch("/bachelorproject/pkg/koweb_bg.wasm").then(response =>
+    response.arrayBuffer()
+  ).then(bytes =>
+    WebAssembly.compile(bytes)
+  ).then(WasmModule =>
+    worker.postMessage({ "type": "CompiledModule", "WasmModule": WasmModule })
+  );
+
+worker.onmessage = function(e) {
+    // result.textContent = e.data;
+    console.log('Message received from worker : ', e);
+    // worker.terminate();
+}
+
 let program_list = [];
 
 //TODO
@@ -225,33 +240,13 @@ test_click.onclick = () => {
 };
 
 
-//make load_make work on the worker 
-//i think i will start the web worker at the start and then depending on the message 
-
 var load_make = document.getElementById("load_make");
 load_make.onclick = () => {
-    //this would just start the worker thread and await its response or something ?
-    let worker = new Worker("/bachelorproject/js/worker_graph.js");
-
     const url = document.getElementById("urlmake").value;;
     worker.postMessage({
         type: "url",
         value: url,
     });
-
-    worker.onmessage = function(e) {
-        // result.textContent = e.data;
-        console.log('Message received from worker : ', e);
-        worker.terminate();
-    }
-
-    fetch("/bachelorproject/pkg/koweb_bg.wasm").then(response =>
-        response.arrayBuffer()
-      ).then(bytes =>
-        WebAssembly.compile(bytes)
-      ).then(WasmModule =>
-        worker.postMessage({ "type": "CompiledModule", "WasmModule": WasmModule })
-      );
 
 };
 
