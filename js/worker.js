@@ -1,19 +1,34 @@
 
 
-import init, {
-    run_test,
-    increment_test,
-    get_graph_rust,
-    run_multiple,
-} from "../pkg/koweb.js";
+// import init, {
+//     run_test,
+//     increment_test,
+//     get_graph_rust,
+//     run_multiple,
+// } from "../pkg/koweb.js";
 
 
-async function init_wasm_module() {
-    await init();
-}
-init_wasm_module();
+//i can do it with one worker and a switch statement actually i think 
 
 
+
+// async function init_wasm_module() {
+//     await init();
+// }
+// init_wasm_module();
+
+// onmessage = function(msg) {
+//     switch(msg.data.type) {
+
+//         case "graph":
+//         const opts = toOpts(msg.data.opts);
+//         render(msg.data.id, opts);
+//         break;
+
+//         case "run":
+//         renderer.set_name(msg.data.name);
+//         break;
+//     }
 
 // importScripts("wasm_fractal.js");
 // not ordinarily necessary, but for streaming WASM compilation to
@@ -24,8 +39,8 @@ init_wasm_module();
 
 
 
-let module_to_run = document.getElementById("file_to_run").value;
-console.log("WORKER MODULE TO RUN",module_to_run);
+// let module_to_run = document.getElementById("file_to_run").value;
+// console.log("WORKER MODULE TO RUN",module_to_run);
 
 onmessage = function(e) {
     console.log('Message received from main script');
@@ -35,12 +50,12 @@ onmessage = function(e) {
     // postMessage(workerResult);
   }
 
-function log() {
-    postMessage({
-        type: "call",
-        command: ["console", "log"],
-        args: Array.prototype.slice.call(arguments)
-    })
-}
+// function log() {
+//     postMessage({
+//         type: "call",
+//         command: ["console", "log"],
+//         args: Array.prototype.slice.call(arguments)
+//     })
+// }
 
 //i want to console log things and post messages when things need to be written on the DOM sounds quite possible right now 
