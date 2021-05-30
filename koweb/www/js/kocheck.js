@@ -225,14 +225,20 @@ test_click.onclick = () => {
 };
 
 
+//make load_make work on the worker 
 var load_make = document.getElementById("load_make");
 load_make.onclick = () => {
     //this would just start the worker thread and await its response or something ?
     let worker = new Worker("worker_graph.js");
+
+    worker.postMessage("hello");
+
     worker.onmessage = function(e) {
         // result.textContent = e.data;
         console.log('Message received from worker : ', e);
     }
+
+    worker.terminate();
 };
 
 
