@@ -11,6 +11,8 @@ async function init_wasm_module() {
 }
 init_wasm_module();
 
+fetch_make_text_from_url();
+
 //lets try to make a worker for the graph data then 
 //i don't think i can get the url from the dom so i have to pass it as a message 
 //from the main thread 
