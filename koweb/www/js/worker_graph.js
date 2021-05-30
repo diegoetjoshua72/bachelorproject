@@ -27,7 +27,7 @@ import init, {
     increment_test,
     get_graph_rust,
     run_multiple,
-} from "../pkg/koweb.js";
+} from "/bachelorproject/pkg/koweb.js";
 
 
 onmessage = function(e) {
