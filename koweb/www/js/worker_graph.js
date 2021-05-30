@@ -21,7 +21,14 @@
     
     //cool it works
     //now get wasm to work here 
-importScripts("/bachelorproject/pkg/koweb.js");
+// importScripts("/bachelorproject/pkg/koweb.js");
+import init, {
+    run_test,
+    increment_test,
+    get_graph_rust,
+    run_multiple,
+} from "../pkg/koweb.js";
+
 
 onmessage = function(e) {
     console.log('Message received from main script');
