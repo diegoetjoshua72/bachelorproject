@@ -227,42 +227,47 @@ test_click.onclick = () => {
 
 var load_make = document.getElementById("load_make");
 load_make.onclick = () => {
-    fetch_make_text_from_url();
+    //this would just start the worker thread and await its response or something ?
+    let worker = new Worker("worker_graph.js");
+    worker.onmessage = function(e) {
+        // result.textContent = e.data;
+        console.log('Message received from worker : ', e);
+    }
 };
 
 
 // const url = "https://raw.githubusercontent.com//bachelorproject/master/examples/kontroli.mk";
 // https://github.com/01mf02/kontroli-rs/blob/master/examples/sudoku/deps.mk
-function fetch_make_text_from_url() {
-    remove_all_errors_dom();
-    const url = document.getElementById("urlmake").value; //continue here
-    console.log(url);
-    if (url != "") {
-        fetch(url)
-            .then(check_fetch)
-            .then((result) => {
-                result
-                    .text() //if the string is 404 not found
-                    .then((string) => {
-                        console.log(
-                            "THIS IS THE MAKE STRING WE GOT FROM :: ",
-                            string
-                        );
-                        use_graph_data(get_graph_rust(string)); //donc ici je vais utiliser un fonction rust qui permetra de get let dependences
-                    }) //here we need to call the get dep from rust then we can generate the html and the css from it and the raw urls
-                    .catch((err) => {
-                        console.log("ERROR :", err);
-                        display_error_dom(err, "errors");
-                    });
-            })
-            .catch((err) => {
-                console.log("ERROR :", err);
-                // display_error_dom(err, context_id);
-            });
-    } else {
-        display_error_dom("Empty url field", "errors");
-    }
-}
+// function fetch_make_text_from_url() {
+//     remove_all_errors_dom();
+//     const url = document.getElementById("urlmake").value; //continue here
+//     console.log(url);
+//     if (url != "") {
+//         fetch(url)
+//             .then(check_fetch)
+//             .then((result) => {
+//                 result
+//                     .text() //if the string is 404 not found
+//                     .then((string) => {
+//                         console.log(
+//                             "THIS IS THE MAKE STRING WE GOT FROM :: ",
+//                             string
+//                         );
+//                         use_graph_data(get_graph_rust(string)); //donc ici je vais utiliser un fonction rust qui permetra de get let dependences
+//                     }) //here we need to call the get dep from rust then we can generate the html and the css from it and the raw urls
+//                     .catch((err) => {
+//                         console.log("ERROR :", err);
+//                         display_error_dom(err, "errors");
+//                     });
+//             })
+//             .catch((err) => {
+//                 console.log("ERROR :", err);
+//                 // display_error_dom(err, context_id);
+//             });
+//     } else {
+//         display_error_dom("Empty url field", "errors");
+//     }
+// }
 
 function use_graph_data(graph_data) {
     const dependency_list = graph_data;
