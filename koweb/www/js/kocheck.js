@@ -34,25 +34,6 @@ worker.onerror = function (e) {
 
 let program_list = [];
 
-//TODO
-//1)init was at load : DONE
-//2)generate correct gitraw urls: DONE
-//3)create and set up all the program objects: DONE
-//prio) work on parse buffer and getting the string data to rust !
-//4)based on what is available generate the options on what to run: LATER FIRST TRY TO GET DATA TO RUST
-//5)Try running a .dk that requires dependencies and see what is the output:
-//6)Try to load a hard .mk file like given previously
-
-//si je passe les urls a rust ? direct peut etre c'est mieux
-
-//7)Check if it is possible to fetch bit by bit in JS https://api.video/blog/tutorials/uploading-large-files-with-javascript file and blob api like video split things in segments
-//https://nordicapis.com/everything-you-need-to-know-about-api-pagination/ interesting stuff here for this and maybe the fetch can all be done in rust that would be quite cool
-//then i don't even need to pass strings from js to rust. and the problem is solved
-
-//attends donc peut etre enfait ce que je vais faire c'est utiliser webpack enfait mais je ferais ca vers la fin
-
-//still first the right urls have to be made and the program also
-//first investigate the two way
 
 class Program {
     constructor(name, dependency, dependency_url_list, raw_url) {
@@ -62,11 +43,11 @@ class Program {
         this.raw_url = raw_url;
     }
 
-    static get_piece_of_text(buffer_size) {
-        return this.text.slice(buffer_size, this.text.length - 1);
-    }
-    //get bit of string function that will need to be passed to rust ?
-    //
+    // static get_piece_of_text(buffer_size) {
+    //     return this.text.slice(buffer_size, this.text.length - 1);
+    // }
+    // //get bit of string function that will need to be passed to rust ?
+    // //
 }
 
 function remove_all_outputs_dom() {
