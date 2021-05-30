@@ -8,18 +8,18 @@ import init, {
 
 let worker = new Worker("/bachelorproject/js/worker_graph.js");
 
-WebAssembly.compileStreaming(fetch('/bachelorproject/pkg/koweb_bg.wasm'))
-.then(WasmModule =>
-  worker.postMessage({ "type": "CompiledModule", "WasmModule": WasmModule })
-);
+// WebAssembly.compileStreaming(fetch('/bachelorproject/pkg/koweb_bg.wasm'))
+// .then(WasmModule =>
+//   worker.postMessage({ "type": "CompiledModule", "WasmModule": WasmModule })
+// );
 
-// fetch("/bachelorproject/pkg/koweb_bg.wasm").then(response =>
-//     response.arrayBuffer()
-//   ).then(bytes =>
-//     WebAssembly.compile(bytes)
-//   ).then(WasmModule =>
-//     worker.postMessage({ "type": "CompiledModule", "WasmModule": WasmModule })
-//   );
+fetch("/bachelorproject/pkg/koweb_bg.wasm").then(response =>
+    response.arrayBuffer()
+  ).then(bytes =>
+    WebAssembly.compile(bytes)
+  ).then(WasmModule =>
+    worker.postMessage({ "type": "CompiledModule", "WasmModule": WasmModule })
+  );
 
 worker.onmessage = function(e) {
     // result.textContent = e.data;
