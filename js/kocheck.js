@@ -226,6 +226,8 @@ test_click.onclick = () => {
 
 
 //make load_make work on the worker 
+//i think i will start the web worker at the start and then depending on the message 
+
 var load_make = document.getElementById("load_make");
 load_make.onclick = () => {
     //this would just start the worker thread and await its response or something ?
@@ -235,7 +237,6 @@ load_make.onclick = () => {
     worker.postMessage({
         type: "url",
         value: url,
-        func: get_graph_rust(),
     });
 
     worker.onmessage = function(e) {
@@ -243,6 +244,14 @@ load_make.onclick = () => {
         console.log('Message received from worker : ', e);
         worker.terminate();
     }
+
+    fetch("/bachelorproject/pkg/koweb.wasm").then(response =>
+        response.arrayBuffer()
+      ).then(bytes =>
+        WebAssembly.compile(bytes)
+      ).then(WasmModule =>
+        worker.postMessage({ "MessagePurpose": "CompiledModule", "WasmModule": WasmModule })
+      );
 
 };
 
