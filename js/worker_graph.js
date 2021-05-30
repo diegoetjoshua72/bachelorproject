@@ -21,9 +21,9 @@ self.onmessage = function(event) {
         console.log("we are trying to initialize the module");
         //im guessing im fucking up with this g import thing 
         WebAssembly.instantiate(objData.WasmModule,{}).then(instance => {
+            console.log("wtf :_> ", instance);
             g_objInstance = instance
         });
-        console.log(g_objInstance)
     }
     else{
         console.log("objInstance : ", g_objInstance)
