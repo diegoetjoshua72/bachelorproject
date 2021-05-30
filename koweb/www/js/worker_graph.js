@@ -1,12 +1,23 @@
 
 //i don't think any initialization will be done here we will just
 //figure out how to pass the wasm module here
+
+var g_importObject = {
+    'env': {
+      'memoryBase': 0,
+      'tableBase': 0,
+      'memory': new WebAssembly.Memory({ initial: 256 }),
+      'table': new WebAssembly.Table({ initial: 0, element: 'anyfunc' })
+    }
+  };
+  
+  var g_objInstance = null;
+
 onmessage = function(event) {
     console.log('Message received from main script');
     console.log(event.data)
     console.log('Posting message back to main script');
     postMessage("hello from woker");
-    var g_objInstance = null;
     const objData = event.data;
     if (objData.type == "CompiledModule") {
         console.log("we are trying to initialize the module");
