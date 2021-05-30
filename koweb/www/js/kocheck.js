@@ -197,10 +197,9 @@ var run_multiple_button = document.getElementById("run_multiple");
 run_multiple_button.onclick = async () => {
 
 
-    if (typeof(worker) == "undefined"){
-        let worker = new Worker("worker.js");
-    }
-
+    //might be an error where we create multiple workers in parallel if we spam the button which would not be good
+    let worker = new Worker("worker.js");
+    
     worker.postMessage({
         program_list: program_list,
         module_to_run: module_to_run,
@@ -210,27 +209,9 @@ run_multiple_button.onclick = async () => {
         no_check: document.getElementById("no_check").checked
 
     });
-    //workers run in another GLOBAL context damn interesting
-    //finish reading the workers article after eating
-    //hmm i can't manipulate the dom in worker so the writing to webpage in rust might not work 
-    //data is sent between the worker and the main thread via a system of messages
 
-    //so i need to update the dom with the result of this webworker
-    //but that is quite annoying i think 
-
-    //i could add an onmessage listener that first lets pass data to the worker and do the run multiple there 
-    
-
-    // let module_to_run = document.getElementById("file_to_run").value;
-
-    // await run_multiple(
-    //     program_list,
-    //     module_to_run,
-    //     document.getElementById("eta").checked,
-    //     document.getElementById("no_scope").checked,
-    //     document.getElementById("no_infer").checked,
-    //     document.getElementById("no_check").checked
-    // );
+    //i need an event when i get a post from my woker 
+    //but this post should be done through rust then 
 };
 
 var test_click = document.getElementById("increment");
