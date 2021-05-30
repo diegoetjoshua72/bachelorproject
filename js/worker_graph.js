@@ -1,16 +1,22 @@
 
 //i don't think any initialization will be done here we will just
 //figure out how to pass the wasm module here
-onmessage = function(e) {
+onmessage = function(event) {
     console.log('Message received from main script');
-    console.log(e.data)
+    console.log(event.data)
     console.log('Posting message back to main script');
     postMessage("hello from woker");
-    const {type, value} = e.data;
-    if (type == "MODUlE") {
+    var g_objInstance = null;
+    const objData = event.data;
+    if (objData.type == "CompiledModule") {
         console.log("we are trying to initialize the module");
+        WebAssembly.instantiate(objData.WasmModule, g_importObject).then(instance => 
+            g_objInstance = instance // Hold onto the module's instance so that we can reuse it
+        );
+        console .log(g_objInstance)
     }
     else{
+        g_objInstance.exports.get_graph_rust(objData.value)
         console.log("we want to generate teh graph of the following url :)")
     }
   }

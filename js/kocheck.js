@@ -250,7 +250,7 @@ load_make.onclick = () => {
       ).then(bytes =>
         WebAssembly.compile(bytes)
       ).then(WasmModule =>
-        worker.postMessage({ "MessagePurpose": "CompiledModule", "WasmModule": WasmModule })
+        worker.postMessage({ "type": "CompiledModule", "WasmModule": WasmModule })
       );
 
 };
