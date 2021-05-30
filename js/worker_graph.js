@@ -13,6 +13,7 @@ var g_importObject = {
   
 var g_objInstance = null;
 
+//why does it run twice 
 onmessage = function(event) {
     console.log('Message received from main script');
     console.log(event.data)
@@ -28,7 +29,8 @@ onmessage = function(event) {
         console.log(g_objInstance)
     }
     else{
-        g_objInstance.exports.get_graph_rust(objData.value)
+        console.log("objInstance : ", g_objInstance)
+        // g_objInstance.exports.get_graph_rust(objData.value)
         console.log("we want to generate teh graph of the following url :)")
     }
   }
