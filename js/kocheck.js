@@ -236,9 +236,9 @@ load_make.onclick = () => {
     worker.onmessage = function(e) {
         // result.textContent = e.data;
         console.log('Message received from worker : ', e);
+        worker.terminate();
     }
 
-    worker.terminate();
 };
 
 

@@ -49,6 +49,11 @@ onmessage = function(e) {
     // console.log('Posting message back to main script');
     // postMessage(workerResult);
   }
+//i can do some switching by sending a type value object 
+//let's try to make the most basic example work for now. 
+
+
+
 
 // function log() {
 //     postMessage({
