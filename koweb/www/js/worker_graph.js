@@ -1,31 +1,6 @@
 
-// import init, {
-//     run_test,
-//     increment_test,
-//     get_graph_rust,
-//     run_multiple,
-// } from "../pkg/koweb.js";
-
-
-// async function init_wasm_module() {
-    //     await init();
-    // }
-    // init_wasm_module();
-    
-    // fetch_make_text_from_url();
-    
-    //lets try to make a worker for the graph data then 
-    //i don't think i can get the url from the dom so i have to pass it as a message 
-    //from the main thread 
-    
-    
-    //cool it works
-    //now get wasm to work here 
-// importScripts("/bachelorproject/pkg/koweb.js");
-
-
-//look like i might need to pass the module with a post 
-
+//i don't think any initialization will be done here we will just
+//figure out how to pass the wasm module here
 onmessage = function(e) {
     console.log('Message received from main script');
     console.log(e.data)
