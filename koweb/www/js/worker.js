@@ -8,6 +8,10 @@ import init, {
 } from "../pkg/koweb.js";
 
 
+async function init_wasm_module() {
+    await init();
+}
+init_wasm_module();
 
 
 
@@ -17,6 +21,7 @@ import init, {
 // which isn't always the case (eg with php -S), so we remove for now:
 // delete WebAssembly.instantiateStreaming;
 // wasmFractal("./wasm_fractal_bg.wasm").then((wasm) => {}
+
 
 
 let module_to_run = document.getElementById("file_to_run").value;
