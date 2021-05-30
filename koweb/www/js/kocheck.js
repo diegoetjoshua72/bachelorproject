@@ -1,10 +1,9 @@
-import init, {
-    run_test,
-    increment_test,
-    get_graph_rust,
-    run_multiple,
-} from "../pkg/koweb.js";
-import { Test } from "./program.js";
+// import init, {
+//     run_test,
+//     increment_test,
+//     get_graph_rust,
+//     run_multiple,
+// } from "../pkg/koweb.js";
 
 let program_list = [];
 
@@ -212,6 +211,10 @@ run_multiple_button.onclick = async () => {
 
     //i need an event when i get a post from my woker 
     //but this post should be done through rust then 
+
+    //
+
+
 };
 
 var test_click = document.getElementById("increment");

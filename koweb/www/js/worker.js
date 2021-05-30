@@ -1,5 +1,11 @@
 
 
+import init, {
+    run_test,
+    increment_test,
+    get_graph_rust,
+    run_multiple,
+} from "../pkg/koweb.js";
 
 
 
@@ -16,9 +22,13 @@
 let module_to_run = document.getElementById("file_to_run").value;
 console.log("WORKER MODULE TO RUN",module_to_run);
 
-self.addEventListener("message", function(e){
-    console.log("this is what we got int the worker !!!", e.data)
-})
+onmessage = function(e) {
+    console.log('Message received from main script');
+    console.log(e.data)
+    // var workerResult = 'Result: ' + (e.data[0] * e.data[1]);
+    // console.log('Posting message back to main script');
+    // postMessage(workerResult);
+  }
 
 function log() {
     postMessage({
