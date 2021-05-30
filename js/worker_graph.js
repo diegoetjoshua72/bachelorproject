@@ -21,10 +21,10 @@ onmessage = function(event) {
     const objData = event.data;
     if (objData.type == "CompiledModule") {
         console.log("we are trying to initialize the module");
-        WebAssembly.instantiate(objData.WasmModule, g_importObject).then(instance => 
-            
+        WebAssembly.instantiate(objData.WasmModule, g_importObject).then(instance => {
+            console.log("this is the instance that we get : -> ", instance);
             g_objInstance = instance // Hold onto the module's instance so that we can reuse it
-        );
+        });
         console.log(g_objInstance)
     }
     else{

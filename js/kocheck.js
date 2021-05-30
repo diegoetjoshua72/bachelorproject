@@ -23,12 +23,12 @@ WebAssembly.compileStreaming(fetch('/bachelorproject/pkg/koweb_bg.wasm'))
 
 worker.onmessage = function(e) {
     // result.textContent = e.data;
-    console.log('Message received from worker : ', e);
+    console.log("Message received from worker : ", e);
     // worker.terminate();
 }
 
 worker.onerror = function (e) { 
-    console.log("Error from Web Worker:", e); 
+    console.log("Error from Web Worker: ", e); 
 }
 
 
