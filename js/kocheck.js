@@ -245,7 +245,7 @@ load_make.onclick = () => {
         worker.terminate();
     }
 
-    fetch("/bachelorproject/pkg/koweb.wasm").then(response =>
+    fetch("/bachelorproject/pkg/koweb_bg.wasm").then(response =>
         response.arrayBuffer()
       ).then(bytes =>
         WebAssembly.compile(bytes)
