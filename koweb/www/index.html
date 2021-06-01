@@ -107,13 +107,18 @@
     <!-- <script type="module" src="./js/program.js" defer></script> -->
     <script src='pkg/koweb.js'></script>
     <script>
-        const { increment_test } = wasm_bindgen;
+        const { increment_test,run_test, run_multiple, get_graph_rust } = wasm_bindgen;
         window.increment_test = increment_test;
         async function run() {
           await wasm_bindgen('./pkg/koweb_bg.wasm');
   
           increment_test();
         }
+
+        //fonction rust_graph
+        //fonction run_multiple 
+        //function run
+        // c'est tout garcon 
   
         run();
     </script>
