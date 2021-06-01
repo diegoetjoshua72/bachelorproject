@@ -5,13 +5,18 @@
 //     run_multiple,
 // } from "../pkg/koweb.js";
 
+//make get graph work on the web worker
+//then make run multiple work on the web worker 
+//start writing the introduction for the thesis
+
+
 function loadWasm() {
   const buf = new Uint8Array([0x00, 0x61, 0x73, 0x6d, 0x01, 0x00, 0x00, 0x00,
     0x05, 0x03, 0x01, 0x00, 0x01, 0x0b, 0x03, 0x01, 0x01, 0x00]);
 
   wasm_bindgen('../pkg/koweb_bg.wasm')
-    .then(increment_test)
-    .catch(console.error);
+    // .then(increment_test)
+    // .catch(console.error);
 }
 
 loadWasm();
