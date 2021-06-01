@@ -106,6 +106,17 @@
     <script src="./js/editor.js"></script>
     <!-- <script type="module" src="./js/program.js" defer></script> -->
     <script src='pkg/koweb.js'></script>
+    <script>
+        const { increment_test } = wasm_bindgen;
+  
+        async function run() {
+          await wasm_bindgen('./pkg/koweb_bg.wasm');
+  
+          increment_test();
+        }
+  
+        run();
+    </script>
     <script src ="./js/kocheck.js" defer></script>
     <!-- <script src="js/parsemake.js" defer></script> -->
 
