@@ -17,7 +17,7 @@ console.log(wasm_bindgen);
 
 // run();
 alert("test");
-increment_test();
+window.increment_test();
 
 // let worker = new Worker("/bachelorproject/js/worker_graph.js");
 
