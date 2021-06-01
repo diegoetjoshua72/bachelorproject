@@ -5,6 +5,8 @@
 //     run_multiple,
 // } from "../pkg/koweb.js";
 
+console.log(wasm_bindgen);
+
 const {increment_test, run_test, get_graph_rust, run_multiple} = wasm_bindgen;
 
 async function run() {
