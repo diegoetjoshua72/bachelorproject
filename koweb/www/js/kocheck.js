@@ -16,7 +16,7 @@ console.log(wasm_bindgen);
 // }
 
 // run();
-alert("test");
+alert("testinside");
 run();
 // let worker = new Worker("/bachelorproject/js/worker_graph.js");
 
