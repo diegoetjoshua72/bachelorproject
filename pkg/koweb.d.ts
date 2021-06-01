@@ -1,40 +1,43 @@
-/* tslint:disable */
-/* eslint-disable */
-/**
-* @param {string} make_text_js
-* @returns {any}
-*/
-export function get_graph_rust(make_text_js: string): any;
-/**
-* @param {string} string_js
-* @returns {string}
-*/
-export function get_string_js(string_js: string): string;
-/**
-*/
-export function increment_test(): void;
-/**
-* @param {string} cmds_from_js
-* @param {boolean} eta
-* @param {boolean} no_scope
-* @param {boolean} no_infer
-* @param {boolean} no_check
-*/
-export function run_test(cmds_from_js: string, eta: boolean, no_scope: boolean, no_infer: boolean, no_check: boolean): void;
-/**
-* @param {any} programs
-* @param {string} module_to_run
-* @param {boolean} eta
-* @param {boolean} no_scope
-* @param {boolean} no_infer
-* @param {boolean} no_check
-* @returns {any}
-*/
-export function run_multiple(programs: any, module_to_run: string, eta: boolean, no_scope: boolean, no_infer: boolean, no_check: boolean): any;
+declare namespace wasm_bindgen {
+	/* tslint:disable */
+	/* eslint-disable */
+	/**
+	* @param {string} make_text_js
+	* @returns {any}
+	*/
+	export function get_graph_rust(make_text_js: string): any;
+	/**
+	* @param {string} string_js
+	* @returns {string}
+	*/
+	export function get_string_js(string_js: string): string;
+	/**
+	*/
+	export function increment_test(): void;
+	/**
+	* @param {string} cmds_from_js
+	* @param {boolean} eta
+	* @param {boolean} no_scope
+	* @param {boolean} no_infer
+	* @param {boolean} no_check
+	*/
+	export function run_test(cmds_from_js: string, eta: boolean, no_scope: boolean, no_infer: boolean, no_check: boolean): void;
+	/**
+	* @param {any} programs
+	* @param {string} module_to_run
+	* @param {boolean} eta
+	* @param {boolean} no_scope
+	* @param {boolean} no_infer
+	* @param {boolean} no_check
+	* @returns {any}
+	*/
+	export function run_multiple(programs: any, module_to_run: string, eta: boolean, no_scope: boolean, no_infer: boolean, no_check: boolean): any;
+	
+}
 
-export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
+declare type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
-export interface InitOutput {
+declare interface InitOutput {
   readonly memory: WebAssembly.Memory;
   readonly get_graph_rust: (a: number, b: number) => number;
   readonly get_string_js: (a: number, b: number, c: number) => void;
@@ -59,4 +62,4 @@ export interface InitOutput {
 *
 * @returns {Promise<InitOutput>}
 */
-export default function init (module_or_path?: InitInput | Promise<InitInput>): Promise<InitOutput>;
+declare function wasm_bindgen (module_or_path?: InitInput | Promise<InitInput>): Promise<InitOutput>;
