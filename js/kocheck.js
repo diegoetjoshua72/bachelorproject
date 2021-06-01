@@ -7,13 +7,14 @@
 
 console.log(wasm_bindgen);
 
-const {increment_test, run_test, get_graph_rust, run_multiple} = wasm_bindgen;
+// const {increment_test, run_test, get_graph_rust, run_multiple} = wasm_bindgen;
 
-async function run() {
-  await wasm_bindgen('../pkg/koweb_bg.wasm');
+// async function run() {
+//   await wasm_bindgen('../pkg/koweb_bg.wasm');
 
-  increment_test();
-}
+//   increment_test();
+// }
+
 run();
 
 // let worker = new Worker("/bachelorproject/js/worker_graph.js");
