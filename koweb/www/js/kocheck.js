@@ -17,8 +17,7 @@ console.log(wasm_bindgen);
 
 // run();
 alert("test");
-window.increment_test();
-
+run();
 // let worker = new Worker("/bachelorproject/js/worker_graph.js");
 
 // fetch("/bachelorproject/pkg/koweb_bg.wasm").then(response =>
