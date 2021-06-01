@@ -9,21 +9,22 @@
 //then make run multiple work on the web worker 
 //start writing the introduction for the thesis
 
+//TOUGH SO FAR NO LUCK but it worked a bit maybe just keep it in the worker or something 
+// function loadWasm() {
+//   const buf = new Uint8Array([0x00, 0x61, 0x73, 0x6d, 0x01, 0x00, 0x00, 0x00,
+//     0x05, 0x03, 0x01, 0x00, 0x01, 0x0b, 0x03, 0x01, 0x01, 0x00]);
 
-function loadWasm() {
-  const buf = new Uint8Array([0x00, 0x61, 0x73, 0x6d, 0x01, 0x00, 0x00, 0x00,
-    0x05, 0x03, 0x01, 0x00, 0x01, 0x0b, 0x03, 0x01, 0x01, 0x00]);
+//   wasm_bindgen('../pkg/koweb_bg.wasm')
+//     // .catch(console.error);
+// }
 
-  wasm_bindgen('../pkg/koweb_bg.wasm')
-    // .catch(console.error);
-}
-
-loadWasm();
-const { increment_test } = wasm_bindgen;
+// loadWasm();
+// const { increment_test } = wasm_bindgen;
 // increment_test();
 
 
-console.log("inside kocheck : ", wasm_bindgen);
+// console.log("inside kocheck : ", wasm_bindgen);
+
 let worker = new Worker("/bachelorproject/js/worker_graph.js");
 
 fetch("/bachelorproject/pkg/koweb_bg.wasm").then(response =>
