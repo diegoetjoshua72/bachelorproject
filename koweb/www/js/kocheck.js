@@ -15,7 +15,7 @@ console.log(wasm_bindgen);
 //   increment_test();
 // }
 
-run();
+// run();
 alert("test");
 increment_test();
 
