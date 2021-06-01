@@ -15,13 +15,13 @@ function loadWasm() {
     0x05, 0x03, 0x01, 0x00, 0x01, 0x0b, 0x03, 0x01, 0x01, 0x00]);
 
   wasm_bindgen('./pkg/koweb_bg.wasm')
-    // .then(increment_test)
+    .then(increment_test)
     // .catch(console.error);
 }
 
 loadWasm();
 const { increment_test } = wasm_bindgen;
-increment_test();
+// increment_test();
 
 
 console.log("inside kocheck : ", wasm_bindgen);
