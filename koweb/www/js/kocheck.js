@@ -5,19 +5,21 @@
 //     run_multiple,
 // } from "../pkg/koweb.js";
 
-console.log(wasm_bindgen);
+function loadWasm() {
+  const buf = new Uint8Array([0x00, 0x61, 0x73, 0x6d, 0x01, 0x00, 0x00, 0x00,
+    0x05, 0x03, 0x01, 0x00, 0x01, 0x0b, 0x03, 0x01, 0x01, 0x00]);
 
-// const {increment_test, run_test, get_graph_rust, run_multiple} = wasm_bindgen;
+  wasm_bindgen('./raytrace_parallel_bg.wasm')
+    .then(increment_test)
+    .catch(console.error);
+}
 
-// async function run() {
-//   await wasm_bindgen('../pkg/koweb_bg.wasm');
+loadWasm();
+const { increment_test } = wasm_bindgen;
+increment_test();
 
-//   increment_test();
-// }
 
-// run();
-alert("testinside");
-run();
+console.log("inside kocheck : ", wasm_bindgen);
 let worker = new Worker("/bachelorproject/js/worker_graph.js");
 
 fetch("/bachelorproject/pkg/koweb_bg.wasm").then(response =>
@@ -40,7 +42,6 @@ worker.onerror = function (e) {
 
 
 let program_list = [];
-
 
 class Program {
     constructor(name, dependency, dependency_url_list, raw_url) {
@@ -156,12 +157,6 @@ async function run(program = undefined) {
     remove_all_outputs_dom();
     // await init();
     var testing = await window.editor.getValue();
-    const prog = new Program(testing, "pipo", "toto");
-    // console.log(prog);
-    //si la classe casse trop les couilles je peut faire une closure mais je pense la classes c'est bien
-
-    // prog.go_through_iterator();
-    // prog.get_piece_to_koweb();
 
     if (program === undefined) {
         run_test(
@@ -181,10 +176,6 @@ async function run(program = undefined) {
             document.getElementById("no_check").checked
         );
     }
-    // } catch {
-    //     remove_all_errors_dom();
-    //     display_error_dom("something went wrong in the kontroli run", "errors");
-    // }
 }
 
 
@@ -207,7 +198,6 @@ run_button.onclick = async () => {
 var run_multiple_button = document.getElementById("run_multiple");
 run_multiple_button.onclick = async () => {
 
-
     //might be an error where we create multiple workers in parallel if we spam the button which would not be good
     let worker = new Worker("worker.js");
     
@@ -218,15 +208,7 @@ run_multiple_button.onclick = async () => {
         no_scope: document.getElementById("no_scope").checked,
         no_infer: document.getElementById("no_infer").checked,
         no_check: document.getElementById("no_check").checked
-
     });
-
-    //i need an event when i get a post from my woker 
-    //but this post should be done through rust then 
-
-    //
-
-
 };
 
 var test_click = document.getElementById("increment");

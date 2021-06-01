@@ -2,17 +2,38 @@
 
 importScripts("../pkg/koweb.js")
 console.log("wasm bindgen in our worker : ", wasm_bindgen);
-self.onmessage = function(event) {
-    console.log(event)
-    const objData = event.data;
-    if (objData.type == "CompiledModule") {
-        console.log("we are trying to initialize the module");
-    }
-    else{
-        console.log("objInstance : ", g_objInstance)
-        console.log("we want to generate teh graph of the following url :)")
-    }
-  }
+// const {graph_from_rust} = null;
+
+self.onmessage = event => {
+  let initialised = wasm_bindgen(...event.data).catch(err => {
+    // Propagate to main `onerror`:
+    setTimeout(() => {
+      throw err;
+    });
+    // Rethrow to keep promise rejected and prevent execution of further commands:
+    throw err;
+  });
+
+  self.onmessage = async event => {
+    // This will queue further commands up until the module is fully initialised:
+    await initialised;
+    wasm_bindgen.child_entry_point(event.data);
+  };
+};
+
+// self.onmessage = function(event) {
+//     console.log(event)
+//     const objData = event.data;
+//     if (objData.type == "init") {
+//         console.log("we are trying to initialize the module");
+
+
+//     }
+//     else{
+//         console.log("objInstance : ", g_objInstance)
+//         console.log("we want to generate teh graph of the following url :)")
+//     }
+//   }
 
 // function fetch_make_text_from_url() {
 //     remove_all_errors_dom();
