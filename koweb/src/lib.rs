@@ -228,6 +228,7 @@ pub async fn run_multiple(
     no_infer: bool,
     no_check: bool,
 ) {
+    //in here try to start a web worker
     console_log::init_with_level(Level::Trace);
     init_console_wasm_debug();
     let vec_of_programs: Vec<Program> = programs.into_serde().unwrap();
