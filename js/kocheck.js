@@ -34,7 +34,7 @@ async function run_wasm() {
     console.log('index.js loaded');
 
     // Demonstrate that we can call our function imported from wasm
-    console.log('increment test main thread', add_two_numbers(2, 4));
+    console.log('increment test main thread', increment_test());
 
     // Create a worker in JS - note the `{type: 'module'}`
     var myWorker = new Worker('./worker_graph.js', {type: 'module'});
