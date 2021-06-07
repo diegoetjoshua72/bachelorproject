@@ -37,24 +37,14 @@ extern "C" {
     fn log(s: &str);
 }
 
-static mut test: i32 = 0;
-
 #[wasm_bindgen]
 pub fn get_string_js(string_js: String) -> String {
     return string_js;
 }
 
 #[wasm_bindgen()]
-pub fn increment_test() {
-    unsafe {
-        // alert(Prog::get_piece_to_koweb_static().as_str());
-        // alert(Test::test_text().as_str());
-        // alert(call_exported_rust_func().as_str());
-        // alert(Test2::test_text2().as_str()); MIME TYPE ISSUE AAA
-        // let value = js_sys::Reflect::get(&target, &property_key).expect("reflect failed");
-        alert(format!("test : {}", test).as_str());
-        test += 1;
-    }
+pub fn hello_rust() {
+    alert("hello rust");
 }
 
 fn get_text_from_editor() -> Result<String, ()> {

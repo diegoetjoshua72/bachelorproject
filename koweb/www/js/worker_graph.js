@@ -6,7 +6,7 @@
 // console.log("return of wasmbindgen call in worker", wasm_bindgen())
 
 
-import init, {increment_test} from '../pkg/koweb.js';
+import init, {hello_rust} from '../pkg/koweb.js';
 
 // We compiled with `--target web`, which creates an ES module. Not all modern browsers have support
 // for loading modules in web workers. This example will work in Chrome but not in Firefox.
@@ -16,7 +16,7 @@ async function run_in_worker() {
     // Loading wasm file
     await init();
 
-    console.log('increment test', increment_test());
+    console.log('hellorust worker : ', hello_rust());
 }
 
 run_in_worker();
