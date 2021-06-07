@@ -163,6 +163,7 @@ fn create_graph(make_text_js: String) -> Graph {
     let mut graph = Graph { graph: vec![] };
     let mut files = vec![];
     let line_iter = make_text_js.lines();
+    //parse makefile and return list of list of file names one list for every module
     for line in line_iter {
         if line != "" {
             let mut temp = line.split(' ');
@@ -180,6 +181,7 @@ fn create_graph(make_text_js: String) -> Graph {
     }
     // info!("create_graph : files (before o removal): {:?}", &files);
 
+    //remove all the o from dko so that we have the actual file names
     for i in 0..files.len() {
         for j in 0..files[i].len() {
             if files[i][j].contains(".dko") {
@@ -192,10 +194,16 @@ fn create_graph(make_text_js: String) -> Graph {
     for i in 0..files.len() {
         for j in 0..files[i].len() {
             if j == 0 {
+                //if its the first in the list then we add the node to the graph
                 if graph.get_index_node_with_value(String::from(files[i][j])) == None {
                     graph.add_node(String::from(files[i][j]), None);
                 }
             } else {
+                //if its not the first in the list and it is not in the graph yet then we get the index of the first in the list
+                //and we add the node as a child of the first in the list
+                //if its not the fist and is already in the list then we just add the index of the child again to the first file so it will have it twice
+                //we deal with duplicates later
+
                 // if graph.get_index_node_with_value(String::from(files[i][j])) == None {
                 let index_first = graph.get_index_node_with_value(String::from(files[i][0]));
                 if graph.get_index_node_with_value(String::from(files[i][j])) == None {
