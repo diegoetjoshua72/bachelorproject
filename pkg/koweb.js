@@ -240,8 +240,8 @@ __exports.get_string_js = function(string_js) {
 
 /**
 */
-__exports.increment_test = function() {
-    wasm.increment_test();
+__exports.hello_rust = function() {
+    wasm.hello_rust();
 };
 
 /**
@@ -617,7 +617,7 @@ async function init(input) {
         return addHeapObject(ret);
     };
     imports.wbg.__wbindgen_closure_wrapper291 = function(arg0, arg1, arg2) {
-        var ret = makeMutClosure(arg0, arg1, 129, __wbg_adapter_28);
+        var ret = makeMutClosure(arg0, arg1, 128, __wbg_adapter_28);
         return addHeapObject(ret);
     };
 
