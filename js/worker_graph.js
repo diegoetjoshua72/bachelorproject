@@ -2,7 +2,9 @@
 
 importScripts("../pkg/koweb.js")
 console.log("wasm bindgen in our worker : ", wasm_bindgen);
-// const {graph_from_rust} = null;
+// const {graph_from_rust} = nu\
+console.log("return of wasmbindgen call in worker", wasm_bindgen())
+
 
 self.onmessage = event => {
   let initialised = wasm_bindgen(...event.data).catch(err => {
