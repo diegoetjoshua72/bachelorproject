@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&display=swap" rel="stylesheet">
@@ -86,45 +85,14 @@
 
         <div id="footer">
             <!-- add github link ? -->
+            
         </div>
 
     </div>
 
-    <!-- PARSER FOR MAKEFILES WILL ONLY WORK WITH .mk FORMAT ONLINE RAW FILES -->
-    <!-- 1) split the string in what matters we won't care about flags --x -->
-    <!-- 2) keep names and filenames in the array -->
-    <!-- 3) generate the raw github urls for each file -->
-    <!-- 4) fetch data from each of those files then store it somewhere perhaps on the generated html idk this step hmmm make some global constant with a promise and these file values or something -->
-    <!-- 5) on file name click it puts the content of the file in the editor -->
-    <!--  -->
-
-
-    <!-- <script type="module" src="./pkg/koweb.js"></script>  -->
-    <!-- <script type="module" src="./js/init_wasm.js"></script> -->
     <script src="./monaco/min/vs/loader.js"></script>
     <script src="./js/editor.js"></script>
-    <!-- <script type="module" src="./js/program.js" defer></script> -->
-    <!-- <script src='./pkg/koweb.js'></script> -->
-    <!-- <script>
-        //i don't think this will be needed anymore i will just put everythin in the worker
-        //
-        const { increment_test,run_test, run_multiple, get_graph_rust } = wasm_bindgen;
-        window.increment_test = increment_test;
-        async function run() {
-          await wasm_bindgen('./pkg/koweb_bg.wasm');
-  
-          increment_test();
-        }
-
-        //fonction rust_graph
-        //fonction run_multiple 
-        //function run
-        // c'est tout garcon 
-  
-        run();
-    </script> -->
     <script type="module" src ="./js/kocheck.js"></script>
-    <!-- <script src="js/parsemake.js" defer></script> -->
 
 </body>
 
